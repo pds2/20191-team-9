@@ -2,7 +2,7 @@
 
 O tema escolhido para o trabalho final da disciplina será um e-commerce de produtos geek, visando ser um sistema semelhante ao de lojinhas virtuais do Instagram. O projeto utilizará os conceitos de modelagem de projeto, programação orientada a objetos e de testes unitários. O tema escolhido tem o propósito de pôr em prática os conceitos introduzidos na matéria, bem como reforçar os conceitos aprendidos previamente.
 
-##User Stories
+## User Stories
  -  Como cliente preciso de uma interface para realizar cadastro próprio no sistema de lojinha virtual, utilizando BD implementado
 	- Fazer uma interface para login do usuário
 	- Fazer uma interace para logout do usuário
