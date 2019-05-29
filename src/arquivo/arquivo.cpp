@@ -16,32 +16,28 @@ void Arquivo::ListaUsuarioArquivo() const {
   Usuario users;
 
   iodados.open("usuarios.txt", ios::ate | ios::out | ios::in);
+  ~Usuario();
 
   while (iodados.read((char *) &users, (char *) em, (char *) sen)){
-    usuarios.push_back(make_tuple(users, em, sen));
+    CadastraUsuario(users, em, sen);
   }
 
-  for (int i = 0; i < usuarios.size(); i++)
-        cout << get<0>(users[i]) << " "
-             << get<1>(users[i]) << " "
-             << get<2>(users[i]) << "\n";
+  ImprimeUsuarios();
 
   iodados.close();
 }
 
-bool Arquivo::BuscarEmailArquivo(std::string usu) const {//só usar o sort da estrutura tuple
+bool Arquivo::BuscarEmailArquivo(std::string em) const {//só usar o sort da estrutura tuple
   fstream iodados;
-  int i=0;
 
   iodados.open("usuarios.txt", ios::ate | ios::out | ios::in);
 
   while (iodados.read((char *) user, (char *) em, (char *) sen)){
-    if(getNome(user) == usu){
+    if(user == usu){
       return true;
     }
-
-    i++;
   }
+
   iodados.close();
   return false;
 }

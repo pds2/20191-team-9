@@ -13,9 +13,18 @@ Usuario::Usuario(std::string n, std::string em, std::string s){
   RegistraUsuarioArquivo(make_tuple(n, em, s));
 };
 
+Usuario::~Usuario(){
+  usuarios.clear();
+}
+
 void CadastraUsuario (std::string n, std::string em, std::string s) const{
   if(checaNome(n) && checaEmail(em) && checaSenha){
-    Usuario(n, em, s);
+    if(BuscarEmailArquivo(em)==false){
+      Usuario(n, em, s);
+    }
+    else{
+      std::cout << "Endereço de email já cadastrado. Tente novamente." << std::endl;
+    }
   }
   else{
     std::cout << "Dados inválidos. Tente novamente." << std::endl;
@@ -34,12 +43,12 @@ std::string Usuario::getSenha(vector<tuple<std::string, std::string, std::string
   return get<2>(usu);
 }
 
-bool checaNome(std::string n) const{
+bool Usuario::checaNome(std::string n) const{
   std::all_of(std::begin(n), std::end(n),
   [](char c){ return std::isalpha(c);});
 }
 
-bool checaEmail(std::string &em) const{
+bool Usuario::checaEmail(std::string &em) const{
   // Locate '@'
   auto at = std::find(em.begin(), em.end(), '@');
   // Locate '.' after '@'
@@ -50,7 +59,14 @@ bool checaEmail(std::string &em) const{
   return (at != em.end()) && (dot != em.end());
 }
 
-bool checaSenha(std::string s) const{
+bool Usuario::checaSenha(std::string s) const{
   std::all_of(std::begin(s), std::end(s),
   [](char c){ return std::isalnum(c);});
+}
+
+void Usuario::ImprimeUsuarios(){
+    for (int i = 0; i < usuarios.size(); i++)
+          cout << get<0>(users[i]) << " "
+               << get<1>(users[i]) << " "
+               << get<2>(users[i]) << "\n";
 }
