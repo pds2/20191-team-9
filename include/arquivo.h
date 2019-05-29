@@ -9,7 +9,7 @@ public:
     void RegistraUsuarioArquivo (Usuario usu) const;
     void ListaUsuarioArquivo() const;
     bool BuscarEmailArquivo(std::string usu) const;
-
+//testando
 };
 
 #endif
