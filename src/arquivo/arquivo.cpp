@@ -13,24 +13,34 @@ void Arquivo::RegistraUsuarioArquivo (tuple<std::string, std::string, std::strin
 
 void Arquivo::ListaUsuarioArquivo() const {
   fstream iodados;
-  Usuario usuarios;
+  Usuario users;
+
   iodados.open("usuarios.txt", ios::ate | ios::out | ios::in);
 
-  while (iodados.read((char *) &usu, (char *) em, (char *) sen)){
-
-    std::cout << usu->getNome() << " " << usu->getEmail() << " " << usu->getSenha() << std::endl;
+  while (iodados.read((char *) &users, (char *) em, (char *) sen)){
+    usuarios.push_back(make_tuple(users, em, sen));
   }
+
+  for (int i = 0; i < usuarios.size(); i++)
+        cout << get<0>(users[i]) << " "
+             << get<1>(users[i]) << " "
+             << get<2>(users[i]) << "\n";
 
   iodados.close();
 }
 
-bool Arquivo::BuscarEmailArquivo(std::string usu) const {
+bool Arquivo::BuscarEmailArquivo(std::string usu) const {//só usar o sort da estrutura tuple
   fstream iodados;
+  int i=0;
+
   iodados.open("usuarios.txt", ios::ate | ios::out | ios::in);
-  while (iodados.read((char *) &usu, (char *) em, (char *) sen)){
-    if(usu->getNome() == usu){
+
+  while (iodados.read((char *) user, (char *) em, (char *) sen)){
+    if(getNome(user) == usu){
       return true;
     }
+
+    i++;
   }
   iodados.close();
   return false;
