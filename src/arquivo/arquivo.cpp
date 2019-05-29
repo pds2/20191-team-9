@@ -1,4 +1,4 @@
-#include "include/arquivo.h"
+#include "include/arquivo/arquivo.h"
 #include "include/usuario/usuario.h"
 
 void Arquivo::RegistraUsuarioArquivo (Usuario usu) const{
