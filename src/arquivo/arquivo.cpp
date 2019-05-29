@@ -1,13 +1,12 @@
 #include "include/arquivo/arquivo.h"
 #include "include/usuario/usuario.h"
 
-void Arquivo::RegistraUsuarioArquivo (Usuario usu) const{
+void Arquivo::RegistraUsuarioArquivo (tuple<std::string, std::string, std::string> usu) const{
   fstream iodados;
   iodados.open("usuarios.txt", ios::ate | ios::out | ios::in);
 
-  iodados.write(usu->getNome(), usu->getEmail(), usu->getSenha());//Aqui gravamos o conteúdo do objeto 'usu' em 'usuarios.txt'.
+  iodados.write(get<0>(usu), get<1>(usu), get<2>(usu));//Aqui gravamos o conteúdo do objeto 'usu' em 'usuarios.txt'.
 
-  }
   iodados.seekg(0);
   iodados.close();
 }
@@ -18,6 +17,7 @@ void Arquivo::ListaUsuarioArquivo() const {
   iodados.open("usuarios.txt", ios::ate | ios::out | ios::in);
 
   while (iodados.read((char *) &usu, (char *) em, (char *) sen)){
+
     std::cout << usu->getNome() << " " << usu->getEmail() << " " << usu->getSenha() << std::endl;
   }
 

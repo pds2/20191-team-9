@@ -6,9 +6,12 @@
 #include <cstdlib>
 
 #include "include/usuario/usuario.h"
+#include "include/arquivo/arquivo.h"
 
-Usuario::Usuario(std::string n, std::string em, std::string s):
-    _nome(n), _email(em), _senha(s){};
+Usuario::Usuario(std::string n, std::string em, std::string s){
+  usuarios.push_back(make_tuple(n, em, s));
+  RegistraUsuarioArquivo(make_tuple(n, em, s));
+};
 
 void CadastraUsuario (std::string n, std::string em, std::string s) const{
   if(checaNome(n) && checaEmail(em) && checaSenha){
@@ -19,28 +22,16 @@ void CadastraUsuario (std::string n, std::string em, std::string s) const{
   }
 }
 
-std::string Usuario::getNome() const{
-  return _nome;
+std::string Usuario::getNome(vector<tuple<std::string, std::string, std::string> > usu) const{
+  return get<0>(usu);
 }
 
-std::string Usuario::getEmail() const{
-  return _email;
+std::string Usuario::getEmail(vector<tuple<std::string, std::string, std::string> > usu) const{
+  return get<1>(usu);
 }
 
-std::string Usuario::getSenha() const{
-  return _senha;
-}
-
-void Usuario::setNome(std::string n) const{
-  this->_nome = n;
-}
-
-void Usuario::setEmail(std::string em) const{
-  this->_email = em;
-}
-
-void Usuario::setSenha(std::string s) const{
-  this->_senha = s;
+std::string Usuario::getSenha(vector<tuple<std::string, std::string, std::string> > usu) const{
+  return get<2>(usu);
 }
 
 bool checaNome(std::string n) const{

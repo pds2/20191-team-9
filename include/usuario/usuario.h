@@ -3,22 +3,21 @@
 
 #include <string>
 
+#include <vector>
+#include <tuple>
+#include <iostream>
+
 class Usuario{
 
 private:
-    const std::string _nome;
-    const std::string _email;
-    const std::string _senha;
+    const vector<tuple<std::string, std::string, std::string> > usuarios;
+
 public:
     Usuario(std::string n, std::string em, std::string s);
 
     std::string getNome() const;
     std::string getEmail() const;
     std::string getSenha() const;
-
-    void setNome(std::string n) const;
-    void setEmail(std::string em) const;
-    void setSenha(std::string s) const;
 
     bool checaNome(std::string n) const;
     bool checaEmail(std::string &em) const;

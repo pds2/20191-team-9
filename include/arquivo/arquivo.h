@@ -6,10 +6,9 @@
 class Arquivo{
 
 public:
-    void RegistraUsuarioArquivo (Usuario usu) const;
+    void RegistraUsuarioArquivo ( <tuple<std::string, std::string, std::string> usu) const;
     void ListaUsuarioArquivo() const;
     bool BuscarEmailArquivo(std::string usu) const;
-//testando
 };
 
 #endif
