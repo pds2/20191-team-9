@@ -4,12 +4,12 @@
 #include "produto.h"
 
 class Acessorios : public Produtos{
-    public: 
-        std::string _tipo;  
+    public:
+        std::string _tipo;
     private:
         Acessorios();
-        ~Acessorios();  
+        ~Acessorios();
         std::string setAcessorio(float, float, std::string,
-        std::string, std::string, std::string, std::string, std::string);  
-        std::string getAcessorio(); 
+        std::string, std::string, std::string, std::string, std::string);
+        std::string getAcessorio();
 };
