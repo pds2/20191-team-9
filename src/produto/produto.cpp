@@ -1,6 +1,6 @@
-#include "produto.h"
+#include "../../include/produto/produto.h"
 
-Produtos::Produtos(float preco, float mediaAvaliacoes,
+Produto::Produto(float preco, float mediaAvaliacoes,
   std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material){
 
         std::vector<std::string> vazio;
@@ -17,15 +17,15 @@ Produtos::Produtos(float preco, float mediaAvaliacoes,
         _avaliacoes = nada;
 }
 
-Produtos::~Produtos(){
+Produto::~Produto(){
 
 }
 
-std::string Produtos::getProduto(){
+std::string Produto::getProduto(){
     std::cout<< _preco << std::endl <<_mediaAvaliacoes << std::endl <<_nome << std::endl <<_categoria << std::endl <<_cor << std::endl << _descricao << std::endl <<_material << std::endl;
 }
 
-void Produtos::avaliarProduto(int nota){
+void Produto::avaliarProduto(int nota){
 
     if (nota>=1 && nota<=5){
     _avaliacoes.push_back(nota);
@@ -41,7 +41,7 @@ void Produtos::avaliarProduto(int nota){
     _mediaAvaliacoes = (float)soma/size;
 }
 
-void Produtos::getComentarios(){
+void Produto::getComentarios(){
     int size = _comentarios.size();
     int i;
     for(i=0; i<size; i++){
@@ -49,6 +49,6 @@ void Produtos::getComentarios(){
     }
 }
 
-void Produtos::setComentario(std::string comentario){
+void Produto::setComentario(std::string comentario){
     _comentarios.push_back(comentario);
 }
