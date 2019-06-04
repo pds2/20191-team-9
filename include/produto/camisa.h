@@ -1,15 +1,18 @@
+#ifndef CAMISA_H
+#define CAMISA_H
+
 #include <iostream>
 #include <string>
 #include <vector>
 #include "produto.h"
 
-class Camisas : public Produtos{
+class Camisa : public Produto{
     public:
         char _tamanho;
-    private:
-       Camisas();
-       ~Camisas();
-       std::string setCamisa(float, float, std::string,
-       std::string, std::string, std::string, std::string, char); 
-       std::string getCamisa();
+        std::string _tipo;
+    
+        void setProduto(float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, char tamanho, std::string tipo);
+        void getProduto();
 };
+
+#endif
