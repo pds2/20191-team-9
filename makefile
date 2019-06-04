@@ -1,15 +1,15 @@
-edit: algordenacao.o randomvetores.o
-        cc -o edit algordenacao.o \
-        randomvetores.o
+edit: usuario.o arquivo.o
+        cc -o edit usuario.o \
+        arquivo.o
 
-algordenacao.o: algordenacao.c algordenacao.h
-        cc -c algordenacao.c
+usuario.o: src/usuario/usuario.cpp include/usuario/usuario.h include/arquivo/arquivo.h
+        g++ -g -Wall -O3 -std=c++11 -c -o src/usuario/usuario.cpp
 
-randomvetores.o: randomvetores.c randomvetores.h
-        cc -c randomvetores.c
+arquivo.o: src/arquivo/arquivo.cpp include/arquivo/arquivo.h
+				 g++ -g -Wall -O3 -std=c++11 -c -o src/arquivo/arquivo.cpp
 
 clean:
-        rm edit algordenacao.o randomvetores.o
+        rm edit usuario.o arquivo.o
 
 run: edit
         ./edit
