@@ -1,30 +1,5 @@
 #include "../../include/produto/produto.h"
 
-Produto::Produto(float preco, float mediaAvaliacoes,
-  std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material){
-
-        std::vector<std::string> vazio;
-        std::vector<int> nada;
-
-        _preco = preco;
-        _mediaAvaliacoes = mediaAvaliacoes;
-        _nome = nome;
-        _categoria = categoria;
-        _cor = cor;
-        _descricao = descricao;
-        _material = material;
-        _comentarios = vazio;
-        _avaliacoes = nada;
-}
-
-Produto::~Produto(){
-
-}
-
-std::string Produto::getProduto(){
-    std::cout<< _preco << std::endl <<_mediaAvaliacoes << std::endl <<_nome << std::endl <<_categoria << std::endl <<_cor << std::endl << _descricao << std::endl <<_material << std::endl;
-}
-
 void Produto::avaliarProduto(int nota){
 
     if (nota>=1 && nota<=5){
