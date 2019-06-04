@@ -16,9 +16,9 @@ class Produto{
         std::string _cor; 
         std::string _descricao;
         std::string _material;
-        Produto(float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material);
-        ~Produto();
-        std::string getProduto(); //exibe produto 
+        
+        void setProduto();
+        void getProduto(); //exibe produto 
         void avaliarProduto(int nota); //salva avaliacao na lista e depois modifica a media
         void getComentarios(); //imprime comentarios
         void setComentario(std::string comentario); //salva comentario
