@@ -1,15 +1,17 @@
+#ifndef ACESSORIO_H
+#define ACESSORIO_H
+
 #include <iostream>
 #include <string>
 #include <vector>
 #include "produto.h"
 
-class Acessorios : public Produtos{
+class Acessorio : public Produto{
     public:
-        std::string _tipo;
-    private:
-        Acessorios();
-        ~Acessorios();
-        std::string setAcessorio(float, float, std::string,
-        std::string, std::string, std::string, std::string, std::string);
-        std::string getAcessorio();
+        int _tamanho;
+        
+        void setProduto(float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, int tamanho);
+        void getProduto();
 };
+
+#endif
