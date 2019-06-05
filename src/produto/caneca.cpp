@@ -1,4 +1,4 @@
-/*
+
 #include "produto/caneca.h"
 #include "produto.cpp"
 
@@ -22,4 +22,4 @@ void Caneca::setProduto(float preco, float mediaAvaliacoes, std::string nome, st
 void Caneca::getProduto(){
     std::cout << "Nome:\t" <<_nome << std::endl << "Preco:\t"<< _preco << std::endl << "Media:\t" <<_mediaAvaliacoes << std::endl << "Categoria:\t" << _categoria << std::endl << "Cor:\t" <<_cor << std::endl << "Descricao:\t" << _descricao << std::endl << "Material:\t" << _material << std::endl << "Diametro:\t" << _diametro << std::endl;
 }
-*/
+
