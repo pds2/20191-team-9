@@ -1,5 +1,5 @@
-#include "include/arquivo/arquivo.h"
-#include "include/usuario/usuario.h"
+/*#include "arquivo/arquivo.h"
+#include "usuario/usuario.h"
 
 void Arquivo::RegistraUsuarioArquivo (tuple<std::string, std::string, std::string> usu) const{
   fstream iodados;
@@ -41,3 +41,4 @@ bool Arquivo::BuscarEmailArquivo(std::string em) const {//só usar o sort da est
   iodados.close();
   return false;
 }
+*/

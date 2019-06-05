@@ -10,27 +10,27 @@ Usuario::~Usuario(){
   usuarios.clear();
 }
 
-std::string Usuario::getNome(std::tuple<std::string, std::string, std::string> usu) const{
+std::string Usuario::getNome(std::tuple<std::string, std::string, std::string> usu){
   return std::get<0>(usu);
 }
 
-std::string Usuario::getEmail(std::tuple<std::string, std::string, std::string> usu) const{
+std::string Usuario::getEmail(std::tuple<std::string, std::string, std::string> usu){
   return std::get<1>(usu);
 }
 
-std::string Usuario::getSenha(std::tuple<std::string, std::string, std::string> usu) const{
+std::string Usuario::getSenha(std::tuple<std::string, std::string, std::string> usu){
   return std::get<2>(usu);
 }
 
-bool Usuario::checaNome(std::string n) const{
+bool Usuario::checaNome(std::string n){
   return true;
 }
 
-bool Usuario::checaEmail(std::string em) const{
+bool Usuario::checaEmail(std::string em){
   return true;
 }
 
-bool Usuario::checaSenha(std::string s) const{
+bool Usuario::checaSenha(std::string s){
   return true;
 }
 
@@ -49,7 +49,7 @@ bool Usuario::BuscarEmailVector(std::string n){
   return false;
 }
 
-void CadastraUsuario (std::string n, std::string em, std::string s) const{
+void Usuario::CadastraUsuario (std::string n, std::string em, std::string s){
   if(checaNome(n) && checaEmail(em) && checaSenha(s)){
     if(BuscarEmailVector(em)==false){
       Usuario(n, em, s);

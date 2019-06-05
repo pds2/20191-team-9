@@ -1,4 +1,4 @@
-#ifndef ARQUIVO_H
+/*#ifndef ARQUIVO_H
 #define ARQUIVO_H
 
 #include <string>
@@ -12,3 +12,4 @@ public:
 };
 
 #endif
+*/
