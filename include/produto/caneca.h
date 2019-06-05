@@ -1,16 +1,17 @@
+#ifndef CANECA_H
+#define CANECA_H
+
 #include <iostream>
 #include <string>
 #include <vector>
 #include "produto.h"
 
-
-class Canecas : public Produtos{
+class Caneca : public Produto{
     public:
-        int _tamanho;
-    private:
-       Canecas();
-       ~Canecas();
-       std::string setCaneca(float, float, std::string,
-       std::string, std::string, std::string, std::string, int); 
-       std::string getCaneca();
+        int _diametro;
+        
+        void setProduto(float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, int diametro);
+        void getProduto();
 };
+
+#endif
