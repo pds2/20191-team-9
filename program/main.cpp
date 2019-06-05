@@ -1,5 +1,6 @@
 #include <iostream>
 #include "usuario/usuario.h"
+##include "ecommerce.h"
 
 int main(int argc, char const *argv[]) {
 
