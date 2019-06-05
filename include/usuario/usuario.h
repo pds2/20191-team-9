@@ -10,23 +10,26 @@
 class Usuario{
 
 private:
-    std::vector<std::tuple<std::string, std::string, std::string> > usuarios;
+    std::vector<Usuario> usuarios;
+    std::string _nome;
+    std::string _email;
+    std::string _senha;
 
 public:
     Usuario(std::string n, std::string em, std::string s);
+    Usuario::Usuario();
     ~Usuario();
 
-    std::string getNome(std::tuple<std::string, std::string, std::string> usu);
-    std::string getEmail(std::tuple<std::string, std::string, std::string> usu);
-    std::string getSenha(std::tuple<std::string, std::string, std::string> usu);
+    std::string getNome(Usuario usu);
+    std::string getEmail(Usuario usu);
+    std::string getSenha(Usuario usu);
 
     bool checaNome(std::string n);
     bool checaEmail(std::string em);
     bool checaSenha(std::string s);
 
-    void CadastraUsuario (std::string n, std::string em, std::string s);
     bool BuscarEmailVector(std::string n);
-    void ImprimeUsuarios();
+    void imprimirUsuarios();
 };
 
 #endif

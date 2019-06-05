@@ -1,7 +1,10 @@
 #include <iostream>
+#include "usuario/usuario.h"
 
 int main(int argc, char const *argv[]) {
-  std::cout << "TESTANDO!" << std::endl;
+
+  Usuario usu;
+  usu.CadastraUsuario("cat", "cat", "1234");
 
   return 0;
 }
