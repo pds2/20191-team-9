@@ -1,15 +1,22 @@
-edit: usuario.o arquivo.o
-	cc -o edit usuario.o \
-	arquivo.o
+CC := g++
+SRCDIR := src
+BUILDDIR := build
+TARGET := main
 
-usuario.o: src/usuario/usuario.cpp include/usuario/usuario.h include/arquivo/arquivo.h
-	g++ -g -Wall -O3 -std=c++11 -c -o src/usuario/usuario.cpp
+SRCEXT := cpp
+SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
+OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
+CFLAGS := -g -Wall -O3 -std=c++14
+INC := -I include/ -I third_party/
 
-arquivo.o: src/arquivo/arquivo.cpp include/arquivo/arquivo.h
-	g++ -g -Wall -O3 -std=c++11 -c -o src/arquivo/arquivo.cpp
+$(TARGET): $(OBJECTS)
+	$(CC) $^ -o $(TARGET)
+
+$(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
 
 clean:
-	rm edit usuario.o arquivo.o
+	$(RM) -r $(BUILDDIR)/* $(TARGET)
 
-run: edit
-	./edit
+.PHONY: clean
