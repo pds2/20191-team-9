@@ -1,5 +1,5 @@
-/*
-#include "../../include/produto/produto.h"
+
+#include "produto/produto.h" 
 
 void Produto::avaliarProduto(int nota){
 
@@ -28,4 +28,4 @@ void Produto::getComentarios(){
 void Produto::setComentario(std::string comentario){
     _comentarios.push_back(comentario);
 }
-*/
+
