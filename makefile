@@ -1,22 +1,50 @@
 CC := g++
 SRCDIR := src
-BUILDDIR := build
-TARGET := main
+TSTDIR := tests
+OBJDIR := build
+BINDIR := bin
+
+MAIN := program/main.cpp
+TESTER := program/tester.cpp
 
 SRCEXT := cpp
 SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
-OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
-CFLAGS := -g -Wall -O3 -std=c++14
+OBJECTS := $(patsubst $(SRCDIR)/%,$(OBJDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
+TSTSOURCES := $(shell find $(TSTDIR) -type f -name *.$(SRCEXT))
+
+CFLAGS := -g -Wall -O3 -std=c++11
 INC := -I include/ -I third_party/
 
-$(TARGET): $(OBJECTS)
-	$(CC) $^ -o $(TARGET)
-
-$(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
+$(OBJDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
 
-clean:
-	$(RM) -r $(BUILDDIR)/* $(TARGET)
+main: $(OBJECTS)
+	@mkdir -p $(BINDIR)
+	$(CC) $(CFLAGS) $(INC) $(MAIN) $^ -o $(BINDIR)/main
 
-.PHONY: clean
+tests: $(OBJECTS)
+	@mkdir -p $(BINDIR)
+	$(CC) $(CFLAGS) $(INC) $(TESTER) $(TSTSOURCES) $^ -o $(BINDIR)/tester
+	$(BINDIR)/tester
+
+tests-unit: $(OBJECTS)
+	echo $(CC)
+	echo $(CFLAGS)
+	echo $(INC)
+	echo $(TESTER)
+	echo $(TSTSOURCES)
+	echo $(BINDIR)
+
+valgrind: main
+	valgrind --leak-check=full --track-origins=yes $(BINDIR)/main
+
+all: main
+
+run: main
+	$(BINDIR)/main
+
+clean:
+	$(RM) -r $(OBJDIR)/* $(BINDIR)/*
+
+.PHONY: clean coverage
