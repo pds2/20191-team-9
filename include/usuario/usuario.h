@@ -16,17 +16,14 @@ private:
     std::string _email;
     std::string _senha;
 
-    std::vector <Produto> carrinho;
-    std::vector <Produto> historico;
-
 public:
     Usuario(std::string n, std::string em, std::string s);
     Usuario();
     ~Usuario();
 
-    std::string getNome(Usuario usu);
-    std::string getEmail(Usuario usu);
-    std::string getSenha(Usuario usu);
+    std::string getNome();
+    std::string getEmail();
+    std::string getSenha();
 };
 
 #endif

@@ -11,7 +11,8 @@
 class Ecommerce{
   private:
     int numeroUsuarios;
-    std::vector<Usuario> usuarios;
+    std::vector<Usuario *> usuarios;
+
   public:
     Ecommerce();
     ~Ecommerce();

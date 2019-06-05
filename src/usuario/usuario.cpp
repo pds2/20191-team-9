@@ -16,14 +16,14 @@ Usuario::~Usuario(){
   carrinho.clear();
 }
 
-std::string Usuario::getNome(Usuario usu){
-  return usu._nome;
+std::string Usuario::getNome(){
+  return this->_nome;
 }
 
-std::string Usuario::getEmail(Usuario usu){
-  return usu._email;
+std::string Usuario::getEmail(){
+  return this->_email;
 }
 
-std::string Usuario::getSenha(Usuario usu){
-  return usu._senha;
+std::string Usuario::getSenha(){
+  return this->_senha;
 }
