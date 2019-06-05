@@ -8,9 +8,9 @@
 
 class Acessorio : public Produto{
     public:
-        int _tamanho;
+        std::string _tipo;
         
-        void setProduto(float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, int tamanho);
+        void setProduto(float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, std::string tipo);
         void getProduto();
 };
 
