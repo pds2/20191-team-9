@@ -12,7 +12,8 @@ Usuario::Usuario(){
 }
 
 Usuario::~Usuario(){
-  usuarios.clear();
+  historico.clear();
+  carrinho.clear();
 }
 
 std::string Usuario::getNome(Usuario usu){

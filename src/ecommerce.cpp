@@ -4,6 +4,10 @@ Ecommerce::Ecommerce(){
   numeroUsuarios = 0;
 }
 
+Ecommerce:~Ecommerce(){
+  usuarios.clear();
+}
+
 void Ecommerce::cadastrarUsuario (std::string n, std::string em, std::string s){
   if(checaNome(n) && checaEmail(em) && checaSenha(s)){
     if(buscarEmail(em)==false){
