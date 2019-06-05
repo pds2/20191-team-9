@@ -1,4 +1,4 @@
-#ifndef ACESSORIO_CPP
+/*#ifndef ACESSORIO_CPP
 #define ACESSORIO_CPP
 
 #include "produto/acessorio.h"
@@ -26,3 +26,4 @@ void Acessorio::getProduto(){
 }
 
 #endif
+*/

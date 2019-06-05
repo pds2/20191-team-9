@@ -1,4 +1,4 @@
-#ifndef BLUSAS_E_MOLETOM_CPP
+/*#ifndef BLUSAS_E_MOLETOM_CPP
 #define BLUSAS_E_MOLETOM_CPP
 
 #include "produto/blusas_e_moletom.h"
@@ -27,3 +27,4 @@ void BlusasEMoletom::getProduto(){
 }
 
 #endif
+*/
