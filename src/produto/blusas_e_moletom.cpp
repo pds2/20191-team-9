@@ -1,5 +1,5 @@
 
-#include "produto/blusas_e_moletom.h"
+#include "include/produto/blusas_e_moletom.h"
 #include "produto.cpp"
 
 void BlusasEMoletom::setProduto(float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, char tamanho, std::string tipo){
