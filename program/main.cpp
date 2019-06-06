@@ -14,5 +14,6 @@ int main(int argc, char const *argv[]) {
 
   ecom.imprimirUsuarios();
   ecom.adicionarCarrinho();
+  ecom.imprimirCarrinho();
   return 0;
 }

@@ -50,8 +50,18 @@ void Ecommerce::adicionarCarrinho(){
     std::cout << "Produto adicionado ao carrinho com sucesso!"<< "\n";
   }
   else{
-      std::cout << "Produto escolhido não foi encontrado. Tente novamente mais tarde.";
+    std::cout << "Produto escolhido não foi encontrado. Tente novamente mais tarde.";
   }
+}
+
+void Ecommerce::imprimirCarrinho(){
+  Comprador comp;
+  comp.imprimirCarrinho();
+}
+
+void Ecommerce::imprimirHistorico(){
+  Comprador comp;
+  comp.imprimirHistorico();
 }
 
 bool Ecommerce::buscarEmail(std::string em){

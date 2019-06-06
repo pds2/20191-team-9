@@ -29,6 +29,9 @@ class Ecommerce{
 
     void adicionarCarrinho();
     void limparTela();
+
+    void imprimirCarrinho();
+    void imprimirHistorico();
 };
 
 #endif
