@@ -3,8 +3,8 @@
 
 #include "usuario/comprador.h"
 
-Comprador::Comprador(std::string n, std::string em, std::string s) :
-  Usuario(n, em, s), _numeroComprasCarrinho(0), _numeroComprasHistorico(0), _numeroAvaliacoes(0), _dinheiro(0){};
+Comprador::Comprador(std::string n, std::string em, std::string s, int numCarr, int numHist, int numAval, double din) :
+  Usuario(n, em, s), _numeroComprasCarrinho(numCarr), _numeroComprasHistorico(numHist), _numeroAvaliacoes(numAval), _dinheiro(din){};
 
 Comprador::~Comprador(){
   carrinho.clear();
@@ -32,9 +32,7 @@ double Comprador::getDinheiro(){
 }
 
 void Comprador::adicionarCarrinho(std::string email){
-  Usuario *usu = new Usuario("cataprima", "cataprima", "1234");
-  carrinho.push_back(usu);
-  _numeroComprasCarrinho++;
+
 }
 
 bool Comprador::excluirCarrinho(){
@@ -46,17 +44,11 @@ bool Comprador::adicionaDinheiro(double valor, Comprador comp){
 }
 
 void Comprador::imprimirCarrinho(){
-  for(int i=0; i < _numeroComprasCarrinho; i++){
-    std::cout << "testando";
-    std::cout << (*carrinho[i]).getNome() << " " << (*carrinho[i]).getEmail() << " " << (*carrinho[i]).getSenha() << "\n";
-  }
+
 }
 
 void Comprador::imprimirHistorico(){
-  Usuario usuario;
-  for(int i=0; i < _numeroComprasHistorico; i++){
-    std::cout << (*historico[i]).getNome() << " " << (*historico[i]).getEmail() << " " << (*historico[i]).getSenha() << "\n";
-  }
+
 }
 
 void Comprador::exibirPerfil(){

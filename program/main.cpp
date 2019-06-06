@@ -11,9 +11,10 @@ int main(int argc, char const *argv[]) {
   ecom.cadastrarUsuario("kitkat", "kitkat", "1234");
   ecom.cadastrarUsuario("catalinda", "catalinda", "1234");
   ecom.cadastrarUsuario("cataprima", "cataprima", "1234");
-
-  ecom.imprimirUsuarios();
   ecom.adicionarCarrinho();
   ecom.imprimirCarrinho();
+
+  /*ecom.imprimirUsuarios();
+  ecom.adicionarCarrinho();*/
   return 0;
 }

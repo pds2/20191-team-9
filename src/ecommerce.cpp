@@ -55,8 +55,9 @@ void Ecommerce::adicionarCarrinho(){
 }
 
 void Ecommerce::imprimirCarrinho(){
-  Comprador comp;
-  comp.imprimirCarrinho();
+  Comprador *comp = new Comprador();
+  std::cout << "teste1";
+  (*comp).imprimirCarrinho();
 }
 
 void Ecommerce::imprimirHistorico(){

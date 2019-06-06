@@ -12,17 +12,17 @@
 
 class Comprador : public Usuario{
   private:
-    int _numeroComprasHistorico=0;
-    int _numeroComprasCarrinho=0;
-    int _numeroAvaliacoes=0;
-    double _dinheiro=0;
+    int _numeroComprasHistorico;
+    int _numeroComprasCarrinho;
+    int _numeroAvaliacoes;
+    double _dinheiro;
 
     //dps mudar de Usuario para Produto quando estiver pronto
-    std::vector<Usuario *> carrinho;
+    std::vector<Comprador *> carrinho;
     std::vector<Usuario *> historico;
 
   public:
-    Comprador(std::string n, std::string em, std::string s);
+    Comprador(std::string n, std::string em, std::string s, int numCarr, int numHist, int numAval, double din);
     Comprador();
     ~Comprador();
 
