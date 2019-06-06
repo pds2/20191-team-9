@@ -12,7 +12,7 @@ Comprador::~Comprador(){
 }
 
 Comprador::Comprador(){
-  
+
 }
 
 int Comprador::getNumeroComprasHistorico(){
@@ -31,42 +31,25 @@ double Comprador::getDinheiro(){
   return this->_dinheiro;
 }
 
-bool Comprador::adicionarCarrinho(){
-  Ecommerce ecom;
-  std::string codProduto;
-
-  ecom.imprimirUsuarios();  //faz a listagem dos produtos aqui
-
-  std::cout << "----------Escolha um produto para adiciona-lo ao seu carrinho----------"<< "\n";
-  std::cout << "Código do Produto: "<< "\n";  //usuario escolhe qual produto vai querer aqui;
-  std::cin >> codProduto;
-
-  if(ecom.buscarEmail(codProduto) == true){
-    Usuario *comp = new Usuario("teste", "teste", "teste");
-    carrinho.push_back(comp);
-    _numeroComprasCarrinho++;
-    std::cout << "Produto adicionado ao carrinho com sucesso!"<< "\n";
-    imprimirCarrinho();
-  }
-  else{
-    std::cout << "Produto escolhido não foi encontrado. Tente novamente mais tarde."<< "\n";
-  }
+void Comprador::adicionarCarrinho(std::string email){
+  Usuario *comp = new Usuario("teste", "teste", "teste");
+  carrinho.push_back(comp);
+  _numeroComprasCarrinho++;
+  imprimirCarrinho();
 }
 
 bool Comprador::excluirCarrinho(){
-
+  return true;
 }
 
 bool Comprador::adicionaDinheiro(double valor, Comprador comp){
-
+  return true;
 }
 
 void Comprador::imprimirCarrinho(){
-  Ecommerce ecom;
-  ecom.imprimirUsuarios();
-  /*for(int i=0; i < _numeroComprasCarrinho; i++){
+  for(int i=0; i < _numeroComprasCarrinho; i++){
     std::cout << "testando o carrinho " << i+1 << "\n";
-  }*/
+  }
 }
 
 void Comprador::imprimirHistorico(){

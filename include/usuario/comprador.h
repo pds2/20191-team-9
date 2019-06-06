@@ -7,11 +7,10 @@
 #include <tuple>
 #include <iostream>
 
-#include "produto/produto.h"
 #include "usuario/usuario.h"
 #include "ecommerce.h"
 
-class Comprador : public Usuario {
+class Comprador : public Usuario{
   private:
     int _numeroComprasHistorico;
     int _numeroComprasCarrinho;
@@ -32,7 +31,7 @@ class Comprador : public Usuario {
     int getNumeroAvaliacoes();
     double getDinheiro();
 
-    bool adicionarCarrinho();
+    void adicionarCarrinho(std::string email);
     bool excluirCarrinho();
     bool adicionaDinheiro(double valor, Comprador comp);
 

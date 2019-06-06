@@ -28,19 +28,36 @@ void Ecommerce::cadastrarUsuario (std::string n, std::string em, std::string s){
 void Ecommerce::imprimirUsuarios(){
   Usuario usuario;
   for(int i=0; i < numeroUsuarios; i++){
-    std::cout << "COD " << i << (*usuarios[i]).getNome() << " " << (*usuarios[i]).getEmail() << " " << (*usuarios[i]).getSenha() << "\n";
+    std::cout << (*usuarios[i]).getNome() << " " << (*usuarios[i]).getEmail() << " " << (*usuarios[i]).getSenha() << "\n";
   }
 }
 
 void Ecommerce::adicionarCarrinho(){
   Comprador comp;
-  comp.adicionarCarrinho();
+  std::string email;
+
+  limparTela();
+
+  imprimirUsuarios(); //faz a listagem dos produtos aqui
+
+  std::cout << "\n\n" << "----Escolha um produto para adiciona-lo ao seu carrinho----"<< "\n";
+  std::cout << "Código do Produto: ";  //usuario escolhe qual produto vai querer aqui;
+
+  std::getline (std::cin, email);
+
+  if(buscarEmail(email) == true){
+    comp.adicionarCarrinho(email);
+    std::cout << "Produto adicionado ao carrinho com sucesso!"<< "\n";
+  }
+  else{
+      std::cout << "Produto escolhido não foi encontrado. Tente novamente mais tarde.";
+  }
 }
 
 bool Ecommerce::buscarEmail(std::string em){
   Usuario usuario;
   for(int i=0; i < numeroUsuarios; i++){
-    if((*usuarios[i]).getNome() == em){
+    if((*usuarios[i]).getEmail() == em){
       return true;
     }
   }
@@ -57,4 +74,8 @@ bool Ecommerce::checaEmail(std::string em){
 
 bool Ecommerce::checaSenha(std::string s){
   return true;
+}
+
+void Ecommerce::limparTela(){
+  std::system("clear||cls");
 }

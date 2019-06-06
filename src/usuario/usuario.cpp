@@ -1,5 +1,4 @@
 #include "usuario/usuario.h"
-//#include "include/arquivo/arquivo.h"
 
 Usuario::Usuario(std::string n, std::string em, std::string s){
   _nome = n;
@@ -25,14 +24,4 @@ std::string Usuario::getEmail(){
 
 std::string Usuario::getSenha(){
   return this->_senha;
-}
-
-void Usuario::imprimirUsuarios(){
-  Ecommerce ecom;
-  ecom.imprimirUsuarios();
-}
-
-bool Usuario::buscarEmail(std::string em){
-  Ecommerce ecom;
-  ecom.buscarEmail(em);
 }

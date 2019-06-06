@@ -6,7 +6,8 @@
 #include <tuple>
 #include <iostream>
 
-#include "usuario/usuario.h"
+#include <cstdlib>
+
 #include "usuario/comprador.h"
 
 class Ecommerce{
@@ -27,6 +28,7 @@ class Ecommerce{
     bool checaSenha(std::string s);
 
     void adicionarCarrinho();
+    void limparTela();
 };
 
 #endif
