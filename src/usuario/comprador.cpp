@@ -32,7 +32,14 @@ double Comprador::getDinheiro(){
 }
 
 void Comprador::adicionarCarrinho(std::string email){
+  Comprador *comp = new Comprador("cataprima", "cataprima", "1234", 1, 1, 1, 20);
+  carrinho.push_back(comp);
+  comp = new Comprador("catarina", "catarina", "1234", 1, 1, 1, 20);
+  carrinho.push_back(comp);
 
+  for(int i=0; i < 2; i++){
+    std::cout << (*carrinho[i]).getNome() << " " << (*carrinho[i]).getEmail() << " " << (*carrinho[i]).getSenha() << "\n";
+  }
 }
 
 bool Comprador::excluirCarrinho(){
@@ -44,11 +51,17 @@ bool Comprador::adicionaDinheiro(double valor, Comprador comp){
 }
 
 void Comprador::imprimirCarrinho(){
-
+  std::cout <<  "\n" << carrinho.size()  << "\n";
+  for(int i=0; i < _numeroComprasCarrinho; i++){
+    std::cout << (*carrinho[i]).getNome() << " " << (*carrinho[i]).getEmail() << " " << (*carrinho[i]).getSenha() << "\n";
+  }
 }
 
 void Comprador::imprimirHistorico(){
-
+  Usuario usuario;
+  for(int i=0; i < _numeroComprasHistorico; i++){
+    std::cout << (*historico[i]).getNome() << " " << (*historico[i]).getEmail() << " " << (*historico[i]).getSenha() << "\n";
+  }
 }
 
 void Comprador::exibirPerfil(){
