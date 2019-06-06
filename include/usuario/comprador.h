@@ -9,24 +9,36 @@
 
 #include "produto/produto.h"
 #include "usuario/usuario.h"
+#include "ecommerce.h"
 
 class Comprador : public Usuario {
   private:
-    int numeroCompras;
-    int numeroAvaliacoes;
-    double dinheiro;
+    int _numeroComprasHistorico;
+    int _numeroComprasCarrinho;
+    int _numeroAvaliacoes;
+    double _dinheiro;
 
-    std::vector <Produto> carrinho;
-    std::vector <Produto> historico;
+//dps mudar de Usuario para Produto quando estiver pronto
+    std::vector <Usuario *> carrinho;
+    std::vector <Usuario *> historico;
   public:
+    Comprador(std::string n, std::string em, std::string s);
     Comprador();
     ~Comprador();
+
+    int getNumeroComprasHistorico();
+    int getNumeroComprasCarrinho();
+
+    int getNumeroAvaliacoes();
+    double getDinheiro();
+
     bool adicionarCarrinho();
     bool excluirCarrinho();
-    bool adicionaDinheiro();
+    bool adicionaDinheiro(double valor, Comprador comp);
 
     void exibirPerfil();
-
+    void imprimirCarrinho();
+    void imprimirHistorico();
 };
 
 #endif

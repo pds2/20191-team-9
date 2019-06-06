@@ -28,14 +28,19 @@ void Ecommerce::cadastrarUsuario (std::string n, std::string em, std::string s){
 void Ecommerce::imprimirUsuarios(){
   Usuario usuario;
   for(int i=0; i < numeroUsuarios; i++){
-    std::cout << (*usuarios[i]).getNome() << " " << (*usuarios[i]).getEmail() << " " << (*usuarios[i]).getSenha() << "\n";
+    std::cout << "COD " << i << (*usuarios[i]).getNome() << " " << (*usuarios[i]).getEmail() << " " << (*usuarios[i]).getSenha() << "\n";
   }
 }
 
-bool Ecommerce::buscarEmail(std::string n){
+void Ecommerce::adicionarCarrinho(){
+  Comprador comp;
+  comp.adicionarCarrinho();
+}
+
+bool Ecommerce::buscarEmail(std::string em){
   Usuario usuario;
   for(int i=0; i < numeroUsuarios; i++){
-    if((*usuarios[i]).getNome() == n){
+    if((*usuarios[i]).getNome() == em){
       return true;
     }
   }

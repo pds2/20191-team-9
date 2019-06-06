@@ -12,8 +12,7 @@ Usuario::Usuario(){
 }
 
 Usuario::~Usuario(){
-  historico.clear();
-  carrinho.clear();
+
 }
 
 std::string Usuario::getNome(){
@@ -26,4 +25,14 @@ std::string Usuario::getEmail(){
 
 std::string Usuario::getSenha(){
   return this->_senha;
+}
+
+void Usuario::imprimirUsuarios(){
+  Ecommerce ecom;
+  ecom.imprimirUsuarios();
+}
+
+bool Usuario::buscarEmail(std::string em){
+  Ecommerce ecom;
+  ecom.buscarEmail(em);
 }

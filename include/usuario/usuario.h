@@ -8,6 +8,7 @@
 #include <iostream>
 
 #include "produto/produto.h"
+#include "ecommerce.h"
 
 class Usuario{
 
@@ -24,6 +25,10 @@ public:
     std::string getNome();
     std::string getEmail();
     std::string getSenha();
+
+    void Usuario::imprimirUsuarios();
+    bool Usuario::buscarEmail(std::string em);
+
 };
 
 #endif

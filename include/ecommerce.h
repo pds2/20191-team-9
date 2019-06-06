@@ -7,6 +7,7 @@
 #include <iostream>
 
 #include "usuario/usuario.h"
+#include "usuario/comprador.h"
 
 class Ecommerce{
   private:
@@ -24,6 +25,8 @@ class Ecommerce{
     bool checaNome(std::string n);
     bool checaEmail(std::string em);
     bool checaSenha(std::string s);
+
+    void adicionarCarrinho();
 };
 
 #endif

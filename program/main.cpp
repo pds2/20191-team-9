@@ -8,5 +8,7 @@ int main(int argc, char const *argv[]) {
   ecom.cadastrarUsuario("cat", "cat", "1234");
   ecom.imprimirUsuarios();
 
+  ecom.adicionarCarrinho();
+
   return 0;
 }
