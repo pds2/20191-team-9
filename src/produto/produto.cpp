@@ -6,7 +6,7 @@
 
 Produto::Produto(){
 }
-~Produto::Produto(){
+Produto::~Produto(){
 }
 
 void Produto::avaliarProduto(int nota){
