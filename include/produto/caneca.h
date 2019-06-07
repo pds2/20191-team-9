@@ -9,7 +9,8 @@
 class Caneca : public Produto{
     public:
         int _diametro;
-        
+        Caneca();
+        ~Caneca();
         void setProduto(float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, int diametro);
         void getProduto();
 };
