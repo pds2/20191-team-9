@@ -16,7 +16,8 @@ class Produto{
         std::string _cor;
         std::string _descricao;
         std::string _material;
-
+        Produto();
+        ~Produto();
         void setProduto();
         void getProduto(); //exibe produto
         void avaliarProduto(int nota); //salva avaliacao na lista e depois modifica a media
