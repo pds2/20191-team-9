@@ -1,8 +1,12 @@
-/*#ifndef BLUSAS_E_MOLETOM_CPP
+#ifndef BLUSAS_E_MOLETOM_CPP
 #define BLUSAS_E_MOLETOM_CPP
 
 #include "produto/blusas_e_moletom.h"
 #include "produto.cpp"
+
+
+BlusasEMoletom();
+~BlusasEMoletom();
 
 void BlusasEMoletom::setProduto(float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, char tamanho, std::string tipo){
 
@@ -27,4 +31,4 @@ void BlusasEMoletom::getProduto(){
 }
 
 #endif
-*/
+
