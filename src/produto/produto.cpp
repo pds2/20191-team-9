@@ -1,7 +1,13 @@
-/*#ifndef PRODUTO_CPP
+#ifndef PRODUTO_CPP
 #define PRODUTO_CPP
 
 #include "produto/produto.h"
+
+
+Produto::Produto(){
+}
+~Produto::Produto(){
+}
 
 void Produto::avaliarProduto(int nota){
 
@@ -32,4 +38,4 @@ void Produto::setComentario(std::string comentario){
 }
 
 #endif
-*/
+
