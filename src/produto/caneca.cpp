@@ -5,7 +5,7 @@
 #include "produto.cpp"
 
 Caneca::Caneca();
-~Caneca::Caneca();
+Caneca::~Caneca();
 
 void Caneca::setProduto(float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, int diametro){
 
