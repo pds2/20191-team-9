@@ -1,8 +1,13 @@
-/*#ifndef ACESSORIO_CPP
+#ifndef ACESSORIO_CPP
 #define ACESSORIO_CPP
 
 #include "produto/acessorio.h"
 #include "produto.cpp"
+
+Acessorio::Acessorio(){
+}
+Acessorio::~Acessorio(){
+}
 
 void Acessorio::setProduto(float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, std::string tipo){
 
