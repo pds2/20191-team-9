@@ -3,7 +3,7 @@
 
 #include "usuario/comprador.h"
 
-Comprador::Comprador(std::string n, std::string em, std::string s, std:string cpf, std::string end, int numCarr, int numHist, int numAval, double din) :
+Comprador::Comprador(std::string n, std::string em, std::string s, std::string cpf, std::string end, int numCarr, int numHist, int numAval, double din) :
   Usuario(n, em, s), _CPF(cpf),  _endereco(end), _numeroComprasCarrinho(numCarr), _numeroComprasHistorico(numHist), _numeroAvaliacoes(numAval), _dinheiro(din){};
 
 Comprador::~Comprador(){
@@ -39,36 +39,67 @@ double Comprador::getDinheiro(){
   return this->_dinheiro;
 }
 
-void Comprador::adicionarCarrinho(std::string email){
-  Comprador *comp = new Comprador("cataprima", "cataprima", "1234", 1, 1, 1, 20);
-  carrinho.push_back(comp);
-  comp = new Comprador("catarina", "catarina", "1234", 1, 1, 1, 20);
-  carrinho.push_back(comp);
+void Comprador::adicionarCarrinho(std::string codProduto){
 
-  for(int i=0; i < 2; i++){
-    std::cout << (*carrinho[i]).getNome() << " " << (*carrinho[i]).getEmail() << " " << (*carrinho[i]).getSenha() << "\n";
-  }
+  //aqui procura o produto pelo codProduto dele, se encontrar não adiciona de novo, se não, prossegue
+  // pega cada atributo desse Produto encontrado e cria um novo Produto, registrando ele no carrinho
+  //Produto *prod = new Produto("cataprima", "cataprima", "1234", 1, 1, 1, 20);
+  //carrinho.push_back(prod);
 }
 
-bool Comprador::excluirCarrinho(){
-  return true;
+bool Comprador::retirarCarrinho(){
+  if(_numeroComprasCarrinho == 0){
+    std::cout << "Seu carrinho está vazio. Adicione produtos para continuar.";
+    return false;
+  }
+  else{
+    for(int i=0; i < _numeroComprasCarrinho; i++){
+      //(*carrinho[i]).getProduto(); aqui chama a funcao que exibe os produtos que estão no carrinho
+    }
+    int codProduto;
+    int indice = -1;
+    std::cout << "Digite o código do produto que deseja retirar do seu carrinho: ";
+    std::cin >> codProduto;
+
+    //aqui precisa verificar se o produto tá no carrinho mesmo
+    //indice = funcao que procura pelo produto dado o codigo
+
+    if(indice != -1){
+      carrinho.erase(carrinho.begin()+ indice); //apaga o indice elemento a partir do começo do vector
+      return true;
+    }
+    else{
+      std::cout << "Produto não encontrado no carrinho. Tente novamente.";
+      return false;
+    }
+  }
+  return false;
 }
 
 bool Comprador::adicionaDinheiro(double valor, Comprador comp){
+  //aqui tem que mandar uma requisicao para o administrador
   return true;
 }
 
 void Comprador::imprimirCarrinho(){
-  std::cout <<  "\n" << carrinho.size()  << "\n";
-  for(int i=0; i < _numeroComprasCarrinho; i++){
-    std::cout << (*carrinho[i]).getNome() << " " << (*carrinho[i]).getEmail() << " " << (*carrinho[i]).getSenha() << "\n";
+  if(_numeroComprasCarrinho == 0){
+    std::cout << "Seu carrinho está vazio. Adicione produtos para continuar.";
+  }
+  else{
+    for(int i=0; i < _numeroComprasCarrinho; i++){
+      //(*carrinho[i]).getProduto(); aqui chama a funcao que exibe os produtos que estão no carrinho
+    }
   }
 }
 
 void Comprador::imprimirHistorico(){
-  Usuario usuario;
-  for(int i=0; i < _numeroComprasHistorico; i++){
-    std::cout << (*historico[i]).getNome() << " " << (*historico[i]).getEmail() << " " << (*historico[i]).getSenha() << "\n";
+  if(_numeroComprasHistorico == 0){
+    std::cout << "Seu histórico está vazio. Compre produtos para continuar.";
+  }
+  else{
+    for(int i=0; i < _numeroComprasHistorico; i++){
+      //(*historico[i]).getProduto(); aqui chama a funcao que exibe os produtos que estão no historico
+    }
   }
 }
 

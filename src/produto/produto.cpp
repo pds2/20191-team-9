@@ -20,7 +20,7 @@ Produto::Produto(float preco, float mediaAvaliacoes, std::string nome, std::stri
 }
 
 Produto::~Produto(){
-    
+
 }
 
 
@@ -44,7 +44,7 @@ void Produto::getComentarios(){
     int size = _comentarios.size();
     int i;
     std::cout << "------------------------------" << std::endl;
-    std::cout << "Comentarios sobre esse produto:" << std::endl; 
+    std::cout << "Comentarios sobre esse produto:" << std::endl;
 
     for(i=0; i<size; i++){
         std::cout << _comentarios[i] << std::endl;
@@ -56,4 +56,3 @@ void Produto::setComentario(std::string comentario){
 }
 
 #endif
-
