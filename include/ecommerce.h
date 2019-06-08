@@ -24,6 +24,7 @@ class Ecommerce{
     ~Ecommerce();
 
     void cadastrarUsuario (std::string n, std::string em, std::string s);
+    void cadastrarComprador (std::string n, std::string em, std::string s, std::string cpf, std::string endereco, int numCarr, int numHist, int numAval, double din);
     bool procurarUsuario(std::string email);
     void imprimirUsuarios();
     void imprimirCompradores();
@@ -38,6 +39,7 @@ class Ecommerce{
     void impCarrinho();
     void impHistorico();
     void listaUsuarioArquivo();
+    void gravaUsuarioArquivo();
 };
 
 #endif

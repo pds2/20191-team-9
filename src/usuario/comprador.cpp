@@ -42,13 +42,10 @@ double Comprador::getDinheiro(){
 }
 
 void Comprador::adicionarCarrinho(){
-
   //aqui procura o produto pelo codProduto dele, se encontrar não adiciona de novo, se não, prossegue
   // pega cada atributo desse Produto encontrado e cria um novo Produto, registrando ele no carrinho
   //Produto *prod = new Produto("cataprima", "cataprima", "1234", 1, 1, 1, 20);
   //carrinho.push_back(prod);
-
-
 }
 
 bool Comprador::retirarCarrinho(){
@@ -163,7 +160,7 @@ void Comprador::avaliarItem(){
     std::cout << "\n" << "De 0 a 5, qual nota deseja dar ao produto de código " << codProduto << "?" << "\n";
     std::cin >> nota;
     if(nota>=0 || nota<=5){
-      (*historico[indice]).avaliarProduto(nota);
+      (historico[indice]).avaliarProduto(nota);
     }
     else{
       std::cout << "\n" << "Nota inválida. Tente novamente.";

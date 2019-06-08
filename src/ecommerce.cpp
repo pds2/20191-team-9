@@ -55,7 +55,7 @@ void Ecommerce::gravaUsuarioArquivo(){
   int numeroCompradores = compradores.size();
   for(int i=0; arquivo.good() && i < numeroCompradores-1; i++){
     arquivo << (compradores[i]).getNome() << "," << (compradores[i]).getEmail() << "," << (compradores[i]).getSenha() << "," << (compradores[i]).getNumeroComprasCarrinho() << "," << (compradores[i]).getNumeroComprasHistorico() << "," << (compradores[i]).getNumeroAvaliacoes() << "," << (compradores[i]).getEndereco() << "," << (compradores[i]).getDinheiro() << "\n"
-  imprimirCompradores();
+  }
   arquivo.close();
 }
 
@@ -72,7 +72,25 @@ void Ecommerce::cadastrarUsuario (std::string n, std::string em, std::string s){
   else{
     std::cout << "Dados inválidos. Tente novamente." << std::endl;
   }
-  //RegistraUsuarioArquivo(make_tuple(n, em, s));
+}
+
+void Ecommerce::cadastrarComprador (std::string n, std::string em, std::string s, std::string cpf,
+  std::string endereco, int numCarr, int numHist, int numAval, double din){
+   if(checaNome(n) && checaEmail(em) && checaSenha(s)){
+    if(procurarUsuario(em)==false){
+      Comprador comp = Comprador(n, em, s, cpf, endereco, numCarr, numHist, numAval, din);
+      Usuario usu = Usuario(n, em, s);
+      usuarios.push_back(usu);
+      compradores.push_back(comp);
+      gravaUsuarioArquivo();
+     }
+     else{
+      std::cout << "Endereço de email já cadastrado. Tente novamente." << std::endl;
+     }
+  }
+  else{
+    std::cout << "Dados inválidos. Tente novamente." << std::endl;
+  }
 }
 
 void Ecommerce::imprimirUsuarios(){
