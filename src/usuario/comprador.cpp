@@ -39,7 +39,7 @@ double Comprador::getDinheiro(){
   return this->_dinheiro;
 }
 
-void Comprador::adicionarCarrinho(std::string codProduto){
+void Comprador::adicionarCarrinho(){
 
   //aqui procura o produto pelo codProduto dele, se encontrar não adiciona de novo, se não, prossegue
   // pega cada atributo desse Produto encontrado e cria um novo Produto, registrando ele no carrinho
@@ -114,17 +114,28 @@ void Comprador::exibirPerfil(){
   std::cout << "Qntd Dinheiro: " << getDinheiro() << "\n";
 }
 
-bool Comprador::procurarItens(){
-  /*//aqui chama a funcao de produto que procura itens
-  std::vector<Item> vecOfItems = getItemList();
-  std::vector<Item>::iterator it;
-  it = std::find_if(vecOfItems.begin(), vecOfItems.end(), [](Item const& obj){
-  		return obj.getPrice() == 28;
-  	} );
-  if(it != vecOfItems.end())
-  	std::cout<<"Item Price ::"<<it->getPrice()<<" Count :: "<<it->getCount()<<std::endl;
-  else
-  	std::cout<<"Item not Found"<<std::endl;*/
+int Comprador::procurarItensHistorico(int codProduto){
+  /*int numeroHistorico = historico.size();
+
+  for(int i=0; i < numeroHistorico; i++){
+    //inserir aqui a funcao que pega o codigo do produto
+    if((*historico[i]).getCodigoProduto() == codProduto){
+      return i;
+    }
+  }*/
+  return -1;
+}
+
+int Comprador::procurarItensCarrinho(int codProduto){
+  /*int numeroCarrinho = carrinho.size();
+
+  for(int i=0; i < numeroCarrinho; i++){
+  //inserir aqui a funcao que pega o codigo do produto
+    if((*carrinho[i]).getCodigoProduto() == codProduto){
+      return i;
+    }
+  }*/
+  return -1;
 }
 
 void Comprador::adicionarComentario(){
@@ -140,7 +151,8 @@ void Comprador::avaliarItem(){
   std::cout << "\n" << "Digite o código do produto que deseja retirar do seu carrinho: ";
   std::cin >> codProduto;
 
-  // indice = aqui chama a funcao de produto que procura itens por codProduto
+  indice = procurarItensHistorico(codProduto);
+
   if (indice != -1){
     int nota;
 
@@ -161,6 +173,4 @@ void Comprador::avaliarItem(){
 void Comprador::enviarMensagem(){
 
 }
-
-
 #endif

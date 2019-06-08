@@ -11,11 +11,16 @@ int main(int argc, char const *argv[]) {
   ecom.cadastrarUsuario("kitkat", "kitkat", "1234");
   ecom.cadastrarUsuario("catalinda", "catalinda", "1234");
   ecom.cadastrarUsuario("cataprima", "cataprima", "1234");
-  ecom.cadastrarUsuario("cataprima", "cataprima", "1234");
-  ecom.adicionarCarrinho();
-  ecom.imprimirCarrinho();
 
-  /*ecom.imprimirUsuarios();
-  ecom.adicionarCarrinho();*/
+/*  std::string email;
+  std::cout << "Email: ";
+  std::getline(std::cin, email);*/
+
+//  std::cout << ecom.buscarEmail(email);
+//  ecom.adicionarCarrinho();
+  //ecom.imprimirCarrinho();
+
+  ecom.imprimirUsuarios();
+  //ecom.adicionarCarrinho();*/
   return 0;
 }

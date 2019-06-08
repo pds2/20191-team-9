@@ -20,18 +20,18 @@ class Ecommerce{
     ~Ecommerce();
 
     void cadastrarUsuario (std::string n, std::string em, std::string s);
-    bool buscarEmail(std::string n);
+    bool procurarUsuario(std::string email);
     void imprimirUsuarios();
 
     bool checaNome(std::string n);
     bool checaEmail(std::string em);
     bool checaSenha(std::string s);
 
-    void adicionarCarrinho();
+    void addCarrinho();
     void limparTela();
 
-    void imprimirCarrinho();
-    void imprimirHistorico();
+    void impCarrinho();
+    void impHistorico();
 };
 
 #endif

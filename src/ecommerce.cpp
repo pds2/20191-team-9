@@ -10,7 +10,7 @@ Ecommerce::~Ecommerce(){
 
 void Ecommerce::cadastrarUsuario (std::string n, std::string em, std::string s){
   if(checaNome(n) && checaEmail(em) && checaSenha(s)){
-    if(buscarEmail(em)==false){
+    if(procurarUsuario(em)==false){
       Usuario *usu = new Usuario(n, em, s);
       usuarios.push_back(usu);
       numeroUsuarios++;
@@ -26,47 +26,27 @@ void Ecommerce::cadastrarUsuario (std::string n, std::string em, std::string s){
 }
 
 void Ecommerce::imprimirUsuarios(){
-  Usuario usuario;
   for(int i=0; i < numeroUsuarios; i++){
     std::cout << (*usuarios[i]).getNome() << " " << (*usuarios[i]).getEmail() << " " << (*usuarios[i]).getSenha() << "\n";
   }
 }
 
-void Ecommerce::adicionarCarrinho(){
+void Ecommerce::addCarrinho(){
   Comprador comp;
-  std::string email;
-
-  limparTela();
-
-  imprimirUsuarios(); //faz a listagem dos produtos aqui
-
-  std::cout << "\n\n" << "----Escolha um produto para adiciona-lo ao seu carrinho----"<< "\n";
-  std::cout << "Código do Produto: ";  //usuario escolhe qual produto vai querer aqui;
-
-  std::getline (std::cin, email);
-
-  if(buscarEmail(email) == true){
-    comp.adicionarCarrinho(email);
-    std::cout << "Produto adicionado ao carrinho com sucesso!"<< "\n";
-  }
-  else{
-    std::cout << "Produto escolhido não foi encontrado. Tente novamente mais tarde.";
-  }
+  comp.adicionarCarrinho();
 }
 
-void Ecommerce::imprimirCarrinho(){
-  Comprador *comp = new Comprador();
-  std::cout << "teste1";
-  (*comp).imprimirCarrinho();
+void Ecommerce::impCarrinho(){
+  Comprador comp;
+  comp.imprimirCarrinho();
 }
 
-void Ecommerce::imprimirHistorico(){
+void Ecommerce::impHistorico(){
   Comprador comp;
   comp.imprimirHistorico();
 }
 
-bool Ecommerce::buscarEmail(std::string em){
-  Usuario usuario;
+bool Ecommerce::procurarUsuario(std::string em){
   for(int i=0; i < numeroUsuarios; i++){
     if((*usuarios[i]).getEmail() == em){
       return true;

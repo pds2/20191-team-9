@@ -7,6 +7,8 @@
 #include <tuple>
 #include <iostream>
 
+#include <iterator>
+
 #include "usuario/usuario.h"
 #include "produto/produto.h"
 #include "ecommerce.h"
@@ -39,7 +41,7 @@ class Comprador : public Usuario{
     int getNumeroAvaliacoes();
     double getDinheiro();
 
-    void adicionarCarrinho(std::string email);
+    void adicionarCarrinho();
     void fazerCompras();
     bool retirarCarrinho();
     bool adicionaDinheiro(double valor, Comprador comp);
@@ -48,7 +50,8 @@ class Comprador : public Usuario{
     void imprimirCarrinho();
     void imprimirHistorico();
 
-    bool procurarItens();
+    int procurarItensHistorico(int codProduto);
+    int procurarItensCarrinho(int codProduto);
     void adicionarComentario();
     void avaliarItem();
     void enviarMensagem();
