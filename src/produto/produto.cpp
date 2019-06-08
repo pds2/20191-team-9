@@ -1,7 +1,28 @@
-/*#ifndef PRODUTO_CPP
+#ifndef PRODUTO_CPP
 #define PRODUTO_CPP
 
 #include "produto/produto.h"
+
+
+Produto::Produto(float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material){
+        std::vector<std::string> vazio;
+        std::vector<int> nada;
+
+        _preco = preco;
+        _mediaAvaliacoes = mediaAvaliacoes;
+        _nome = nome;
+        _categoria = categoria;
+        _cor = cor;
+        _descricao = descricao;
+        _material = material;
+        _comentarios = vazio;
+        _avaliacoes = nada;
+}
+
+Produto::~Produto(){
+    
+}
+
 
 void Produto::avaliarProduto(int nota){
 
@@ -22,6 +43,9 @@ void Produto::avaliarProduto(int nota){
 void Produto::getComentarios(){
     int size = _comentarios.size();
     int i;
+    std::cout << "------------------------------" << std::endl;
+    std::cout << "Comentarios sobre esse produto:" << std::endl; 
+
     for(i=0; i<size; i++){
         std::cout << _comentarios[i] << std::endl;
     }
@@ -32,4 +56,4 @@ void Produto::setComentario(std::string comentario){
 }
 
 #endif
-*/
+
