@@ -3,8 +3,8 @@
 
 #include "usuario/comprador.h"
 
-Comprador::Comprador(std::string n, std::string em, std::string s, int numCarr, int numHist, int numAval, double din) :
-  Usuario(n, em, s), _numeroComprasCarrinho(numCarr), _numeroComprasHistorico(numHist), _numeroAvaliacoes(numAval), _dinheiro(din){};
+Comprador::Comprador(std::string n, std::string em, std::string s, std:string cpf, std::string end, int numCarr, int numHist, int numAval, double din) :
+  Usuario(n, em, s), _CPF(cpf),  _endereco(end), _numeroComprasCarrinho(numCarr), _numeroComprasHistorico(numHist), _numeroAvaliacoes(numAval), _dinheiro(din){};
 
 Comprador::~Comprador(){
   carrinho.clear();
@@ -13,6 +13,14 @@ Comprador::~Comprador(){
 
 Comprador::Comprador(){
 
+}
+
+std::string getCPF(){
+  return this->_CPF;
+}
+
+std::string getEndereco(){
+  return this->_endereco;
 }
 
 int Comprador::getNumeroComprasHistorico(){
