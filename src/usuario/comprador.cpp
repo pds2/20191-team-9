@@ -160,7 +160,7 @@ void Comprador::avaliarItem(){
     std::cout << "\n" << "De 0 a 5, qual nota deseja dar ao produto de código " << codProduto << "?" << "\n";
     std::cin >> nota;
     if(nota>=0 || nota<=5){
-      (historico[indice]).avaliarProduto(nota);
+      (historico[indice])->avaliarProduto(nota);
     }
     else{
       std::cout << "\n" << "Nota inválida. Tente novamente.";

@@ -26,6 +26,7 @@ class Ecommerce{
     void cadastrarUsuario (std::string n, std::string em, std::string s);
     void cadastrarComprador (std::string n, std::string em, std::string s, std::string cpf, std::string endereco, int numCarr, int numHist, int numAval, double din);
     bool procurarUsuario(std::string email);
+    bool procurarComprador(std::string em);
     void imprimirUsuarios();
     void imprimirCompradores();
 

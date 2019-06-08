@@ -25,8 +25,9 @@ int main(int argc, char const *argv[]) {
 //  ecom.imprimirUsuarios();
   //ecom.adicionarCarrinho();*/
 
-ecom.listaUsuarioArquivo();
-ecom.cadastrarComprador("catarina", "catarina.enya", "3237", "fleming", 0, 0 , 0, 0.0)
+//ecom.listaUsuarioArquivo();
+
+ecom.cadastrarComprador("nome", "catarinaenya", "senha", "cpf", "endereco", 1, 1, 1, 1);
 ecom.listaUsuarioArquivo();
 
 return 0;

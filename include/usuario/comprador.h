@@ -28,6 +28,7 @@ class Comprador : public Usuario{
 
   public:
     Comprador(std::string n, std::string em, std::string s, std::string cpf, std::string endereco, int numCarr, int numHist, int numAval, double din);
+
     Comprador();
     ~Comprador();
 
