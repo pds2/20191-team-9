@@ -6,6 +6,7 @@ Ecommerce::Ecommerce(){
 
 Ecommerce::~Ecommerce(){
   usuarios.clear();
+  compradores.clear();
 }
 
 void Ecommerce::listaUsuarioArquivo(){
@@ -16,7 +17,7 @@ void Ecommerce::listaUsuarioArquivo(){
   if (!arquivo.is_open()) std::cout << "Erro ao abrir arquivo. Tente novamente";
 
   while (arquivo.good()){
-    std::string nome, email, senha, cpf, endereco;
+    std::string nome, email, senha, cpf, endereco, nH, nC, nA, d;
     int numHistorico, numCarrinho, numAvaliacoes;
     double dinheiro;
 
@@ -25,17 +26,20 @@ void Ecommerce::listaUsuarioArquivo(){
     std::getline(arquivo, senha,',');
     std::getline(arquivo, cpf,',');
     std::getline(arquivo, endereco,',');
-  /*  std::getline(arquivo, std::stoi(numCarrinho),',');
-    std::getline(arquivo, std::stoi(numHistorico),',');
-    std::getline(arquivo, std::stoi(numAvaliacoes),',');
-    std::getline(arquivo, std::stod(dinheiro),'\n');*/
+    std::getline(arquivo, nC,',');
+    std::getline(arquivo, nH,',');
+    std::getline(arquivo, nA,',');
+    std::getline(arquivo, d,'\n');
 
-  /*  Comprador *comp = Comprador(nome, email, senha, cpf, endereco, std::stoi(numCarrinho),
-      std::stoi(numHistorico), std::stoi(numAvaliacoes), std::stod(dinheiro));
+    numCarrinho = std::stoi(nC);
+    numHistorico = std::stoi(nH);
+    numAvaliacoes = std::stoi(nA);
+    //dinheiro = std::stod(d);
 
-    usuarios.push_back(comp);*/
+    Comprador comp = Comprador(nome, email, senha, cpf, endereco, numCarrinho, numHistorico, numAvaliacoes, dinheiro);
+    compradores.push_back(comp);
 
-    std::cout << nome << std::endl;
+    std::cout << "\n" << nome << std::endl;
     std::cout << email << std::endl;
     std::cout << senha << std::endl;
     std::cout << cpf << std::endl;
@@ -52,7 +56,7 @@ void Ecommerce::listaUsuarioArquivo(){
 void Ecommerce::cadastrarUsuario (std::string n, std::string em, std::string s){
   if(checaNome(n) && checaEmail(em) && checaSenha(s)){
     if(procurarUsuario(em)==false){
-      Usuario *usu = new Usuario(n, em, s);
+      Usuario usu = Usuario(n, em, s);
       usuarios.push_back(usu);
       numeroUsuarios++;
     }
@@ -68,7 +72,7 @@ void Ecommerce::cadastrarUsuario (std::string n, std::string em, std::string s){
 
 void Ecommerce::imprimirUsuarios(){
   for(int i=0; i < numeroUsuarios; i++){
-    std::cout << (*usuarios[i]).getNome() << " " << (*usuarios[i]).getEmail() << " " << (*usuarios[i]).getSenha() << "\n";
+    std::cout << (usuarios[i]).getNome() << " " << (usuarios[i]).getEmail() << " " << (usuarios[i]).getSenha() << "\n";
   }
 }
 
@@ -89,7 +93,7 @@ void Ecommerce::impHistorico(){
 
 bool Ecommerce::procurarUsuario(std::string em){
   for(int i=0; i < numeroUsuarios; i++){
-    if((*usuarios[i]).getEmail() == em){
+    if((usuarios[i]).getEmail() == em){
       return true;
     }
   }

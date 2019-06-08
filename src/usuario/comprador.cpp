@@ -2,9 +2,17 @@
 #define COMPRADOR_CPP
 
 #include "usuario/comprador.h"
+#include "usuario/usuario.h"
 
-Comprador::Comprador(std::string n, std::string em, std::string s, std::string cpf, std::string end, int numCarr, int numHist, int numAval, double din) :
-  Usuario(n, em, s), _CPF(cpf),  _endereco(end), _numeroComprasCarrinho(numCarr), _numeroComprasHistorico(numHist), _numeroAvaliacoes(numAval), _dinheiro(din){};
+Comprador::Comprador(std::string n, std::string em, std::string s, std::string cpf, std::string endereco, int numCarr, int numHist, int numAval, double din){
+  Usuario(n, em, s);
+  this->_CPF = cpf;
+  this->_endereco = endereco;
+  this->_numeroComprasCarrinho = numCarr;
+  this->_numeroComprasHistorico = numHist;
+  this->_numeroAvaliacoes = numAval;
+  this->_dinheiro = din;
+};
 
 Comprador::~Comprador(){
   carrinho.clear();

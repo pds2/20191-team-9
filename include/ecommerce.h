@@ -3,21 +3,22 @@
 
 #include <string>
 #include <vector>
-#include <tuple>
-#include <iostream>
-#include <string>
-
-#include <fstream>
+#include <sstream>
 
 #include <cstdlib>
+
+#include <math.h>
+
+#include <fstream>
+#include <iostream>
 
 #include "usuario/comprador.h"
 
 class Ecommerce{
   private:
     int numeroUsuarios;
-    std::vector<Usuario *> usuarios;
-    std::vector<Comprador *> compradores;
+    std::vector <Usuario> usuarios;
+    std::vector <Comprador> compradores;
 
   public:
     Ecommerce();
