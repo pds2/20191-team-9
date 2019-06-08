@@ -45,6 +45,8 @@ void Comprador::adicionarCarrinho(){
   // pega cada atributo desse Produto encontrado e cria um novo Produto, registrando ele no carrinho
   //Produto *prod = new Produto("cataprima", "cataprima", "1234", 1, 1, 1, 20);
   //carrinho.push_back(prod);
+
+
 }
 
 bool Comprador::retirarCarrinho(){
@@ -87,7 +89,7 @@ void Comprador::imprimirCarrinho(){
   }
   else{
     for(int i=0; i < _numeroComprasCarrinho; i++){
-      //(*carrinho[i]).getProduto(); aqui chama a funcao que exibe os produtos que estão no carrinho
+      //(*carrinho[i]).getProduto(); //aqui chama a funcao que exibe os produtos que estão no carrinho
     }
   }
 }
@@ -98,7 +100,7 @@ void Comprador::imprimirHistorico(){
   }
   else{
     for(int i=0; i < _numeroComprasHistorico; i++){
-      //(*historico[i]).getProduto(); aqui chama a funcao que exibe os produtos que estão no historico
+      //(*historico[i]).getProduto(); //aqui chama a funcao que exibe os produtos que estão no historico
     }
   }
 }
