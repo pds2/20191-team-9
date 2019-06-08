@@ -13,10 +13,13 @@ void Ecommerce::listaUsuarioArquivo(){
 
   arquivo.open("usuarios.csv");
 
-  if (!arquivo.is_open()) std::cout << "Erro ao abrir arquivo. Tente novamente";
+  if (!arquivo.is_open()){
+    std::cout << "Erro ao abrir arquivo. Tente novamente";
+    exit(1);
+  }
 
   while (arquivo.good()){
-    std::string nome, email, senha, cpf, endereco, nH, nC, nA, d;
+    std::string nome, email, senha, cpf, endereco;
     int numHistorico, numCarrinho, numAvaliacoes;
     double dinheiro;
 
@@ -25,21 +28,33 @@ void Ecommerce::listaUsuarioArquivo(){
     std::getline(arquivo, senha,',');
     std::getline(arquivo, cpf,',');
     std::getline(arquivo, endereco,',');
-    std::getline(arquivo, nC,',');
-    std::getline(arquivo, nH,',');
-    std::getline(arquivo, nA,',');
-    std::getline(arquivo, d,'\n');
+    /*std::getline(arquivo, numCarrinho,',');
+    std::getline(arquivo, numHistorico,',');
+    std::getline(arquivo, numAvaliacoes,',');
+    std::getline(arquivo, dinheiro,'\n');*/
 
-    Comprador comp = Comprador(nome, email, senha, cpf, endereco, nC, nH, nA, d);
+    Comprador comp = Comprador(nome, email, senha, cpf, endereco, numCarrinho, numHistorico, numAvaliacoes, dinheiro);
     Usuario usu = Usuario(nome, email, senha);
     usuarios.push_back(usu);
     compradores.push_back(comp);
   }
+  imprimirCompradores();
+  arquivo.close();
+}
 
-  void Ecommerce::listaHistoricoArquivo(){
+void Ecommerce::gravaUsuarioArquivo(){
+  std::fstream arquivo;
 
+  arquivo.open("usuarios.csv");
+
+  if (!arquivo.is_open()){
+    std::cout << "Erro ao abrir arquivo. Tente novamente";
+    exit(1);
   }
 
+  int numeroCompradores = compradores.size();
+  for(int i=0; arquivo.good() && i < numeroCompradores-1; i++){
+    arquivo << (compradores[i]).getNome() << "," << (compradores[i]).getEmail() << "," << (compradores[i]).getSenha() << "," << (compradores[i]).getNumeroComprasCarrinho() << "," << (compradores[i]).getNumeroComprasHistorico() << "," << (compradores[i]).getNumeroAvaliacoes() << "," << (compradores[i]).getEndereco() << "," << (compradores[i]).getDinheiro() << "\n"
   imprimirCompradores();
   arquivo.close();
 }
