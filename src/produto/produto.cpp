@@ -4,10 +4,25 @@
 #include "produto/produto.h"
 
 
-Produto::Produto(){
+Produto::Produto(float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material){
+        std::vector<std::string> vazio;
+        std::vector<int> nada;
+
+        _preco = preco;
+        _mediaAvaliacoes = mediaAvaliacoes;
+        _nome = nome;
+        _categoria = categoria;
+        _cor = cor;
+        _descricao = descricao;
+        _material = material;
+        _comentarios = vazio;
+        _avaliacoes = nada;
 }
+
 Produto::~Produto(){
+    
 }
+
 
 void Produto::avaliarProduto(int nota){
 
