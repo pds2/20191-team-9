@@ -13,7 +13,7 @@ BlusasEMoletom::BlusasEMoletom(float preco, float mediaAvaliacoes, std::string n
 
 BlusasEMoletom::~BlusasEMoletom(){
 
-}
+}*/
 
 /*void BlusasEMoletom::setProduto(float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, char tamanho, std::string tipo){
 

@@ -11,7 +11,7 @@ Acessorio::Acessorio(float preco, float mediaAvaliacoes, std::string nome, std::
 Acessorio::~Acessorio(){
 
 }
-
+*/
 /*void Acessorio::setProduto(float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, std::string tipo){
 
         std::vector<std::string> vazio;
