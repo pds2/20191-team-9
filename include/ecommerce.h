@@ -16,7 +16,6 @@
 
 class Ecommerce{
   private:
-    int numeroUsuarios;
     std::vector <Usuario> usuarios;
     std::vector <Comprador> compradores;
 
@@ -27,6 +26,7 @@ class Ecommerce{
     void cadastrarUsuario (std::string n, std::string em, std::string s);
     bool procurarUsuario(std::string email);
     void imprimirUsuarios();
+    void imprimirCompradores();
 
     bool checaNome(std::string n);
     bool checaEmail(std::string em);

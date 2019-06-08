@@ -4,8 +4,8 @@
 #include "usuario/comprador.h"
 #include "usuario/usuario.h"
 
-Comprador::Comprador(std::string n, std::string em, std::string s, std::string cpf, std::string endereco, int numCarr, int numHist, int numAval, double din){
-  Usuario(n, em, s);
+Comprador::Comprador(std::string n, std::string em, std::string s, std::string cpf,
+  std::string endereco, int numCarr, int numHist, int numAval, double din) :   Usuario(n, em, s){
   this->_CPF = cpf;
   this->_endereco = endereco;
   this->_numeroComprasCarrinho = numCarr;
@@ -21,6 +21,18 @@ Comprador::~Comprador(){
 
 Comprador::Comprador(){
 
+}
+
+Comprador::getNome(){
+  Usuario::getNome();
+}
+
+Comprador::getSenha(){
+  Usuario::getSenha();
+}
+
+Comprador::getEmail(){
+  Usuario::getEmail();
 }
 
 std::string Comprador::getCPF(){

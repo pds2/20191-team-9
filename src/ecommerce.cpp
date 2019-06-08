@@ -1,7 +1,6 @@
 #include "ecommerce.h"
 
 Ecommerce::Ecommerce(){
-  numeroUsuarios = 0;
 }
 
 Ecommerce::~Ecommerce(){
@@ -31,23 +30,15 @@ void Ecommerce::listaUsuarioArquivo(){
     std::getline(arquivo, nA,',');
     std::getline(arquivo, d,'\n');
 
-    numCarrinho = std::stoi(nC);
-    numHistorico = std::stoi(nH);
-    numAvaliacoes = std::stoi(nA);
+    //numCarrinho = std::stoi(nC);
+    //numHistorico = std::stoi(nH);
+    //numAvaliacoes = std::stoi(nA);
     //dinheiro = std::stod(d);
 
-    Comprador comp = Comprador(nome, email, senha, cpf, endereco, numCarrinho, numHistorico, numAvaliacoes, dinheiro);
+    Comprador comp = Comprador(nome, email, senha, cpf, endereco, 1, 1, 1, 0.0);
     compradores.push_back(comp);
 
-    std::cout << "\n" << nome << std::endl;
-    std::cout << email << std::endl;
-    std::cout << senha << std::endl;
-    std::cout << cpf << std::endl;
-    std::cout << endereco << std::endl;
-    std::cout << numCarrinho << std::endl;
-    std::cout << numHistorico << std::endl;
-    std::cout << numAvaliacoes << std::endl;
-    std::cout << dinheiro << std::endl;
+    imprimirCompradores();
   }
 
   arquivo.close();
@@ -58,7 +49,6 @@ void Ecommerce::cadastrarUsuario (std::string n, std::string em, std::string s){
     if(procurarUsuario(em)==false){
       Usuario usu = Usuario(n, em, s);
       usuarios.push_back(usu);
-      numeroUsuarios++;
     }
     else{
       std::cout << "Endereço de email já cadastrado. Tente novamente." << std::endl;
@@ -71,8 +61,16 @@ void Ecommerce::cadastrarUsuario (std::string n, std::string em, std::string s){
 }
 
 void Ecommerce::imprimirUsuarios(){
+  int numeroUsuarios = usuarios.size();
   for(int i=0; i < numeroUsuarios; i++){
     std::cout << (usuarios[i]).getNome() << " " << (usuarios[i]).getEmail() << " " << (usuarios[i]).getSenha() << "\n";
+  }
+}
+
+void Ecommerce::imprimirCompradores(){
+  int numeroCompradores = compradores.size();
+  for(int i=0; i < numeroCompradores; i++){
+    std::cout << (compradores[i]).getNome() << " " << (compradores[i]).getEmail() << " " << (compradores[i]).getSenha() << "\n";
   }
 }
 
@@ -92,6 +90,7 @@ void Ecommerce::impHistorico(){
 }
 
 bool Ecommerce::procurarUsuario(std::string em){
+  int numeroUsuarios = usuarios.size();
   for(int i=0; i < numeroUsuarios; i++){
     if((usuarios[i]).getEmail() == em){
       return true;
