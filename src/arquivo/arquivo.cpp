@@ -1,44 +1,46 @@
 /*#include "arquivo/arquivo.h"
-#include "usuario/usuario.h"
 
-void Arquivo::RegistraUsuarioArquivo (tuple<std::string, std::string, std::string> usu) const{
-  fstream iodados;
-  iodados.open("usuarios.txt", ios::ate | ios::out | ios::in);
+void Arquivo::registraUsuarioArquivo (){
+/*  std::fstream arquivo;
+  arquivo.open("usuarios::ios.txt", std::ios::ate | std::ios::out | std::ios::in);
 
-  iodados.write(get<0>(usu), get<1>(usu), get<2>(usu));//Aqui gravamos o conteúdo do objeto 'usu' em 'usuarios.txt'.
+  arquivo.write(get<0>(usu), get<1>(usu), get<2>(usu));//Aqui gravamos o conteúdo do objeto 'usu' em 'usuarstd::ios.txt'.
 
-  iodados.seekg(0);
-  iodados.close();
+  arquivo.seekg(0);
+  arquivo.close();
+
 }
+*/
+/*
+void Arquivo::listaUsuarioArquivo(){
+  std::fstream arquivo;
 
-void Arquivo::ListaUsuarioArquivo() const {
-  fstream iodados;
-  Usuario users;
+  arquivo.open("usuarios.csv");
 
-  iodados.open("usuarios.txt", ios::ate | ios::out | ios::in);
-  ~Usuario();
+  if (!arquivo.is_open()) std::cout << "Erro ao abrir arquivo. Tente novamente";
 
-  while (iodados.read((char *) &users, (char *) em, (char *) sen)){
-    CadastraUsuario(users, em, sen);
+  while (arquivo.good()){
+    std::string nome, email, senha, cpf, endereco;
+    int numHistorico, numCarrinho, numAvaliacoes;
+    double dinheiro;
+
+    getline(arquivo, nome,',');
+    getline(arquivo, email,',');
+    getline(arquivo, senha,',');
+    getline(arquivo, cpf,',');
+    getline(arquivo, endereco,',');
+    getline(arquivo, numCarrinho,',');
+    getline(arquivo, numHistorico,',');
+    getline(arquivo, numAvaliacoes,',');
+    getline(arquivo, dinheiro,'\n');
+
+    Ecommerce *ecom = new Ecom();
+    Comprador *comp = Comprador(nome, email, senha, cpf, endereco, std::stoi(numCarrinho),
+      std::stoi(numHistorico), std::stoi(numAvaliacoes), std::stod(dinheiro));
+
+    compradores.push_back(comp);
   }
 
-  ImprimeUsuarios();
-
-  iodados.close();
-}
-
-bool Arquivo::BuscarEmailArquivo(std::string em) const {//só usar o sort da estrutura tuple
-  fstream iodados;
-
-  iodados.open("usuarios.txt", ios::ate | ios::out | ios::in);
-
-  while (iodados.read((char *) user, (char *) em, (char *) sen)){
-    if(user == usu){
-      return true;
-    }
-  }
-
-  iodados.close();
-  return false;
+  arquivo.close();
 }
 */

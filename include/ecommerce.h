@@ -5,6 +5,9 @@
 #include <vector>
 #include <tuple>
 #include <iostream>
+#include <string>
+
+#include <fstream>
 
 #include <cstdlib>
 
@@ -14,6 +17,7 @@ class Ecommerce{
   private:
     int numeroUsuarios;
     std::vector<Usuario *> usuarios;
+    std::vector<Comprador *> compradores;
 
   public:
     Ecommerce();
@@ -32,6 +36,7 @@ class Ecommerce{
 
     void impCarrinho();
     void impHistorico();
+    void listaUsuarioArquivo();
 };
 
 #endif

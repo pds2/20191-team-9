@@ -8,6 +8,47 @@ Ecommerce::~Ecommerce(){
   usuarios.clear();
 }
 
+void Ecommerce::listaUsuarioArquivo(){
+  std::fstream arquivo;
+
+  arquivo.open("usuarios.csv");
+
+  if (!arquivo.is_open()) std::cout << "Erro ao abrir arquivo. Tente novamente";
+
+  while (arquivo.good()){
+    std::string nome, email, senha, cpf, endereco;
+    int numHistorico, numCarrinho, numAvaliacoes;
+    double dinheiro;
+
+    std::getline(arquivo, nome,',');
+    std::getline(arquivo, email,',');
+    std::getline(arquivo, senha,',');
+    std::getline(arquivo, cpf,',');
+    std::getline(arquivo, endereco,',');
+  /*  std::getline(arquivo, std::stoi(numCarrinho),',');
+    std::getline(arquivo, std::stoi(numHistorico),',');
+    std::getline(arquivo, std::stoi(numAvaliacoes),',');
+    std::getline(arquivo, std::stod(dinheiro),'\n');*/
+
+  /*  Comprador *comp = Comprador(nome, email, senha, cpf, endereco, std::stoi(numCarrinho),
+      std::stoi(numHistorico), std::stoi(numAvaliacoes), std::stod(dinheiro));
+
+    usuarios.push_back(comp);*/
+
+    std::cout << nome << std::endl;
+    std::cout << email << std::endl;
+    std::cout << senha << std::endl;
+    std::cout << cpf << std::endl;
+    std::cout << endereco << std::endl;
+    std::cout << numCarrinho << std::endl;
+    std::cout << numHistorico << std::endl;
+    std::cout << numAvaliacoes << std::endl;
+    std::cout << dinheiro << std::endl;
+  }
+
+  arquivo.close();
+}
+
 void Ecommerce::cadastrarUsuario (std::string n, std::string em, std::string s){
   if(checaNome(n) && checaEmail(em) && checaSenha(s)){
     if(procurarUsuario(em)==false){

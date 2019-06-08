@@ -1,15 +1,18 @@
-/*#ifndef ARQUIVO_H
+#ifndef ARQUIVO_H
 #define ARQUIVO_H
 
 #include <string>
+#include <iostream>
+#include <fstream>
+
+#include "usuario/usuario.h"
+#include "ecommerce.h"
 
 class Arquivo{
 
 public:
-    void RegistraUsuarioArquivo ( <tuple<std::string, std::string, std::string> usu) const;
-    void ListaUsuarioArquivo() const;
-    bool BuscarEmailArquivo(std::string usu) const;
+    void registraUsuarioArquivo ();
+    void listaUsuarioArquivo();
 };
 
 #endif
-*/
