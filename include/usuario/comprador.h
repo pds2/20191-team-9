@@ -41,14 +41,14 @@ class Comprador : public Usuario{
 
     void adicionarCarrinho(std::string email);
     void fazerCompras();
-    bool retirararrinho();
+    bool retirarCarrinho();
     bool adicionaDinheiro(double valor, Comprador comp);
 
     void exibirPerfil();
     void imprimirCarrinho();
     void imprimirHistorico();
 
-    void procurarItens();
+    bool procurarItens();
     void adicionarComentario();
     void avaliarItem();
     void enviarMensagem();
