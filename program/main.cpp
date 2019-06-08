@@ -5,7 +5,7 @@
 int main(int argc, char const *argv[]) {
 
   Ecommerce ecom;
-/*  ecom.cadastrarUsuario("cat", "cat", "1234");
+/* ecom.cadastrarUsuario("cat", "cat", "1234");
   ecom.cadastrarUsuario("catarina", "catarina", "1234");
   ecom.cadastrarUsuario("catau", "catau", "1234");
   ecom.cadastrarUsuario("kitkat", "kitkat", "1234");
@@ -27,5 +27,5 @@ int main(int argc, char const *argv[]) {
 
 ecom.listaUsuarioArquivo();
 
-  return 0;
+return 0;
 }

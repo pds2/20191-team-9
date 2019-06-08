@@ -30,17 +30,17 @@ void Ecommerce::listaUsuarioArquivo(){
     std::getline(arquivo, nA,',');
     std::getline(arquivo, d,'\n');
 
-    //numCarrinho = std::stoi(nC);
-    //numHistorico = std::stoi(nH);
-    //numAvaliacoes = std::stoi(nA);
-    //dinheiro = std::stod(d);
-
-    Comprador comp = Comprador(nome, email, senha, cpf, endereco, 1, 1, 1, 0.0);
+    Comprador comp = Comprador(nome, email, senha, cpf, endereco, nC, nH, nA, d);
+    Usuario usu = Usuario(nome, email, senha);
+    usuarios.push_back(usu);
     compradores.push_back(comp);
-
-    imprimirCompradores();
   }
 
+  void Ecommerce::listaHistoricoArquivo(){
+
+  }
+
+  imprimirCompradores();
   arquivo.close();
 }
 
@@ -61,16 +61,33 @@ void Ecommerce::cadastrarUsuario (std::string n, std::string em, std::string s){
 }
 
 void Ecommerce::imprimirUsuarios(){
+  limparTela();
   int numeroUsuarios = usuarios.size();
-  for(int i=0; i < numeroUsuarios; i++){
-    std::cout << (usuarios[i]).getNome() << " " << (usuarios[i]).getEmail() << " " << (usuarios[i]).getSenha() << "\n";
+  for(int i=0; i < numeroUsuarios-1; i++){
+    std::cout << "\n" << "----------------------------------------------" << std::endl;
+    std::cout << "\t\t Usuário " << i+1 << std::endl;
+    std::cout << "----------------------------------------------" << "\n" << std::endl;
+    std::cout << "Nome: " << (usuarios[i]).getNome() << std::endl;
+    std::cout << "Email: " << (usuarios[i]).getEmail() << std::endl;
+    std::cout << "Senha: " << (usuarios[i]).getSenha() << std::endl;
   }
 }
 
 void Ecommerce::imprimirCompradores(){
+  limparTela();
   int numeroCompradores = compradores.size();
-  for(int i=0; i < numeroCompradores; i++){
-    std::cout << (compradores[i]).getNome() << " " << (compradores[i]).getEmail() << " " << (compradores[i]).getSenha() << "\n";
+  for(int i=0; i < numeroCompradores-1; i++){
+    std::cout << "\n" << "----------------------------------------------" << std::endl;
+    std::cout << "\t\t Comprador " << i+1 << std::endl;
+    std::cout << "----------------------------------------------" << "\n" << std::endl;
+    std::cout << "Nome: " << (compradores[i]).getNome() << std::endl;
+    std::cout << "Email: " << (compradores[i]).getEmail() << std::endl;
+    std::cout << "Senha: " << (compradores[i]).getSenha() << std::endl;
+    std::cout << "Carrinho: " << (compradores[i]).getNumeroComprasCarrinho() << std::endl;
+    std::cout << "Histórico: " << (compradores[i]).getNumeroComprasHistorico() << std::endl;
+    std::cout << "Avaliações: " << (compradores[i]).getNumeroAvaliacoes() << std::endl;
+    std::cout << "Endereço: " << (compradores[i]).getEndereco() << std::endl;
+    std::cout << "Dinheiro: " << (compradores[i]).getDinheiro() << std::endl;
   }
 }
 
