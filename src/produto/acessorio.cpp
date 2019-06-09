@@ -1,4 +1,4 @@
-/*#ifndef ACESSORIO_CPP
+#ifndef ACESSORIO_CPP
 #define ACESSORIO_CPP
 
 #include "produto/acessorio.h"
@@ -11,8 +11,8 @@ Acessorio::Acessorio(float preco, float mediaAvaliacoes, std::string nome, std::
 Acessorio::~Acessorio(){
 
 }
-*/
-/*void Acessorio::setProduto(float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, std::string tipo){
+
+void Acessorio::setProduto(float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, std::string tipo){
 
         std::vector<std::string> vazio;
         std::vector<int> nada;
@@ -27,10 +27,8 @@ Acessorio::~Acessorio(){
         _comentarios = vazio;
         _avaliacoes = nada;
         _tipo = tipo;
-}*/
-/*
-void Acessorio::getProduto(){
-    std::cout <<"Nome:\t" <<_nome << std::endl << "Preco:\t"<< _preco << std::endl << "Media:\t" <<_mediaAvaliacoes << std::endl << "Categoria:\t" << _categoria << std::endl << "Cor:\t" <<_cor << std::endl << "Descricao:\t" << _descricao << std::endl << "Material:\t" <<_material << std::endl << "Tipo:\t" << _tipo << std::endl;
 }
+void Acessorio::getTipo(){
+    std::cout<<"Tipo:/t"<<_tipo;
 
-#endif*/
+#endif
