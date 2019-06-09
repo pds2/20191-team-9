@@ -7,14 +7,17 @@
 #include "produto.h"
 
 class BlusasEMoletom : public Produto{
-    public:
+    private:
         char _tamanho;
         std::string _tipo; //Se é uma blusa ou um moletom
-        
-        BlusasEMoletom(float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, char tamanho, std::string tipo);
+    
+    public:
+        BlusasEMoletom(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, char tamanho, std::string tipo);
         ~BlusasEMoletom();
-        //void setProduto(float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, char tamanho, std::string tipo);
-        void getTipo();
+        char getTamanho();
+        std::string getTipo();
+        void imprimeProduto();
+
 };
 
 #endif
