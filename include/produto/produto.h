@@ -6,7 +6,7 @@
 #include <vector>
 
 class Produto{
-    public:
+    private:
         float _preco;
         std::vector<int> _avaliacoes;
         float _mediaAvaliacoes;
@@ -16,20 +16,25 @@ class Produto{
         std::string _cor;
         std::string _descricao;
         std::string _material;
+        int _codigoProduto;
 
-        Produto(float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material);
+    public:
+        Produto(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material);
         ~Produto();
-        //void setProduto();
-        void getPreco();
-        void getMediaAvaliacoes();
-        void getNome();
-        void getCategoria();
-        void getCor();
-        void getDescricao();
-        void getMaterial();
+
+        float getPreco();
+        float getMediaAvaliacoes();
+        std::string getNome();
+        std::string getCategoria();
+        std::string getCor();
+        std::string getDescricao();
+        std::string getMaterial();
+        int getCodigoProduto();
+        
         void avaliarProduto(int nota); //salva avaliacao na lista e depois modifica a media
         void getComentarios(); //imprime comentarios
         void setComentario(std::string comentario); //salva comentario
+        
 };
 
 #endif
