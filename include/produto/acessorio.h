@@ -7,13 +7,15 @@
 #include "produto.h"
 
 class Acessorio : public Produto{
-    public:
+    private:
         std::string _tipo;
-       
-        Acessorio(float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, std::string tipo);
+    
+    public:
+        Acessorio(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, std::string tipo);
         ~Acessorio();
-        //void setProduto(float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, std::string tipo);
-        void getTipo();
+        
+        std::string getTipo();
+        void imprimeProduto();
 };
 
 #endif
