@@ -2,21 +2,25 @@
 #define PRODUTO_CPP
 #include "produto/produto.h"
 
-Produto::Produto(float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material){
+Produto::Produto(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material){
         std::vector<std::string> vazio;
         std::vector<int> nada;
-        _preco = preco;
-        _mediaAvaliacoes = mediaAvaliacoes;
-        _nome = nome;
-        _categoria = categoria;
-        _cor = cor;
-        _descricao = descricao;
-        _material = material;
-        _comentarios = vazio;
-        _avaliacoes = nada;
+        
+        this->_codigoProduto = cod;
+        this->_preco = preco;
+        this->_mediaAvaliacoes = mediaAvaliacoes;
+        this->_nome = nome;
+        this->_categoria = categoria;
+        this->_cor = cor;
+        this->_descricao = descricao;
+        this->_material = material;
+        this->_comentarios = vazio;
+        this->_avaliacoes = nada;
 }
+
 Produto::~Produto(){
 }
+
 void Produto::avaliarProduto(int nota){
     if (nota>=1 && nota<=5){
     _avaliacoes.push_back(nota);
@@ -29,6 +33,7 @@ void Produto::avaliarProduto(int nota){
 	  }
     _mediaAvaliacoes = (float)soma/size;
 }
+
 void Produto::getComentarios(){
     int size = _comentarios.size();
     int i;
@@ -38,29 +43,41 @@ void Produto::getComentarios(){
         std::cout << _comentarios[i] << std::endl;
     }
 }
+
 void Produto::setComentario(std::string comentario){
     _comentarios.push_back(comentario);
 }
 
-void Produto::getPreco(){
-    std::cout<<"Preco:/t"<<_preco;
+float Produto::getPreco(){
+    return this->_preco;
 }
-void Produto::getMediaAvaliacoes(){
-    std::cout<<"Media de Avaliacoes:/t"<< _mediaAvaliacoes;
+
+float Produto::getMediaAvaliacoes(){
+    return this-> _mediaAvaliacoes;
 }
-void Produto::getNome(){
-    std::cout<<"Nome:/t"<< _nome;
+
+std::string Produto::getNome(){
+    return this->_nome;
 }
-void Produto::getCategoria(){
-    std::cout<<"Categoria:/t"<< _categoria
+
+std::string Produto::getCategoria(){
+    return this-> _categoria;
 }
-void Produto::getCor(){
-    std::cout<<"Cor:/t"<< _cor;
+
+std::string Produto::getCor(){
+    return this-> _cor;
 }
-void Produto::getDescricao(){
-    std::cout<<"Descricao:/t"<< _descricao;
+
+std::string Produto::getDescricao(){
+    return this->_descricao;
 }
-void Produto::getMaterial(){
-    std::cout<<"Material:/t"<< _material;
+
+std::string Produto::getMaterial(){
+    return this->_material;
 }
+
+int Produto::getCodigoProduto(){
+    return this->_codigoProduto;
+}
+
 #endif
