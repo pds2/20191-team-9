@@ -17,6 +17,7 @@ class Comprador : public Usuario{
     int _numeroComprasHistorico;
     int _numeroComprasCarrinho;
     int _numeroAvaliacoes;
+    int _totalCarrinho;
     double _dinheiro;
 
     std::string _CPF;
@@ -37,6 +38,8 @@ class Comprador : public Usuario{
 
     std::string getCPF();
     std::string getEndereco();
+
+    int getTotalCarrinho();
 
     int getNumeroAvaliacoes();
     double getDinheiro();

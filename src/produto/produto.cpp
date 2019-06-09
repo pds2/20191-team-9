@@ -5,7 +5,7 @@
 Produto::Produto(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material){
         std::vector<std::string> vazio;
         std::vector<int> nada;
-        
+
         this->_codigoProduto = cod;
         this->_preco = preco;
         this->_mediaAvaliacoes = mediaAvaliacoes;
