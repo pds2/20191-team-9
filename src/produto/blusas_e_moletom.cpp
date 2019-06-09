@@ -6,35 +6,37 @@
 
 
 
-BlusasEMoletom::BlusasEMoletom(float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, char tamanho, std::string tipo) : Produto(preco, mediaAvaliacoes, nome, categoria, cor, descricao, material){
-        _tipo = tipo;
-        _tamanho = tamanho;
+BlusasEMoletom::BlusasEMoletom(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, char tamanho, std::string tipo) : Produto(cod, preco, mediaAvaliacoes, nome, categoria, cor, descricao, material){
+        this->_tipo = tipo;
+        this->_tamanho = tamanho;
 }
 
 BlusasEMoletom::~BlusasEMoletom(){
 
 }
 
-void BlusasEMoletom::setProduto(float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, char tamanho, std::string tipo){
-
-        std::vector<std::string> vazio;
-        std::vector<int> nada;
-
-        _preco = preco;
-        _mediaAvaliacoes = mediaAvaliacoes;
-        _nome = nome;
-        _categoria = categoria;
-        _cor = cor;
-        _descricao = descricao;
-        _material = material;
-        _comentarios = vazio;
-        _avaliacoes = nada;
-        _tipo = tipo;
-        _tamanho = tamanho;
+std::string BlusasEMoletom::getTipo(){
+        return this->_tipo;
 }
 
-void BlusasEMoletom::getTipo(){
-    std::cout<<"Tipo:/t"<<_tipo;
+char BlusasEMoletom::getTamanho(){
+        return this->_tamanho;
+}
+
+void BlusasEMoletom::imprimeProduto(){
+
+        std::cout << "------------------------------" << std::endl;
+        std::cout << "Nome do produto:\t" << getNome() << std::endl;
+        std::cout << "Preco:\t\t\tR$ "<< getPreco() << std::endl;
+        std::cout << "Tamanho: \t\t" << getTamanho() << std::endl;
+        std::cout << "Tipo:\t\t\t" << getTipo() << std::endl;
+        std::cout << "Cor:\t\t\t" << getCor() << std::endl;
+        std::cout << "Media de avaliacoes:\t" << getMediaAvaliacoes() << std::endl;
+        std::cout << "Categoria:\t\t" << getCategoria() << std::endl;
+        std::cout << "Descricao:\t\t" << getDescricao() << std::endl;
+        std::cout << "Material:\t\t" << getMaterial() << std::endl;
+
+}
 
 #endif
 
