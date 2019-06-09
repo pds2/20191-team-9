@@ -14,7 +14,7 @@ class BlusasEMoletom : public Produto{
         BlusasEMoletom(float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, char tamanho, std::string tipo);
         ~BlusasEMoletom();
         //void setProduto(float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, char tamanho, std::string tipo);
-        void getProduto();
+        void getTipo();
 };
 
 #endif
