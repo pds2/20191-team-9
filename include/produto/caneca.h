@@ -12,7 +12,7 @@ class Caneca : public Produto{
         Caneca(float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, int diametro);
         ~Caneca();
         //void setProduto(float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, int diametro);
-        void getProduto();
+        void getDiametro();
 };
 
 #endif
