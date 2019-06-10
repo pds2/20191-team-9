@@ -16,9 +16,9 @@ class Administrador : public Usuario{
   public:
     Administrador(std::string nome, std::string email, std::string senha);
 
-    void removeItem(Produto item);
-
     void adicionaItem(std::string nome_do_produto);
+
+    void removeItem(Produto item);
 
     void mostraPedidos();
 
