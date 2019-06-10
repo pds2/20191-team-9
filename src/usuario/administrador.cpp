@@ -22,7 +22,8 @@ void Administrador::adicionaItem(std::string nome_do_produto){
   // Inicializa as e coleta variáveis comuns à todos os produtos
   int tipo_de_produto;
   int codigo_do_produto;
-  float media_das_avaliacoes;
+  float media_das_avaliacoes = 0;
+  float preco;
   std::string categoria;
   std::string cor;
   std::string descricao;
@@ -43,6 +44,9 @@ void Administrador::adicionaItem(std::string nome_do_produto){
   std::cout << "Por favor, informe o material do produto:" << std::endl;
   std::cin >> material;
 
+  std::cout << "Por favor, informe o preco do produto:" << std::endl;
+  std::cin >> preco;
+
   // Agora é preciso entender que tipo de produto o administrador deseja adicionar,
   // pois cada produto possui alguns atributos próprios.
   // A entrada é dada por um int para que possamos comparará-la e validá-la com mais facilidade.
@@ -55,7 +59,7 @@ void Administrador::adicionaItem(std::string nome_do_produto){
   }
 
   switch (tipo_de_produto) {
-    case 1:
+    case 1: //Produto é uma blusa ou um moletom
       char tamanho;
       std::cout << "Por favor, informe o tamanho do produto:" << std::endl;
       std::cin >> tamanho;
@@ -63,12 +67,31 @@ void Administrador::adicionaItem(std::string nome_do_produto){
       int tipo_de_peca;
       std::cout << "Por favor, informe o tipo da peça que deseja adicionar. Digite:\n1 - Blusa\n2 - Moletom" << std::endl;
 
+      if(tipo_de_peca == 1){
+        BlusasEMoletom::BlusasEMoletom(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tamanho, "BLUSA");
+      }else if(tipo_de_peca == 2){
+        BlusasEMoletom::BlusasEMoletom(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tamanho, "MOLETOM");
+      }
       break;
-    case 2;
 
+    case 2: //Produto é uma caneca
+      float diametro;
+      std::cout << "Por favor, informe o diâmetro da caneca:" << std::endl;
+      std::cin >> diametro;
+
+      Caneca::Caneca(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, diametro);
       break;
-    case 3;
 
+    case 3: //Produto é um acessório
+      std::string tipo_de_acessorio;
+
+      std::cout << "Por favor, informe que tipo de acessório é este produto:" << std::endl;
+      std::cin >> tipo_de_acessorio;
+
+      for(int i = 0; int i < std::strlen(tipo_de_acessorio); i++){
+        tipo_de_acessorio[i] = std::toupper(tipo_de_acessorio[i]);
+      }
+      Acessorio::Acessorio(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tipo_de_acessorio);
       break;
   }
 }
