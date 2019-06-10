@@ -24,7 +24,7 @@ class Administrador : public Usuario{
 
     void mostraPedidos();
 
-    bool aprovaPedido(std::string requisicao, Comprador user);
+    void aprovaPedido(float valor, Comprador user);
 
     void exibeUsuarios();
 
