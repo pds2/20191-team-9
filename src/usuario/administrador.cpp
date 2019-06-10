@@ -2,6 +2,7 @@
 #define ADMINISTRADOR_CPP
 
 #include "usuario/administrador.hpp"
+#include <fstream>
 
 Administrador::Administrador(std::string nome, std::string email, std::string senha){
   this->_nome = nome;
@@ -100,15 +101,46 @@ void Administrador::removeItem(Produto item){
   //procura no estoque.txt se existe algum produto com o nome chamado.
   //Se ele existir, este produto é retirado do estoque. Se não existir, uma mensagem de erro é impressa na tela.
 
+}
 
+void Administrador::mostraPedidos(){
+  if(_qntdade_de_requisicoes <= 0){
+    std::cout << "Não há nenhuma requisição de aumento de saldo no momento." << std::endl;
+
+    return;
+  }
+
+  for(int i = 0; i < _qntdade_de_requisicoes; i++){
+    std::cout << (i+1) << " - " << this->_requisicoes[i] << std::endl;
+  }
+}
+
+void Administrador::aprovaPedido(float valor, Comprador user){
+  int aprovacao;
+
+  std::cout << "Deseja aprovar o pedido de " << user._nome << " para o aumento de R$" << valor << "em seu saldo?" << std::endl;
+  std::cout << "Digite:\n1 - aprovar\n2 - reprovar" << std::endl;
+  std::cin >> aprovacao;
+
+  if(aprovacao == 1){
+    user._dinheiro += valor;
+  }
 
 }
 
-void Administrador::mostraPedidos(){}
+void Administrador::exibeUsuarios(){
+  ifstream lista_de_usuarios("usuarios.txt");
 
-bool Administrador::aprovaPedido(std::string requisicao, Comprador user){}
+  if(lista_de_usuarios.is_open()){
+    std::string linha;
 
-void Administrador::exibeUsuarios(){}
+    while(getLine(lista_de_usuarios, linha)){
+      std::cout << linha << std::endl;
+    }
+  }
+
+  lista_de_usuarios.close();
+}
 
 void Administrador::editaUsuario(Comprador user){}
 
