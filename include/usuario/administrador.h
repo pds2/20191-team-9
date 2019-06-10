@@ -14,6 +14,8 @@ class Administrador : public Usuario{
     std::str _requisicoes[];
 
   public:
+    int _qntdade_de_requisicoes
+
     Administrador(std::string nome, std::string email, std::string senha);
 
     void adicionaItem(std::string nome_do_produto);
