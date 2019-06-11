@@ -28,13 +28,13 @@ class Administrador : public Usuario{
 
     void exibeUsuarios();
 
-    void editaUsuario(std::string email);
-
     void excluiUsuario(std::string email);
 
-    void exibeMensagens(std::string email);
+    void verPerfil();
 
-    void respondeMensagens(std::string email);
+    void compradorCsvToVector;
+
+    void usuarioCsvToVector;
 
     ~Administrador();
 
