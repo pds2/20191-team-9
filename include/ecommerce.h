@@ -18,8 +18,8 @@ class Ecommerce{
   private:
     std::vector <Usuario> usuarios;
     std::vector <Comprador> compradores;
-    const std::string SENHADMIN = "Ecom@Geek42";
-    Usuario *userLogged = NULL;
+    /*const std::string SENHADMIN = "Ecom@Geek42"
+    Ecommerce::Usuario *userLogged = NULL;*/
 
   public:
     Ecommerce();
@@ -50,7 +50,6 @@ class Ecommerce{
     void gravaUsuarioArquivo();
 
     void loginUsuario(std::string n, std::string s);
-    void loginUsuario();
     void logoutUsuario();
     void inicio();
     void menuSumario(int idMenu, int opcao);

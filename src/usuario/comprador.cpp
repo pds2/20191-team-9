@@ -308,4 +308,5 @@ bool Comprador::adicionaDinheiro(double valor, Comprador comp){
 void Comprador::limparTela(){
   std::system("clear||cls");
 }
+
 #endif
