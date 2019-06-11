@@ -24,8 +24,8 @@ class Comprador : public Usuario{
     std::string _endereco;
 
     //dps mudar de Usuario para Produto quando estiver pronto
-    std::vector<Produto *> carrinho;
-    std::vector<Produto *> historico;
+    std::vector <Produto> carrinho;
+    std::vector <Produto> historico;
 
   public:
     Comprador(std::string n, std::string em, std::string s, std::string cpf, std::string endereco, int numCarr, int numHist, int numAval, double din);
@@ -44,7 +44,7 @@ class Comprador : public Usuario{
     int getNumeroAvaliacoes();
     double getDinheiro();
 
-    void adicionarCarrinho();
+    bool adicionarCarrinho();
     void fazerCompras();
     bool retirarCarrinho();
     bool adicionaDinheiro(double valor, Comprador comp);
@@ -58,6 +58,8 @@ class Comprador : public Usuario{
     void adicionarComentario();
     void avaliarItem();
     void enviarMensagem();
+
+    void limparTela();
 };
 
 #endif

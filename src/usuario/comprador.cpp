@@ -2,7 +2,6 @@
 #define COMPRADOR_CPP
 
 #include "usuario/comprador.h"
-#include "usuario/usuario.h"
 
 Comprador::Comprador(std::string n, std::string em, std::string s, std::string cpf,
    std::string endereco, int numCarr, int numHist, int numAval, double din) :
@@ -45,7 +44,7 @@ double Comprador::getDinheiro(){
   return this->_dinheiro;
 }
 
-void Comprador::adicionarCarrinho(){
+bool Comprador::adicionarCarrinho(){
   limparTela();
 
   //imprimir listagem de produtos aqui
@@ -80,7 +79,6 @@ void Comprador::adicionarCarrinho(){
     return false;
   }
 }
-}
 
 bool Comprador::retirarCarrinho(){
   if(_numeroComprasCarrinho == 0){
@@ -113,6 +111,7 @@ bool Comprador::retirarCarrinho(){
 
 void Comprador::imprimirCarrinho(){
   int _numeroComprasCarrinho = carrinho.size();
+  double totalCarrinho=0;
 
   if(_numeroComprasCarrinho == 0){
     std::cout << "Seu carrinho está vazio. Adicione produtos para continuar.";
@@ -126,22 +125,23 @@ void Comprador::imprimirCarrinho(){
 
     for(int i=0; i < _numeroComprasCarrinho; i++){
 
-      std::cout << "\n" << "----------------------------------------------" << std::endl;
-      std::cout << "\t\t Código " << (carrinho[i]).getCodigoProduto() << std::endl;
+      /*std::cout << "\n" << "----------------------------------------------" << std::endl;
+      std::cout << "\t\t Código " << (carrinho[i])->getCodigoProduto() << std::endl;
       std::cout << "----------------------------------------------" << "\n" << std::endl;
-      std::cout << "Nome: " << (carrinho[i]).getNome() << std::endl;
-      std::cout << "Categoria: " << (carrinho[i]).getCategoria()  << std::endl;
-      std::cout << "Cor: " << (carrinho[i]).getCor()  << std::endl;
-      std::cout << "Material: " << (carrinho[i]).getMaterial()  << std::endl;
-      std::cout << "Media de Avaliações: " << (carrinho[i]).getMediaAvaliacoes()  << std::endl;
-      std::cout << "Preço " << (carrinho[i]).getPreco() << std::endl;
-      std::cout << "Descricao: " << (carrinho[i]).getDescricao() << std::endl;
+      std::cout << "Nome: " << (carrinho[i])->getNome() << std::endl;
+      std::cout << "Categoria: " << (carrinho[i])->getCategoria()  << std::endl;
+      std::cout << "Cor: " << (carrinho[i])->getCor()  << std::endl;
+      std::cout << "Material: " << (carrinho[i])->getMaterial()  << std::endl;
+      std::cout << "Media de Avaliações: " << (carrinho[i])->getMediaAvaliacoes()  << std::endl;
+      std::cout << "Preço " << (carrinho[i])->getPreco() << std::endl;
+      std::cout << "Descricao: " << (carrinho[i])->getDescricao() << std::endl;
+      totalCarrinho += (carrinho[i])->getPreco();*/
 
     }
 
     std::cout << "\n" << "----------------------------------------------" << std::endl;
     std::cout << "\t\t Qntd de Produtos: " << _numeroComprasCarrinho << std::endl;
-    std::cout << "\t\t Total: "<< (carrinho[i]).getTotalCarrinho() << std::endl;
+    std::cout << "\t\t Total: "<< totalCarrinho << std::endl;
     std::cout << "----------------------------------------------" << "\n" << std::endl;
   }
 }
@@ -160,17 +160,17 @@ void Comprador::imprimirHistorico(){
 
     for(int i=0; i < _numeroComprasCarrinho; i++){
 
-      std::cout << "\n" << "----------------------------------------------" << std::endl;
-      std::cout << "\t\t Código " << (historico[i]).getCodigoProduto() << std::endl;
+      /*std::cout << "\n" << "----------------------------------------------" << std::endl;
+      std::cout << "\t\t Código " << (historico[i])->getCodigoProduto() << std::endl;
       std::cout << "----------------------------------------------" << "\n" << std::endl;
-      std::cout << "Nome: " << (historico[i]).getNome() << std::endl;
-      std::cout << "Categoria: " << (historico[i]).getCategoria()  << std::endl;
-      std::cout << "Cor: " << (historico[i]).getCor()  << std::endl;
-      std::cout << "Material: " << (historico[i]).getMaterial()  << std::endl;
-      std::cout << "Media de Avaliações: " << (historico[i]).getMediaAvaliacoes()  << std::endl;
-      std::cout << "Preço " << (historico[i]).getPreco() << std::endl;
-      std::cout << "Descricao: " << (historico[i]).getDescricao() << std::endl;
-
+      std::cout << "Nome: " << (historico[i])->getNome() << std::endl;
+      std::cout << "Categoria: " << (historico[i])->getCategoria()  << std::endl;
+      std::cout << "Cor: " << (historico[i])->getCor()  << std::endl;
+      std::cout << "Material: " << (historico[i])->getMaterial()  << std::endl;
+      std::cout << "Media de Avaliações: " << (historico[i])->getMediaAvaliacoes()  << std::endl;
+      std::cout << "Preço " << (historico[i])->getPreco() << std::endl;
+      std::cout << "Descricao: " << (historico[i])->getDescricao() << std::endl;
+*/
     }
 
     std::cout << "\n" << "----------------------------------------------" << std::endl;
@@ -197,9 +197,9 @@ int Comprador::procurarItensHistorico(int codProduto){
   int _numeroHistorico = historico.size();
 
   for(int indice=0; indice < _numeroHistorico; indice++){
-    if((historico[indice]).getCodigoProduto() == codProduto){
+    /*if((historico[indice])->getCodigoProduto() == codProduto){
       return indice;
-    }
+    }*/
   }
   return -1;
 }
@@ -208,9 +208,9 @@ int Comprador::procurarItensCarrinho(int codProduto){
   int _numeroCarrinho = carrinho.size();
 
   for(int indice=0; indice < _numeroCarrinho; indice++){
-    if((carrinho[indice]).getCodigoProduto() == codProduto){
+    /*if((carrinho[indice])->getCodigoProduto() == codProduto){
       return indice;
-    }
+    }*/
   }
   return -1;
 }
@@ -232,8 +232,9 @@ void Comprador::adicionarComentario(){
     std::string comentario;
 
     std::cout << "\n" << "Escreva o seu comentário para o produto de código " << codProduto << " : " << std::endl;
-    std::getLine(std::cin, comentario);
-    setComentario(comentario);
+    std::getline(std::cin, comentario);
+    //(historico[indice])->setComentario(comentario);
+    //aqui altera o comentario do produto
   }
   else{
     std::cout << "\n" << "O produto de código " << codProduto << " não consta em seu histórico então não pode ter um comentário registrado. Tente novamente.";
@@ -259,7 +260,7 @@ void Comprador::avaliarItem(){
     std::cout << "\n" << "De 0 a 5, qual nota deseja dar ao produto de código " << codProduto << "?" << std::endl;
     std::cin >> nota;
     if(nota>=0 || nota<=5){
-      (historico[indice])->avaliarProduto(nota);
+      (historico[indice]).avaliarProduto(nota);
     }
     else{
       std::cout << "\n" << "Nota inválida. Tente novamente.";
@@ -277,6 +278,10 @@ void Comprador::enviarMensagem(){
 bool Comprador::adicionaDinheiro(double valor, Comprador comp){
   //aqui tem que mandar uma requisicao para o administrador
   return true;
+}
+
+void Comprador::limparTela(){
+  std::system("clear||cls");
 }
 
 #endif

@@ -20,7 +20,7 @@ class Produto{
 
     public:
         Produto(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material);
-        ~Produto();
+        //~Produto();
 
         float getPreco();
         float getMediaAvaliacoes();
@@ -30,11 +30,11 @@ class Produto{
         std::string getDescricao();
         std::string getMaterial();
         int getCodigoProduto();
-        
+
         void avaliarProduto(int nota); //salva avaliacao na lista e depois modifica a media
         void getComentarios(); //imprime comentarios
         void setComentario(std::string comentario); //salva comentario
-        
+
 };
 
 #endif

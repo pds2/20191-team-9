@@ -1,4 +1,4 @@
-#ifndef CANECA_H
+/*#ifndef CANECA_H
 #define CANECA_H
 
 #include <iostream>
@@ -9,7 +9,7 @@
 class Caneca : public Produto{
     private:
         float _diametro;
-        
+
     public:
         Caneca(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, float diametro);
         ~Caneca();
@@ -19,3 +19,4 @@ class Caneca : public Produto{
 };
 
 #endif
+*/

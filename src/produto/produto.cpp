@@ -1,4 +1,4 @@
-#ifndef PRODUTO_CPP
+/*#ifndef PRODUTO_CPP
 #define PRODUTO_CPP
 #include "produto/produto.h"
 
@@ -81,3 +81,4 @@ int Produto::getCodigoProduto(){
 }
 
 #endif
+*/

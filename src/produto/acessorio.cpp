@@ -1,4 +1,4 @@
-#ifndef ACESSORIO_CPP
+/*#ifndef ACESSORIO_CPP
 #define ACESSORIO_CPP
 
 #include "produto/acessorio.h"
@@ -17,7 +17,7 @@ std::string Acessorio::getTipo(){
 }
 
 void Acessorio::imprimeProduto(){
-    
+
     std::cout << "------------------------------" << std::endl;
     std::cout << "Nome do produto:\t" << getNome() << std::endl;
     std::cout << "Preco:\t\t\tR$ "<< getPreco() << std::endl;
@@ -31,3 +31,4 @@ void Acessorio::imprimeProduto(){
 }
 
 #endif
+*/

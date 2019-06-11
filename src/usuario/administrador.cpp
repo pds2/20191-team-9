@@ -1,7 +1,9 @@
+
+/*
 #ifndef ADMINISTRADOR_CPP
 #define ADMINISTRADOR_CPP
 
-#include "usuario/administrador.hpp"
+#include "usuario/administrador.h"
 #include <fstream>
 
 Administrador::Administrador(std::string nome, std::string email, std::string senha){
@@ -13,9 +15,9 @@ Administrador::Administrador(std::string nome, std::string email, std::string se
 void Administrador::adicionaItem(std::string nome_do_produto){
   //procura no estoque.txt se existe algum produto com o nome dado.
   //Se ele não existir, este produto é adicionado ao estoque. Se existir, uma mensagem de erro é impressa na tela.
-
-  if(/*nome existe no arquivo*/){
-    std::cout << "Este produto já existe!" << std::endl;
+*/
+//if(/*nome existe no arquivo*/){
+/*    std::cout << "Este produto já existe!" << std::endl;
 
     return;
   }
@@ -153,3 +155,4 @@ void Administrador::respondeMensagens(Comprador user){}
 Administrador::~Administrador(){}
 
 #endif
+*/

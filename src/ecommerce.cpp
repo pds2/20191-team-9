@@ -190,7 +190,7 @@ bool Ecommerce::checaSenha(std::string s){
 void Ecommerce::limparTela(){
   std::system("clear||cls");
 }
-
+/*
 bool Ecommerce::checaCodigo(int cod){
     int x = produtos.size();
     int aux;
@@ -411,4 +411,4 @@ void Ecommerce::gravaProdutosArquivo(){
     }
   }
   arquivo.close();
-}
+}*/

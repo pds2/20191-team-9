@@ -1,4 +1,4 @@
-#ifndef CANECA_CPP
+/*#ifndef CANECA_CPP
 #define CANECA_CPP
 
 #include "produto/caneca.h"
@@ -28,3 +28,4 @@ void Caneca::imprimeProduto(){
         std::cout << "Diametro:\t\t" << getDiametro() << " cm" << std::endl;
 }
 #endif
+*/
