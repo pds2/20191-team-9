@@ -208,10 +208,9 @@ void Ecommerce::limparTela(){
 }
 
 void Ecommerce::loginUsuario(){
-
   std::string nome, senha;
   std::cout << "Insira seu nome de usuário: ";
-  std::cin >> name;
+  std::cin >> nome;
   limparTela();
   std::cout << std::endl << "Insira sua senha: ";
   std::cin >> senha;
@@ -225,20 +224,20 @@ void Ecommerce::loginUsuario(){
       break;
       }
       else{
-        std::cout << "Senha incorreta!"
+        std::cout << "Senha incorreta!";
         loginUsuario();
       }
     }
   }
 
-  if (*userLogged = NULL){
-    std::cout << "Nome de usuario nao encontrado!"
+  if (userLogged == nullptr){
+    std::cout << "Nome de usuario nao encontrado!";
     loginUsuario();
   }
 }
 
 void Ecommerce::logoutUsuario(){
-  *userLogged = NULL;
+  userLogged = nullptr;
   inicio();
 }
 
@@ -256,33 +255,57 @@ void Ecommerce::menuSumario(int idMenu, int opcao){
   switch (idMenu) {
 
     case 1:
-
+    {
       switch (opcao){
         case 1:
           loginUsuario();
           break;
         case 2:
           int op;
-          std::cout << "Para se cadastrar como administrador, digite 1" << std::endl
-          << "Para se cadastrar como comprador, digite 2" << std::endl
+          std::cout << "Para se cadastrar como administrador, digite 1" << "\n" << "Para se cadastrar como comprador, digite 2" << std::endl;
           std::cin >> op;
           menuSumario(2, op);
           break;
       }
       break;
 
-    case 2:
+    }
 
+    case 2:
+    {
       switch (opcao){
         case 1:
-          std::string adminPass;
-          std::cout << "Insira a senha de administrador: "
-          std::cin << adminPass;
-          limparTela();
-          if(adminPass == SENHADMIN){
-            std::string nome, senha, confSenha, email;
+          {
+            std::string adminPass;
+            std::cout << "Insira a senha de administrador: ";
+            std::cin >> adminPass;
+            limparTela();
+            if(adminPass == SENHADMIN){
+              std::string nome, senha, confSenha, email;
+              std::cout << "Insira seu nome de usuário: ";
+              std::cin >> nome;
+              limparTela();
+              std::cout << std::endl << "Insira uma senha: ";
+              std::cin >> senha;
+              limparTela();
+              std::cout << std::endl << "Confirme sua senha: ";
+              std::cin >> confSenha;
+              limparTela();
+              std::cout << std::endl << "Insira seu email: ";
+              std::cin >> email;
+              limparTela();
+              cadastrarUsuario(nome, email, senha);
+            }
+            else{
+              std::cout << "Senha de administrador incorreta!";
+              menuSumario(2, 1);
+            }
+            break;
+          }
+        case 2:
+            std::string nome, senha, confSenha, email, endereco, cpf;
             std::cout << "Insira seu nome de usuário: ";
-            std::cin >> name;
+            std::cin >> nome;
             limparTela();
             std::cout << std::endl << "Insira uma senha: ";
             std::cin >> senha;
@@ -293,42 +316,24 @@ void Ecommerce::menuSumario(int idMenu, int opcao){
             std::cout << std::endl << "Insira seu email: ";
             std::cin >> email;
             limparTela();
-            cadastrarUsuario(nome, email, senha);
-          else{
-            std::cout << "Senha de administrador incorreta!"
-            menuSumario(2, 1);
-          }
-          break;
-        case 2:
-          std::string nome, senha, confSenha, email, endereco, cpf;
-          std::cout << "Insira seu nome de usuário: ";
-          std::cin >> name;
-          limparTela();
-          std::cout << std::endl << "Insira uma senha: ";
-          std::cin >> senha;
-          limparTela();
-          std::cout << std::endl << "Confirme sua senha: ";
-          std::cin >> confSenha;
-          limparTela();
-          std::cout << std::endl << "Insira seu email: ";
-          std::cin >> email;
-          limparTela();
-          std::cout << std::endl << "Insira seu CPF: ";
-          std::cin >> cpf;
-          limparTela();
-          std::cout << std::endl << "Insira seu endereco: ";
-          std::cin >> endereco;
-          limparTela();
-          cadastrarComprador(nome, email, senha, cpf, endereco);
-          break;
+            std::cout << std::endl << "Insira seu CPF: ";
+            std::cin >> cpf;
+            limparTela();
+            std::cout << std::endl << "Insira seu endereco: ";
+            std::cin >> endereco;
+            limparTela();
+            cadastrarComprador(nome, email, senha, cpf, endereco, 0, 0, 0, 0);
+            break;
       }
       break;
+    }
 
     case 3:
+    {
       switch (opcao){
         case 1:
           limparTela();
-          fazerCompras();
+          //fazerCompras();
           break;
         case 2:
           limparTela();
@@ -336,44 +341,48 @@ void Ecommerce::menuSumario(int idMenu, int opcao){
           break;
         case 3:
           limparTela();
-          exibirPerfil();
-          break;
-      }
-      break;
-
-    case 4:
-      switch (opcao){
-        case 1:
-          limparTela();
-          //imprimirProdutos();
-          break;
-        case 2:
-          limparTela();
-          imprimirUsuarios();
-          break;
-        case 3:
-          limparTela();
           //exibirPerfil();
           break;
-        case 3:
-          limparTela();
-          mostraPedidos();
-          break;
-        case 4:
-          limparTela();
-          //imrprimirMensagens();
-          break;
       }
       break;
+    }
+
+    case 4:
+      {
+        switch (opcao){
+          case 1:
+            limparTela();
+            //imprimirProdutos();
+            break;
+          case 2:
+            limparTela();
+            imprimirUsuarios();
+            break;
+          case 3:
+            limparTela();
+            //exibirPerfil();
+            break;
+          case 4:
+            limparTela();
+            //mostraPedidos(); aqui insere a listagem de produtos
+            break;
+          case 5:
+            limparTela();
+            //imrprimirMensagens();
+            break;
+        }
+        break;
+      }
 
     case 5: //admin produtos, usuarios, verprodutos
-
-      switch (opcao){
-        case 1:
-          break;
-        case 2:
+      {
+          switch (opcao){
+            case 1:
+              break;
+            case 2:
+              break;
+          }
           break;
       }
-      break;
   }
 }
