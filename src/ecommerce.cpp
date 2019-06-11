@@ -14,7 +14,7 @@ void Ecommerce::listaUsuarioArquivo(){
 
   std::fstream arquivo;
 
-  arquivo.open("usuarios.csv");
+  arquivo.open("usuarios.txt");
 
   if (!arquivo.is_open()){
     std::cout << "Erro ao abrir arquivo. Tente novamente";
@@ -46,10 +46,10 @@ void Ecommerce::listaUsuarioArquivo(){
 }
 
 void Ecommerce::gravaUsuarioArquivo(){
-  std::remove("usuarios.cvs");
+  std::remove("usuarios.txt");
 
   std::fstream arquivo;
-  arquivo.open("usuarios.csv", std::ofstream::app);
+  arquivo.open("usuarios.txt", std::ofstream::app);
 
   if (!arquivo.is_open()){
     std::cout << "Erro ao abrir arquivo. Tente novamente";

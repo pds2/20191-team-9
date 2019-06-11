@@ -48,8 +48,6 @@ bool Comprador::adicionarCarrinho(){
   limparTela();
 
   //imprimir listagem de produtos aqui
-  Ecommerce ecom;
-  ecom.imprimirProdutos();
 
   int codProduto, opcao, indice = -1;
   std::cout << "\n" << "Digite o código do produto que deseja adicionar ao seu carrinho: ";

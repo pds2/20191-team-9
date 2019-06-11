@@ -13,11 +13,6 @@
 #include <iostream>
 
 #include "usuario/comprador.h"
-#include "produto/produto.h"
-
-#include "produto/acessorio.h"
-#include "produto/blusas_e_moletom.h"
-#include "produto/caneca.h"
 
 class Ecommerce{
   private:
