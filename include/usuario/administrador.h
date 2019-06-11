@@ -11,10 +11,10 @@
 
 class Administrador : public Usuario{
   private:
-    std::str _requisicoes[];
+    std::map <std::string, float> _requisicoes;
+    int _qntdade_de_requisicoes;
 
   public:
-    int _qntdade_de_requisicoes
 
     Administrador(std::string nome, std::string email, std::string senha);
 
