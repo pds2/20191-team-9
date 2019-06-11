@@ -26,6 +26,8 @@ void Ecommerce::listaUsuarioArquivo(){
 
     std::string nome, email, senha, cpf, endereco;
     std::string numHistorico, numCarrinho, numAvaliacoes, dinheiro;
+    int numH, numC, numA;
+    float din;
 
     std::getline(arquivo, nome,',');
     std::getline(arquivo, email,',');
@@ -35,9 +37,14 @@ void Ecommerce::listaUsuarioArquivo(){
     std::getline(arquivo, numCarrinho,',');
     std::getline(arquivo, numHistorico,',');
     std::getline(arquivo, numAvaliacoes,',');
-    std::getline(arquivo, dinheiro,'\n');
+    std::getline(arquivo, dinheiro,',');
 
-    Comprador comp = Comprador(nome, email, senha, cpf, endereco, 1, 1, 1, 1);
+    din = std::stof(dinheiro);
+    numH = std::stoi(numHistorico);
+    numC = std::stoi(numCarrinho);
+    numA = std::stoi(numAvaliacoes);
+
+    Comprador comp = Comprador(nome, email, senha, cpf, endereco, numC, numH, numA, din);
     Usuario usu = Usuario(nome, email, senha);
     usuarios.push_back(usu);
     compradores.push_back(comp);
