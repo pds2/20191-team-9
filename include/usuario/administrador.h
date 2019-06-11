@@ -11,7 +11,7 @@
 
 class Administrador : public Usuario{
   private:
-    std::map <std::string, float> _requisicoes;
+    std::map<std::string, float> _requisicoes;
     int _qntdade_de_requisicoes;
 
   public:
