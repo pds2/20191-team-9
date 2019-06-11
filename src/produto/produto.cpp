@@ -1,4 +1,4 @@
-/*#ifndef PRODUTO_CPP
+#ifndef PRODUTO_CPP
 #define PRODUTO_CPP
 #include "produto/produto.h"
 
@@ -19,6 +19,7 @@ Produto::Produto(int cod, float preco, float mediaAvaliacoes, std::string nome, 
 }
 
 Produto::~Produto(){
+
 }
 
 void Produto::avaliarProduto(int nota){
@@ -81,4 +82,3 @@ int Produto::getCodigoProduto(){
 }
 
 #endif
-*/

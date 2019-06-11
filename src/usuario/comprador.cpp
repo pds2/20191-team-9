@@ -125,17 +125,17 @@ void Comprador::imprimirCarrinho(){
 
     for(int i=0; i < _numeroComprasCarrinho; i++){
 
-      /*std::cout << "\n" << "----------------------------------------------" << std::endl;
-      std::cout << "\t\t Código " << (carrinho[i])->getCodigoProduto() << std::endl;
+      std::cout << "\n" << "----------------------------------------------" << std::endl;
+      std::cout << "\t\t Código " << (carrinho[i]).getCodigoProduto() << std::endl;
       std::cout << "----------------------------------------------" << "\n" << std::endl;
-      std::cout << "Nome: " << (carrinho[i])->getNome() << std::endl;
-      std::cout << "Categoria: " << (carrinho[i])->getCategoria()  << std::endl;
-      std::cout << "Cor: " << (carrinho[i])->getCor()  << std::endl;
-      std::cout << "Material: " << (carrinho[i])->getMaterial()  << std::endl;
-      std::cout << "Media de Avaliações: " << (carrinho[i])->getMediaAvaliacoes()  << std::endl;
-      std::cout << "Preço " << (carrinho[i])->getPreco() << std::endl;
-      std::cout << "Descricao: " << (carrinho[i])->getDescricao() << std::endl;
-      totalCarrinho += (carrinho[i])->getPreco();*/
+      std::cout << "Nome: " << (carrinho[i]).getNome() << std::endl;
+      std::cout << "Categoria: " << (carrinho[i]).getCategoria()  << std::endl;
+      std::cout << "Cor: " << (carrinho[i]).getCor()  << std::endl;
+      std::cout << "Material: " << (carrinho[i]).getMaterial()  << std::endl;
+      std::cout << "Media de Avaliações: " << (carrinho[i]).getMediaAvaliacoes()  << std::endl;
+      std::cout << "Preço " << (carrinho[i]).getPreco() << std::endl;
+      std::cout << "Descricao: " << (carrinho[i]).getDescricao() << std::endl;
+      totalCarrinho += (carrinho[i]).getPreco();
 
     }
 
@@ -160,17 +160,17 @@ void Comprador::imprimirHistorico(){
 
     for(int i=0; i < _numeroComprasCarrinho; i++){
 
-      /*std::cout << "\n" << "----------------------------------------------" << std::endl;
-      std::cout << "\t\t Código " << (historico[i])->getCodigoProduto() << std::endl;
+      std::cout << "\n" << "----------------------------------------------" << std::endl;
+      std::cout << "\t\t Código " << (historico[i]).getCodigoProduto() << std::endl;
       std::cout << "----------------------------------------------" << "\n" << std::endl;
-      std::cout << "Nome: " << (historico[i])->getNome() << std::endl;
-      std::cout << "Categoria: " << (historico[i])->getCategoria()  << std::endl;
-      std::cout << "Cor: " << (historico[i])->getCor()  << std::endl;
-      std::cout << "Material: " << (historico[i])->getMaterial()  << std::endl;
-      std::cout << "Media de Avaliações: " << (historico[i])->getMediaAvaliacoes()  << std::endl;
-      std::cout << "Preço " << (historico[i])->getPreco() << std::endl;
-      std::cout << "Descricao: " << (historico[i])->getDescricao() << std::endl;
-*/
+      std::cout << "Nome: " << (historico[i]).getNome() << std::endl;
+      std::cout << "Categoria: " << (historico[i]).getCategoria()  << std::endl;
+      std::cout << "Cor: " << (historico[i]).getCor()  << std::endl;
+      std::cout << "Material: " << (historico[i]).getMaterial()  << std::endl;
+      std::cout << "Media de Avaliações: " << (historico[i]).getMediaAvaliacoes()  << std::endl;
+      std::cout << "Preço " << (historico[i]).getPreco() << std::endl;
+      std::cout << "Descricao: " << (historico[i]).getDescricao() << std::endl;
+
     }
 
     std::cout << "\n" << "----------------------------------------------" << std::endl;

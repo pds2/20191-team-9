@@ -20,7 +20,7 @@ class Produto{
 
     public:
         Produto(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material);
-        //~Produto();
+        ~Produto();
 
         float getPreco();
         float getMediaAvaliacoes();
