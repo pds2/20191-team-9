@@ -1,8 +1,8 @@
-/*#ifndef ACESSORIO_CPP
+#ifndef ACESSORIO_CPP
 #define ACESSORIO_CPP
 
 #include "produto/acessorio.h"
-#include "produto.cpp"
+#include "produto/produto.h"
 
 Acessorio::Acessorio(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, std::string tipo):Produto(cod, preco, mediaAvaliacoes, nome, categoria, cor, descricao, material){
     this->_tipo = tipo;
@@ -31,4 +31,3 @@ void Acessorio::imprimeProduto(){
 }
 
 #endif
-*/

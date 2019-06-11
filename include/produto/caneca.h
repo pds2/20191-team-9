@@ -1,4 +1,4 @@
-/*#ifndef CANECA_H
+#ifndef CANECA_H
 #define CANECA_H
 
 #include <iostream>
@@ -19,4 +19,3 @@ class Caneca : public Produto{
 };
 
 #endif
-*/

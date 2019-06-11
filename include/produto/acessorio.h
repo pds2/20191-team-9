@@ -1,4 +1,3 @@
-/*
 #ifndef ACESSORIO_H
 #define ACESSORIO_H
 
@@ -20,4 +19,3 @@ class Acessorio : public Produto{
 };
 
 #endif
-*/

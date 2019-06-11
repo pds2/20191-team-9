@@ -1,4 +1,3 @@
-/*
 #ifndef BLUSAS_E_MOLETOM_H
 #define BLUSAS_E_MOLETOM_H
 
@@ -22,4 +21,3 @@ class BlusasEMoletom : public Produto{
 };
 
 #endif
-*/

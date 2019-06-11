@@ -1,5 +1,4 @@
-/*
-#ifndef ADMINISTRADOR_CPP
+/*#ifndef ADMINISTRADOR_CPP
 #define ADMINISTRADOR_CPP
 
 #include "usuario/administrador.hpp"
@@ -10,8 +9,9 @@ Administrador::Administrador(std::string nome, std::string email, std::string se
   this->_email = email;
   this->_senha = senha;
 }
+*/
 
-void Administrador::adicionaItem(std::string nome_do_produto){
+/*void Administrador::adicionaItem(std::string nome_do_produto){
   //procura no estoque.txt se existe algum produto com o nome dado.
   //Se ele não existir, este produto é adicionado ao estoque. Se existir, uma mensagem de erro é impressa na tela.
 
@@ -96,8 +96,8 @@ void Administrador::adicionaItem(std::string nome_do_produto){
       Acessorio::Acessorio(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tipo_de_acessorio);
       break;
   }
-}
-
+}*/
+/*
 void Administrador::removeItem(Produto item){
   //procura no estoque.txt se existe algum produto com o nome chamado.
   //Se ele existir, este produto é retirado do estoque. Se não existir, uma mensagem de erro é impressa na tela.
@@ -192,4 +192,4 @@ void Administrador::respondeMensagens(Comprador user){}
 Administrador::~Administrador(){}
 
 #endif
-/*
+*/

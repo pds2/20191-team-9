@@ -11,7 +11,6 @@
 
 #include "usuario/usuario.h"
 #include "produto/produto.h"
-#include "ecommerce.h"
 
 class Comprador : public Usuario{
   private:

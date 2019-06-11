@@ -208,17 +208,16 @@ void Ecommerce::limparTela(){
 }
 
 void Ecommerce::loginUsuario(){
-  std::string nome, senha;
-  std::cout << "Insira seu nome de usuário: ";
-  std::cin >> nome;
-  limparTela();
+  std::string email, senha;
+  std::cout << "Insira seu email: ";
+  std::cin >> email;
   std::cout << std::endl << "Insira sua senha: ";
   std::cin >> senha;
   limparTela();
 
   int numeroUsuarios = usuarios.size();
   for(int i=0; i < numeroUsuarios; i++){
-    if((usuarios[i]).getNome() == nome){
+    if((usuarios[i]).getEmail() == email){
       if ((usuarios[i]).getSenha() == senha){
         *userLogged = usuarios[i];
       break;
@@ -231,8 +230,8 @@ void Ecommerce::loginUsuario(){
   }
 
   if (userLogged == nullptr){
-    std::cout << "Nome de usuario nao encontrado!";
-    loginUsuario();
+    std::cout << "Email nao encontrado!";
+      loginUsuario();
   }
 }
 
@@ -284,13 +283,10 @@ void Ecommerce::menuSumario(int idMenu, int opcao){
               std::string nome, senha, confSenha, email;
               std::cout << "Insira seu nome de usuário: ";
               std::cin >> nome;
-              limparTela();
               std::cout << std::endl << "Insira uma senha: ";
               std::cin >> senha;
-              limparTela();
               std::cout << std::endl << "Confirme sua senha: ";
               std::cin >> confSenha;
-              limparTela();
               std::cout << std::endl << "Insira seu email: ";
               std::cin >> email;
               limparTela();

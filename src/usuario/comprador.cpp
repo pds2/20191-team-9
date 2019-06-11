@@ -44,7 +44,7 @@ int Comprador::getNumeroAvaliacoes(){
   return this->_numeroAvaliacoes;
 }
 
-double Comprador::getDinheiro(){
+float Comprador::getDinheiro(){
   return this->_dinheiro;
 }
 
@@ -52,9 +52,7 @@ bool Comprador::adicionarCarrinho(){
   limparTela();
 
   //imprimir listagem de produtos aqui
-  Ecommerce ecom;
-  ecom.imprimirProdutos();
-
+  
   int codProduto, opcao, indice = -1;
   std::cout << "\n" << "Digite o código do produto que deseja adicionar ao seu carrinho: ";
   std::cin >> codProduto;
