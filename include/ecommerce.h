@@ -24,7 +24,7 @@ class Ecommerce{
     std::vector <Usuario> usuarios;
     std::vector <Comprador> compradores;
 
-  /*  std::vector <Produto> produtos;
+  /*std::vector <Produto> produtos;
     std::vector <Caneca> canecas;
     std::vector <Acessorio> acessorios;
     std::vector <BlusasEMoletom> blusasEmoletons;*/

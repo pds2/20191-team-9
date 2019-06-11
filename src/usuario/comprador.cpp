@@ -48,6 +48,9 @@ bool Comprador::adicionarCarrinho(){
   limparTela();
 
   //imprimir listagem de produtos aqui
+  Ecommerce ecom;
+  ecom.imprimirProdutos();
+
   int codProduto, opcao, indice = -1;
   std::cout << "\n" << "Digite o código do produto que deseja adicionar ao seu carrinho: ";
   std::cin >> codProduto;
@@ -197,9 +200,9 @@ int Comprador::procurarItensHistorico(int codProduto){
   int _numeroHistorico = historico.size();
 
   for(int indice=0; indice < _numeroHistorico; indice++){
-    /*if((historico[indice])->getCodigoProduto() == codProduto){
+    if((historico[indice]).getCodigoProduto() == codProduto){
       return indice;
-    }*/
+    }
   }
   return -1;
 }
@@ -208,9 +211,9 @@ int Comprador::procurarItensCarrinho(int codProduto){
   int _numeroCarrinho = carrinho.size();
 
   for(int indice=0; indice < _numeroCarrinho; indice++){
-    /*if((carrinho[indice])->getCodigoProduto() == codProduto){
+    if((carrinho[indice]).getCodigoProduto() == codProduto){
       return indice;
-    }*/
+    }
   }
   return -1;
 }
@@ -271,10 +274,6 @@ void Comprador::avaliarItem(){
   }
 }
 
-void Comprador::enviarMensagem(){
-
-}
-
 bool Comprador::adicionaDinheiro(double valor, Comprador comp){
   //aqui tem que mandar uma requisicao para o administrador
   return true;
@@ -282,6 +281,10 @@ bool Comprador::adicionaDinheiro(double valor, Comprador comp){
 
 void Comprador::limparTela(){
   std::system("clear||cls");
+}
+
+void Comprador::enviarMensagem(){
+
 }
 
 #endif
