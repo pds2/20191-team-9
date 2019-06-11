@@ -3,6 +3,10 @@
 
 #include <string>
 #include <iostream>
+#include <fstream>
+#include <vector>
+#include <map>
+#include <iterator>
 
 #include "ecommerce.h"
 #include "produto/produto.h"
