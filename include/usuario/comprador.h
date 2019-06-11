@@ -11,6 +11,7 @@
 
 #include "usuario/usuario.h"
 #include "produto/produto.h"
+#include "ecommerce.h"
 
 class Comprador : public Usuario{
   private:
@@ -18,7 +19,7 @@ class Comprador : public Usuario{
     int _numeroComprasCarrinho;
     int _numeroAvaliacoes;
     int _totalCarrinho;
-    double _dinheiro;
+    float _dinheiro;
 
     std::string _CPF;
     std::string _endereco;
@@ -42,7 +43,9 @@ class Comprador : public Usuario{
     int getTotalCarrinho();
 
     int getNumeroAvaliacoes();
-    double getDinheiro();
+    float getDinheiro();
+    void setDinheiro(float valor);
+
 
     bool adicionarCarrinho();
     void fazerCompras();
@@ -57,7 +60,6 @@ class Comprador : public Usuario{
     int procurarItensCarrinho(int codProduto);
     void adicionarComentario();
     void avaliarItem();
-    void enviarMensagem();
 
     void limparTela();
 };

@@ -200,7 +200,7 @@ void Ecommerce::limparTela(){
   std::system("clear||cls");
 }
 
-void loginUsuario(){
+void Ecommerce::loginUsuario(){
 
   std::string nome, senha;
   std::cout << "Insira seu nome de usuário: ";
@@ -230,12 +230,12 @@ void loginUsuario(){
   }
 }
 
-void logoutUsuario(){
+void Ecommerce::logoutUsuario(){
   *userLogged = NULL;
   inicio();
 }
 
-void inicio(){
+void Ecommerce::inicio(){
   int digito;
     std::cout << "Bem vindo à nossa loja!" << std::endl
     << "Se você já tem uma conta, digite 1" << std::endl
@@ -244,7 +244,7 @@ void inicio(){
     menuSumario(1, digito);
 }
 
-void menuSumario(int idMenu, int opcao){
+void Ecommerce::menuSumario(int idMenu, int opcao){
 
   switch (idMenu) {
 
@@ -285,7 +285,7 @@ void menuSumario(int idMenu, int opcao){
             limparTela();
             std::cout << std::endl << "Insira seu email: ";
             std::cin >> email;
-            limparTela(); 
+            limparTela();
             cadastrarUsuario(nome, email, senha);
           else{
             std::cout << "Senha de administrador incorreta!"

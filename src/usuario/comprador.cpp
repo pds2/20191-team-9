@@ -16,6 +16,10 @@ Comprador::Comprador(){
 
 }
 
+void Comprador::setDinheiro(float valor){
+  this->_dinheiro = valor;
+}
+
 int Comprador::getTotalCarrinho(){
   return this->_totalCarrinho;
 }
@@ -48,6 +52,8 @@ bool Comprador::adicionarCarrinho(){
   limparTela();
 
   //imprimir listagem de produtos aqui
+  Ecommerce ecom;
+  ecom.imprimirProdutos();
 
   int codProduto, opcao, indice = -1;
   std::cout << "\n" << "Digite o código do produto que deseja adicionar ao seu carrinho: ";
@@ -301,10 +307,6 @@ bool Comprador::adicionaDinheiro(double valor, Comprador comp){
 
 void Comprador::limparTela(){
   std::system("clear||cls");
-}
-
-void Comprador::enviarMensagem(){
-
 }
 
 #endif
