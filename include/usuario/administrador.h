@@ -32,9 +32,9 @@ class Administrador : public Usuario{
 
     void verPerfil();
 
-    void compradorCsvToVector;
+    void compradorCsvToVector();
 
-    void usuarioCsvToVector;
+    void usuarioCsvToVector();
 
     ~Administrador();
 
