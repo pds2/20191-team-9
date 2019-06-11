@@ -46,6 +46,10 @@ class Ecommerce{
     bool checaEmail(std::string em);
     bool checaSenha(std::string s);
 
+    int buscaIndiceCaneca(int cod);
+    int buscaIndiceAcessorio(int cod);
+    int buscaIndiceBlusasEMoletom(int cod);    
+  
     void addCarrinho();
     void limparTela();
 
