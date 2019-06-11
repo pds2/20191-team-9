@@ -1,9 +1,8 @@
-
 /*
 #ifndef ADMINISTRADOR_CPP
 #define ADMINISTRADOR_CPP
 
-#include "usuario/administrador.h"
+#include "usuario/administrador.hpp"
 #include <fstream>
 
 Administrador::Administrador(std::string nome, std::string email, std::string senha){
@@ -15,9 +14,9 @@ Administrador::Administrador(std::string nome, std::string email, std::string se
 void Administrador::adicionaItem(std::string nome_do_produto){
   //procura no estoque.txt se existe algum produto com o nome dado.
   //Se ele não existir, este produto é adicionado ao estoque. Se existir, uma mensagem de erro é impressa na tela.
-*/
-//if(/*nome existe no arquivo*/){
-/*    std::cout << "Este produto já existe!" << std::endl;
+
+  if(nome existe no arquivo){
+    std::cout << "Este produto já existe!" << std::endl;
 
     return;
   }
@@ -106,6 +105,8 @@ void Administrador::removeItem(Produto item){
 }
 
 void Administrador::mostraPedidos(){
+  // Imprime o mapa _requisicoes com o seguinte formato
+  // Exemplo: 1 - email@docomprador.com: R$100,00
   if(_qntdade_de_requisicoes <= 0){
     std::cout << "Não há nenhuma requisição de aumento de saldo no momento." << std::endl;
 
@@ -113,14 +114,14 @@ void Administrador::mostraPedidos(){
   }
 
   for(int i = 0; i < _qntdade_de_requisicoes; i++){
-    std::cout << (i+1) << " - " << this->_requisicoes[i] << std::endl;
+    std::cout << (i+1) << " - " << this->_requisicoes[i] << ": R$" << std::endl;
   }
 }
 
-void Administrador::aprovaPedido(float valor, Comprador user){
+void Administrador::aprovaPedido(std::string email, float valor){
   int aprovacao;
 
-  std::cout << "Deseja aprovar o pedido de " << user._nome << " para o aumento de R$" << valor << "em seu saldo?" << std::endl;
+  std::cout << "Deseja aprovar o pedido de " << email << " para o aumento de R$" << valor << "em seu saldo?" << std::endl;
   std::cout << "Digite:\n1 - aprovar\n2 - reprovar" << std::endl;
   std::cin >> aprovacao;
 
@@ -144,7 +145,43 @@ void Administrador::exibeUsuarios(){
   lista_de_usuarios.close();
 }
 
-void Administrador::editaUsuario(Comprador user){}
+void Administrador::editaUsuario(Comprador user){
+  int opcao;
+
+  std::cout << "O que você deseja editar? Digite:" << std::endl;
+  std::cout << "1 - Editar o nome do comprador" << std::endl;
+  std::cout << "2 - Editar o email do comprador" << std::endl;
+  std::cout << "3 - Editar a senha do comprador" << std::endl;
+  std::cout << "4 - Editar o CPF do comprador" << std::endl;
+  std::cout << "5 - Editar o endereço do comprador" << std::endl;
+  std::cin >> opcao;
+
+  switch (opcao) {
+    case 1:
+
+      break;
+
+    case 2:
+
+      break;
+
+    case 3:
+
+      break;
+
+    case 4:
+
+      break;
+
+    case 5:
+
+      break;
+
+    case 6:
+
+      break;
+  }
+}
 
 void Administrador::excluiUsuario(Comprador user){}
 
@@ -155,4 +192,4 @@ void Administrador::respondeMensagens(Comprador user){}
 Administrador::~Administrador(){}
 
 #endif
-*/
+/*
