@@ -310,22 +310,60 @@ void Ecommerce::listaProdutosArquivo(){
   arquivo.close();
 }
 
+
 void Ecommerce::imprimirProdutos(){
     int x = produtos.size();
-    int aux;
+    int aux, c, i;
     for(aux = 0; aux < x; aux++){
 
-        std::cout << "----------------------------------------" << std::endl;
-        std::cout << "Nome:\t\t\t" << produtos[aux].getNome() << std::endl;
-        std::cout << "Preco: \t\t\t" << produtos[aux].getPreco() << std::endl;
-        std::cout << "Cor:\t\t\t" << produtos[aux].getCor() << std::endl;
-        std::cout << "Descricao:\t\t" << produtos[aux].getDescricao() << std::endl;
-        std::cout << "Material:\t\t" << produtos[aux].getMaterial() << std::endl;
-        std::cout << "Media de Avaliacoes:\t" << produtos[aux].getMediaAvaliacoes() << std::endl;
-        std::cout << "Categoria:\t\t" << produtos[aux].getCategoria() << std::endl;
-        std::cout << "COD:\t\t\t" << produtos[aux].getCodigoProduto() << std::endl;
-    }
+        if (produtos[aux].getCategoria()=="Canecas"){
+            c = produtos[aux].getCodigoProduto();
+            i = buscaIndiceCaneca(c);
+            canecas[i].imprimeProduto();
+        }
+        if (produtos[aux].getCategoria()=="Blusas e Moletons"){
+            c = produtos[aux].getCodigoProduto();
+            i = buscaIndiceBlusasEMoletom(c);
+            blusasEmoletons[i].imprimeProduto();
+        }
+        if (produtos[aux].getCategoria()=="Acessorios"){
+            c = produtos[aux].getCodigoProduto();
+            i = buscaIndiceAcessorio(c);
+            acessorios[i].imprimeProduto();
+        }
+        std::cout << "Codigo do Produto:\t" << produtos[aux].getCodigoProduto() << std::endl;
+        }
 }
+
+int Ecommerce::buscaIndiceCaneca(int cod){
+    int x;
+    for(x = 0; x < canecas.size(); x++){
+        if(canecas[x].getCodigoProduto() == cod){
+            return x;
+        }
+    }
+    return -1;
+}
+
+int Ecommerce::buscaIndiceBlusasEMoletom(int cod){
+    int x;
+    for(x = 0; x < blusasEmoletons.size(); x++){
+        if(blusasEmoletons[x].getCodigoProduto() == cod){
+            return x;
+        }
+    }
+    return -1;
+}
+int Ecommerce::buscaIndiceAcessorio(int cod){
+    int x;
+    for(x = 0; x < acessorios.size(); x++){
+        if(acessorios[x].getCodigoProduto() == cod){
+            return x;
+        }
+    }
+    return -1;
+}
+
 
 void Ecommerce::gravaProdutosArquivo(){
   std::remove("produtos.cvs");
@@ -343,35 +381,34 @@ void Ecommerce::gravaProdutosArquivo(){
     arquivo << (produtos[i]).getCodigoProduto() << "," << (produtos[i]).getNome() << "," << (produtos[i]).getPreco() << "," << (produtos[i]).getMediaAvaliacoes() << "," << (produtos[i]).getCategoria() << ","  << (produtos[i]).getCor() << "," << (produtos[i]).getDescricao() << "," << (produtos[i]).getMaterial() << ",";
     int x = 0;
     if (produtos[i].getCategoria()=="Acessorios"){
-        int t = acessorios.size();
-        while (x < t){
-          if(produtos[i].getCodigoProduto() == acessorios[x].getCodigoProduto()){
-            arquivo << (acessorios[x]).getTipo() << std::endl;
+        int x = produtos[i].getCodigoProduto();
+        int i = buscaIndiceAcessorio(x);
+        if(i != -1){
+               arquivo << (acessorios[i]).getTipo() << std::endl;
+         } else {
+            std::cout << "Erro. Tente novamente." << std::endl;
             }
-            x++;
-        }
 
     }
     if (produtos[i].getCategoria()=="Blusas e Moletons"){
-        int t = blusasEmoletons.size();
-        while (x < t){
-          if(produtos[i].getCodigoProduto() == blusasEmoletons[x].getCodigoProduto()){
-            arquivo << (blusasEmoletons[x]).getTamanho() << "," << (blusasEmoletons[x]).getTipo() << std::endl;
-          }
-          x++;
-        }
+        int x = produtos[i].getCodigoProduto();
+        int i = buscaIndiceBlusasEMoletom(x);
+        if(i != -1){
+               arquivo << (blusasEmoletons[i]).getTamanho() << "," << (blusasEmoletons[i]).getTipo() << std::endl;
+         } else {
+            std::cout << "Erro. Tente novamente." << std::endl;
+            }
     }
     if (produtos[i].getCategoria()=="Canecas"){
-      int t = canecas.size();
-        while (x < t){
-          if(produtos[i].getCodigoProduto() == canecas[x].getCodigoProduto()){
-            arquivo << (canecas[x]).getDiametro() << std::endl;
-          }
-          x++;
-        }
+      int x = produtos[i].getCodigoProduto();
+      int i = buscaIndiceCaneca(x);
+      if(i != -1){
+            arquivo << (canecas[i]).getDiametro() << std::endl;
+          } else {
+            std::cout << "Erro. Tente novamente." << std::endl;
+            }
+
     }
   }
-
-
   arquivo.close();
 }
