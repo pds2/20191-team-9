@@ -61,7 +61,7 @@ class Ecommerce{
     int buscaIndiceCaneca(int cod);
     int buscaIndiceAcessorio(int cod);
     int buscaIndiceBlusasEMoletom(int cod);
-  //  int buscaIndiceProduto(int cod);
+    int buscaIndiceProduto(int cod);
     int tamanhoArquivo(const char* file_name); //se o arquivo tiver vazio retorna 0
 
     void addCarrinho();
