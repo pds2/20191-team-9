@@ -112,17 +112,90 @@ void Administrador::removeItem(std::string nome_do_produto){
   //procura no vector se existe algum produto com o nome chamado.
   //Se ele existir, este produto é retirado do estoque. Se não existir, uma mensagem de erro é impressa na tela.
 
-  if(this->bluemols.size() == 0 || this->cans.size() == 0 || this->aces.size() == 0){
+  this->bluemols.clear();
+  this->cans.clear();
+  this->aces.clear();
 
-    this->bluemols.clear();
-    this->cans.clear();
-    this->aces.clear();
+  produtoCsvToVector();
 
-    produtoCsvToVector();
+  std::string name;
+  int indice = -1;
+  int bm = 0;
+  int cn = 0;
+  int ac = 0;
 
+  // Procura o produto dentre os produtos cadastrados
+  for(int i = 0; i<bluemols.size(); i++){
 
+    name = bluemols[i].getNome();
+
+    if(strcomp(nome_do_produto, name) == 0){
+      indice = i;
+      bm = 1;
+      break;
+    }
 
   }
+
+  if(indice == -1){
+    for(int i = 0; i<cans.size(); i++){
+
+      name = cans[i].getNome();
+
+      if(strcomp(nome_do_produto, name) == 0){
+        indice = i;
+        cn = 1;
+        break;
+      }
+
+    }
+  }
+
+  if(indice == -1){
+    for(int i = 0; i<aces.size(); i++){
+
+      name = aces[i].getNome();
+
+      if(strcomp(nome_do_produto, name) == 0){
+        indice = i;
+        ac = 1;
+        break;
+      }
+
+    }
+  }
+
+  //Se não achou, imprime uma mensagem de erro. Se achou, procura em qual categoria está o item para fazer a remoção
+  if(indice == -1){
+    std::cout << "Este produto não existe!" << std::endl;
+    return;
+  }else if(bm == 1){
+    bluemols.erase(bluemols.begin() + indice);
+  }else if(cn == 1){
+    cans.erase(cans.begin() + indice);
+  }else if(ac == 1){
+    aces.erase(aces.begin() + indice);
+  }
+
+  //Com o produto apagado, o arquivo de produtos é reescrito
+  std::ofstream arquivo;
+
+  arquivo.open("produtos.csv", std::ios::trunc | std::ios::out);
+
+  for(int i = 0; i<bluemols.size(); i++){
+    arquivo << bluemols[i].getCodigoProduto() << "," << bluemols[i].getNome() << "," << bluemols[i].getPreco() << "," << bluemols[i].getMediaAvaliacoes() << "," << bluemols[i].getCategoria() << ","  << bluemols[i].getCor() << "," << bluemols[i].getDescricao() << "," << bluemols[i].getMaterial() << "," << bluemols[i].getTamanho() << "," << bluemols[i].getTipo() << std::endl;
+  }
+
+  for(int i = 0; i<cans.size(); i++){
+    arquivo << cans[i].getCodigoProduto() << "," << cans[i].getNome() << "," << cans[i].getPreco() << "," << cans[i].getMediaAvaliacoes() << "," << cans[i].getCategoria() << ","  << cans[i].getCor() << "," << cans[i].getDescricao() << "," << cans[i].getMaterial() << "," << cans[i].getDiametro() << std::endl;
+  }
+
+  for(int i = 0; i<aces.size(); i++){
+    arquivo << aces[i].getCodigoProduto() << "," << aces[i].getNome() << "," << aces[i].getPreco() << "," << aces[i].getMediaAvaliacoes() << "," << aces[i].getCategoria() << ","  << aces[i].getCor() << "," << aces[i].getDescricao() << "," << aces[i].getMaterial() << "," << aces[i].getTipo() << std::endl;
+
+  }
+
+  arquivo.close();
 
 }
 
