@@ -41,10 +41,6 @@ class Administrador : public Usuario{
 
     void excluiUsuario(std::string email);
 
-    void exibeMensagens(std::string email);
-
-    void respondeMensagens(std::string email);
-
     ~Administrador();
 
 };
