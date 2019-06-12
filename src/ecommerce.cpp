@@ -4,7 +4,7 @@
 #include "ecommerce.h"
 
 Ecommerce::Ecommerce(){
-  inicio();
+  //inicio();
 }
 
 Ecommerce::~Ecommerce(){
