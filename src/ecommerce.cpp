@@ -220,7 +220,7 @@ int Ecommerce::buscaIndiceProdutos(int cod){
 
 
 void Ecommerce::gravaProdutosArquivo(){
-  std::remove("produtos.cvs");
+  std::remove("produtos.csv");
 
   std::fstream arquivo;
   arquivo.open("produtos.csv", std::ofstream::app);
@@ -285,7 +285,7 @@ void Ecommerce::listaUsuarioArquivo(){
   while (arquivo.good()){
 
     std::string nome, email, senha, cpf, endereco;
-    std::string numHistorico, numCarrinho, numAvaliacoes, dinheiro;
+    std::string numHistoricoS, numCarrinhoS, numAvaliacoesS, dinheiroS;
     int numH, numC, numA;
     float din;
 
@@ -294,15 +294,19 @@ void Ecommerce::listaUsuarioArquivo(){
     std::getline(arquivo, senha,',');
     std::getline(arquivo, cpf,',');
     std::getline(arquivo, endereco,',');
-    std::getline(arquivo, numCarrinho,',');
-    std::getline(arquivo, numHistorico,',');
-    std::getline(arquivo, numAvaliacoes,',');
-    std::getline(arquivo, dinheiro,',');
+    std::getline(arquivo, numCarrinhoS,',');
+    std::getline(arquivo, numHistoricoS,',');
+    std::getline(arquivo, numAvaliacoesS,',');
+    std::getline(arquivo, dinheiroS,',');
 
-    din = std::stof(dinheiro);
-    numH = std::stoi(numHistorico);
-    numC = std::stoi(numCarrinho);
-    numA = std::stoi(numAvaliacoes);
+    std::istringstream iss(numHistoricoS);
+    numH = std::stoi(numHistoricoS);
+    std::istringstream iss(numCarrinhoS);
+    numC = std::stoi(numCarrinhoS);
+    std::istringstream iss(numAvaliacoesS);
+    numA = std::stoi(numAvaliacoesS);
+
+    din = std::stof(dinheiroS);
 
     Comprador comp = Comprador(nome, email, senha, cpf, endereco, numC, numH, numA, din);
     Usuario usu = Usuario(nome, email, senha);
@@ -314,7 +318,7 @@ void Ecommerce::listaUsuarioArquivo(){
 }
 
 void Ecommerce::gravaUsuarioArquivo(){
-  std::remove("usuarios.cvs");
+  std::remove("usuarios.csv");
 
   std::fstream arquivo;
   arquivo.open("usuarios.csv", std::ofstream::app);
@@ -338,7 +342,7 @@ void Ecommerce::cadastrarUsuario (std::string n, std::string em, std::string s){
       Usuario usu = Usuario(n, em, s);
       usuarios.push_back(usu);
       std::cout << "Cadastro executado com sucesso!";
-      loginUsuario();
+      //loginUsuario();
     }
     else{
       std::cout << "Endereço de email já cadastrado. Tente novamente." << std::endl;
@@ -357,8 +361,8 @@ void Ecommerce::cadastrarComprador (std::string n, std::string em, std::string s
       usuarios.push_back(usu);
       compradores.push_back(comp);
       gravaUsuarioArquivo();
-      std::cout << "Cadastro executado com sucesso!";
-      loginUsuario();
+      std::cout << "Cadastro executado com sucesso!" << std::endl;
+      //loginUsuario();
      }
      else{
       std::cout << "Endereço de email já cadastrado. Tente novamente." << std::endl;
@@ -484,14 +488,14 @@ void Ecommerce::loginUsuario(){
       }
       else{
         std::cout << "Senha incorreta!";
-        loginUsuario();
+        //loginUsuario();
       }
     }
   }
 
   if (userLogged == nullptr){
     std::cout << "Email nao encontrado!";
-      loginUsuario();
+      //loginUsuario();
   }
 }
 
@@ -523,7 +527,7 @@ void Ecommerce::menuSumario(int idMenu, int opcao){
     {
       switch (opcao){
         case 1:
-          loginUsuario();
+          //loginUsuario();
           break;
         case 2:
           int op;
