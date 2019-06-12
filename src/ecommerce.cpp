@@ -287,7 +287,7 @@ void Ecommerce::listaUsuarioArquivo(){
     std::string nome, email, senha, cpf, endereco;
     std::string numHistoricoS, numCarrinhoS, numAvaliacoesS, dinheiroS;
     int numH, numC, numA;
-    float din;
+    float din=0.0;
 
     std::getline(arquivo, nome,',');
     std::getline(arquivo, email,',');
@@ -297,7 +297,9 @@ void Ecommerce::listaUsuarioArquivo(){
     std::getline(arquivo, numCarrinhoS,',');
     std::getline(arquivo, numHistoricoS,',');
     std::getline(arquivo, numAvaliacoesS,',');
-    std::getline(arquivo, dinheiroS,',');
+    std::getline(arquivo, dinheiroS);
+
+    //din = std::stof(dinheiroS);
 
     std::istringstream iss1(numHistoricoS);
     numH = std::stoi(numHistoricoS);
@@ -305,8 +307,6 @@ void Ecommerce::listaUsuarioArquivo(){
     numC = std::stoi(numCarrinhoS);
     std::istringstream iss3(numAvaliacoesS);
     numA = std::stoi(numAvaliacoesS);
-
-    din = std::stof(dinheiroS);
 
     Comprador comp = Comprador(nome, email, senha, cpf, endereco, numC, numH, numA, din);
     Usuario usu = Usuario(nome, email, senha);
@@ -395,9 +395,9 @@ void Ecommerce::imprimirCompradores(){
   limparTela();
   int numeroCompradores = compradores.size();
   if(numeroCompradores>0){
-    for(int i=0; i < numeroCompradores-1; i++){
+    for(int i=0; i < numeroCompradores; i++){
       std::cout << "\n" << "----------------------------------------------" << std::endl;
-      std::cout << "\t\t Comprador " << i+1 << std::endl;
+      std::cout << "\t\t Comprador " << i << std::endl;
       std::cout << "----------------------------------------------" << "\n" << std::endl;
       std::cout << "Nome: " << (compradores[i]).getNome() << std::endl;
       std::cout << "Email: " << (compradores[i]).getEmail() << std::endl;
