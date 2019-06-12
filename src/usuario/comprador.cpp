@@ -50,24 +50,27 @@ float Comprador::getDinheiro(){
 }
 
 bool Comprador::adicionarCarrinho(){
+  Ecommerce ecom;
   limparTela();
 
   //imprimir listagem de produtos aqui
+  ecom.imprimirProdutos();
 
   int codProduto, opcao, indice = -1;
   std::cout << "\n" << "Digite o código do produto que deseja adicionar ao seu carrinho: ";
   std::cin >> codProduto;
 
   //procurar codigo do item na listagem de produtos
-  indice = procurarItensCarrinho(codProduto);
+  indice = ecom.buscaIndiceProdutos(codProduto);
 
   if(indice != -1){
-    std::cout << "Este produto já encontra-se em seu carrinho. Deseja adiciona-lo novamente?" << "\nPressione 1 para SIM e 0 para NÃO." << std::endl;
+    std::cout << "Este produto já encontra-se em seu carrinho. Deseja adiciona-lo novamente?" << "\n0 - NÃO.\n1 - SIM." << std::endl;
     std::cin >> opcao;
 
     switch (opcao) {
       case 1:
         // pega cada atributo desse Produto encontrado e cria um novo Produto, registrando ele no carrinho
+        //(ecom.produtos[indice]).get
         //Produto *prod = new Produto("cataprima", "cataprima", "1234", 1, 1, 1, 20);
           //carrinho.push_back(prod);
         //modifica a variavel _totalCarrinho

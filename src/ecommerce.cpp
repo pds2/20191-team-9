@@ -502,11 +502,17 @@ void Ecommerce::logoutUsuario(){
 
 void Ecommerce::inicio(){
   int digito;
-    std::cout << "Bem vindo à nossa loja!" << std::endl
-    << "Se você já tem uma conta, digite 1" << std::endl
-    << "Para se cadastrar, digite 2" << std::endl;
-    std::cin >> digito;
-    menuSumario(1, digito);
+  limparTela();
+
+  std::cout << "\n" << "-------------------------------------------------------------" << std::endl;
+  std::cout << "\t\t Bem vindo à nossa loja!" << std::endl;
+  std::cout << "\-------------------------------------------------------------" << "\n" << std::endl;
+
+  std::cout << "1 - Já possuo uma conta." << std::endl;
+  std::cout << "2 - Desejo me cadastrar." << std::endl;
+  std::cout << "\nEscolha uma opção: ";
+  std::cin >> digito;
+  menuSumario(1, digito);
 }
 
 void Ecommerce::menuSumario(int idMenu, int opcao){
