@@ -128,39 +128,43 @@ void Administrador::adicionaItem(std::string nome_do_produto){
 
   for(int i = 0; i<bluemols.size(); i++){
 
-    name = Produto::getNome();
+    name = bluemols[i].getNome();
 
-    if(strcomp(bluemols[i].nome_do_produto, name) == 0){
+    if(strcomp(nome_do_produto, name) == 0){
       indice = i;
       break;
     }
 
   }
 
-  for(int i = 0; i<cans.size(); i++){
+  if(indice == -1){
+    for(int i = 0; i<cans.size(); i++){
 
-    name = Produto::getNome();
+      name = cans[i].getNome();
 
-    if(strcomp(cans[i]._nome, name) == 0){
-      indice = i;
-      break;
+      if(strcomp(nome_do_produto, name) == 0){
+        indice = i;
+        break;
+      }
+
     }
-
   }
 
-  for(int i = 0; i<aces.size(); i++){
+  if(indice == -1){
+    for(int i = 0; i<aces.size(); i++){
 
-    name = Produto::getNome();
+      name = aces[i].getNome();
 
-    if(strcomp(aces[i]._nome, name) == 0){
-      indice = i;
-      break;
+      if(strcomp(nome_do_produto, name) == 0){
+        indice = i;
+        break;
+      }
+
     }
-
   }
 
-  if(false){
-    std::cout << "Este produto já existe!" << std::endl;
+    if(indice != -1){
+    std::cout << "Já existe um produto com este nome!" << std::endl;
 
     return;
   }
@@ -193,18 +197,8 @@ void Administrador::adicionaItem(std::string nome_do_produto){
   std::cout << "Por favor, informe o preco do produto:" << std::endl;
   std::cin >> preco;
 
-  // Agora é preciso entender que tipo de produto o administrador deseja adicionar,
-  // pois cada produto possui alguns atributos próprios.
-  // A entrada é dada por um int para que possamos comparará-la e validá-la com mais facilidade.
-
-  std::cout << "Qual tipo de produto deseja adicionar?Digite:\n1 - Blusas e Moletons\n2 - Canecas\n3 - Acessórios" << std::endl;
-  std::cin >> tipo_de_produto;
-
-  if(tipo_de_produto < 1 || tipo_de_produto > 3){
-    std::cout << "O número digitado é inválido! Por favor, digite um número entre 1 e 3" << std::endl;
-  }
-
-  switch (tipo_de_produto) {
+  // Agora construiremos o novo produto de acordo com sua categoria
+  switch (categoria) {
     case 1: //Produto é uma blusa ou um moletom
       char tamanho;
       std::cout << "Por favor, informe o tamanho do produto:" << std::endl;
