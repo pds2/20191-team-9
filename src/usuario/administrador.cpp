@@ -108,141 +108,25 @@ void Administrador::usuarioCsvToVector(){
   arquivo.close();
 }
 
+void Administrador::removeItem(std::string nome_do_produto){
+  //procura no vector se existe algum produto com o nome chamado.
+  //Se ele existir, este produto é retirado do estoque. Se não existir, uma mensagem de erro é impressa na tela.
+
+  if(this->bluemols.size() == 0 || this->cans.size() == 0 || this->aces.size() == 0){
+
+    this->bluemols.clear();
+    this->cans.clear();
+    this->aces.clear();
+
+    produtoCsvToVector();
 
 
-void Administrador::adicionaItem(std::string nome_do_produto){
-  // importa informações sobre itens de um arquivo csv para um vector, para manusear os dados mais facilmente
-  // procura no estoque.vector se existe algum produto com o nome dado.
-  // Se ele não existir, este produto é adicionado ao estoque. Se existir, uma mensagem de erro é impressa na tela.
-
-  this->bluemols.clear();
-  this->cans.clear();
-  this->aces.clear();
-
-  produtoCsvToVector();
-
-  std::string name;
-  int indice = -1;
-  int iterador;
-
-
-  for(int i = 0; i<bluemols.size(); i++){
-
-    name = bluemols[i].getNome();
-
-    if(strcomp(nome_do_produto, name) == 0){
-      indice = i;
-      break;
-    }
 
   }
 
-  if(indice == -1){
-    for(int i = 0; i<cans.size(); i++){
-
-      name = cans[i].getNome();
-
-      if(strcomp(nome_do_produto, name) == 0){
-        indice = i;
-        break;
-      }
-
-    }
-  }
-
-  if(indice == -1){
-    for(int i = 0; i<aces.size(); i++){
-
-      name = aces[i].getNome();
-
-      if(strcomp(nome_do_produto, name) == 0){
-        indice = i;
-        break;
-      }
-
-    }
-  }
-
-    if(indice != -1){
-    std::cout << "Já existe um produto com este nome!" << std::endl;
-
-    return;
-  }
-
-  // Inicializa as e coleta variáveis comuns à todos os produtos
-  int tipo_de_produto;
-  int codigo_do_produto;
-  float media_das_avaliacoes = 0;
-  float preco;
-  std::string categoria;
-  std::string cor;
-  std::string descricao;
-  std::string material;
-
-  std::cout << "Por favor, informe o código do produto:" << std::endl;
-  std::cin >> codigo_do_produto;
-
-  std::cout << "Por favor, informe a categoria do produto:" << std::endl;
-  std::cin >> categoria;
-
-  std::cout << "Por favor, informe a cor:" << std::endl;
-  std::cin >> cor;
-
-  std::cout << "Por favor, dê uma descrição para o produto:" << std::endl;
-  std::cin >> descricao;
-
-  std::cout << "Por favor, informe o material do produto:" << std::endl;
-  std::cin >> material;
-
-  std::cout << "Por favor, informe o preco do produto:" << std::endl;
-  std::cin >> preco;
-
-  // Agora construiremos o novo produto de acordo com sua categoria
-  switch (categoria) {
-    case 1: //Produto é uma blusa ou um moletom
-      char tamanho;
-      std::cout << "Por favor, informe o tamanho do produto:" << std::endl;
-      std::cin >> tamanho;
-
-      int tipo_de_peca;
-      std::cout << "Por favor, informe o tipo da peça que deseja adicionar. Digite:\n1 - Blusa\n2 - Moletom" << std::endl;
-
-      if(tipo_de_peca == 1){
-        BlusasEMoletom::BlusasEMoletom(codigo_do_produto, preco, media_das_avaliacoes, nome_do_produto, categoria, cor, descricao, material, tamanho, "BLUSA");
-      }else if(tipo_de_peca == 2){
-        BlusasEMoletom::BlusasEMoletom(codigo_do_produto, preco, media_das_avaliacoes, nome_do_produto, categoria, cor, descricao, material, tamanho, "MOLETOM");
-      }
-      break;
-
-    case 2: //Produto é uma caneca
-      float diametro;
-      std::cout << "Por favor, informe o diâmetro da caneca:" << std::endl;
-      std::cin >> diametro;
-
-      Caneca::Caneca(codigo_do_produto, preco, media_das_avaliacoes, nome_do_produto, categoria, cor, descricao, material, diametro);
-      break;
-
-    case 3: //Produto é um acessório
-      std::string tipo_de_acessorio;
-
-      std::cout << "Por favor, informe que tipo de acessório é este produto:" << std::endl;
-      std::cin >> tipo_de_acessorio;
-
-      for(int i = 0; int i < std::strlen(tipo_de_acessorio); i++){
-        tipo_de_acessorio[i] = std::toupper(tipo_de_acessorio[i]);
-      }
-      Acessorio::Acessorio(codigo_do_produto, preco, media_das_avaliacoes, nome_do_produto, categoria, cor, descricao, material, tipo_de_acessorio);
-      break;
-  }
 }
 
 /*
-void Administrador::removeItem(Produto item){
-  //procura no estoque.txt se existe algum produto com o nome chamado.
-  //Se ele existir, este produto é retirado do estoque. Se não existir, uma mensagem de erro é impressa na tela.
-
-}
-
 void Administrador::mostraPedidos(){
   // Imprime o mapa _requisicoes com o seguinte formato
   // Exemplo: 1 - email@docomprador.com: R$100,00
