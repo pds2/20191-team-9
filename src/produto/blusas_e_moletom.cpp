@@ -2,7 +2,6 @@
 #define BLUSAS_E_MOLETOM_CPP
 
 #include "produto/blusas_e_moletom.h"
-#include "produto/produto.h"
 
 BlusasEMoletom::BlusasEMoletom(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, char tamanho, std::string tipo) : Produto(cod, preco, mediaAvaliacoes, nome, categoria, cor, descricao, material){
         this->_tipo = tipo;

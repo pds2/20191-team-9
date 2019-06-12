@@ -52,7 +52,7 @@ bool Comprador::adicionarCarrinho(){
   limparTela();
 
   //imprimir listagem de produtos aqui
-  
+
   int codProduto, opcao, indice = -1;
   std::cout << "\n" << "Digite o código do produto que deseja adicionar ao seu carrinho: ";
   std::cin >> codProduto;
@@ -86,7 +86,8 @@ bool Comprador::adicionarCarrinho(){
 }
 
 bool Comprador::retirarCarrinho(){
-  if(_numeroComprasCarrinho == 0){
+  numeroComprasCarrinho = carrinho.size();
+  if(numeroComprasCarrinho == 0){
     std::cout << "\n\nSeu carrinho está vazio. Adicione produtos para continuar.";
     return false;
   }
@@ -209,28 +210,6 @@ int Comprador::procurarItensHistorico(int codProduto){
   return -1;
 }
 
-/*
-  Generic function to find an element in vector and also its position.
-  It returns a pair of bool & int i.e.
-  bool : Represents if element is present in vector or not.
-  int : Represents the index of element in vector if its found else -1
-*/
-template < typename T>
-std::pair<bool, int > findInVector(const std::vector<T>  & vecOfElements, const T  & element){
-  std::pair<bool, int > result;
-  // Find given element in vector
-  auto it = std::find(vecOfElements.begin(), vecOfElements.end(), element);
-  if (it != vecOfElements.end()){
-  result.second = distance(vecOfElements.begin(), it);
-  result.first = true;
-  }
-  else{
-  result.first = false;
-  result.second = -1;
-  }
-  return result;
-}
-
 int Comprador::procurarItensCarrinho(int codProduto){
   int _numeroCarrinho = carrinho.size();
 
@@ -306,4 +285,27 @@ bool Comprador::adicionaDinheiro(double valor, Comprador comp){
 void Comprador::limparTela(){
   std::system("clear||cls");
 }
+
+/*
+  Generic function to find an element in vector and also its position.
+  It returns a pair of bool & int i.e.
+  bool : Represents if element is present in vector or not.
+  int : Represents the index of element in vector if its found else -1
+*/
+template < typename T>
+std::pair<bool, int > findInVector(const std::vector<T>  & vecOfElements, const T  & element){
+  std::pair<bool, int > result;
+  // Find given element in vector
+  auto it = std::find(vecOfElements.begin(), vecOfElements.end(), element);
+  if (it != vecOfElements.end()){
+  result.second = distance(vecOfElements.begin(), it);
+  result.first = true;
+  }
+  else{
+  result.first = false;
+  result.second = -1;
+  }
+  return result;
+}
+
 #endif

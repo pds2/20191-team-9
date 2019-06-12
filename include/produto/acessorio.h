@@ -4,7 +4,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "produto.h"
+
+#include "produto/produto.h"
 
 class Acessorio : public Produto{
     private:
