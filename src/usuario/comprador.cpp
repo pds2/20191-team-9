@@ -312,4 +312,28 @@ std::pair<bool, int > findInVector(const std::vector<T>  & vecOfElements, const 
   return result;
 }
 
+void Comprador::fazerCompras(){
+  std::cout << "Você está comprando " << carrinho.size() << " produtos, cujo valor total é " << _totalCarrinho << ". Deseja confirmar sua compra?" << std::endl;
+  std::cout << "0 - NÃO\n1 - SIM" << std::endl;
+  switch (opcao) {
+    case 0:
+      std::cout << "Compra não realizada. Você ainda possui produtos te esperando em seu carrinho!" << std::endl;
+      break;
+    case 1:
+    {
+      if(_dinheiro>=_totalCarrinho){
+        carrinho.clear();
+        _dinheiro = _dinheiro - _totalCarrinho;
+      }
+      else{
+        std::cout << "Compra não realizada pois seu saldo é insuficiente! Você possui R$ " << _dinheiro << std::endl;
+      }
+      break
+    }
+    default:
+      std::cout << "Opção inválida. Tente novamente" << std::endl;
+      break;
+  }
+}
+
 #endif
