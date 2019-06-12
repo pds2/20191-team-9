@@ -9,6 +9,253 @@ Ecommerce::~Ecommerce(){
   compradores.clear();
 }
 
+
+int Ecommerce::tamanhoArquivo(const char* file_name){
+    FILE *file = fopen(file_name, "r");
+
+    if(file == NULL)
+        return 0;
+
+    fseek(file, 0, SEEK_END);
+    int size = ftell(file);
+    fclose(file);
+
+    return size;
+}
+
+bool Ecommerce::checaCodigo(int cod){
+    int x = produtos.size();
+    int aux;
+
+    for (aux = 0; aux < x; aux++){
+        if(produtos[aux].getCodigoProduto()== cod){
+            return false;
+        }
+    }
+
+    return true;
+}
+
+void Ecommerce::cadastrarCaneca(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, float diametro){
+    if (checaCodigo(cod)){
+        Caneca can(cod, preco, mediaAvaliacoes, nome, "Canecas", cor, descricao, material, diametro);
+        Produto prod(cod, preco, mediaAvaliacoes, nome, "Canecas", cor, descricao, material);
+        canecas.push_back(can);
+        produtos.push_back(prod);
+    } else {
+        std::cout << "Codigo de produto ja cadastrado. Tente novamente." << std::endl;
+    }
+}
+
+void Ecommerce::cadastrarAcessorio(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, std::string tipo){
+    if(checaCodigo(cod)){
+        Acessorio ac(cod, preco, mediaAvaliacoes, nome, "Acessorios", cor, descricao, material, tipo);
+        Produto prod(cod, preco, mediaAvaliacoes, nome, "Acessorios", cor, descricao, material);
+        acessorios.push_back(ac);
+        produtos.push_back(prod);
+    } else {
+        std::cout << "Codigo de produto ja cadastrado. Tente novamente." << std::endl;
+    }
+}
+
+void Ecommerce::cadastrarBlusasEMoletom(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, char tamanho, std::string tipo){
+    if(checaCodigo(cod)){
+        BlusasEMoletom b(cod, preco, mediaAvaliacoes, nome, "Blusas e Moletons", cor, descricao, material, tamanho, tipo);
+        Produto prod(cod, preco, mediaAvaliacoes, nome, "Blusas e Moletons", cor, descricao, material);
+        blusasEmoletons.push_back(b);
+        produtos.push_back(prod);
+    } else {
+        std::cout << "Codigo de produto ja cadastrado. Tente novamente." << std::endl;
+    }
+}
+
+
+void Ecommerce::listaProdutosArquivo(){
+  produtos.clear();
+
+  std::fstream arquivo;
+  arquivo.open("produtos.csv",std::ios::in);
+
+  if (!arquivo.is_open()){
+    std::cout << "Erro ao abrir arquivo. Tente novamente";
+    exit(1);
+  }
+
+int linhas = tamanhoArquivo("produtos.csv");
+std::cout << "TAMANHO ARQUIVO =   " << linhas << std::endl;
+  if (tamanhoArquivo("produtos.csv") == 0){
+    std::cout << "Ainda nao ha nenhum produto cadastrado." << std::endl;
+    return;
+  }
+
+  while (arquivo.good()){
+    int cod;
+    std::string nome, categoria, cor, descricao, material;
+    float preco, mediaAvaliacoes;
+
+    std::string codigoS, precoS, mediaS;
+
+    std::getline(arquivo, codigoS,',');
+    std::getline(arquivo, nome,',');
+    std::getline(arquivo, precoS,',');
+    std::getline(arquivo, mediaS,',');
+    std::getline(arquivo, categoria,',');
+    std::getline(arquivo, cor,',');
+    std::getline(arquivo, descricao,',');
+    std::getline(arquivo, material,',');
+
+    if (codigoS == ""){
+        break;
+    }
+
+    std::istringstream iss(codigoS);
+    cod = std::stoi(codigoS);
+    preco = std::stof(precoS);
+    mediaAvaliacoes = std::stof(mediaS);
+
+    if (categoria == "Acessorios"){
+      std::string tipo;
+      std::getline(arquivo, tipo);
+
+      Acessorio ac(cod, preco, mediaAvaliacoes, nome, categoria, cor, descricao, material, tipo);
+      acessorios.push_back(ac);
+
+    }
+
+    if (categoria == "Canecas"){
+      float diametro;
+      std::string diametroS;
+      std::getline(arquivo, diametroS);
+
+      diametro = std::stof(diametroS);
+      Caneca can(cod, preco, mediaAvaliacoes, nome, categoria, cor, descricao, material, diametro);
+      canecas.push_back(can);
+
+    }
+
+    if (categoria == "Blusas e Moletons"){
+      char tamanho;
+      std::string tp, tam;
+
+      std::getline(arquivo, tam,',');
+      std::getline(arquivo, tp);
+
+      tamanho = tam[0];
+      BlusasEMoletom bM(cod, preco, mediaAvaliacoes, nome, categoria, cor, descricao, material, tamanho, tp);
+      blusasEmoletons.push_back(bM);
+    }
+
+    Produto prod(cod, preco, mediaAvaliacoes, nome, categoria, cor, descricao, material);
+    produtos.push_back(prod);
+    }
+  arquivo.close();
+}
+
+void Ecommerce::imprimirProdutos(){
+    int x = produtos.size();
+    int aux, c, i;
+    for(aux = 0; aux < x; aux++){
+
+        if (produtos[aux].getCategoria()=="Canecas"){
+            c = produtos[aux].getCodigoProduto();
+            i = buscaIndiceCaneca(c);
+            canecas[i].imprimeProduto();
+        }
+        if (produtos[aux].getCategoria()=="Blusas e Moletons"){
+            c = produtos[aux].getCodigoProduto();
+            i = buscaIndiceBlusasEMoletom(c);
+            blusasEmoletons[i].imprimeProduto();
+        }
+        if (produtos[aux].getCategoria()=="Acessorios"){
+            c = produtos[aux].getCodigoProduto();
+            i = buscaIndiceAcessorio(c);
+            acessorios[i].imprimeProduto();
+        }
+        std::cout << "Codigo do Produto:\t" << produtos[aux].getCodigoProduto() << std::endl;
+        }
+}
+
+int Ecommerce::buscaIndiceCaneca(int cod){
+    int x;
+    for(x = 0; x < canecas.size(); x++){
+        if(canecas[x].getCodigoProduto() == cod){
+            return x;
+        }
+    }
+    return -1;
+}
+
+int Ecommerce::buscaIndiceBlusasEMoletom(int cod){
+    int x;
+    for(x = 0; x < blusasEmoletons.size(); x++){
+        if(blusasEmoletons[x].getCodigoProduto() == cod){
+            return x;
+        }
+    }
+    return -1;
+}
+
+int Ecommerce::buscaIndiceAcessorio(int cod){
+    int x;
+    for(x = 0; x < acessorios.size(); x++){
+        if(acessorios[x].getCodigoProduto() == cod){
+            return x;
+        }
+    }
+    return -1;
+}
+
+
+void Ecommerce::gravaProdutosArquivo(){
+  std::remove("produtos.cvs");
+
+  std::fstream arquivo;
+  arquivo.open("produtos.csv", std::ofstream::app);
+
+  if (!arquivo.is_open()){
+    std::cout << "Erro ao abrir arquivo. Tente novamente";
+    exit(1);
+  }
+
+  int numeroProdutos = produtos.size();
+
+  for(int i=0; arquivo.good() && i < numeroProdutos; i++){
+
+     //if(checaCodigo(produtos[i].getCodigoProduto())){
+        arquivo << (produtos[i]).getCodigoProduto() << "," << (produtos[i]).getNome() << "," << (produtos[i]).getPreco() << "," << (produtos[i]).getMediaAvaliacoes() << "," << (produtos[i]).getCategoria() << ","  << (produtos[i]).getCor() << "," << (produtos[i]).getDescricao() << "," << (produtos[i]).getMaterial() << ",";
+        int x = 0;
+        if (produtos[i].getCategoria()=="Acessorios"){
+            int x = produtos[i].getCodigoProduto();
+            int i = buscaIndiceAcessorio(x);
+            if(i != -1){
+                   arquivo << (acessorios[i]).getTipo() << std::endl;
+             } else {
+                std::cout << "Erro. Tente novamente." << std::endl;
+                }
+        }
+        if (produtos[i].getCategoria()=="Blusas e Moletons"){
+            int x = produtos[i].getCodigoProduto();
+            int i = buscaIndiceBlusasEMoletom(x);
+            if(i != -1){
+                   arquivo << (blusasEmoletons[i]).getTamanho() << "," << (blusasEmoletons[i]).getTipo() << std::endl;
+             } else {
+                std::cout << "Erro. Tente novamente." << std::endl;
+                }
+        }
+        if (produtos[i].getCategoria()=="Canecas"){
+          int x = produtos[i].getCodigoProduto();
+          int i = buscaIndiceCaneca(x);
+          if(i != -1){
+                arquivo << (canecas[i]).getDiametro() << std::endl;
+              } else {
+                std::cout << "Erro. Tente novamente." << std::endl;
+                }
+        }
+    //}
+  }
+  arquivo.close();
+}
+
 void Ecommerce::listaUsuarioArquivo(){
   usuarios.clear();
   compradores.clear();
