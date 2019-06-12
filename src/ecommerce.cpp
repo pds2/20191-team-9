@@ -299,7 +299,9 @@ void Ecommerce::listaUsuarioArquivo(){
     std::getline(arquivo, numAvaliacoesS,',');
     std::getline(arquivo, dinheiroS);
 
-    //din = std::stof(dinheiroS);
+    if(email==""){
+      break;
+    }
 
     std::istringstream iss1(numHistoricoS);
     numH = std::stoi(numHistoricoS);
@@ -307,6 +309,8 @@ void Ecommerce::listaUsuarioArquivo(){
     numC = std::stoi(numCarrinhoS);
     std::istringstream iss3(numAvaliacoesS);
     numA = std::stoi(numAvaliacoesS);
+
+    din = std::stof(dinheiroS);
 
     Comprador comp = Comprador(nome, email, senha, cpf, endereco, numC, numH, numA, din);
     Usuario usu = Usuario(nome, email, senha);
