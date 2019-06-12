@@ -7,6 +7,7 @@ Ecommerce::Ecommerce(){
 Ecommerce::~Ecommerce(){
   usuarios.clear();
   compradores.clear();
+  produtos.clear();
 }
 
 
@@ -82,7 +83,6 @@ void Ecommerce::listaProdutosArquivo(){
   }
 
 int linhas = tamanhoArquivo("produtos.csv");
-std::cout << "TAMANHO ARQUIVO =   " << linhas << std::endl;
   if (tamanhoArquivo("produtos.csv") == 0){
     std::cout << "Ainda nao ha nenhum produto cadastrado." << std::endl;
     return;
@@ -199,6 +199,16 @@ int Ecommerce::buscaIndiceAcessorio(int cod){
     int x;
     for(x = 0; x < acessorios.size(); x++){
         if(acessorios[x].getCodigoProduto() == cod){
+            return x;
+        }
+    }
+    return -1;
+}
+
+int Ecommerce::buscaIndiceProdutos(int cod){
+    int x;
+    for(x = 0; x < produtos.size(); x++){
+        if(produtos[x].getCodigoProduto() == cod){
             return x;
         }
     }
