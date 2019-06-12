@@ -3,7 +3,6 @@
 
 #include <string>
 #include <vector>
-#include <sstream>
 
 #include <cstdlib>
 
@@ -11,6 +10,8 @@
 
 #include <fstream>
 #include <iostream>
+
+#include <sstream>
 
 #include "usuario/comprador.h"
 #include "produto/produto.h"

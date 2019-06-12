@@ -299,11 +299,11 @@ void Ecommerce::listaUsuarioArquivo(){
     std::getline(arquivo, numAvaliacoesS,',');
     std::getline(arquivo, dinheiroS,',');
 
-    std::istringstream iss(numHistoricoS);
+    std::istringstream iss1(numHistoricoS);
     numH = std::stoi(numHistoricoS);
-    std::istringstream iss(numCarrinhoS);
+    std::istringstream iss2(numCarrinhoS);
     numC = std::stoi(numCarrinhoS);
-    std::istringstream iss(numAvaliacoesS);
+    std::istringstream iss3(numAvaliacoesS);
     numA = std::stoi(numAvaliacoesS);
 
     din = std::stof(dinheiroS);
@@ -487,15 +487,13 @@ void Ecommerce::loginUsuario(){
       break;
       }
       else{
-        std::cout << "Senha incorreta!";
-        //loginUsuario();
+        std::cout << "Senha incorreta!"<< std::endl;        //loginUsuario();
       }
     }
   }
 
   if (userLogged == nullptr){
-    std::cout << "Email nao encontrado!";
-      //loginUsuario();
+    std::cout << "Email nao encontrado!" << std::endl;      //loginUsuario();
   }
 }
 
@@ -510,7 +508,7 @@ void Ecommerce::inicio(){
 
   std::cout << "\n" << "-------------------------------------------------------------" << std::endl;
   std::cout << "\t\t Bem vindo à nossa loja!" << std::endl;
-  std::cout << "\-------------------------------------------------------------" << "\n" << std::endl;
+  std::cout << "-------------------------------------------------------------" << "\n" << std::endl;
 
   std::cout << "1 - Já possuo uma conta." << std::endl;
   std::cout << "2 - Desejo me cadastrar." << std::endl;
