@@ -1,21 +1,68 @@
-/*#ifndef ADMINISTRADOR_CPP
+/*
+#ifndef ADMINISTRADOR_CPP
 #define ADMINISTRADOR_CPP
 
 #include "usuario/administrador.hpp"
-#include <fstream>
 
 Administrador::Administrador(std::string nome, std::string email, std::string senha){
   this->_nome = nome;
   this->_email = email;
   this->_senha = senha;
 }
-*/
 
-/*void Administrador::adicionaItem(std::string nome_do_produto){
-  //procura no estoque.txt se existe algum produto com o nome dado.
-  //Se ele não existir, este produto é adicionado ao estoque. Se existir, uma mensagem de erro é impressa na tela.
+void Administrador::produtoCsvToVector(){
 
-  if(nome existe no arquivo){
+  int codigo_do_produto;
+  float media_das_avaliacoes;
+  float preco;
+  std::string categoria; //Acessorios, Canecas, Blusas e Moletons
+  std::string cor;
+  std::string descricao;
+  std::string material;
+
+  vector<BlusasEMoletom> bluemol;
+  vector<Caneca> can;
+  vector<Acessorio> ace;
+
+  tsd::ifstream arquivo;
+  arquivo.open("produtos.csv", ios::in);
+
+  if (!arquivo.is_open()){
+   std::cout << "Erro ao abrir arquivo. Tente novamente";
+   exit(1);
+  }
+
+  std::getline(arquivo, codigo_do_produto, ',');
+  std::getline(arquivo, preco, ',');
+  std::getline(arquivo, media_das_avaliacoes, ',');
+  std::getline(arquivo, nome, ',');
+  std::getline(arquivo, categoria, ',');
+  std::getline(arquivo, cor, ',');
+  std::getline(arquivo, descricao, ',');
+  std::getline(arquivo, material, ',');
+
+  if(std::strcomp(categoria, "Blusas e Moletons") == 0){
+    std::string tamanho;
+    std::string tipo_de_produto;
+
+    std::getline(arquivo, tamanho, ',');
+    std::getline(arquivo, tipo_de_produto, '\n');
+  }
+
+  codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tamanho, "MOLETOM");
+
+}
+
+void Administrador::usuarioCsvToVector(){}
+
+void Administrador::adicionaItem(std::string nome_do_produto){
+  // importa informações sobre itens de um arquivo csv para um vector, para manusear os dados mais facilmente
+  // procura no estoque.vector se existe algum produto com o nome dado.
+  // Se ele não existir, este produto é adicionado ao estoque. Se existir, uma mensagem de erro é impressa na tela.
+
+
+
+  if(false){
     std::cout << "Este produto já existe!" << std::endl;
 
     return;
@@ -72,7 +119,7 @@ Administrador::Administrador(std::string nome, std::string email, std::string se
       if(tipo_de_peca == 1){
         BlusasEMoletom::BlusasEMoletom(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tamanho, "BLUSA");
       }else if(tipo_de_peca == 2){
-        BlusasEMoletom::BlusasEMoletom(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tamanho, "MOLETOM");
+       // BlusasEMoletom::BlusasEMoletom(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tamanho, "MOLETOM");
       }
       break;
 
@@ -96,8 +143,8 @@ Administrador::Administrador(std::string nome, std::string email, std::string se
       Acessorio::Acessorio(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tipo_de_acessorio);
       break;
   }
-}*/
-/*
+}
+
 void Administrador::removeItem(Produto item){
   //procura no estoque.txt se existe algum produto com o nome chamado.
   //Se ele existir, este produto é retirado do estoque. Se não existir, uma mensagem de erro é impressa na tela.
@@ -126,7 +173,8 @@ void Administrador::aprovaPedido(std::string email, float valor){
   std::cin >> aprovacao;
 
   if(aprovacao == 1){
-    user._dinheiro += valor;
+    int novo_saldo = user.getDinheiro() + valor;
+    user.setDinheiro(novo_saldo);
   }
 
 }
@@ -145,49 +193,9 @@ void Administrador::exibeUsuarios(){
   lista_de_usuarios.close();
 }
 
-void Administrador::editaUsuario(Comprador user){
-  int opcao;
+void Administrador::excluiUsuario(std::string email){
 
-  std::cout << "O que você deseja editar? Digite:" << std::endl;
-  std::cout << "1 - Editar o nome do comprador" << std::endl;
-  std::cout << "2 - Editar o email do comprador" << std::endl;
-  std::cout << "3 - Editar a senha do comprador" << std::endl;
-  std::cout << "4 - Editar o CPF do comprador" << std::endl;
-  std::cout << "5 - Editar o endereço do comprador" << std::endl;
-  std::cin >> opcao;
-
-  switch (opcao) {
-    case 1:
-
-      break;
-
-    case 2:
-
-      break;
-
-    case 3:
-
-      break;
-
-    case 4:
-
-      break;
-
-    case 5:
-
-      break;
-
-    case 6:
-
-      break;
-  }
 }
-
-void Administrador::excluiUsuario(Comprador user){}
-
-void Administrador::exibeMensagens(Comprador user){}
-
-void Administrador::respondeMensagens(Comprador user){}
 
 Administrador::~Administrador(){}
 
