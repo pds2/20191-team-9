@@ -3,6 +3,9 @@
 
 #include <string>
 #include <iostream>
+#include <vector>
+#include <map>
+#include <fstream>
 
 #include "ecommerce.h"
 #include "produto/produto.h"
@@ -11,8 +14,14 @@
 
 class Administrador : public Usuario{
   private:
-    std::map<std::string, float> _requisicoes;
     int _qntdade_de_requisicoes;
+
+    std::vector<BlusasEMoletom> bluemols;
+    std::vector<Caneca> cans;
+    std::<Acessorio> aces;
+    std::map<std::string, float> _requisicoes;
+
+
 
   public:
 
