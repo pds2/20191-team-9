@@ -12,6 +12,7 @@ Administrador::Administrador(std::string nome, std::string email, std::string se
 
 void Administrador::produtoCsvToVector(){
 
+  std::string nome;
   std::string codigo_do_produto;
   std::string media_das_avaliacoes;
   std::string preco;
@@ -19,10 +20,6 @@ void Administrador::produtoCsvToVector(){
   std::string cor;
   std::string descricao;
   std::string material;
-
-  std::vector<BlusasEMoletom> bluemols;
-  std::vector<Caneca> cans;
-  std::vector<Acessorio> aces;
 
   std::ifstream arquivo;
   arquivo.open("produtos.csv", ios::in);
@@ -54,7 +51,7 @@ void Administrador::produtoCsvToVector(){
       std::getline(arquivo, tipo_de_produto, '\n');
 
       BlusasEMoletom bem = BlusasEMoletom(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tamanho,);
-      bluemols.push_back(bem);
+      this->bluemols.push_back(bem);
 
     }else if(std::strcomp(categoria, "Canecas") == 0){
       std::string diametro;
@@ -62,7 +59,7 @@ void Administrador::produtoCsvToVector(){
       std::getline(arquivo, diametro, '\n');
 
       Caneca can = Caneca(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, diametro);
-      cans.push_back(can);
+      this->cans.push_back(can);
 
     }else if(std::strcomp(categoria, "Acessorio") == 0){
       std::string tipo_de_acessorio;
@@ -70,8 +67,7 @@ void Administrador::produtoCsvToVector(){
       std::getline(arquivo, diametro, '\n');
 
       Acessorio ace = Acessorio(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tipo_de_acessorio);
-
-      aces.push_back(ace);
+      this->aces.push_back(ace);
     }
   }
 
@@ -82,8 +78,6 @@ void Administrador::usuarioCsvToVector(){
 
   std::string nome, email, senha, cpf, endereco;
   std::string numHistorico, numCarrinho, numAvaliacoes, dinheiro;
-
-  std::vector<Compradores> shoppers;
 
   std::fstream arquivo;
   arquivo.open("usuarios.csv", ios::in);
@@ -108,20 +102,62 @@ void Administrador::usuarioCsvToVector(){
     std::stof(dinheiro);
 
     Comprador comp = Comprador(nome, email, senha, cpf, endereco, numCarrinho, numHistorico, numAvaliacoes, dinheiro);
-    shoppers.push_back(comp);
+    this->shoppers.push_back(comp);
   }
 
   arquivo.close();
 }
 
 
-/*
+
 void Administrador::adicionaItem(std::string nome_do_produto){
   // importa informações sobre itens de um arquivo csv para um vector, para manusear os dados mais facilmente
   // procura no estoque.vector se existe algum produto com o nome dado.
   // Se ele não existir, este produto é adicionado ao estoque. Se existir, uma mensagem de erro é impressa na tela.
 
+  this->bluemols.clear();
+  this->cans.clear();
+  this->aces.clear();
 
+  produtoCsvToVector();
+
+  std::string name;
+  int indice = -1;
+  int iterador;
+
+
+  for(int i = 0; i<bluemols.size(); i++){
+
+    name = Produto::getNome();
+
+    if(strcomp(bluemols[i].nome_do_produto, name) == 0){
+      indice = i;
+      break;
+    }
+
+  }
+
+  for(int i = 0; i<cans.size(); i++){
+
+    name = Produto::getNome();
+
+    if(strcomp(cans[i]._nome, name) == 0){
+      indice = i;
+      break;
+    }
+
+  }
+
+  for(int i = 0; i<aces.size(); i++){
+
+    name = Produto::getNome();
+
+    if(strcomp(aces[i]._nome, name) == 0){
+      indice = i;
+      break;
+    }
+
+  }
 
   if(false){
     std::cout << "Este produto já existe!" << std::endl;
@@ -178,9 +214,9 @@ void Administrador::adicionaItem(std::string nome_do_produto){
       std::cout << "Por favor, informe o tipo da peça que deseja adicionar. Digite:\n1 - Blusa\n2 - Moletom" << std::endl;
 
       if(tipo_de_peca == 1){
-        BlusasEMoletom::BlusasEMoletom(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tamanho, "BLUSA");
+        BlusasEMoletom::BlusasEMoletom(codigo_do_produto, preco, media_das_avaliacoes, nome_do_produto, categoria, cor, descricao, material, tamanho, "BLUSA");
       }else if(tipo_de_peca == 2){
-        BlusasEMoletom::BlusasEMoletom(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tamanho, "MOLETOM");
+        BlusasEMoletom::BlusasEMoletom(codigo_do_produto, preco, media_das_avaliacoes, nome_do_produto, categoria, cor, descricao, material, tamanho, "MOLETOM");
       }
       break;
 
@@ -189,7 +225,7 @@ void Administrador::adicionaItem(std::string nome_do_produto){
       std::cout << "Por favor, informe o diâmetro da caneca:" << std::endl;
       std::cin >> diametro;
 
-      Caneca::Caneca(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, diametro);
+      Caneca::Caneca(codigo_do_produto, preco, media_das_avaliacoes, nome_do_produto, categoria, cor, descricao, material, diametro);
       break;
 
     case 3: //Produto é um acessório
@@ -201,11 +237,12 @@ void Administrador::adicionaItem(std::string nome_do_produto){
       for(int i = 0; int i < std::strlen(tipo_de_acessorio); i++){
         tipo_de_acessorio[i] = std::toupper(tipo_de_acessorio[i]);
       }
-      Acessorio::Acessorio(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tipo_de_acessorio);
+      Acessorio::Acessorio(codigo_do_produto, preco, media_das_avaliacoes, nome_do_produto, categoria, cor, descricao, material, tipo_de_acessorio);
       break;
   }
 }
 
+/*
 void Administrador::removeItem(Produto item){
   //procura no estoque.txt se existe algum produto com o nome chamado.
   //Se ele existir, este produto é retirado do estoque. Se não existir, uma mensagem de erro é impressa na tela.
