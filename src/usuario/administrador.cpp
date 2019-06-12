@@ -12,17 +12,17 @@ Administrador::Administrador(std::string nome, std::string email, std::string se
 
 void Administrador::produtoCsvToVector(){
 
-  int codigo_do_produto;
-  float media_das_avaliacoes;
-  float preco;
+  std::string codigo_do_produto;
+  std::string media_das_avaliacoes;
+  std::string preco;
   std::string categoria; //Acessorios, Canecas, Blusas e Moletons
   std::string cor;
   std::string descricao;
   std::string material;
 
-  vector<BlusasEMoletom> bluemol;
-  vector<Caneca> can;
-  vector<Acessorio> ace;
+  vector<BlusasEMoletom> bluemols;
+  vector<Caneca> cans;
+  vector<Acessorio> aces;
 
   tsd::ifstream arquivo;
   arquivo.open("produtos.csv", ios::in);
@@ -41,15 +41,24 @@ void Administrador::produtoCsvToVector(){
   std::getline(arquivo, descricao, ',');
   std::getline(arquivo, material, ',');
 
+  std::stoi(codigo_do_produto);
+  std::stof(media_das_avaliacoes);
+  std::stof(preco);
+
   if(std::strcomp(categoria, "Blusas e Moletons") == 0){
     std::string tamanho;
     std::string tipo_de_produto;
 
     std::getline(arquivo, tamanho, ',');
     std::getline(arquivo, tipo_de_produto, '\n');
-  }
 
-  codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tamanho, "MOLETOM");
+    BlusasEMoletom bem = BlusasEMoletom(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tamanho,);
+    bluemols.push_back(bem);
+  }else if(std::strcomp(categoria, "Canecas") == 0){
+
+  }else if(std::strcomp(categoria, "Acessorio") == 0){
+
+  }
 
 }
 
@@ -119,7 +128,7 @@ void Administrador::adicionaItem(std::string nome_do_produto){
       if(tipo_de_peca == 1){
         BlusasEMoletom::BlusasEMoletom(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tamanho, "BLUSA");
       }else if(tipo_de_peca == 2){
-       // BlusasEMoletom::BlusasEMoletom(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tamanho, "MOLETOM");
+        //BlusasEMoletom::BlusasEMoletom(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tamanho, "MOLETOM");
       }
       break;
 
