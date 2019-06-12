@@ -2,6 +2,7 @@
 #define COMPRADOR_CPP
 
 #include "usuario/comprador.h"
+#include "ecommerce.h"
 
 Comprador::Comprador(std::string n, std::string em, std::string s, std::string cpf,
    std::string endereco, int numCarr, int numHist, int numAval, double din) :
@@ -86,8 +87,8 @@ bool Comprador::adicionarCarrinho(){
 }
 
 bool Comprador::retirarCarrinho(){
-  numeroComprasCarrinho = carrinho.size();
-  if(numeroComprasCarrinho == 0){
+  _numeroComprasCarrinho = carrinho.size();
+  if(_numeroComprasCarrinho == 0){
     std::cout << "\n\nSeu carrinho está vazio. Adicione produtos para continuar.";
     return false;
   }
@@ -116,7 +117,7 @@ bool Comprador::retirarCarrinho(){
 }
 
 void Comprador::imprimirCarrinho(){
-  int _numeroComprasCarrinho = carrinho.size();
+  _numeroComprasCarrinho = carrinho.size();
   double totalCarrinho=0;
 
   if(_numeroComprasCarrinho == 0){
@@ -153,7 +154,7 @@ void Comprador::imprimirCarrinho(){
 }
 
 void Comprador::imprimirHistorico(){
-  int _numeroComprasHistorico = historico.size();
+  _numeroComprasHistorico = historico.size();
   if(_numeroComprasHistorico == 0){
     std::cout << "Seu histórico está vazio. Compre produtos para continuar.";
   }
@@ -200,9 +201,9 @@ void Comprador::exibirPerfil(){
 }
 
 int Comprador::procurarItensHistorico(int codProduto){
-  int _numeroHistorico = historico.size();
+  _numeroComprasHistorico = historico.size();
 
-  for(int indice=0; indice < _numeroHistorico; indice++){
+  for(int indice=0; indice < _numeroComprasHistorico; indice++){
     if((historico[indice]).getCodigoProduto() == codProduto){
       return indice;
     }
@@ -211,9 +212,9 @@ int Comprador::procurarItensHistorico(int codProduto){
 }
 
 int Comprador::procurarItensCarrinho(int codProduto){
-  int _numeroCarrinho = carrinho.size();
+  _numeroComprasCarrinho = carrinho.size();
 
-  for(int indice=0; indice < _numeroCarrinho; indice++){
+  for(int indice=0; indice < _numeroComprasCarrinho; indice++){
     if((carrinho[indice]).getCodigoProduto() == codProduto){
       return indice;
     }

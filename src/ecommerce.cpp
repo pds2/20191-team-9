@@ -1,3 +1,6 @@
+#ifndef ECOMMERCE_CPP
+#define ECOMMERCE_CPP
+
 #include "ecommerce.h"
 
 Ecommerce::Ecommerce(){
@@ -639,3 +642,4 @@ void Ecommerce::menuSumario(int idMenu, int opcao){
       }
   }
 }
+#endif

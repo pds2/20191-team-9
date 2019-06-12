@@ -28,7 +28,7 @@ class Ecommerce{
     std::vector <Acessorio> acessorios;
     std::vector <BlusasEMoletom> blusasEmoletons;
 
-  
+
     const std::string SENHADMIN = "Ecom@Geek42";
     Usuario *userLogged = NULL;
 
@@ -38,14 +38,14 @@ class Ecommerce{
 
     void cadastrarUsuario (std::string n, std::string em, std::string s);
     void cadastrarComprador (std::string n, std::string em, std::string s, std::string cpf, std::string endereco, int numCarr, int numHist, int numAval, double din);
-    
+
     void cadastrarCaneca(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, float diametro);
     void cadastrarAcessorio(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, std::string tipo);
     void cadastrarBlusasEMoletom(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, char tamanho, std::string tipo);
-    
+
     bool procurarUsuario(std::string email);
     bool procurarComprador(std::string em);
-    
+
     void imprimirUsuarios();
     void imprimirCompradores();
     void imprimirProdutos();
@@ -61,22 +61,22 @@ class Ecommerce{
     int buscaIndiceCaneca(int cod);
     int buscaIndiceAcessorio(int cod);
     int buscaIndiceBlusasEMoletom(int cod);
-    int buscaIndiceProduto(int cod);
+    int buscaIndiceProdutos(int cod);
     int tamanhoArquivo(const char* file_name); //se o arquivo tiver vazio retorna 0
 
     void addCarrinho();
     void limparTela();
     void impCarrinho();
     void impHistorico();
-    
+
     void listaUsuarioArquivo();
     void gravaUsuarioArquivo();
 
     bool checaCodigo(int cod); //verifica se ja existe um produto com o mesmo codigo cadastrado, caso sim retorna false
-    void listaProdutosArquivo();    
-    void gravaProdutosArquivo();    
-  
-  
+    void listaProdutosArquivo();
+    void gravaProdutosArquivo();
+
+
     void loginUsuario(std::string n, std::string s);
     void loginUsuario();
     void logoutUsuario();
