@@ -1,4 +1,5 @@
-/*#ifndef ADMINISTRADOR_CPP
+/*
+#ifndef ADMINISTRADOR_CPP
 #define ADMINISTRADOR_CPP
 
 #include "usuario/administrador.hpp"
@@ -23,7 +24,7 @@ void Administrador::produtoCsvToVector(){
   std::vector<Caneca> cans;
   std::vector<Acessorio> aces;
 
-  tsd::ifstream arquivo;
+  std::ifstream arquivo;
   arquivo.open("produtos.csv", ios::in);
 
   if (!arquivo.is_open()){
@@ -73,10 +74,48 @@ void Administrador::produtoCsvToVector(){
       aces.push_back(ace);
     }
   }
-}
-/*
-void Administrador::usuarioCsvToVector(){}
 
+  arquivo.close();
+}
+
+void Administrador::usuarioCsvToVector(){
+
+  std::string nome, email, senha, cpf, endereco;
+  std::string numHistorico, numCarrinho, numAvaliacoes, dinheiro;
+
+  std::vector<Compradores> shoppers;
+
+  std::fstream arquivo;
+  arquivo.open("usuarios.csv", ios::in);
+
+  if (!arquivo.is_open()){
+    std::cout << "Erro ao abrir arquivo. Tente novamente";
+    exit(1);
+  }
+
+  while (arquivo.good()){
+
+    std::getline(arquivo, nome,',');
+    std::getline(arquivo, email,',');
+    std::getline(arquivo, senha,',');
+    std::getline(arquivo, cpf,',');
+    std::getline(arquivo, endereco,',');
+    std::getline(arquivo, numCarrinho,',');
+    std::getline(arquivo, numHistorico,',');
+    std::getline(arquivo, numAvaliacoes,',');
+    std::getline(arquivo, dinheiro,'\n');
+
+    std::stof(dinheiro);
+
+    Comprador comp = Comprador(nome, email, senha, cpf, endereco, numCarrinho, numHistorico, numAvaliacoes, dinheiro);
+    shoppers.push_back(comp);
+  }
+
+  arquivo.close();
+}
+
+
+/*
 void Administrador::adicionaItem(std::string nome_do_produto){
   // importa informações sobre itens de um arquivo csv para um vector, para manusear os dados mais facilmente
   // procura no estoque.vector se existe algum produto com o nome dado.
