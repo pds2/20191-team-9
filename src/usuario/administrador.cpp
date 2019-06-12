@@ -1,5 +1,4 @@
-/*
-#ifndef ADMINISTRADOR_CPP
+/*#ifndef ADMINISTRADOR_CPP
 #define ADMINISTRADOR_CPP
 
 #include "usuario/administrador.hpp"
@@ -20,9 +19,9 @@ void Administrador::produtoCsvToVector(){
   std::string descricao;
   std::string material;
 
-  vector<BlusasEMoletom> bluemols;
-  vector<Caneca> cans;
-  vector<Acessorio> aces;
+  std::vector<BlusasEMoletom> bluemols;
+  std::vector<Caneca> cans;
+  std::vector<Acessorio> aces;
 
   tsd::ifstream arquivo;
   arquivo.open("produtos.csv", ios::in);
@@ -32,36 +31,50 @@ void Administrador::produtoCsvToVector(){
    exit(1);
   }
 
-  std::getline(arquivo, codigo_do_produto, ',');
-  std::getline(arquivo, preco, ',');
-  std::getline(arquivo, media_das_avaliacoes, ',');
-  std::getline(arquivo, nome, ',');
-  std::getline(arquivo, categoria, ',');
-  std::getline(arquivo, cor, ',');
-  std::getline(arquivo, descricao, ',');
-  std::getline(arquivo, material, ',');
+  while(arquivo.good()){
+    std::getline(arquivo, codigo_do_produto, ',');
+    std::getline(arquivo, preco, ',');
+    std::getline(arquivo, media_das_avaliacoes, ',');
+    std::getline(arquivo, nome, ',');
+    std::getline(arquivo, categoria, ',');
+    std::getline(arquivo, cor, ',');
+    std::getline(arquivo, descricao, ',');
+    std::getline(arquivo, material, ',');
 
-  std::stoi(codigo_do_produto);
-  std::stof(media_das_avaliacoes);
-  std::stof(preco);
+    std::stoi(codigo_do_produto);
+    std::stof(media_das_avaliacoes);
+    std::stof(preco);
 
-  if(std::strcomp(categoria, "Blusas e Moletons") == 0){
-    std::string tamanho;
-    std::string tipo_de_produto;
+    if(std::strcomp(categoria, "Blusas e Moletons") == 0){
+      std::string tamanho;
+      std::string tipo_de_produto;
 
-    std::getline(arquivo, tamanho, ',');
-    std::getline(arquivo, tipo_de_produto, '\n');
+      std::getline(arquivo, tamanho, ',');
+      std::getline(arquivo, tipo_de_produto, '\n');
 
-    BlusasEMoletom bem = BlusasEMoletom(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tamanho,);
-    bluemols.push_back(bem);
-  }else if(std::strcomp(categoria, "Canecas") == 0){
+      BlusasEMoletom bem = BlusasEMoletom(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tamanho,);
+      bluemols.push_back(bem);
 
-  }else if(std::strcomp(categoria, "Acessorio") == 0){
+    }else if(std::strcomp(categoria, "Canecas") == 0){
+      std::string diametro;
 
+      std::getline(arquivo, diametro, '\n');
+
+      Caneca can = Caneca(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, diametro);
+      cans.push_back(can);
+
+    }else if(std::strcomp(categoria, "Acessorio") == 0){
+      std::string tipo_de_acessorio;
+
+      std::getline(arquivo, diametro, '\n');
+
+      Acessorio ace = Acessorio(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tipo_de_acessorio);
+
+      aces.push_back(ace);
+    }
   }
-
 }
-
+/*
 void Administrador::usuarioCsvToVector(){}
 
 void Administrador::adicionaItem(std::string nome_do_produto){
@@ -128,7 +141,7 @@ void Administrador::adicionaItem(std::string nome_do_produto){
       if(tipo_de_peca == 1){
         BlusasEMoletom::BlusasEMoletom(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tamanho, "BLUSA");
       }else if(tipo_de_peca == 2){
-        //BlusasEMoletom::BlusasEMoletom(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tamanho, "MOLETOM");
+        BlusasEMoletom::BlusasEMoletom(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tamanho, "MOLETOM");
       }
       break;
 
