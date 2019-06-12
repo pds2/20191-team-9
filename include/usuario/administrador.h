@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <iterator>
 #include <fstream>
 
 #include "ecommerce.h"
@@ -18,7 +19,8 @@ class Administrador : public Usuario{
 
     std::vector<BlusasEMoletom> bluemols;
     std::vector<Caneca> cans;
-    std::<Acessorio> aces;
+    std::vector<Acessorio> aces;
+    std::vector<Compradores> shoppers;
     std::map<std::string, float> _requisicoes;
 
 
@@ -29,7 +31,7 @@ class Administrador : public Usuario{
 
     void adicionaItem(std::string nome_do_produto);
 
-    void removeItem(Produto item);
+    void removeItem(std::string nome_do_produto);
 
     void mostraPedidos();
 
