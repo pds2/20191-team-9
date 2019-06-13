@@ -69,10 +69,13 @@ class Ecommerce{
     void limparTela();
     void impCarrinho();
     void impHistorico();
+    void impProdutos();
+    void mostraProdutos();
 
     void listaUsuarioArquivo();
     void gravaUsuarioArquivo();
 
+    long int geradorCod();
     bool checaCodigo(int cod); //verifica se ja existe um produto com o mesmo codigo cadastrado, caso sim retorna false
     void listaProdutosArquivo();
     void gravaProdutosArquivo();

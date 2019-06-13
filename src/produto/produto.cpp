@@ -44,6 +44,11 @@ void Produto::getComentarios(){
     for(i=0; i<size; i++){
         std::cout << _comentarios[i] << std::endl;
     }
+
+    int digito
+    std::cout << "Pressione qualquer tecla para voltar ao menu: ";
+    std::cin >> digito
+    if (true) { menuInicial(); }
 }
 
 void Produto::setComentario(std::string comentario){

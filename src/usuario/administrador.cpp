@@ -168,6 +168,7 @@ void Administrador::removeItem(std::string nome_do_produto){
   //Se não achou, imprime uma mensagem de erro. Se achou, procura em qual categoria está o item para fazer a remoção
   if(indice == -1){
     std::cout << "Este produto não existe!" << std::endl;
+    ecom.mostraProdutos();
     return;
   }else if(bm == 1){
     _bluemols.erase(_bluemols.begin() + indice);
@@ -196,7 +197,22 @@ void Administrador::removeItem(std::string nome_do_produto){
   }
 
   arquivo.close();
+  ecom.mostraProdutos();
+}
 
+void Administrador::exibirPerfil(){
+  limparTela();
+  std::cout << "\n" << "----------------------------------------------" << std::endl;
+  std::cout << "\t\t Perfil do Usuário" << std::endl;
+  std::cout << "----------------------------------------------" << "\n" << std::endl;
+  std::cout << "Nome: " << getNome() << std::endl;
+  std::cout << "Email: " << getEmail() << std::endl;
+  std::cout << "Senha: " << getSenha() << std::endl;
+  
+  int digito
+  std::cout << "Pressione qualquer tecla para voltar ao menu: ";
+  std::cin >> digito
+  if (true) { menuInicial(); }
 }
 
 void Administrador::adicionaPedido(std::string email, float valor){
