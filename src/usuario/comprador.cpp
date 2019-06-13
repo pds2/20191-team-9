@@ -2,6 +2,7 @@
 #define COMPRADOR_CPP
 
 #include "usuario/comprador.h"
+#include "usuario/administrador.h"
 #include "ecommerce.h"
 
 /**
