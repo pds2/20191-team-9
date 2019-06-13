@@ -307,11 +307,6 @@ void Comprador::exibirPerfil(){
   std::cout << "Nº Compras do Histórico: " << getNumeroComprasHistorico() << std::endl;
   std::cout << "Nº Avaliações: " << getNumeroAvaliacoes() << std::endl;
   std::cout << "Qntd Dinheiro: " << getDinheiro() << std::endl;
-
-  int digito
-  std::cout << "Pressione qualquer tecla para voltar ao menu: ";
-  std::cin >> digito
-  if (true) { menuInicial(); }
 }
 
 /**
