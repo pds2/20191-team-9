@@ -14,6 +14,7 @@
 #include <sstream>
 
 #include "usuario/comprador.h"
+#include "usuario/administrador.h"
 #include "produto/produto.h"
 #include "produto/acessorio.h"
 #include "produto/caneca.h"

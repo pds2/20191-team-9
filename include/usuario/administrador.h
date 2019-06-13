@@ -11,8 +11,8 @@
 #include "ecommerce.h"
 #include "produto/produto.h"
 #include "produto/acessorio.h"
-#include "blusas_e_moletom.h"
-#include "caneca.h"
+#include "produto/blusas_e_moletom.h"
+#include "produto/caneca.h"
 
 #include "usuario/usuario.h"
 #include "usuario/comprador.h"

@@ -650,7 +650,7 @@ void Ecommerce::impCarrinho(){
   int digito;
   std::cin >> digito;
   while((digito != 1) && (digito != 2) && (digito != 3)){
-    std::cout << "Essa opçao nao existe! Digite um numero valido: ";
+    std::cout << "Essa opcao nao existe! Digite um numero valido: ";
     std::cin >> digito;
   }
 
@@ -683,7 +683,7 @@ void Ecommerce::impHistorico(){
   int digito;
   std::cin >> digito;
   while((digito != 1) && (digito != 2) && (digito != 3) && (digito != 4)) {
-    std::cout << "Essa opçao nao existe! Digite um numero valido: ";
+    std::cout << "Essa opcao nao existe! Digite um numero valido: ";
     std::cin >> digito;
   }
   switch (digito) {
@@ -834,7 +834,7 @@ void Ecommerce::loginUsuario(){
     if((usuarios[i]).getEmail() == email){
       if ((usuarios[i]).getSenha() == senha){
         *userLogged = usuarios[i];
-        menuInicial()
+        menuInicial();
       break;
       }
       else{
@@ -917,7 +917,7 @@ void Ecommerce::dadosComprador(){
 
 void Ecommerce::dadosProduto(){
   limparTela();
-  std::string nome, preco, cor, material, descriçao;
+  std::string nome, preco, cor, material, descricao;
   int opção;
   long int codigo;
   codigo = geradorCod();
@@ -934,8 +934,8 @@ void Ecommerce::dadosProduto(){
   std::cin >> cor;
   std::cout << std::endl << "Informe o material do produto: ";
   std::cin >> material;
-  std::cout << std::endl << "Faça uma breve descriçao do produto: ";
-  std::cin >> descriçao;
+  std::cout << std::endl << "Faça uma breve descricao do produto: ";
+  std::cin >> descricao;
   switch (opção){
     caso 1:
       float diametro;
