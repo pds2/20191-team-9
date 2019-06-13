@@ -553,7 +553,7 @@ void Comprador::listaHistoricoArquivo(){
   arquivo.close();
 }
 
-void Ecommerce::gravaHistoricoArquivo(){
+void Comprador::gravaHistoricoArquivo(){
   std::remove("historico.csv");
 
   std::fstream arquivo;
@@ -567,8 +567,8 @@ void Ecommerce::gravaHistoricoArquivo(){
   _numeroComprasHistorico = historico.size();
   for(int i=0; arquivo.good() && i < _numeroComprasHistorico; i++){
     int indice = procurarComprador((historico[i].first);
-    arquivo << (historico[i].first) << "," << comprador[indice].getNumeroComprasHistorico() << ",";
-    arquivo << << (historico[i].second).getCodigoProduto() << "," << (historico[i].second).getNome() << "," << (historico[i].second).getPreco() << "\n";
+    arquivo << (historico[i].first) << "," << (comprador[indice]).getNumeroComprasHistorico() << ",";
+    arquivo << << (historico[i].second).getCodigoProduto() << "," << (historico[i].second).getNome() << "," << (historico[i].second).getPreco();
   }
 
   arquivo.close();
