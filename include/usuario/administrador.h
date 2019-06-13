@@ -31,8 +31,8 @@ class Administrador : public Usuario{
 
     void removeItem(std::string nome_do_produto);
 
+    void adicionaPedido(std::string email, float valor);
     void mostraPedidos();
-
     void aprovaPedido(std::string email);
 
     void excluiUsuario(std::string email);
