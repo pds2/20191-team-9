@@ -82,4 +82,7 @@ int Produto::getCodigoProduto(){
     return this->_codigoProduto;
 }
 
+int Produto::retornaNumComentarios(){
+    return _comentarios.size();
+}
 #endif
