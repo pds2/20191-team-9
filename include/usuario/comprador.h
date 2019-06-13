@@ -17,7 +17,7 @@ class Comprador : public Usuario{
     int _numeroComprasHistorico;
     int _numeroComprasCarrinho;
     int _numeroAvaliacoes;
-    int _totalCarrinho;
+    float _totalCarrinho;
     float _dinheiro;
 
     std::string _CPF;

@@ -56,7 +56,7 @@ void Comprador::setDinheiro(float valor){
  * @return [valor total dos itens adicionados ao carrinho do comprador]
  */
 
-int Comprador::getTotalCarrinho(){
+float Comprador::getTotalCarrinho(){
   return this->_totalCarrinho;
 }
 
@@ -129,7 +129,6 @@ bool Comprador::adicionarCarrinho(){
   Ecommerce ecom;
   limparTela();
 
-  //imprimir listagem de produtos aqui
   ecom.imprimirProdutos();
 
   int codProduto, opcao, indice = -1;
@@ -145,18 +144,31 @@ bool Comprador::adicionarCarrinho(){
 
     switch (opcao) {
       case 1:
-        // pega cada atributo desse Produto encontrado e cria um novo Produto, registrando ele no carrinho
-        //(ecom.produtos[indice]).get
-        //Produto *prod = new Produto("cataprima", "cataprima", "1234", 1, 1, 1, 20);
-          //carrinho.push_back(prod);
-        //modifica a variavel _totalCarrinho
+        int cod;
+        std::string nome, categoria, cor, descricao, material;
+        float preco, mediaAvaliacoes;
+
+        cod = (ecom.produto[indice]).getCodigoProduto();
+        nome = (ecom.produto[indice]).getNome();
+        categoria = (ecom.produto[indice]).getCategoria();
+        cor = (ecom.produto[indice]).getCor();
+        descricao = (ecom.produto[indice]).getDescricao();
+        material = (ecom.produto[indice]).getMaterial();
+        preco = (ecom.produto[indice]).getPreco();
+        mediaAvaliacoes = (ecom.produto[indice]).getMediaAvaliacoes();
+
+        Produto prod = Produto(cod, preco, mediaAvaliacoes, nome, categoria, cor, descricao, material)
+        carrinho.push_back(prod);
+        _totalCarrinho = _totalCarrinho + preco;
         return true;
       case 0:
         std::cout << "Este produto já encontra-se em seu carrinho. Você escolheu não adicionar novamente." << std::endl;
         return false;
+        break;
       default:
         std::cout << "Resposta inválida. Tente novamente." << std::endl;
         return false;
+        break;
     }
   }
   else{
@@ -182,7 +194,7 @@ bool Comprador::retirarCarrinho(){
 
     int codProduto;
     int indice = -1;
-    //imprimirCarrinho();
+    imprimirCarrinho();
 
     std::cout << "\n" << "Digite o código do produto que deseja retirar do seu carrinho: ";
     std::cin >> codProduto;
@@ -377,8 +389,9 @@ void Comprador::adicionarComentario(){
 
     std::cout << "\n" << "Escreva o seu comentário para o produto de código " << codProduto << " : " << std::endl;
     std::getline(std::cin, comentario);
-    //(historico[indice])->setComentario(comentario);
-    //aqui altera o comentario do produto
+
+    (historico[indice]).setComentario(comentario);
+    std::cout << "\n" << "Comentário para o produto de código " << codProduto << " registrado com sucesso! " << std::endl;
     ecom.impHistorico();
   }
   else{
