@@ -33,7 +33,7 @@ class Administrador : public Usuario{
 
     void mostraPedidos();
 
-    void aprovaPedido(float valor, Comprador user);
+    void aprovaPedido(std::string email);
 
     void excluiUsuario(std::string email);
 
