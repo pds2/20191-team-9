@@ -199,7 +199,7 @@ void Administrador::removeItem(std::string nome_do_produto){
 
 }
 
-/*
+
 void Administrador::mostraPedidos(){
   // Imprime o mapa _requisicoes com o seguinte formato
   // Exemplo: 1 - email@docomprador.com: R$100,00
@@ -209,11 +209,20 @@ void Administrador::mostraPedidos(){
     return;
   }
 
+  limparTela();
+
+  std::cout << "----------------------------------------------" << std::endl;
+  std::cout << "Estas são as requisições de aumento de saldo pendentes:" << std::endl;
+
   for(int i = 0; i < _qntdade_de_requisicoes; i++){
-    std::cout << (i+1) << " - " << this->_requisicoes[i] << ": R$" << std::endl;
+    std::cout << "\n" << "----------------------------------------------" << std::endl;
+    std::cout << (i+1) << ") " << this->_requisicoes[i].first << " está requisitando um aumento de: R$" << this->_requisicoes[i].second << std::endl;
+    std::cout << "\n" << "----------------------------------------------" << std::endl;
   }
 }
 
+
+/*
 void Administrador::aprovaPedido(std::string email, float valor){
   int aprovacao;
 
