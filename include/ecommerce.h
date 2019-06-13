@@ -32,7 +32,7 @@ class Ecommerce{
 
 
     const std::string SENHADMIN = "Ecom@Geek42";
-    Usuario *userLogged = nullptr;
+    Comprador *userLogged = nullptr;
 
   public:
     Ecommerce();
@@ -93,6 +93,7 @@ class Ecommerce{
     void menuUsuario();
     void menuComprador();
     void dadosComprador();
+    void dadosProduto();
 };
 
 #endif
