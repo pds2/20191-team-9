@@ -86,7 +86,9 @@ void Administrador::produtoCsvToVector(){
 }
 
 /**
- * [Administrador::usuarioCsvToVector description]
+ * [Administrador::usuarioCsvToVector -> Classe que pega as informações sobre os
+ * usuarios do arquivo csv no qual eles estão e insere-as em um vector para
+ * fácil manuseio]
  */
 void Administrador::usuarioCsvToVector(){
 
@@ -123,7 +125,9 @@ void Administrador::usuarioCsvToVector(){
 }
 
 /**
- * [Administrador::reqCsvToMap description]
+ * [Administrador::reqCsvToMap -> Classe que pega as informações sobre as
+ * requisições do arquivo csv no qual eles estão e insere-as em um map para
+ * fácil manuseio]
  */
 void Administrador::reqCsvToMap(){
   this->_requisicoes.clear();
