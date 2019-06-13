@@ -3,24 +3,24 @@
 
 #include <string>
 #include <iostream>
-#include <fstream>
 #include <vector>
 #include <map>
 #include <iterator>
+#include <fstream>
 
-#include "ecommerce.h"
-#include "produto/produto.h"
-#include "usuario/usuario.h"
-#include "usuario/comprador.h"
+#include "../ecommerce.h"
+#include "produto.h"
+#include "usuario.h"
+#include "comprador.h"
 
 class Administrador : public Usuario{
   private:
     int _qntdade_de_requisicoes;
 
-    std::vector<BlusasEMoletom> bluemols;
-    std::vector<Caneca> cans;
-    std::vector<Acessorio> aces;
-    std::vector<Compradores> shoppers;
+    std::vector<BlusasEMoletom> _bluemols;
+    std::vector<Caneca> _cans;
+    std::vector<Acessorio> _aces;
+    std::vector<Compradores> _shoppers;
     std::map<std::string, float> _requisicoes;
 
 
@@ -35,15 +35,7 @@ class Administrador : public Usuario{
 
     void aprovaPedido(float valor, Comprador user);
 
-    void exibeUsuarios();
-
     void excluiUsuario(std::string email);
-
-    void verPerfil();
-
-    void compradorCsvToVector();
-
-    void usuarioCsvToVector();
 
     ~Administrador();
 
