@@ -229,21 +229,6 @@ void Administrador::aprovaPedido(std::string email, float valor){
 }
 */
 
-void Administrador::exibeUsuarios(){
-  std::ifstream lista_de_usuarios;
-  lista_de_usuarios.open("usuarios.csv", std::ios::in);
-
-  if(lista_de_usuarios.is_open()){
-    std::string linha;
-
-    while(getLine(lista_de_usuarios, linha)){
-      std::cout << linha << std::endl;
-    }
-  }
-
-  lista_de_usuarios.close();
-}
-
 void Administrador::excluiUsuario(std::string email){
   std::string email_do_cliente;
   int indice = -1;
