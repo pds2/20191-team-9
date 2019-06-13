@@ -13,6 +13,103 @@ Ecommerce::~Ecommerce(){
   produtos.clear();
 }
 
+void Ecommerce::listaComentariosArquivo(){
+  produtos.clear();
+
+  std::fstream arquivo;
+  arquivo.open("comentarios.csv",std::ios::in);
+
+  if (!arquivo.is_open()){
+    std::cout << "Erro ao abrir arquivo. Tente novamente";
+    exit(1);
+  }
+
+    int linhas = tamanhoArquivo("comentarios.csv");
+      if (tamanhoArquivo("comentarios.csv") == 0){
+        std::cout << "Nenhum comentario foi feito ainda." << std::endl;
+        return;
+      }
+
+      while (arquivo.good()){
+        int cod, num;
+        std::vector<std::string> coments;
+
+        std::string codigoS, numS, cmt;
+
+        std::getline(arquivo, codigoS,',');
+        std::getline(arquivo, numS, ',');
+
+        if (codigoS == ""){
+            break;
+        }
+
+        cod = std::stoi(codigoS);
+        num = std::stoi(numS);
+
+        std::cout << "Codigo e numero de comentarios = " << cod << " " << num << std::endl;
+
+            if (num == 0){
+                std::cout << "Esse produto nao recebeu nenhum comentario ainda." << std::endl;
+            }
+            else{
+                int aux;
+                for(aux=0; aux<num-1; aux++){
+                    std::getline(arquivo, cmt,',');
+
+                    std::cout << "Comentario " << aux << " = "  << cmt << std::endl;
+
+                    adicionaComentario(cod, cmt);
+                }
+                std::getline(arquivo, cmt);
+
+                std::cout << "Comentario " << aux << " = "  << cmt << std::endl;
+
+                adicionaComentario(cod, cmt);
+            }
+        }
+  arquivo.close();
+}
+
+void Ecommerce::gravaComentariosArquivo(){
+  std::remove("comentarios.cvs");
+
+  std::fstream arquivo;
+  arquivo.open("comentarios.csv", std::ofstream::app);
+
+  if (!arquivo.is_open()){
+    std::cout << "Erro ao abrir arquivo. Tente novamente";
+    exit(1);
+  }
+
+  int numeroProdutos = produtos.size();
+
+  for(int i=0; arquivo.good() && i < numeroProdutos; i++){
+
+        arquivo << (produtos[i]).getCodigoProduto() << ",";
+
+        int n = produtos[i].retornaNumComentarios();
+
+        arquivo << n << ",";
+        if (n == 0){ //Arquivo não possui comentarios
+            arquivo << "0" << std::endl;
+        } else{
+            int aux;
+            for(aux=0; aux < n-1; aux++){
+               arquivo << "\"" << produtos[i]._comentarios[aux] << "\"" << ",";
+            }
+
+            arquivo << "\"" << produtos[i]._comentarios[aux] << "\"" << "\n";
+        }
+  }
+  arquivo.close();
+}
+
+void Ecommerce::adicionaComentario(int cod, std::string coment){
+    int x = buscaIndiceProdutos(cod);
+    if ( x != -1){
+    produtos[x].setComentario(coment);
+    }
+}
 
 int Ecommerce::tamanhoArquivo(const char* file_name){
     FILE *file = fopen(file_name, "r");
