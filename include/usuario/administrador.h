@@ -8,10 +8,14 @@
 #include <iterator>
 #include <fstream>
 
-#include "../ecommerce.h"
-#include "produto.h"
-#include "usuario.h"
-#include "comprador.h"
+#include "ecommerce.h"
+#include "produto/produto.h"
+#include "produto/acessorio.h"
+#include "blusas_e_moletom.h"
+#include "caneca.h"
+
+#include "usuario/usuario.h"
+#include "usuario/comprador.h"
 
 class Administrador : public Usuario{
   private:
