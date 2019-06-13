@@ -2,7 +2,7 @@
 #ifndef ADMINISTRADOR_CPP
 #define ADMINISTRADOR_CPP
 
-#include "../../include/usuario/administrador.h"
+#include "usuario/administrador.h"
 
 Administrador::Administrador(std::string nome, std::string email, std::string senha){
   this->_nome = nome;

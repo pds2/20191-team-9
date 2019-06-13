@@ -14,7 +14,9 @@
 #include "produto/produto.h"
 
 class Comprador : public Usuario{
+
   private:
+
     int _numeroComprasHistorico;
     int _numeroComprasCarrinho;
     int _numeroAvaliacoes;

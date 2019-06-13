@@ -3,15 +3,30 @@
 
 #include "ecommerce.h"
 
+/**
+ * [Ecommerce::Ecommerce Construtor da classe Ecommerce]
+ * @method Ecommerce::Ecommerce
+ */
+
 Ecommerce::Ecommerce(){
   //inicio();
 }
+
+/**
+ * [Ecommerce Destrutor da classe Ecommerce]
+ * @method Ecommerce
+ */
 
 Ecommerce::~Ecommerce(){
   usuarios.clear();
   compradores.clear();
   produtos.clear();
 }
+
+/**
+ * [Ecommerce::listaComentariosArquivo função que lista os comentários de cada produto registrados no arquivo]
+ * @method Ecommerce::listaComentariosArquivo
+ */
 
 void Ecommerce::listaComentariosArquivo(){
   produtos.clear();
@@ -68,6 +83,11 @@ void Ecommerce::listaComentariosArquivo(){
   arquivo.close();
 }
 
+/**
+ * [Ecommerce::gravaComentariosArquivo função que registra os comentários de cada produto no arquivo]
+ * @method Ecommerce::gravaComentariosArquivo
+ */
+
 void Ecommerce::gravaComentariosArquivo(){
   std::remove("comentarios.cvs");
 
@@ -102,12 +122,26 @@ void Ecommerce::gravaComentariosArquivo(){
   arquivo.close();
 }
 
+/**
+ * [Ecommerce::adicionaComentario função que registra um comentário para um produto específico]
+ * @method Ecommerce::adicionaComentario
+ * @param  cod                           [código único que representa o produto]
+ * @param  coment                        [comentário a ser registrado para o produto]
+ */
+
 void Ecommerce::adicionaComentario(int cod, std::string coment){
     int x = buscaIndiceProdutos(cod);
     if ( x != -1){
     produtos[x].setComentario(coment);
     }
 }
+
+/**
+ * [Ecommerce::tamanhoArquivo função que registra o tamanho do arquivo a ser lido]
+ * @method Ecommerce::tamanhoArquivo
+ * @param  file_name                 [nome do arquivo a ser lido]
+ * @return                           [quantidade de linhas do arquivo lido]
+ */
 
 int Ecommerce::tamanhoArquivo(const char* file_name){
     FILE *file = fopen(file_name, "r");
@@ -377,6 +411,11 @@ void Ecommerce::gravaProdutosArquivo(){
   arquivo.close();
 }
 
+/**
+ * [Ecommerce::listaUsuarioArquivo função que lista os usuários registrados no arquivo]
+ * @method Ecommerce::listaUsuarioArquivo
+ */
+
 void Ecommerce::listaUsuarioArquivo(){
   usuarios.clear();
   compradores.clear();
@@ -429,6 +468,11 @@ void Ecommerce::listaUsuarioArquivo(){
   arquivo.close();
 }
 
+/**
+ * [Ecommerce::gravaUsuarioArquivo função que grava os usuários do vector no arquivo]
+ * @method Ecommerce::gravaUsuarioArquivo
+ */
+
 void Ecommerce::gravaUsuarioArquivo(){
   std::remove("historico.csv");
 
@@ -468,6 +512,20 @@ void Ecommerce::gravaUsuarioArquivo(){
   }
 }*/ //VAI OU NAO TER??
 
+/**
+ * [Ecommerce::cadastrarComprador  função que cadastra um comprador, considerando as informações dadas na hora do registro do mesmo, e adicionando-o ao vector de usuarios]
+ * @method Ecommerce::cadastrarComprador
+ * @param  n                             [nome do comprador]
+ * @param  em                            [email do comprador]
+ * @param  s                             [senha do comprador]
+ * @param  cpf                           [cpf do comprador]
+ * @param  endereco                      [endereco do comprador]
+ * @param  numCarr                       [numero de itens no carrinho do comprador]
+ * @param  numHist                       [numero de itens no histórico do comprador]
+ * @param  numAval                       [numero de avaliações realizadas pelo comprador]
+ * @param  din                           [quantidade de dinheiro que o comprador possui]
+ */
+
 void Ecommerce::cadastrarComprador (std::string n, std::string em, std::string s, std::string cpf, std::string endereco, int numCarr, int numHist, int numAval, double din){
   limparTela();
   if(checaNome(n) && checaEmail(em) && checaSenha(s)){
@@ -491,6 +549,11 @@ void Ecommerce::cadastrarComprador (std::string n, std::string em, std::string s
   }
 }
 
+/**
+ * [Ecommerce::imprimirUsuarios função que imprime os usuários cadastrados no ecommerce]
+ * @method Ecommerce::imprimirUsuarios
+ */
+
 void Ecommerce::imprimirUsuarios(){
   limparTela();
   int numeroUsuarios = usuarios.size();
@@ -508,6 +571,11 @@ void Ecommerce::imprimirUsuarios(){
     std::cout << "Não há usuários cadastrados." << std::endl;
   }
 }
+
+/**
+ * [Ecommerce::imprimirCompradores função que imprime os usuários do tipo comprador cadastrados no ecommerce]
+ * @method Ecommerce::imprimirCompradores
+ */
 
 void Ecommerce::imprimirCompradores(){
   limparTela();
@@ -674,6 +742,12 @@ void Ecommerce::mostraProdutos(){
   }
 }
 
+/**
+ * [Ecommerce::procurarUsuario função que procura um usuário dado o email do mesmo]
+ * @method Ecommerce::procurarUsuario
+ * @param  em                         [email do usuário]
+ * @return                            [true se o usuário for encontrado e false, em caso contrário]
+ */
 bool Ecommerce::procurarUsuario(std::string em){
   int numeroUsuarios = usuarios.size();
   for(int i=0; i < numeroUsuarios; i++){
@@ -683,6 +757,13 @@ bool Ecommerce::procurarUsuario(std::string em){
   }
   return false;
 }
+
+/**
+ * [Ecommerce::procurarComprador função que procura um comprador dado o email do mesmo]
+ * @method Ecommerce::procurarComprador
+ * @param  em                           [email do comprador]
+ * @return                              [true se o comprador for encontrado e false, em caso contrário]
+ */
 
 bool Ecommerce::procurarComprador(std::string em){
   int numeroCompradores = compradores.size();
@@ -695,13 +776,33 @@ bool Ecommerce::procurarComprador(std::string em){
   return false;
 }
 
+/**
+ * [Ecommerce::checaNome função que checa se o nome fornecido possui o formato aceito]
+ * @method Ecommerce::checaNome
+ * @param  n                    [nome fornecido]
+ * @return                      [true se o formato do nome fornecido for correto e false, em caso contrário]
+ */
 bool Ecommerce::checaNome(std::string n){
   return true;
 }
 
+/**
+ * [Ecommerce::checaEmail função que checa se o email fornecido possui o formato aceito]
+ * @method Ecommerce::checaEmail
+ * @param  em                    [email fornecido]
+ * @return                       [true se o formato do email fornecido for correto e false, em caso contrário]
+ */
+
 bool Ecommerce::checaEmail(std::string em){
   return true;
 }
+
+/**
+ * [Ecommerce::checaSenha função que checa se a senha fornecida possui o formato aceito]
+ * @method Ecommerce::checaSenha
+ * @param  s                     [senha fornecida]
+ * @return                       [true se o formato da senha fornecida for correto e false, em caso contrário]
+ */
 
 bool Ecommerce::checaSenha(std::string s){
   return true;
@@ -710,6 +811,11 @@ bool Ecommerce::checaSenha(std::string s){
 bool checaSenhaAdmin(std::string sAdmin){
   return true;
 }
+
+/**
+ * [Ecommerce::limparTela função que limpa a tela do ecommerce]
+ * @method Ecommerce::limparTela
+ */
 
 void Ecommerce::limparTela(){
   std::system("clear||cls");

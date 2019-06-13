@@ -2,6 +2,7 @@
 #define COMPRADOR_CPP
 
 #include "usuario/comprador.h"
+#include "usuario/administrador.h"
 #include "ecommerce.h"
 
 /**
@@ -554,6 +555,11 @@ void Comprador::listaHistoricoArquivo(){
   imprimirHistorico();
   arquivo.close();
 }
+
+/**
+ * [Comprador::gravaHistoricoArquivo função que grava o histórico de compras do vector no arquivo]
+ * @method Comprador::gravaHistoricoArquivo
+ */
 
 void Comprador::gravaHistoricoArquivo(){
   std::remove("historico.csv");
