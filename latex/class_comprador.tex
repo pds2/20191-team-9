@@ -1,0 +1,404 @@
+\hypertarget{class_comprador}{}\section{Comprador Class Reference}
+\label{class_comprador}\index{Comprador@{Comprador}}
+
+
+{\ttfamily \#include $<$comprador.\+h$>$}
+
+
+
+Inherits \hyperlink{class_usuario}{Usuario}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_comprador_aa8494892432d46b4c8825a5b435af44d}{Comprador} (std\+::string nome, std\+::string email, std\+::string senha, std\+::string cpf, std\+::string endereco, int num\+Compras\+Carrinho, int num\+Compras\+Historico, int num\+Avaliacaoes, double dinheiro)
+\item 
+\hyperlink{class_comprador_a83fc25fdd74fceee73944bfe801ebe08}{Comprador} ()
+\item 
+\hyperlink{class_comprador_a1531e2981ee8279bfc273d28a84c1e32}{$\sim$\+Comprador} ()
+\item 
+int \hyperlink{class_comprador_a18e5782aa451203303ebc3f1ff924f4e}{get\+Numero\+Compras\+Historico} ()
+\item 
+int \hyperlink{class_comprador_a492e697b6237f13d80ff3f6f0b65796e}{get\+Numero\+Compras\+Carrinho} ()
+\item 
+std\+::string \hyperlink{class_comprador_aeb955f1d7fb934cc4e5ffe85d1f5b1f1}{get\+C\+PF} ()
+\item 
+std\+::string \hyperlink{class_comprador_a590eb62bff00484b051e13261d050e83}{get\+Endereco} ()
+\item 
+int \hyperlink{class_comprador_aaff2a1d0fb260e9688367eb606c4eeb5}{get\+Total\+Carrinho} ()
+\item 
+int \hyperlink{class_comprador_ab17a4464ac51d495b7751fd5ced81005}{get\+Numero\+Avaliacoes} ()
+\item 
+float \hyperlink{class_comprador_a92c4ce72febc0bdddc9a709f26656729}{get\+Dinheiro} ()
+\item 
+void \hyperlink{class_comprador_a4f22858b4fdd931a81dd8cfcd4783bde}{set\+Dinheiro} (float valor)
+\item 
+bool \hyperlink{class_comprador_a321ef648a886ea8c567c5030e6ea1e65}{adicionar\+Carrinho} ()
+\item 
+void \hyperlink{class_comprador_a93794d8122ae9f09f192af5d0c027527}{fazer\+Compras} ()
+\item 
+bool \hyperlink{class_comprador_a8a5fc62485a3a9b37340609715e73feb}{retirar\+Carrinho} ()
+\item 
+bool \hyperlink{class_comprador_ab996419e954d24ac9c97e646e81b0c9c}{adiciona\+Dinheiro} (double valor, \hyperlink{class_comprador}{Comprador} comp)
+\item 
+void \hyperlink{class_comprador_a35d18c3bcfff0adfe8dd3b75f46f8bd8}{exibir\+Perfil} ()
+\item 
+void \hyperlink{class_comprador_a22479e83d85331787d699d74c1307ad2}{imprimir\+Carrinho} ()
+\item 
+void \hyperlink{class_comprador_a4c67775d6f1e703278569ebf9cc20a79}{imprimir\+Historico} ()
+\item 
+void \hyperlink{class_comprador_a05415fa7c875440e86d5781f04577572}{procurar\+Produto} (int cod\+Produto)
+\item 
+int \hyperlink{class_comprador_a0ebab4be27f71b04734794765d661529}{procurar\+Itens\+Historico} (int cod\+Produto)
+\item 
+int \hyperlink{class_comprador_a5b8bcd0a0576385fd5614be8a3b2160b}{procurar\+Itens\+Carrinho} (int cod\+Produto)
+\item 
+void \hyperlink{class_comprador_aef06de4d0e7dfaeb5ad5411e895e31b3}{adicionar\+Comentario} ()
+\item 
+void \hyperlink{class_comprador_a10b29882e2737563350cdf6f157d82b4}{avaliar\+Item} ()
+\item 
+void \hyperlink{class_comprador_a511093b891d5c4202cee1f25ccbed66e}{limpar\+Tela} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 15 of file comprador.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_comprador_aa8494892432d46b4c8825a5b435af44d}\label{class_comprador_aa8494892432d46b4c8825a5b435af44d}} 
+\index{Comprador@{Comprador}!Comprador@{Comprador}}
+\index{Comprador@{Comprador}!Comprador@{Comprador}}
+\subsubsection{\texorpdfstring{Comprador()}{Comprador()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Comprador\+::\+Comprador (\begin{DoxyParamCaption}\item[{std\+::string}]{nome,  }\item[{std\+::string}]{email,  }\item[{std\+::string}]{senha,  }\item[{std\+::string}]{cpf,  }\item[{std\+::string}]{endereco,  }\item[{int}]{num\+Compras\+Carrinho,  }\item[{int}]{num\+Compras\+Historico,  }\item[{int}]{num\+Avaliacaoes,  }\item[{double}]{dinheiro }\end{DoxyParamCaption})}
+
+\mbox{[}\hyperlink{class_comprador_aa8494892432d46b4c8825a5b435af44d}{Comprador\+::\+Comprador} Construtor da classe \hyperlink{class_comprador}{Comprador}\mbox{]}  \hyperlink{class_comprador_aa8494892432d46b4c8825a5b435af44d}{Comprador\+::\+Comprador} 
+\begin{DoxyParams}{Parameters}
+{\em nome} & \mbox{[}nome do comprador\mbox{]} \\
+\hline
+{\em email} & \mbox{[}email do comprador, pelo qual o mesmo realiza login no sistema\mbox{]} \\
+\hline
+{\em senha} & \mbox{[}senha do comprador, pela qual o mesmo realiza login no sistema\mbox{]} \\
+\hline
+{\em cpf} & \mbox{[}cpf do comprador\mbox{]} \\
+\hline
+{\em endereco} & \mbox{[}endereco do comprador, para onde os itens comprados deverão ser enviados\mbox{]} \\
+\hline
+{\em num\+Compras\+Carrinho} & \mbox{[}numero de itens adicionados ao carrinho do comprador\mbox{]} \\
+\hline
+{\em num\+Compras\+Historico} & \mbox{[}numero de itens adquiridos do comprador\mbox{]} \\
+\hline
+{\em num\+Avaliacaoes} & \mbox{[}numero de itens avaliados pelo comprador\mbox{]} \\
+\hline
+{\em dinheiro} & \mbox{[}quantidade de dinheiro que o comprador possui\mbox{]} \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 21 of file comprador.\+cpp.
+
+\mbox{\Hypertarget{class_comprador_a83fc25fdd74fceee73944bfe801ebe08}\label{class_comprador_a83fc25fdd74fceee73944bfe801ebe08}} 
+\index{Comprador@{Comprador}!Comprador@{Comprador}}
+\index{Comprador@{Comprador}!Comprador@{Comprador}}
+\subsubsection{\texorpdfstring{Comprador()}{Comprador()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Comprador\+::\+Comprador (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{[}\hyperlink{class_comprador_aa8494892432d46b4c8825a5b435af44d}{Comprador\+::\+Comprador} Construtor sem parâmetros da classe \hyperlink{class_comprador}{Comprador}\mbox{]}  \hyperlink{class_comprador_aa8494892432d46b4c8825a5b435af44d}{Comprador\+::\+Comprador} 
+
+Definition at line 40 of file comprador.\+cpp.
+
+\mbox{\Hypertarget{class_comprador_a1531e2981ee8279bfc273d28a84c1e32}\label{class_comprador_a1531e2981ee8279bfc273d28a84c1e32}} 
+\index{Comprador@{Comprador}!````~Comprador@{$\sim$\+Comprador}}
+\index{````~Comprador@{$\sim$\+Comprador}!Comprador@{Comprador}}
+\subsubsection{\texorpdfstring{$\sim$\+Comprador()}{~Comprador()}}
+{\footnotesize\ttfamily Comprador\+::$\sim$\+Comprador (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{[}\hyperlink{class_comprador}{Comprador} Construtor da classe \hyperlink{class_comprador}{Comprador} \mbox{]}  \hyperlink{class_comprador}{Comprador} 
+
+Definition at line 30 of file comprador.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_comprador_ab996419e954d24ac9c97e646e81b0c9c}\label{class_comprador_ab996419e954d24ac9c97e646e81b0c9c}} 
+\index{Comprador@{Comprador}!adiciona\+Dinheiro@{adiciona\+Dinheiro}}
+\index{adiciona\+Dinheiro@{adiciona\+Dinheiro}!Comprador@{Comprador}}
+\subsubsection{\texorpdfstring{adiciona\+Dinheiro()}{adicionaDinheiro()}}
+{\footnotesize\ttfamily bool Comprador\+::adiciona\+Dinheiro (\begin{DoxyParamCaption}\item[{double}]{valor,  }\item[{\hyperlink{class_comprador}{Comprador}}]{comp }\end{DoxyParamCaption})}
+
+\mbox{[}\hyperlink{class_comprador_ab996419e954d24ac9c97e646e81b0c9c}{Comprador\+::adiciona\+Dinheiro} função que envia uma requsição ao administrador para aumento de saldo do comprador\mbox{]}  \hyperlink{class_comprador_ab996419e954d24ac9c97e646e81b0c9c}{Comprador\+::adiciona\+Dinheiro} 
+\begin{DoxyParams}{Parameters}
+{\em valor} & \mbox{[}valor que o comprador deseja adicionar ao seu dinheiro atual\mbox{]} \\
+\hline
+{\em comp} & \mbox{[}comprador que está solicitando a requisição de aumento de saldo\mbox{]} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{[}true em caso da requisicao ter sido bem sucedida e false, em caso contrário\mbox{]} 
+\end{DoxyReturn}
+
+
+Definition at line 434 of file comprador.\+cpp.
+
+\mbox{\Hypertarget{class_comprador_a321ef648a886ea8c567c5030e6ea1e65}\label{class_comprador_a321ef648a886ea8c567c5030e6ea1e65}} 
+\index{Comprador@{Comprador}!adicionar\+Carrinho@{adicionar\+Carrinho}}
+\index{adicionar\+Carrinho@{adicionar\+Carrinho}!Comprador@{Comprador}}
+\subsubsection{\texorpdfstring{adicionar\+Carrinho()}{adicionarCarrinho()}}
+{\footnotesize\ttfamily bool Comprador\+::adicionar\+Carrinho (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{[}\hyperlink{class_comprador_a321ef648a886ea8c567c5030e6ea1e65}{Comprador\+::adicionar\+Carrinho} função que adiciona ao carrinho um novo item, a ser escolhido pelo comprador\mbox{]}  \hyperlink{class_comprador_a321ef648a886ea8c567c5030e6ea1e65}{Comprador\+::adicionar\+Carrinho} \begin{DoxyReturn}{Returns}
+\mbox{[}true no caso da adição ao carrinho ter sido bem sucedida e false, em caso contrário\mbox{]} 
+\end{DoxyReturn}
+
+
+Definition at line 128 of file comprador.\+cpp.
+
+\mbox{\Hypertarget{class_comprador_aef06de4d0e7dfaeb5ad5411e895e31b3}\label{class_comprador_aef06de4d0e7dfaeb5ad5411e895e31b3}} 
+\index{Comprador@{Comprador}!adicionar\+Comentario@{adicionar\+Comentario}}
+\index{adicionar\+Comentario@{adicionar\+Comentario}!Comprador@{Comprador}}
+\subsubsection{\texorpdfstring{adicionar\+Comentario()}{adicionarComentario()}}
+{\footnotesize\ttfamily void Comprador\+::adicionar\+Comentario (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{[}\hyperlink{class_comprador_aef06de4d0e7dfaeb5ad5411e895e31b3}{Comprador\+::adicionar\+Comentario} função que localiza um item no histórico do comprador, através de uma pesquisa utilizando o código do produto, e em seguida registra um comentário realizado pelo comprador para este mesmo produto\mbox{]}  \hyperlink{class_comprador_aef06de4d0e7dfaeb5ad5411e895e31b3}{Comprador\+::adicionar\+Comentario} 
+
+Definition at line 365 of file comprador.\+cpp.
+
+\mbox{\Hypertarget{class_comprador_a10b29882e2737563350cdf6f157d82b4}\label{class_comprador_a10b29882e2737563350cdf6f157d82b4}} 
+\index{Comprador@{Comprador}!avaliar\+Item@{avaliar\+Item}}
+\index{avaliar\+Item@{avaliar\+Item}!Comprador@{Comprador}}
+\subsubsection{\texorpdfstring{avaliar\+Item()}{avaliarItem()}}
+{\footnotesize\ttfamily void Comprador\+::avaliar\+Item (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{[}\hyperlink{class_comprador_a10b29882e2737563350cdf6f157d82b4}{Comprador\+::avaliar\+Item} função que localiza um item no histórico do comprador, através de uma pesquisa utilizando o código do produto, e em seguida permite que o comprador avalie este mesmo produto\mbox{]}  \hyperlink{class_comprador_a10b29882e2737563350cdf6f157d82b4}{Comprador\+::avaliar\+Item} 
+
+Definition at line 394 of file comprador.\+cpp.
+
+\mbox{\Hypertarget{class_comprador_a35d18c3bcfff0adfe8dd3b75f46f8bd8}\label{class_comprador_a35d18c3bcfff0adfe8dd3b75f46f8bd8}} 
+\index{Comprador@{Comprador}!exibir\+Perfil@{exibir\+Perfil}}
+\index{exibir\+Perfil@{exibir\+Perfil}!Comprador@{Comprador}}
+\subsubsection{\texorpdfstring{exibir\+Perfil()}{exibirPerfil()}}
+{\footnotesize\ttfamily void Comprador\+::exibir\+Perfil (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{[}\hyperlink{class_comprador_a35d18c3bcfff0adfe8dd3b75f46f8bd8}{Comprador\+::exibir\+Perfil} função que exibe o perfil do comprador, com todas as informações que foram registradas durante o seu cadastro\mbox{]}  \hyperlink{class_comprador_a35d18c3bcfff0adfe8dd3b75f46f8bd8}{Comprador\+::exibir\+Perfil} 
+
+Definition at line 289 of file comprador.\+cpp.
+
+\mbox{\Hypertarget{class_comprador_a93794d8122ae9f09f192af5d0c027527}\label{class_comprador_a93794d8122ae9f09f192af5d0c027527}} 
+\index{Comprador@{Comprador}!fazer\+Compras@{fazer\+Compras}}
+\index{fazer\+Compras@{fazer\+Compras}!Comprador@{Comprador}}
+\subsubsection{\texorpdfstring{fazer\+Compras()}{fazerCompras()}}
+{\footnotesize\ttfamily void Comprador\+::fazer\+Compras (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{[}\hyperlink{class_comprador_a93794d8122ae9f09f192af5d0c027527}{Comprador\+::fazer\+Compras} função que confimar a compra dos produtos adicionados ao carrinho do comprador\mbox{]}  \hyperlink{class_comprador_a93794d8122ae9f09f192af5d0c027527}{Comprador\+::fazer\+Compras} 
+
+Definition at line 453 of file comprador.\+cpp.
+
+\mbox{\Hypertarget{class_comprador_aeb955f1d7fb934cc4e5ffe85d1f5b1f1}\label{class_comprador_aeb955f1d7fb934cc4e5ffe85d1f5b1f1}} 
+\index{Comprador@{Comprador}!get\+C\+PF@{get\+C\+PF}}
+\index{get\+C\+PF@{get\+C\+PF}!Comprador@{Comprador}}
+\subsubsection{\texorpdfstring{get\+C\+P\+F()}{getCPF()}}
+{\footnotesize\ttfamily std\+::string Comprador\+::get\+C\+PF (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{[}\hyperlink{class_comprador_aeb955f1d7fb934cc4e5ffe85d1f5b1f1}{Comprador\+::get\+C\+PF} função que retorna o cpf do comprador\mbox{]}  \hyperlink{class_comprador_aeb955f1d7fb934cc4e5ffe85d1f5b1f1}{Comprador\+::get\+C\+PF} \begin{DoxyReturn}{Returns}
+\mbox{[}cpf do comprador\mbox{]} 
+\end{DoxyReturn}
+
+
+Definition at line 68 of file comprador.\+cpp.
+
+\mbox{\Hypertarget{class_comprador_a92c4ce72febc0bdddc9a709f26656729}\label{class_comprador_a92c4ce72febc0bdddc9a709f26656729}} 
+\index{Comprador@{Comprador}!get\+Dinheiro@{get\+Dinheiro}}
+\index{get\+Dinheiro@{get\+Dinheiro}!Comprador@{Comprador}}
+\subsubsection{\texorpdfstring{get\+Dinheiro()}{getDinheiro()}}
+{\footnotesize\ttfamily float Comprador\+::get\+Dinheiro (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{[}\hyperlink{class_comprador_a92c4ce72febc0bdddc9a709f26656729}{Comprador\+::get\+Dinheiro} função que retorna a quantidade de dinheiro que comprador possui\mbox{]}  \hyperlink{class_comprador_a92c4ce72febc0bdddc9a709f26656729}{Comprador\+::get\+Dinheiro} \begin{DoxyReturn}{Returns}
+\mbox{[}quantidade de dinheiro que comprador possui\mbox{]} 
+\end{DoxyReturn}
+
+
+Definition at line 118 of file comprador.\+cpp.
+
+\mbox{\Hypertarget{class_comprador_a590eb62bff00484b051e13261d050e83}\label{class_comprador_a590eb62bff00484b051e13261d050e83}} 
+\index{Comprador@{Comprador}!get\+Endereco@{get\+Endereco}}
+\index{get\+Endereco@{get\+Endereco}!Comprador@{Comprador}}
+\subsubsection{\texorpdfstring{get\+Endereco()}{getEndereco()}}
+{\footnotesize\ttfamily std\+::string Comprador\+::get\+Endereco (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{[}\hyperlink{class_comprador_a590eb62bff00484b051e13261d050e83}{Comprador\+::get\+Endereco} função que retorna o endereço do comprador\mbox{]}  \hyperlink{class_comprador_a590eb62bff00484b051e13261d050e83}{Comprador\+::get\+Endereco} \begin{DoxyReturn}{Returns}
+\mbox{[}endereço do comprador\mbox{]} 
+\end{DoxyReturn}
+
+
+Definition at line 78 of file comprador.\+cpp.
+
+\mbox{\Hypertarget{class_comprador_ab17a4464ac51d495b7751fd5ced81005}\label{class_comprador_ab17a4464ac51d495b7751fd5ced81005}} 
+\index{Comprador@{Comprador}!get\+Numero\+Avaliacoes@{get\+Numero\+Avaliacoes}}
+\index{get\+Numero\+Avaliacoes@{get\+Numero\+Avaliacoes}!Comprador@{Comprador}}
+\subsubsection{\texorpdfstring{get\+Numero\+Avaliacoes()}{getNumeroAvaliacoes()}}
+{\footnotesize\ttfamily int Comprador\+::get\+Numero\+Avaliacoes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{[}\hyperlink{class_comprador_ab17a4464ac51d495b7751fd5ced81005}{Comprador\+::get\+Numero\+Avaliacoes} função que retorna o numero de avaliações realizadas pelo comprador\mbox{]}  \hyperlink{class_comprador_ab17a4464ac51d495b7751fd5ced81005}{Comprador\+::get\+Numero\+Avaliacoes} \begin{DoxyReturn}{Returns}
+\mbox{[}numero de avaliações realizadas pelo comprador\mbox{]} 
+\end{DoxyReturn}
+
+
+Definition at line 108 of file comprador.\+cpp.
+
+\mbox{\Hypertarget{class_comprador_a492e697b6237f13d80ff3f6f0b65796e}\label{class_comprador_a492e697b6237f13d80ff3f6f0b65796e}} 
+\index{Comprador@{Comprador}!get\+Numero\+Compras\+Carrinho@{get\+Numero\+Compras\+Carrinho}}
+\index{get\+Numero\+Compras\+Carrinho@{get\+Numero\+Compras\+Carrinho}!Comprador@{Comprador}}
+\subsubsection{\texorpdfstring{get\+Numero\+Compras\+Carrinho()}{getNumeroComprasCarrinho()}}
+{\footnotesize\ttfamily int Comprador\+::get\+Numero\+Compras\+Carrinho (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{[}\hyperlink{class_comprador_a492e697b6237f13d80ff3f6f0b65796e}{Comprador\+::get\+Numero\+Compras\+Carrinho} função que retorna a quantidade de itens adicionados ao carrinho pelo comprador\mbox{]}  \hyperlink{class_comprador_a492e697b6237f13d80ff3f6f0b65796e}{Comprador\+::get\+Numero\+Compras\+Carrinho} \begin{DoxyReturn}{Returns}
+\mbox{[}quantidade de itens adicionados ao carrinho pelo comprador\mbox{]} 
+\end{DoxyReturn}
+
+
+Definition at line 98 of file comprador.\+cpp.
+
+\mbox{\Hypertarget{class_comprador_a18e5782aa451203303ebc3f1ff924f4e}\label{class_comprador_a18e5782aa451203303ebc3f1ff924f4e}} 
+\index{Comprador@{Comprador}!get\+Numero\+Compras\+Historico@{get\+Numero\+Compras\+Historico}}
+\index{get\+Numero\+Compras\+Historico@{get\+Numero\+Compras\+Historico}!Comprador@{Comprador}}
+\subsubsection{\texorpdfstring{get\+Numero\+Compras\+Historico()}{getNumeroComprasHistorico()}}
+{\footnotesize\ttfamily int Comprador\+::get\+Numero\+Compras\+Historico (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{[}\hyperlink{class_comprador_a18e5782aa451203303ebc3f1ff924f4e}{Comprador\+::get\+Numero\+Compras\+Historico} função que retorna a quantidade de itens adquiridos anteriormente pelo comprador\mbox{]}  \hyperlink{class_comprador_a18e5782aa451203303ebc3f1ff924f4e}{Comprador\+::get\+Numero\+Compras\+Historico} \begin{DoxyReturn}{Returns}
+\mbox{[}quantidade de itens adquiridos anteriormente pelo comprador\mbox{]} 
+\end{DoxyReturn}
+
+
+Definition at line 88 of file comprador.\+cpp.
+
+\mbox{\Hypertarget{class_comprador_aaff2a1d0fb260e9688367eb606c4eeb5}\label{class_comprador_aaff2a1d0fb260e9688367eb606c4eeb5}} 
+\index{Comprador@{Comprador}!get\+Total\+Carrinho@{get\+Total\+Carrinho}}
+\index{get\+Total\+Carrinho@{get\+Total\+Carrinho}!Comprador@{Comprador}}
+\subsubsection{\texorpdfstring{get\+Total\+Carrinho()}{getTotalCarrinho()}}
+{\footnotesize\ttfamily int Comprador\+::get\+Total\+Carrinho (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{[}\hyperlink{class_comprador_aaff2a1d0fb260e9688367eb606c4eeb5}{Comprador\+::get\+Total\+Carrinho} função que retorna o valor total dos itens adicionados ao carrinho do comprador\mbox{]}  \hyperlink{class_comprador_aaff2a1d0fb260e9688367eb606c4eeb5}{Comprador\+::get\+Total\+Carrinho} \begin{DoxyReturn}{Returns}
+\mbox{[}valor total dos itens adicionados ao carrinho do comprador\mbox{]} 
+\end{DoxyReturn}
+
+
+Definition at line 59 of file comprador.\+cpp.
+
+\mbox{\Hypertarget{class_comprador_a22479e83d85331787d699d74c1307ad2}\label{class_comprador_a22479e83d85331787d699d74c1307ad2}} 
+\index{Comprador@{Comprador}!imprimir\+Carrinho@{imprimir\+Carrinho}}
+\index{imprimir\+Carrinho@{imprimir\+Carrinho}!Comprador@{Comprador}}
+\subsubsection{\texorpdfstring{imprimir\+Carrinho()}{imprimirCarrinho()}}
+{\footnotesize\ttfamily void Comprador\+::imprimir\+Carrinho (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{[}\hyperlink{class_comprador_a22479e83d85331787d699d74c1307ad2}{Comprador\+::imprimir\+Carrinho} função que imprime os itens que constam no carrinho do comprador\mbox{]}  \hyperlink{class_comprador_a22479e83d85331787d699d74c1307ad2}{Comprador\+::imprimir\+Carrinho} 
+
+Definition at line 209 of file comprador.\+cpp.
+
+\mbox{\Hypertarget{class_comprador_a4c67775d6f1e703278569ebf9cc20a79}\label{class_comprador_a4c67775d6f1e703278569ebf9cc20a79}} 
+\index{Comprador@{Comprador}!imprimir\+Historico@{imprimir\+Historico}}
+\index{imprimir\+Historico@{imprimir\+Historico}!Comprador@{Comprador}}
+\subsubsection{\texorpdfstring{imprimir\+Historico()}{imprimirHistorico()}}
+{\footnotesize\ttfamily void Comprador\+::imprimir\+Historico (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{[}\hyperlink{class_comprador_a4c67775d6f1e703278569ebf9cc20a79}{Comprador\+::imprimir\+Historico} função que imprime os itens que constam no histórico do comprador\mbox{]}  \hyperlink{class_comprador_a4c67775d6f1e703278569ebf9cc20a79}{Comprador\+::imprimir\+Historico} 
+
+Definition at line 251 of file comprador.\+cpp.
+
+\mbox{\Hypertarget{class_comprador_a511093b891d5c4202cee1f25ccbed66e}\label{class_comprador_a511093b891d5c4202cee1f25ccbed66e}} 
+\index{Comprador@{Comprador}!limpar\+Tela@{limpar\+Tela}}
+\index{limpar\+Tela@{limpar\+Tela}!Comprador@{Comprador}}
+\subsubsection{\texorpdfstring{limpar\+Tela()}{limparTela()}}
+{\footnotesize\ttfamily void Comprador\+::limpar\+Tela (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{[}\hyperlink{class_comprador_a511093b891d5c4202cee1f25ccbed66e}{Comprador\+::limpar\+Tela} função responsável por limpar a tela do sistema\mbox{]}  \hyperlink{class_comprador_a511093b891d5c4202cee1f25ccbed66e}{Comprador\+::limpar\+Tela} 
+
+Definition at line 444 of file comprador.\+cpp.
+
+\mbox{\Hypertarget{class_comprador_a5b8bcd0a0576385fd5614be8a3b2160b}\label{class_comprador_a5b8bcd0a0576385fd5614be8a3b2160b}} 
+\index{Comprador@{Comprador}!procurar\+Itens\+Carrinho@{procurar\+Itens\+Carrinho}}
+\index{procurar\+Itens\+Carrinho@{procurar\+Itens\+Carrinho}!Comprador@{Comprador}}
+\subsubsection{\texorpdfstring{procurar\+Itens\+Carrinho()}{procurarItensCarrinho()}}
+{\footnotesize\ttfamily int Comprador\+::procurar\+Itens\+Carrinho (\begin{DoxyParamCaption}\item[{int}]{cod\+Produto }\end{DoxyParamCaption})}
+
+\mbox{[}\hyperlink{class_comprador_a5b8bcd0a0576385fd5614be8a3b2160b}{Comprador\+::procurar\+Itens\+Carrinho} função que localiza um item no carrinho do comprador, através de uma pesquisa utilizando o código do produto\mbox{]}  \hyperlink{class_comprador_a5b8bcd0a0576385fd5614be8a3b2160b}{Comprador\+::procurar\+Itens\+Carrinho} 
+\begin{DoxyParams}{Parameters}
+{\em cod\+Produto} & \mbox{[}código único que representa um produto\mbox{]} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{[}indice no carrinho em que o produto se encontra\mbox{]} 
+\end{DoxyReturn}
+
+
+Definition at line 349 of file comprador.\+cpp.
+
+\mbox{\Hypertarget{class_comprador_a0ebab4be27f71b04734794765d661529}\label{class_comprador_a0ebab4be27f71b04734794765d661529}} 
+\index{Comprador@{Comprador}!procurar\+Itens\+Historico@{procurar\+Itens\+Historico}}
+\index{procurar\+Itens\+Historico@{procurar\+Itens\+Historico}!Comprador@{Comprador}}
+\subsubsection{\texorpdfstring{procurar\+Itens\+Historico()}{procurarItensHistorico()}}
+{\footnotesize\ttfamily int Comprador\+::procurar\+Itens\+Historico (\begin{DoxyParamCaption}\item[{int}]{cod\+Produto }\end{DoxyParamCaption})}
+
+\mbox{[}\hyperlink{class_comprador_a0ebab4be27f71b04734794765d661529}{Comprador\+::procurar\+Itens\+Historico} função que localiza um item no histórico do comprador, através de uma pesquisa utilizando o código do produto\mbox{]}  \hyperlink{class_comprador_a0ebab4be27f71b04734794765d661529}{Comprador\+::procurar\+Itens\+Historico} 
+\begin{DoxyParams}{Parameters}
+{\em cod\+Produto} & \mbox{[}código úndico que representa um produto\mbox{]} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{[}indice no histórico em que o produto se encontra\mbox{]} 
+\end{DoxyReturn}
+
+
+Definition at line 331 of file comprador.\+cpp.
+
+\mbox{\Hypertarget{class_comprador_a05415fa7c875440e86d5781f04577572}\label{class_comprador_a05415fa7c875440e86d5781f04577572}} 
+\index{Comprador@{Comprador}!procurar\+Produto@{procurar\+Produto}}
+\index{procurar\+Produto@{procurar\+Produto}!Comprador@{Comprador}}
+\subsubsection{\texorpdfstring{procurar\+Produto()}{procurarProduto()}}
+{\footnotesize\ttfamily void Comprador\+::procurar\+Produto (\begin{DoxyParamCaption}\item[{int}]{cod\+Produto }\end{DoxyParamCaption})}
+
+\mbox{[}\hyperlink{class_comprador_a05415fa7c875440e86d5781f04577572}{Comprador\+::procurar\+Produto} função que imprime os comentários registrados para um item específico, localizando o item através de uma pesquisa utilizando o código do produto\mbox{]}  \hyperlink{class_comprador_a05415fa7c875440e86d5781f04577572}{Comprador\+::procurar\+Produto} 
+\begin{DoxyParams}{Parameters}
+{\em cod\+Produto} & \mbox{[}código único que representa um produto\mbox{]} \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 314 of file comprador.\+cpp.
+
+\mbox{\Hypertarget{class_comprador_a8a5fc62485a3a9b37340609715e73feb}\label{class_comprador_a8a5fc62485a3a9b37340609715e73feb}} 
+\index{Comprador@{Comprador}!retirar\+Carrinho@{retirar\+Carrinho}}
+\index{retirar\+Carrinho@{retirar\+Carrinho}!Comprador@{Comprador}}
+\subsubsection{\texorpdfstring{retirar\+Carrinho()}{retirarCarrinho()}}
+{\footnotesize\ttfamily bool Comprador\+::retirar\+Carrinho (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{[}\hyperlink{class_comprador_a8a5fc62485a3a9b37340609715e73feb}{Comprador\+::retirar\+Carrinho} função que retira um item do carrinho, a ser escolhido pelo comprador\mbox{]}  \hyperlink{class_comprador_a8a5fc62485a3a9b37340609715e73feb}{Comprador\+::retirar\+Carrinho} \begin{DoxyReturn}{Returns}
+\mbox{[}true no caso da remoção do carrinho ter sido bem sucedida e false, em caso contrário\mbox{]} 
+\end{DoxyReturn}
+
+
+Definition at line 174 of file comprador.\+cpp.
+
+\mbox{\Hypertarget{class_comprador_a4f22858b4fdd931a81dd8cfcd4783bde}\label{class_comprador_a4f22858b4fdd931a81dd8cfcd4783bde}} 
+\index{Comprador@{Comprador}!set\+Dinheiro@{set\+Dinheiro}}
+\index{set\+Dinheiro@{set\+Dinheiro}!Comprador@{Comprador}}
+\subsubsection{\texorpdfstring{set\+Dinheiro()}{setDinheiro()}}
+{\footnotesize\ttfamily void Comprador\+::set\+Dinheiro (\begin{DoxyParamCaption}\item[{float}]{valor }\end{DoxyParamCaption})}
+
+\mbox{[}\hyperlink{class_comprador_a4f22858b4fdd931a81dd8cfcd4783bde}{Comprador\+::set\+Dinheiro} função que modifica a quantidade de dinheiro que o comprador possui\mbox{]}  \hyperlink{class_comprador_a4f22858b4fdd931a81dd8cfcd4783bde}{Comprador\+::set\+Dinheiro} 
+\begin{DoxyParams}{Parameters}
+{\em valor} & \mbox{[}parâmetro que define a nova quantidade de dinheiro que o comprador possui\mbox{]} \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 49 of file comprador.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/usuario/\hyperlink{comprador_8h}{comprador.\+h}\item 
+src/usuario/\hyperlink{comprador_8cpp}{comprador.\+cpp}\end{DoxyCompactItemize}

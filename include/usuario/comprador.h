@@ -27,7 +27,7 @@ class Comprador : public Usuario{
     std::vector <Produto> historico;
 
   public:
-    Comprador(std::string n, std::string em, std::string s, std::string cpf, std::string endereco, int numCarr, int numHist, int numAval, double din);
+    Comprador(std::string nome, std::string email, std::string senha, std::string cpf, std::string endereco, int numComprasCarrinho, int numComprasHistorico, int numAvaliacaoes, double dinheiro);
 
     Comprador();
     ~Comprador();

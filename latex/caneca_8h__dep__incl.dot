@@ -1,0 +1,18 @@
+digraph "include/produto/caneca.h"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node5 [label="include/produto/caneca.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node5 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node6 [label="include/ecommerce.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ecommerce_8h.html"];
+  Node6 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node7 [label="include/usuario/administrador.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$administrador_8h.html"];
+  Node6 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node8 [label="program/main.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html"];
+  Node6 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node9 [label="src/ecommerce.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ecommerce_8cpp.html"];
+  Node6 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node10 [label="src/usuario/comprador.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$comprador_8cpp.html"];
+  Node5 -> Node11 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node11 [label="src/produto/caneca.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$caneca_8cpp.html"];
+}

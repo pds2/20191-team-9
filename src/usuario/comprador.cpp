@@ -4,50 +4,126 @@
 #include "usuario/comprador.h"
 #include "ecommerce.h"
 
-Comprador::Comprador(std::string n, std::string em, std::string s, std::string cpf,
-   std::string endereco, int numCarr, int numHist, int numAval, double din) :
- Usuario(n, em, s), _CPF(cpf), _endereco(endereco), _numeroComprasCarrinho(numCarr), _numeroComprasHistorico(numHist), _numeroAvaliacoes(numAval), _dinheiro(din){};
+/**
+ * [Comprador::Comprador Construtor da classe Comprador]
+ * @method Comprador::Comprador
+ * @param  nome                 [nome do comprador]
+ * @param  email                [email do comprador, pelo qual o mesmo realiza login no sistema]
+ * @param  senha                [senha do comprador, pela qual o mesmo realiza login no sistema]
+ * @param  cpf                  [cpf do comprador]
+ * @param  endereco             [endereco do comprador, para onde os itens comprados deverão ser enviados]
+ * @param  numComprasCarrinho   [numero de itens adicionados ao carrinho do comprador]
+ * @param  numComprasHistorico  [numero de itens adquiridos do comprador]
+ * @param  numAvaliacaoes       [numero de itens avaliados pelo comprador]
+ * @param  dinheiro             [quantidade de dinheiro que o comprador possui]
+ */
+
+Comprador::Comprador(std::string nome, std::string email, std::string senha, std::string cpf,
+   std::string endereco, int numComprasCarrinho, int numComprasHistorico, int numAvaliacaoes, double dinheiro) :
+ Usuario(nome, email, senha), _CPF(cpf), _endereco(endereco), _numeroComprasCarrinho(numComprasCarrinho), _numeroComprasHistorico(numComprasHistorico), _numeroAvaliacoes(numAvaliacaoes), _dinheiro(dinheiro){};
+
+/**
+ * [Comprador Construtor da classe Comprador ]
+ * @method Comprador
+ */
 
 Comprador::~Comprador(){
   carrinho.clear();
   historico.clear();
 }
 
+/**
+ * [Comprador::Comprador Construtor sem parâmetros da classe Comprador]
+ * @method Comprador::Comprador
+ */
+
 Comprador::Comprador(){
 
 }
 
+/**
+ * [Comprador::setDinheiro função que modifica a quantidade de dinheiro que o comprador possui]
+ * @method Comprador::setDinheiro
+ * @param  valor                  [parâmetro que define a nova quantidade de dinheiro que o comprador possui]
+ */
 void Comprador::setDinheiro(float valor){
   this->_dinheiro = valor;
 }
+
+/**
+ * [Comprador::getTotalCarrinho função que retorna o valor total dos itens adicionados ao carrinho do comprador]
+ * @method Comprador::getTotalCarrinho
+ * @return [valor total dos itens adicionados ao carrinho do comprador]
+ */
 
 int Comprador::getTotalCarrinho(){
   return this->_totalCarrinho;
 }
 
+/**
+ * [Comprador::getCPF função que retorna o cpf do comprador]
+ * @method Comprador::getCPF
+ * @return [cpf do comprador]
+ */
 std::string Comprador::getCPF(){
   return this->_CPF;
 }
+
+/**
+ * [Comprador::getEndereco função que retorna o endereço do comprador]
+ * @method Comprador::getEndereco
+ * @return [endereço do comprador]
+ */
 
 std::string Comprador::getEndereco(){
   return this->_endereco;
 }
 
+/**
+ * [Comprador::getNumeroComprasHistorico função que retorna a quantidade de itens adquiridos anteriormente pelo comprador]
+ * @method Comprador::getNumeroComprasHistorico
+ * @return [quantidade de itens adquiridos anteriormente pelo comprador]
+ */
+
 int Comprador::getNumeroComprasHistorico(){
   return this->_numeroComprasHistorico;
 }
+
+/**
+ * [Comprador::getNumeroComprasCarrinho função que retorna a quantidade de itens adicionados ao carrinho pelo comprador]
+ * @method Comprador::getNumeroComprasCarrinho
+ * @return [quantidade de itens adicionados ao carrinho pelo comprador]
+ */
 
 int Comprador::getNumeroComprasCarrinho(){
   return this->_numeroComprasCarrinho;
 }
 
+/**
+ * [Comprador::getNumeroAvaliacoes função que retorna o numero de avaliações realizadas pelo comprador]
+ * @method Comprador::getNumeroAvaliacoes
+ * @return [numero de avaliações realizadas pelo comprador]
+ */
+
 int Comprador::getNumeroAvaliacoes(){
   return this->_numeroAvaliacoes;
 }
 
+/**
+ * [Comprador::getDinheiro função que retorna a quantidade de dinheiro que comprador possui]
+ * @method Comprador::getDinheiro
+ * @return [quantidade de dinheiro que comprador possui]
+ */
+
 float Comprador::getDinheiro(){
   return this->_dinheiro;
 }
+
+/**
+ * [Comprador::adicionarCarrinho função que adiciona ao carrinho um novo item, a ser escolhido pelo comprador]
+ * @method Comprador::adicionarCarrinho
+ * @return [true no caso da adição ao carrinho ter sido bem sucedida e false, em caso contrário]
+ */
 
 bool Comprador::adicionarCarrinho(){
   Ecommerce ecom;
@@ -89,6 +165,12 @@ bool Comprador::adicionarCarrinho(){
   }
 }
 
+/**
+ * [Comprador::retirarCarrinho função que retira um item do carrinho, a ser escolhido pelo comprador]
+ * @method Comprador::retirarCarrinho
+ * @return [true no caso da remoção do carrinho ter sido bem sucedida e false, em caso contrário]
+ */
+
 bool Comprador::retirarCarrinho(){
   _numeroComprasCarrinho = carrinho.size();
   if(_numeroComprasCarrinho == 0){
@@ -118,6 +200,11 @@ bool Comprador::retirarCarrinho(){
   }
   return false;
 }
+
+/**
+ * [Comprador::imprimirCarrinho função que imprime os itens que constam no carrinho do comprador]
+ * @method Comprador::imprimirCarrinho
+ */
 
 void Comprador::imprimirCarrinho(){
   _numeroComprasCarrinho = carrinho.size();
@@ -156,6 +243,11 @@ void Comprador::imprimirCarrinho(){
   }
 }
 
+/**
+ * [Comprador::imprimirHistorico função que imprime os itens que constam no histórico do comprador]
+ * @method Comprador::imprimirHistorico
+ */
+
 void Comprador::imprimirHistorico(){
   _numeroComprasHistorico = historico.size();
   if(_numeroComprasHistorico == 0){
@@ -189,6 +281,11 @@ void Comprador::imprimirHistorico(){
   }
 }
 
+/**
+ * [Comprador::exibirPerfil função que exibe o perfil do comprador, com todas as informações que foram registradas durante o seu cadastro]
+ * @method Comprador::exibirPerfil
+ */
+
 void Comprador::exibirPerfil(){
   limparTela();
   std::cout << "\n" << "----------------------------------------------" << std::endl;
@@ -208,6 +305,12 @@ void Comprador::exibirPerfil(){
   if (true) { menuInicial(); }
 }
 
+/**
+ * [Comprador::procurarProduto função que imprime os comentários registrados para um item específico, localizando o item através de uma pesquisa utilizando o código do produto]
+ * @method Comprador::procurarProduto
+ * @param  codProduto                 [código único que representa um produto]
+ */
+
 void Comprador::procurarProduto(int codProduto){
   _numeroProdutos = produtos.size();
 
@@ -217,6 +320,13 @@ void Comprador::procurarProduto(int codProduto){
     }
   }
 }
+
+/**
+ * [Comprador::procurarItensHistorico função que localiza um item no histórico do comprador, através de uma pesquisa utilizando o código do produto]
+ * @method Comprador::procurarItensHistorico
+ * @param  codProduto                        [código úndico que representa um produto]
+ * @return                                   [indice no histórico em que o produto se encontra]
+ */
 
 int Comprador::procurarItensHistorico(int codProduto){
   _numeroComprasHistorico = historico.size();
@@ -229,6 +339,13 @@ int Comprador::procurarItensHistorico(int codProduto){
   return -1;
 }
 
+/**
+ * [Comprador::procurarItensCarrinho função que localiza um item no carrinho do comprador, através de uma pesquisa utilizando o código do produto]
+ * @method Comprador::procurarItensCarrinho
+ * @param  codProduto                       [código único que representa um produto]
+ * @return                                  [indice no carrinho em que o produto se encontra]
+ */
+
 int Comprador::procurarItensCarrinho(int codProduto){
   _numeroComprasCarrinho = carrinho.size();
 
@@ -240,13 +357,15 @@ int Comprador::procurarItensCarrinho(int codProduto){
   return -1;
 }
 
+/**
+ * [Comprador::adicionarComentario função que localiza um item no histórico do comprador, através de uma pesquisa utilizando o código do produto, e em seguida registra um comentário realizado pelo comprador para este mesmo produto]
+ * @method Comprador::adicionarComentario
+ */
+
 void Comprador::adicionarComentario(){
-  limparTela();
 
   int codProduto;
   int indice = -1
-
-  //imprimirHistorico(); SE FOR PRA CONSULTA SO NAO LIMPAR A TELA
 
   std::cout << "\n" << "Digite o código do produto para o qual deseja registrar um comentário.";
   std::cin >> codProduto;
@@ -267,13 +386,16 @@ void Comprador::adicionarComentario(){
   }
 }
 
+/**
+ * [Comprador::avaliarItem função que localiza um item no histórico do comprador, através de uma pesquisa utilizando o código do produto, e em seguida permite que o comprador avalie este mesmo produto]
+ * @method Comprador::avaliarItem
+ */
+
 void Comprador::avaliarItem(){
   limparTela();
 
   int codProduto;
   int indice = -1;
-
-  //imprimirHistorico();
 
   std::cout << "\n" << "Digite o código do produto que deseja avaliar: ";
   std::cin >> codProduto;
@@ -301,36 +423,32 @@ void Comprador::avaliarItem(){
   }
 }
 
+/**
+ * [Comprador::adicionaDinheiro função que envia uma requsição ao administrador para aumento de saldo do comprador]
+ * @method Comprador::adicionaDinheiro
+ * @param  valor                       [valor que o comprador deseja adicionar ao seu dinheiro atual]
+ * @param  comp                        [comprador que está solicitando a requisição de aumento de saldo]
+ * @return                             [true em caso da requisicao ter sido bem sucedida e false, em caso contrário]
+ */
+
 bool Comprador::adicionaDinheiro(double valor, Comprador comp){
   //aqui tem que mandar uma requisicao para o administrador
   return true;
 }
 
+/**
+ * [Comprador::limparTela função responsável por limpar a tela do sistema]
+ * @method Comprador::limparTela
+ */
+
 void Comprador::limparTela(){
   std::system("clear||cls");
 }
 
-/*
-  Generic function to find an element in vector and also its position.
-  It returns a pair of bool & int i.e.
-  bool : Represents if element is present in vector or not.
-  int : Represents the index of element in vector if its found else -1
-*/
-template < typename T>
-std::pair<bool, int > findInVector(const std::vector<T>  & vecOfElements, const T  & element){
-  std::pair<bool, int > result;
-  // Find given element in vector
-  auto it = std::find(vecOfElements.begin(), vecOfElements.end(), element);
-  if (it != vecOfElements.end()){
-  result.second = distance(vecOfElements.begin(), it);
-  result.first = true;
-  }
-  else{
-  result.first = false;
-  result.second = -1;
-  }
-  return result;
-}
+/**
+ * [Comprador::fazerCompras função que confimar a compra dos produtos adicionados ao carrinho do comprador]
+ * @method Comprador::fazerCompras
+ */
 
 void Comprador::fazerCompras(){
   std::cout << "Você está comprando " << carrinho.size() << " produtos, cujo valor total é " << _totalCarrinho << ". Deseja confirmar sua compra?" << std::endl;
