@@ -1,8 +1,8 @@
-/*
+
 #ifndef ADMINISTRADOR_CPP
 #define ADMINISTRADOR_CPP
 
-#include "usuario/administrador.hpp"
+#include "../../include/usuario/administrador.h"
 
 Administrador::Administrador(std::string nome, std::string email, std::string senha){
   this->_nome = nome;
@@ -112,9 +112,9 @@ void Administrador::removeItem(std::string nome_do_produto){
   //procura no vector se existe algum produto com o nome chamado.
   //Se ele existir, este produto é retirado do estoque. Se não existir, uma mensagem de erro é impressa na tela.
 
-  this->bluemols.clear();
-  this->cans.clear();
-  this->aces.clear();
+  this->_bluemols.clear();
+  this->_cans.clear();
+  this->_aces.clear();
 
   produtoCsvToVector();
 
@@ -125,9 +125,9 @@ void Administrador::removeItem(std::string nome_do_produto){
   int ac = 0;
 
   // Procura o produto dentre os produtos cadastrados
-  for(int i = 0; i<bluemols.size(); i++){
+  for(int i = 0; i<_bluemols.size(); i++){
 
-    name = bluemols[i].getNome();
+    name = _bluemols[i].getNome();
 
     if(strcomp(nome_do_produto, name) == 0){
       indice = i;
@@ -138,9 +138,9 @@ void Administrador::removeItem(std::string nome_do_produto){
   }
 
   if(indice == -1){
-    for(int i = 0; i<cans.size(); i++){
+    for(int i = 0; i<_cans.size(); i++){
 
-      name = cans[i].getNome();
+      name = _cans[i].getNome();
 
       if(strcomp(nome_do_produto, name) == 0){
         indice = i;
@@ -152,9 +152,9 @@ void Administrador::removeItem(std::string nome_do_produto){
   }
 
   if(indice == -1){
-    for(int i = 0; i<aces.size(); i++){
+    for(int i = 0; i<_aces.size(); i++){
 
-      name = aces[i].getNome();
+      name = _aces[i].getNome();
 
       if(strcomp(nome_do_produto, name) == 0){
         indice = i;
@@ -170,11 +170,11 @@ void Administrador::removeItem(std::string nome_do_produto){
     std::cout << "Este produto não existe!" << std::endl;
     return;
   }else if(bm == 1){
-    bluemols.erase(bluemols.begin() + indice);
+    _bluemols.erase(_bluemols.begin() + indice);
   }else if(cn == 1){
-    cans.erase(cans.begin() + indice);
+    _cans.erase(_cans.begin() + indice);
   }else if(ac == 1){
-    aces.erase(aces.begin() + indice);
+    _aces.erase(_aces.begin() + indice);
   }
 
   //Com o produto apagado, o arquivo de produtos é reescrito
@@ -182,16 +182,16 @@ void Administrador::removeItem(std::string nome_do_produto){
 
   arquivo.open("produtos.csv", std::ios::trunc | std::ios::out);
 
-  for(int i = 0; i<bluemols.size(); i++){
-    arquivo << bluemols[i].getCodigoProduto() << "," << bluemols[i].getNome() << "," << bluemols[i].getPreco() << "," << bluemols[i].getMediaAvaliacoes() << "," << bluemols[i].getCategoria() << ","  << bluemols[i].getCor() << "," << bluemols[i].getDescricao() << "," << bluemols[i].getMaterial() << "," << bluemols[i].getTamanho() << "," << bluemols[i].getTipo() << std::endl;
+  for(int i = 0; i<_bluemols.size(); i++){
+    arquivo << _bluemols[i].getCodigoProduto() << "," << bluemols[i].getNome() << "," << bluemols[i].getPreco() << "," << bluemols[i].getMediaAvaliacoes() << "," << bluemols[i].getCategoria() << ","  << bluemols[i].getCor() << "," << bluemols[i].getDescricao() << "," << bluemols[i].getMaterial() << "," << bluemols[i].getTamanho() << "," << bluemols[i].getTipo() << std::endl;
   }
 
-  for(int i = 0; i<cans.size(); i++){
-    arquivo << cans[i].getCodigoProduto() << "," << cans[i].getNome() << "," << cans[i].getPreco() << "," << cans[i].getMediaAvaliacoes() << "," << cans[i].getCategoria() << ","  << cans[i].getCor() << "," << cans[i].getDescricao() << "," << cans[i].getMaterial() << "," << cans[i].getDiametro() << std::endl;
+  for(int i = 0; i<_cans.size(); i++){
+    arquivo << _cans[i].getCodigoProduto() << "," << cans[i].getNome() << "," << cans[i].getPreco() << "," << cans[i].getMediaAvaliacoes() << "," << cans[i].getCategoria() << ","  << cans[i].getCor() << "," << cans[i].getDescricao() << "," << cans[i].getMaterial() << "," << cans[i].getDiametro() << std::endl;
   }
 
-  for(int i = 0; i<aces.size(); i++){
-    arquivo << aces[i].getCodigoProduto() << "," << aces[i].getNome() << "," << aces[i].getPreco() << "," << aces[i].getMediaAvaliacoes() << "," << aces[i].getCategoria() << ","  << aces[i].getCor() << "," << aces[i].getDescricao() << "," << aces[i].getMaterial() << "," << aces[i].getTipo() << std::endl;
+  for(int i = 0; i<_aces.size(); i++){
+    arquivo << _aces[i].getCodigoProduto() << "," << aces[i].getNome() << "," << aces[i].getPreco() << "," << aces[i].getMediaAvaliacoes() << "," << aces[i].getCategoria() << ","  << aces[i].getCor() << "," << aces[i].getDescricao() << "," << aces[i].getMaterial() << "," << aces[i].getTipo() << std::endl;
 
   }
 
@@ -227,9 +227,11 @@ void Administrador::aprovaPedido(std::string email, float valor){
   }
 
 }
+*/
 
 void Administrador::exibeUsuarios(){
-  ifstream lista_de_usuarios("usuarios.txt");
+  std::ifstream lista_de_usuarios;
+  lista_de_usuarios.open("usuarios.csv", std::ios::in);
 
   if(lista_de_usuarios.is_open()){
     std::string linha;
@@ -243,10 +245,51 @@ void Administrador::exibeUsuarios(){
 }
 
 void Administrador::excluiUsuario(std::string email){
+  std::string email_do_cliente;
+  int indice = -1;
+  this->_shoppers.clear();
 
+  usuarioCsvToVector();
+
+  for(int i = 0; i<_shoppers.size(); i++){
+
+    email_do_cliente = _shoppers[i].getEmail();
+
+    if(strcomp(email_do_cliente, email) == 0){
+      indice = i;
+      break;
+    }
+
+  }
+
+  if(indice == -1){
+    std::cout << "Este usuário não existe!\nInsira um usuário válido" << std::endl;
+    return;
+  }
+
+  _shoppers.erase(_shoppers.begin() + indice);
+
+
+  //Com o usuário apagado, resta sobrescrever o arquivo com a nova lista de usuarios
+
+  std::ofstream arquivo;
+
+  arquivo.open("usuarios.csv", std::ios::trunc | std::ios::out);
+
+  for(int i = 0; i<_shoppers.size(); i++){
+    arquivo << _shoppers[i].getNome() << "," << _shoppers[i].getEmail() << "," << _shoppers[i].getSenha() << "," << _shoppers[i].getCPF() << "," << _shoppers[i].getEndereco() << ","  << _shoppers[i].getNumeroComprasCarrinho() << "," << _shoppers[i].getNumeroComprasHistorico() << "," << _shoppers[i].getNumeroAvaliacoes() << "," << _shoppers[i].getDinheiro() << std::endl;
+  }
+
+  arquivo.close();
 }
 
-Administrador::~Administrador(){}
+Administrador::~Administrador(){
+
+  _bluemols.clear();
+  _cans.clear();
+  _aces.clear();
+  _shoppers.clear();
+  _requisicoes.clear();
+}
 
 #endif
-*/
