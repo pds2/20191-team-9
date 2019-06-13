@@ -62,8 +62,6 @@ void Ecommerce::listaComentariosArquivo(){
                 }
                 std::getline(arquivo, cmt);
 
-                std::cout << "Comentario " << aux << " = "  << cmt << std::endl;
-
                 adicionaComentario(cod, cmt);
             }
         }
