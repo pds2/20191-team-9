@@ -208,6 +208,10 @@ void Administrador::exibirPerfil(){
   std::cout << "Nome: " << getNome() << std::endl;
   std::cout << "Email: " << getEmail() << std::endl;
   std::cout << "Senha: " << getSenha() << std::endl;
+
+  std::cout << std::endl << "Pressione ENTER para voltar a pagina anterior";
+  std::cin.get();
+  ecom.menuUsuario();
 }
 
 void Administrador::adicionaPedido(std::string email, float valor){

@@ -156,12 +156,14 @@ int Ecommerce::tamanhoArquivo(const char* file_name){
     return size;
 }
 
-/*long int Ecommerce::geradorCod(){
-  while(-checaCodigo(cod)){
+long int Ecommerce::geradorCod(){
+  long int codProduto;
   srand(unsigned int time(0));
-  codProduto = rand()
-  }
-}*/
+  do {
+    codProduto = rand();
+  } while(!checaCodigo(cod));
+  return codProduto;
+}
 
 bool Ecommerce::checaCodigo(int cod){
     int x = produtos.size();
@@ -177,42 +179,30 @@ bool Ecommerce::checaCodigo(int cod){
 }
 
 void Ecommerce::cadastrarCaneca(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, float diametro){
-    if (checaCodigo(cod)){
-        Caneca can(cod, preco, mediaAvaliacoes, nome, "Canecas", cor, descricao, material, diametro);
-        Produto prod(cod, preco, mediaAvaliacoes, nome, "Canecas", cor, descricao, material);
-        canecas.push_back(can);
-        produtos.push_back(prod);
-        std:cout << "Produto cadastrado com sucesso!" << std::endl;
-        mostraProdutos();
-    } else {
-        std::cout << "Codigo de produto ja cadastrado. Tente novamente." << std::endl;
-    }
+  Caneca can(cod, preco, mediaAvaliacoes, nome, "Canecas", cor, descricao, material, diametro);
+  Produto prod(cod, preco, mediaAvaliacoes, nome, "Canecas", cor, descricao, material);
+  canecas.push_back(can);
+  produtos.push_back(prod);
+  std:cout << "Produto cadastrado com sucesso!" << std::endl;
+  mostraProdutos();
 }
 
 void Ecommerce::cadastrarAcessorio(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, std::string tipo){
-    if(checaCodigo(cod)){
-        Acessorio ac(cod, preco, mediaAvaliacoes, nome, "Acessorios", cor, descricao, material, tipo);
-        Produto prod(cod, preco, mediaAvaliacoes, nome, "Acessorios", cor, descricao, material);
-        acessorios.push_back(ac);
-        produtos.push_back(prod);
-        std:cout << "Produto cadastrado com sucesso!" << std::endl;
-        mostraProdutos();
-    } else {
-        std::cout << "Codigo de produto ja cadastrado. Tente novamente." << std::endl;
-    }
+  Acessorio ac(cod, preco, mediaAvaliacoes, nome, "Acessorios", cor, descricao, material, tipo);
+  Produto prod(cod, preco, mediaAvaliacoes, nome, "Acessorios", cor, descricao, material);
+  acessorios.push_back(ac);
+  produtos.push_back(prod);
+  std:cout << "Produto cadastrado com sucesso!" << std::endl;
+  mostraProdutos();
 }
 
 void Ecommerce::cadastrarBlusasEMoletom(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, char tamanho, std::string tipo){
-    if(checaCodigo(cod)){
-        BlusasEMoletom b(cod, preco, mediaAvaliacoes, nome, "Blusas e Moletons", cor, descricao, material, tamanho, tipo);
-        Produto prod(cod, preco, mediaAvaliacoes, nome, "Blusas e Moletons", cor, descricao, material);
-        blusasEmoletons.push_back(b);
-        produtos.push_back(prod);
-        std:cout << "Produto cadastrado com sucesso!" << std::endl;
-        mostraProdutos();
-    } else {
-        std::cout << "Codigo de produto ja cadastrado. Tente novamente." << std::endl;
-    }
+  BlusasEMoletom b(cod, preco, mediaAvaliacoes, nome, "Blusas e Moletons", cor, descricao, material, tamanho, tipo);
+  Produto prod(cod, preco, mediaAvaliacoes, nome, "Blusas e Moletons", cor, descricao, material);
+  blusasEmoletons.push_back(b);
+  produtos.push_back(prod);
+  std:cout << "Produto cadastrado com sucesso!" << std::endl;
+  mostraProdutos();
 }
 
 
@@ -622,6 +612,9 @@ void Ecommerce::impProdutos(){
       std::cout << "\n" << "Digite o código do produto: ";
       std::cin >> codProduto;
       comp.procurarProduto(codProduto);
+      std::cout << std::endl << "Pressione ENTER para voltar a pagina anterior";
+      std::cin.get();
+      impProdutos();
       break;
     case 2:
       int codProduto;
@@ -722,6 +715,9 @@ void Ecommerce::mostraProdutos(){
       std::cin >> codProduto;
       Produto prod = produtos[buscaIndiceProdutos(codProduto)];
       prod.getComentarios(codProduto);
+      std::cout << std::endl << "Pressione ENTER para voltar a pagina anterior";
+      std::cin.get();
+      mostraProdutos();
       break;
     case 2:
       dadosProduto();
@@ -921,10 +917,10 @@ void Ecommerce::dadosProduto(){
   int opção;
   long int codigo;
   codigo = geradorCod();
-  std::cout << std::endl << "Se você deseja cadastrar uma caneca, digite 1" << endl
-  << "Se você deseja cadastrar uma blusa ou moletom, digite 2" << endl
-  << "Se você deseja cadastrar um acessorio, digite 3" << endl
-  << "Se você deseja voltar a pagina de produtos, digite 0" << endl;
+  std::cout << std::endl << "Se você deseja cadastrar uma caneca, digite 1" << std::endl
+  << "Se você deseja cadastrar uma blusa ou moletom, digite 2" << std::endl
+  << "Se você deseja cadastrar um acessorio, digite 3" << std::endl
+  << "Se você deseja voltar a pagina de produtos, digite 0" << std::endl;
   std::cin >> opção;
   std::cout << "Insira o nome do produto: ";
   std::cin >> nome;

@@ -307,6 +307,10 @@ void Comprador::exibirPerfil(){
   std::cout << "Nº Compras do Histórico: " << getNumeroComprasHistorico() << std::endl;
   std::cout << "Nº Avaliações: " << getNumeroAvaliacoes() << std::endl;
   std::cout << "Qntd Dinheiro: " << getDinheiro() << std::endl;
+
+  std::cout << std::endl << "Pressione ENTER para voltar a pagina anterior";
+  std::cin.get();
+  ecom.menuComprador();
 }
 
 /**
