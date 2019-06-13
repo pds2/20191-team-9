@@ -224,7 +224,6 @@ void Administrador::mostraPedidos(){
   }
 }
 
-//---------------------------->
 void Administrador::aprovaPedido(std::string email){
   int aprovacao;
   float valor;
@@ -287,8 +286,6 @@ void Administrador::aprovaPedido(std::string email){
 
 }
 
-
-//------------------------->
 
 void Administrador::excluiUsuario(std::string email){
   std::string email_do_cliente;
