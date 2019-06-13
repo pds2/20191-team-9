@@ -492,6 +492,11 @@ bool Comprador::adicionaDinheiro(double valor, Comprador comp){
   return true;
 }
 
+/**
+ * [Comprador::listaHistoricoArquivo função que lista o histórico de compras registrados no arquivo]
+ * @method Comprador::listaHistoricoArquivo
+ */
+
 void Comprador::listaHistoricoArquivo(){
   usuarios.clear();
   compradores.clear();
