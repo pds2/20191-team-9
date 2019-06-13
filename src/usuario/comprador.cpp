@@ -437,19 +437,6 @@ void Comprador::avaliarItem(){
 }
 
 /**
- * [Comprador::adicionaDinheiro função que envia uma requsição ao administrador para aumento de saldo do comprador]
- * @method Comprador::adicionaDinheiro
- * @param  valor                       [valor que o comprador deseja adicionar ao seu dinheiro atual]
- * @param  comp                        [comprador que está solicitando a requisição de aumento de saldo]
- * @return                             [true em caso da requisicao ter sido bem sucedida e false, em caso contrário]
- */
-
-bool Comprador::adicionaDinheiro(double valor, Comprador comp){
-  //aqui tem que mandar uma requisicao para o administrador
-  return true;
-}
-
-/**
  * [Comprador::limparTela função responsável por limpar a tela do sistema]
  * @method Comprador::limparTela
  */
@@ -492,6 +479,19 @@ void Comprador::fazerCompras(){
       fazerCompras();
       break;
   }
+}
+
+/**
+ * [Comprador::adicionaDinheiro função que envia uma requsição ao administrador para aumento de saldo do comprador]
+ * @method Comprador::adicionaDinheiro
+ * @param  valor                       [valor que o comprador deseja adicionar ao seu dinheiro atual]
+ * @param  comp                        [comprador que está solicitando a requisição de aumento de saldo]
+ * @return                             [true em caso da requisicao ter sido bem sucedida e false, em caso contrário]
+ */
+
+bool Comprador::adicionaDinheiro(double valor, Comprador comp){
+  //aqui tem que mandar uma requisicao para o administrador
+  return true;
 }
 
 #endif
