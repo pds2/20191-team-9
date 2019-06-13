@@ -10,7 +10,6 @@ class Produto{
         float _preco;
         std::vector<int> _avaliacoes;
         float _mediaAvaliacoes;
-        std::vector<std::string> _comentarios;
         std::string _nome;
         std::string _categoria; //(Tema)
         std::string _cor;
@@ -21,7 +20,8 @@ class Produto{
     public:
         Produto(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material);
         ~Produto();
-
+        
+        std::vector<std::string> _comentarios;
         float getPreco();
         float getMediaAvaliacoes();
         std::string getNome();
@@ -34,6 +34,7 @@ class Produto{
         void avaliarProduto(int nota); //salva avaliacao na lista e depois modifica a media
         void getComentarios(); //imprime comentarios
         void setComentario(std::string comentario); //salva comentario
+        int retornaNumComentarios();
 
 };
 
