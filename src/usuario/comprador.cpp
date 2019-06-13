@@ -489,8 +489,9 @@ void Comprador::fazerCompras(){
  * @return                             [true em caso da requisicao ter sido bem sucedida e false, em caso contrário]
  */
 
-bool Comprador::adicionaDinheiro(double valor, Comprador comp){
+bool Comprador::adicionaDinheiro(float valor){
   //aqui tem que mandar uma requisicao para o administrador
+  Administrador::adicionaPedido(this->_email, valor);
   return true;
 }
 
