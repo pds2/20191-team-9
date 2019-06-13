@@ -364,7 +364,7 @@ void Ecommerce::gravaProdutosArquivo(){
   arquivo.close();
 }
 
-void Comprador::listaUsuarioArquivo(){
+void Ecommerce::listaUsuarioArquivo(){
   usuarios.clear();
   compradores.clear();
 
@@ -416,7 +416,7 @@ void Comprador::listaUsuarioArquivo(){
   arquivo.close();
 }
 
-void Comprador::gravaUsuarioArquivo(){
+void Ecommerce::gravaUsuarioArquivo(){
   std::remove("historico.csv");
 
   std::fstream arquivo;

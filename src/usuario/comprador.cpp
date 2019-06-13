@@ -498,9 +498,6 @@ bool Comprador::adicionaDinheiro(double valor, Comprador comp){
  */
 
 void Comprador::listaHistoricoArquivo(){
-  usuarios.clear();
-  compradores.clear();
-
   std::fstream arquivo;
 
   arquivo.open("historico.csv");
