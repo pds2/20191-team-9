@@ -77,7 +77,10 @@ class Ecommerce{
     void listaProdutosArquivo();
     void gravaProdutosArquivo();
 
-
+    void listaComentariosArquivo();
+    void gravaComentariosArquivo();
+    void adicionaComentario(int cod, std::string coment); //procura produto no vector pelo codigo e adiciona comentario 
+  
     void loginUsuario(std::string n, std::string s);
     void loginUsuario();
     void logoutUsuario();
