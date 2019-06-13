@@ -6,6 +6,7 @@
 #include <vector>
 #include <tuple>
 #include <iostream>
+#include <map>
 
 #include <iterator>
 
@@ -24,11 +25,10 @@ class Comprador : public Usuario{
     std::string _endereco;
 
     std::vector <Produto> carrinho;
-    std::vector <Produto> historico;
+    std::map <std::string, Produto> historico;
 
   public:
     Comprador(std::string nome, std::string email, std::string senha, std::string cpf, std::string endereco, int numComprasCarrinho, int numComprasHistorico, int numAvaliacaoes, double dinheiro);
-
     Comprador();
     ~Comprador();
 
@@ -44,7 +44,6 @@ class Comprador : public Usuario{
     float getDinheiro();
     void setDinheiro(float valor);
 
-
     bool adicionarCarrinho();
     void fazerCompras();
     bool retirarCarrinho();
@@ -59,6 +58,10 @@ class Comprador : public Usuario{
     int procurarItensCarrinho(int codProduto);
     void adicionarComentario();
     void avaliarItem();
+
+    void listaHistoricoArquivo();
+
+    void gravaHistoricoArquivo();
 
     void limparTela();
 };

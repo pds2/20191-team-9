@@ -23,8 +23,6 @@ class Administrador : public Usuario{
     std::vector<Compradores> _shoppers;
     std::map<std::string, float> _requisicoes;
 
-
-
   public:
 
     Administrador(std::string nome, std::string email, std::string senha);

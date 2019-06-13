@@ -272,19 +272,15 @@ void Comprador::imprimirHistorico(){
     std::cout << "\t\t Histórico" << std::endl;
     std::cout << "----------------------------------------------" << "\n" << std::endl;
 
-    for(int i=0; i < _numeroComprasCarrinho; i++){
-
-      std::cout << "\n" << "----------------------------------------------" << std::endl;
-      std::cout << "\t\t Código " << (historico[i]).getCodigoProduto() << std::endl;
-      std::cout << "----------------------------------------------" << "\n" << std::endl;
-      std::cout << "Nome: " << (historico[i]).getNome() << std::endl;
-      std::cout << "Categoria: " << (historico[i]).getCategoria()  << std::endl;
-      std::cout << "Cor: " << (historico[i]).getCor()  << std::endl;
-      std::cout << "Material: " << (historico[i]).getMaterial()  << std::endl;
-      std::cout << "Media de Avaliações: " << (historico[i]).getMediaAvaliacoes()  << std::endl;
-      std::cout << "Preço " << (historico[i]).getPreco() << std::endl;
-      std::cout << "Descricao: " << (historico[i]).getDescricao() << std::endl;
-
+    for(int i=0; i < _numeroComprasHistorico; i++){
+      if((historico[i].first) == this->_email){
+        std::cout << "\n" << "----------------------------------------------" << std::endl;
+        std::cout << "\t\t Email do Comprador: " << (historico[i].first) << std::endl;
+        std::cout << "----------------------------------------------" << "\n" << std::endl;
+        std::cout << "Código: " << (historico[i].second).getCodigoProduto() << std::endl;
+        std::cout << "Nome: " << (historico[i].second).getNome() << std::endl;
+        std::cout << "Preço " << (historico[i].second).getPreco() << std::endl;
+      }
     }
 
     std::cout << "\n" << "----------------------------------------------" << std::endl;
@@ -377,7 +373,7 @@ int Comprador::procurarItensCarrinho(int codProduto){
 void Comprador::adicionarComentario(){
 
   int codProduto;
-  int indice = -1
+  int indice = -1;
 
   std::cout << "\n" << "Digite o código do produto para o qual deseja registrar um comentário.";
   std::cin >> codProduto;
@@ -466,6 +462,8 @@ void Comprador::fazerCompras(){
       if(_dinheiro>=_totalCarrinho){
         carrinho.clear();
         _dinheiro = _dinheiro - _totalCarrinho;
+        _numeroComprasHistorico++;
+
         ecom.menuInicial();
       }
       else{
@@ -489,10 +487,94 @@ void Comprador::fazerCompras(){
  * @return                             [true em caso da requisicao ter sido bem sucedida e false, em caso contrário]
  */
 
-bool Comprador::adicionaDinheiro(float valor){
+bool Comprador::adicionaDinheiro(double valor, Comprador comp){
   //aqui tem que mandar uma requisicao para o administrador
-  Administrador::adicionaPedido(this->_email, valor);
   return true;
 }
+
+/**
+ * [Comprador::listaHistoricoArquivo função que lista o histórico de compras registrados no arquivo]
+ * @method Comprador::listaHistoricoArquivo
+ */
+
+void Comprador::listaHistoricoArquivo(){
+  std::fstream arquivo;
+
+  arquivo.open("historico.csv");
+  std::string email;
+
+  if (!arquivo.is_open()){
+    std::cout << "Erro ao abrir arquivo. Tente novamente";
+    exit(1);
+  }
+
+  while (arquivo.good()){
+
+    std::string nomeProduto, codigoProduto, precoProduto, numeroComprasHistorico;
+    int codigo, nCH;
+    float preco=0.0;
+
+    std::getline(arquivo, email,',');
+    std::getline(arquivo, numeroComprasHistorico, ',');
+
+    if(email==""){
+      break;
+    }
+
+    std::istringstream iss0(numeroComprasHistorico);
+    nCH = std::stoi(numeroComprasHistorico);
+
+    if(nCH > 0){
+      for (int i = 0; i < nCH; i++) {
+        std::getline(arquivo, codigoProduto);
+        std::getline(arquivo, nomeProduto);
+        std::getline(arquivo, precoProduto);
+
+        std::istringstream iss1(codigoProduto);
+        codigo = std::stoi(codigoProduto);
+
+        preco = std::stof(precoProduto);
+
+        int indice = buscaIndiceProdutos(codigo);
+
+        cod = (ecom.produto[indice]).getCodigoProduto();
+        nome = (ecom.produto[indice]).getNome();
+        categoria = (ecom.produto[indice]).getCategoria();
+        cor = (ecom.produto[indice]).getCor();
+        descricao = (ecom.produto[indice]).getDescricao();
+        material = (ecom.produto[indice]).getMaterial();
+        preco = (ecom.produto[indice]).getPreco();
+        mediaAvaliacoes = (ecom.produto[indice]).getMediaAvaliacoes();
+
+        Produto prod = Produto(cod, preco, mediaAvaliacoes, nome, categoria, cor, descricao, material);
+        historico.insert(std::pair<std::string, Produto>(email, prod));
+      }
+    }
+  }
+  imprimirHistorico();
+  arquivo.close();
+}
+
+void Comprador::gravaHistoricoArquivo(){
+  std::remove("historico.csv");
+
+  std::fstream arquivo;
+  arquivo.open("historico.csv", std::ofstream::app);
+
+  if (!arquivo.is_open()){
+    std::cout << "Erro ao abrir arquivo. Tente novamente";
+    exit(1);
+  }
+
+  _numeroComprasHistorico = historico.size();
+  for(int i=0; arquivo.good() && i < _numeroComprasHistorico; i++){
+    int indice = procurarComprador((historico[i].first);
+    arquivo << (historico[i].first) << "," << (comprador[indice]).getNumeroComprasHistorico() << ",";
+    arquivo << << (historico[i].second).getCodigoProduto() << "," << (historico[i].second).getNome() << "," << (historico[i].second).getPreco();
+  }
+
+  arquivo.close();
+}
+
 
 #endif

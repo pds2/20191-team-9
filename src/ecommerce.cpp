@@ -62,8 +62,6 @@ void Ecommerce::listaComentariosArquivo(){
                 }
                 std::getline(arquivo, cmt);
 
-                std::cout << "Comentario " << aux << " = "  << cmt << std::endl;
-
                 adicionaComentario(cod, cmt);
             }
         }
@@ -181,7 +179,7 @@ void Ecommerce::listaProdutosArquivo(){
     std::cout << "Erro ao abrir arquivo. Tente novamente";
     exit(1);
   }
-  
+
   int linhas = tamanhoArquivo("produtos.csv");
   if (tamanhoArquivo("produtos.csv") == 0){
     std::cout << "Ainda nao ha nenhum produto cadastrado." << std::endl;
@@ -372,7 +370,7 @@ void Ecommerce::listaUsuarioArquivo(){
 
   std::fstream arquivo;
 
-  arquivo.open("usuarios.csv");
+  arquivo.open("historico.csv");
 
   if (!arquivo.is_open()){
     std::cout << "Erro ao abrir arquivo. Tente novamente";
@@ -419,10 +417,10 @@ void Ecommerce::listaUsuarioArquivo(){
 }
 
 void Ecommerce::gravaUsuarioArquivo(){
-  std::remove("usuarios.csv");
+  std::remove("historico.csv");
 
   std::fstream arquivo;
-  arquivo.open("usuarios.csv", std::ofstream::app);
+  arquivo.open("historico.csv", std::ofstream::app);
 
   if (!arquivo.is_open()){
     std::cout << "Erro ao abrir arquivo. Tente novamente";
@@ -711,7 +709,7 @@ void Ecommerce::logoutUsuario(){
   else {
     std::cout << "Entrada invalida. Por favor tente novamente...";
     logoutUsuario();
-  } 
+  }
 }
 
 void Ecommerce::inicio(){
