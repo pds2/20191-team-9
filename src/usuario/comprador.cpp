@@ -466,6 +466,7 @@ void Comprador::fazerCompras(){
       if(_dinheiro>=_totalCarrinho){
         carrinho.clear();
         _dinheiro = _dinheiro - _totalCarrinho;
+
         ecom.menuInicial();
       }
       else{
@@ -489,10 +490,82 @@ void Comprador::fazerCompras(){
  * @return                             [true em caso da requisicao ter sido bem sucedida e false, em caso contrário]
  */
 
-bool Comprador::adicionaDinheiro(float valor){
+bool Comprador::adicionaDinheiro(double valor, Comprador comp){
   //aqui tem que mandar uma requisicao para o administrador
-  Administrador::adicionaPedido(this->_email, valor);
   return true;
 }
+
+void Comprador::listaHistoricoArquivo(){
+  usuarios.clear();
+  compradores.clear();
+
+  std::fstream arquivo;
+
+  arquivo.open("historico.csv");
+  std::string email;
+
+  if (!arquivo.is_open()){
+    std::cout << "Erro ao abrir arquivo. Tente novamente";
+    exit(1);
+  }
+  if(arquivo.good()){
+    std::getline(arquivo, email,',');
+  }
+  while (arquivo.good()){
+
+    std::string nomeProduto, codigoProduto, precoProduto;
+    int codigo;
+    float preco=0.0;
+
+    std::getline(arquivo, codigoProduto,',');
+    std::getline(arquivo, nomeProduto,',');
+    std::getline(arquivo, precoProduto);
+
+    if(email==""){
+      break;
+    }
+
+    std::istringstream iss1(codigoProduto);
+    codigo = std::stoi(codigoProduto);
+
+    preco = std::stof(precoProduto);
+
+    int indice = buscaIndiceProdutos(codigo);
+
+    cod = (ecom.produto[indice]).getCodigoProduto();
+    nome = (ecom.produto[indice]).getNome();
+    categoria = (ecom.produto[indice]).getCategoria();
+    cor = (ecom.produto[indice]).getCor();
+    descricao = (ecom.produto[indice]).getDescricao();
+    material = (ecom.produto[indice]).getMaterial();
+    preco = (ecom.produto[indice]).getPreco();
+    mediaAvaliacoes = (ecom.produto[indice]).getMediaAvaliacoes();
+
+    Produto prod = Produto(cod, preco, mediaAvaliacoes, nome, categoria, cor, descricao, material)
+    historico.push_back(prod);
+  }
+  imprimirHistorico();
+  arquivo.close();
+}
+
+void Ecommerce::gravaHistoricoArquivo(){
+  std::remove("historico.csv");
+
+  std::fstream arquivo;
+  arquivo.open("historico.csv", std::ofstream::app);
+
+  if (!arquivo.is_open()){
+    std::cout << "Erro ao abrir arquivo. Tente novamente";
+    exit(1);
+  }
+
+  int numeroCompradores = compradores.size();
+  for(int i=0; arquivo.good() && i < numeroCompradores; i++){
+    arquivo << (compradores[i]).getNome() << "," << (compradores[i]).getEmail() << "," << (compradores[i]).getSenha() << "," << (compradores[i]).getCPF() << ","  << (compradores[i]).getEndereco() << "," << (compradores[i]).getNumeroComprasCarrinho() << "," << (compradores[i]).getNumeroComprasHistorico() << "," << (compradores[i]).getNumeroAvaliacoes() << "," << (compradores[i]).getDinheiro() << "\n";
+  }
+
+  arquivo.close();
+}
+
 
 #endif

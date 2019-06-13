@@ -60,6 +60,10 @@ class Comprador : public Usuario{
     void adicionarComentario();
     void avaliarItem();
 
+    void listaHistoricoArquivo(){
+
+    void gravaHistoricoArquivo(){
+
     void limparTela();
 };
 
