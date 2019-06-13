@@ -3,7 +3,6 @@
 #define ADMINISTRADOR_CPP
 
 #include "usuario/administrador.hpp"
-#include <fstream>
 
 Administrador::Administrador(std::string nome, std::string email, std::string senha){
   this->_nome = nome;
@@ -11,99 +10,196 @@ Administrador::Administrador(std::string nome, std::string email, std::string se
   this->_senha = senha;
 }
 
-void Administrador::adicionaItem(std::string nome_do_produto){
-  //procura no estoque.txt se existe algum produto com o nome dado.
-  //Se ele não existir, este produto é adicionado ao estoque. Se existir, uma mensagem de erro é impressa na tela.
+void Administrador::produtoCsvToVector(){
 
-  if(nome existe no arquivo){
-    std::cout << "Este produto já existe!" << std::endl;
-
-    return;
-  }
-
-  // Inicializa as e coleta variáveis comuns à todos os produtos
-  int tipo_de_produto;
-  int codigo_do_produto;
-  float media_das_avaliacoes = 0;
-  float preco;
-  std::string categoria;
+  std::string nome;
+  std::string codigo_do_produto;
+  std::string media_das_avaliacoes;
+  std::string preco;
+  std::string categoria; //Acessorios, Canecas, Blusas e Moletons
   std::string cor;
   std::string descricao;
   std::string material;
 
-  std::cout << "Por favor, informe o código do produto:" << std::endl;
-  std::cin >> codigo_do_produto;
+  std::ifstream arquivo;
+  arquivo.open("produtos.csv", ios::in);
 
-  std::cout << "Por favor, informe a categoria do produto:" << std::endl;
-  std::cin >> categoria;
-
-  std::cout << "Por favor, informe a cor:" << std::endl;
-  std::cin >> cor;
-
-  std::cout << "Por favor, dê uma descrição para o produto:" << std::endl;
-  std::cin >> descricao;
-
-  std::cout << "Por favor, informe o material do produto:" << std::endl;
-  std::cin >> material;
-
-  std::cout << "Por favor, informe o preco do produto:" << std::endl;
-  std::cin >> preco;
-
-  // Agora é preciso entender que tipo de produto o administrador deseja adicionar,
-  // pois cada produto possui alguns atributos próprios.
-  // A entrada é dada por um int para que possamos comparará-la e validá-la com mais facilidade.
-
-  std::cout << "Qual tipo de produto deseja adicionar?Digite:\n1 - Blusas e Moletons\n2 - Canecas\n3 - Acessórios" << std::endl;
-  std::cin >> tipo_de_produto;
-
-  if(tipo_de_produto < 1 || tipo_de_produto > 3){
-    std::cout << "O número digitado é inválido! Por favor, digite um número entre 1 e 3" << std::endl;
+  if (!arquivo.is_open()){
+   std::cout << "Erro ao abrir arquivo. Tente novamente";
+   exit(1);
   }
 
-  switch (tipo_de_produto) {
-    case 1: //Produto é uma blusa ou um moletom
-      char tamanho;
-      std::cout << "Por favor, informe o tamanho do produto:" << std::endl;
-      std::cin >> tamanho;
+  while(arquivo.good()){
+    std::getline(arquivo, codigo_do_produto, ',');
+    std::getline(arquivo, preco, ',');
+    std::getline(arquivo, media_das_avaliacoes, ',');
+    std::getline(arquivo, nome, ',');
+    std::getline(arquivo, categoria, ',');
+    std::getline(arquivo, cor, ',');
+    std::getline(arquivo, descricao, ',');
+    std::getline(arquivo, material, ',');
 
-      int tipo_de_peca;
-      std::cout << "Por favor, informe o tipo da peça que deseja adicionar. Digite:\n1 - Blusa\n2 - Moletom" << std::endl;
+    std::stoi(codigo_do_produto);
+    std::stof(media_das_avaliacoes);
+    std::stof(preco);
 
-      if(tipo_de_peca == 1){
-        BlusasEMoletom::BlusasEMoletom(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tamanho, "BLUSA");
-      }else if(tipo_de_peca == 2){
-        BlusasEMoletom::BlusasEMoletom(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tamanho, "MOLETOM");
-      }
-      break;
+    if(std::strcomp(categoria, "Blusas e Moletons") == 0){
+      std::string tamanho;
+      std::string tipo_de_produto;
 
-    case 2: //Produto é uma caneca
-      float diametro;
-      std::cout << "Por favor, informe o diâmetro da caneca:" << std::endl;
-      std::cin >> diametro;
+      std::getline(arquivo, tamanho, ',');
+      std::getline(arquivo, tipo_de_produto, '\n');
 
-      Caneca::Caneca(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, diametro);
-      break;
+      BlusasEMoletom bem = BlusasEMoletom(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tamanho,);
+      this->bluemols.push_back(bem);
 
-    case 3: //Produto é um acessório
+    }else if(std::strcomp(categoria, "Canecas") == 0){
+      std::string diametro;
+
+      std::getline(arquivo, diametro, '\n');
+
+      Caneca can = Caneca(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, diametro);
+      this->cans.push_back(can);
+
+    }else if(std::strcomp(categoria, "Acessorio") == 0){
       std::string tipo_de_acessorio;
 
-      std::cout << "Por favor, informe que tipo de acessório é este produto:" << std::endl;
-      std::cin >> tipo_de_acessorio;
+      std::getline(arquivo, diametro, '\n');
 
-      for(int i = 0; int i < std::strlen(tipo_de_acessorio); i++){
-        tipo_de_acessorio[i] = std::toupper(tipo_de_acessorio[i]);
-      }
-      Acessorio::Acessorio(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tipo_de_acessorio);
-      break;
+      Acessorio ace = Acessorio(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tipo_de_acessorio);
+      this->aces.push_back(ace);
+    }
   }
+
+  arquivo.close();
 }
 
-void Administrador::removeItem(Produto item){
-  //procura no estoque.txt se existe algum produto com o nome chamado.
+void Administrador::usuarioCsvToVector(){
+
+  std::string nome, email, senha, cpf, endereco;
+  std::string numHistorico, numCarrinho, numAvaliacoes, dinheiro;
+
+  std::fstream arquivo;
+  arquivo.open("usuarios.csv", ios::in);
+
+  if (!arquivo.is_open()){
+    std::cout << "Erro ao abrir arquivo. Tente novamente";
+    exit(1);
+  }
+
+  while (arquivo.good()){
+
+    std::getline(arquivo, nome,',');
+    std::getline(arquivo, email,',');
+    std::getline(arquivo, senha,',');
+    std::getline(arquivo, cpf,',');
+    std::getline(arquivo, endereco,',');
+    std::getline(arquivo, numCarrinho,',');
+    std::getline(arquivo, numHistorico,',');
+    std::getline(arquivo, numAvaliacoes,',');
+    std::getline(arquivo, dinheiro,'\n');
+
+    std::stof(dinheiro);
+
+    Comprador comp = Comprador(nome, email, senha, cpf, endereco, numCarrinho, numHistorico, numAvaliacoes, dinheiro);
+    this->shoppers.push_back(comp);
+  }
+
+  arquivo.close();
+}
+
+void Administrador::removeItem(std::string nome_do_produto){
+  //procura no vector se existe algum produto com o nome chamado.
   //Se ele existir, este produto é retirado do estoque. Se não existir, uma mensagem de erro é impressa na tela.
 
+  this->bluemols.clear();
+  this->cans.clear();
+  this->aces.clear();
+
+  produtoCsvToVector();
+
+  std::string name;
+  int indice = -1;
+  int bm = 0;
+  int cn = 0;
+  int ac = 0;
+
+  // Procura o produto dentre os produtos cadastrados
+  for(int i = 0; i<bluemols.size(); i++){
+
+    name = bluemols[i].getNome();
+
+    if(strcomp(nome_do_produto, name) == 0){
+      indice = i;
+      bm = 1;
+      break;
+    }
+
+  }
+
+  if(indice == -1){
+    for(int i = 0; i<cans.size(); i++){
+
+      name = cans[i].getNome();
+
+      if(strcomp(nome_do_produto, name) == 0){
+        indice = i;
+        cn = 1;
+        break;
+      }
+
+    }
+  }
+
+  if(indice == -1){
+    for(int i = 0; i<aces.size(); i++){
+
+      name = aces[i].getNome();
+
+      if(strcomp(nome_do_produto, name) == 0){
+        indice = i;
+        ac = 1;
+        break;
+      }
+
+    }
+  }
+
+  //Se não achou, imprime uma mensagem de erro. Se achou, procura em qual categoria está o item para fazer a remoção
+  if(indice == -1){
+    std::cout << "Este produto não existe!" << std::endl;
+    return;
+  }else if(bm == 1){
+    bluemols.erase(bluemols.begin() + indice);
+  }else if(cn == 1){
+    cans.erase(cans.begin() + indice);
+  }else if(ac == 1){
+    aces.erase(aces.begin() + indice);
+  }
+
+  //Com o produto apagado, o arquivo de produtos é reescrito
+  std::ofstream arquivo;
+
+  arquivo.open("produtos.csv", std::ios::trunc | std::ios::out);
+
+  for(int i = 0; i<bluemols.size(); i++){
+    arquivo << bluemols[i].getCodigoProduto() << "," << bluemols[i].getNome() << "," << bluemols[i].getPreco() << "," << bluemols[i].getMediaAvaliacoes() << "," << bluemols[i].getCategoria() << ","  << bluemols[i].getCor() << "," << bluemols[i].getDescricao() << "," << bluemols[i].getMaterial() << "," << bluemols[i].getTamanho() << "," << bluemols[i].getTipo() << std::endl;
+  }
+
+  for(int i = 0; i<cans.size(); i++){
+    arquivo << cans[i].getCodigoProduto() << "," << cans[i].getNome() << "," << cans[i].getPreco() << "," << cans[i].getMediaAvaliacoes() << "," << cans[i].getCategoria() << ","  << cans[i].getCor() << "," << cans[i].getDescricao() << "," << cans[i].getMaterial() << "," << cans[i].getDiametro() << std::endl;
+  }
+
+  for(int i = 0; i<aces.size(); i++){
+    arquivo << aces[i].getCodigoProduto() << "," << aces[i].getNome() << "," << aces[i].getPreco() << "," << aces[i].getMediaAvaliacoes() << "," << aces[i].getCategoria() << ","  << aces[i].getCor() << "," << aces[i].getDescricao() << "," << aces[i].getMaterial() << "," << aces[i].getTipo() << std::endl;
+
+  }
+
+  arquivo.close();
+
 }
 
+/*
 void Administrador::mostraPedidos(){
   // Imprime o mapa _requisicoes com o seguinte formato
   // Exemplo: 1 - email@docomprador.com: R$100,00
@@ -126,7 +222,8 @@ void Administrador::aprovaPedido(std::string email, float valor){
   std::cin >> aprovacao;
 
   if(aprovacao == 1){
-    user._dinheiro += valor;
+    int novo_saldo = user.getDinheiro() + valor;
+    user.setDinheiro(novo_saldo);
   }
 
 }
@@ -145,51 +242,11 @@ void Administrador::exibeUsuarios(){
   lista_de_usuarios.close();
 }
 
-void Administrador::editaUsuario(Comprador user){
-  int opcao;
+void Administrador::excluiUsuario(std::string email){
 
-  std::cout << "O que você deseja editar? Digite:" << std::endl;
-  std::cout << "1 - Editar o nome do comprador" << std::endl;
-  std::cout << "2 - Editar o email do comprador" << std::endl;
-  std::cout << "3 - Editar a senha do comprador" << std::endl;
-  std::cout << "4 - Editar o CPF do comprador" << std::endl;
-  std::cout << "5 - Editar o endereço do comprador" << std::endl;
-  std::cin >> opcao;
-
-  switch (opcao) {
-    case 1:
-
-      break;
-
-    case 2:
-
-      break;
-
-    case 3:
-
-      break;
-
-    case 4:
-
-      break;
-
-    case 5:
-
-      break;
-
-    case 6:
-
-      break;
-  }
 }
-
-void Administrador::excluiUsuario(Comprador user){}
-
-void Administrador::exibeMensagens(Comprador user){}
-
-void Administrador::respondeMensagens(Comprador user){}
 
 Administrador::~Administrador(){}
 
 #endif
-/*
+*/

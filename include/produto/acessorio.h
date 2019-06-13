@@ -1,11 +1,11 @@
-/*
 #ifndef ACESSORIO_H
 #define ACESSORIO_H
 
 #include <iostream>
 #include <string>
 #include <vector>
-#include "produto.h"
+
+#include "produto/produto.h"
 
 class Acessorio : public Produto{
     private:
@@ -20,4 +20,3 @@ class Acessorio : public Produto{
 };
 
 #endif
-*/

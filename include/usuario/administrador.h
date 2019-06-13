@@ -15,16 +15,21 @@
 
 class Administrador : public Usuario{
   private:
-    std::map<std::string, float> _requisicoes;
     int _qntdade_de_requisicoes;
+
+    std::vector<BlusasEMoletom> bluemols;
+    std::vector<Caneca> cans;
+    std::vector<Acessorio> aces;
+    std::vector<Compradores> shoppers;
+    std::map<std::string, float> _requisicoes;
+
+
 
   public:
 
     Administrador(std::string nome, std::string email, std::string senha);
 
-    void adicionaItem(std::string nome_do_produto);
-
-    void removeItem(Produto item);
+    void removeItem(std::string nome_do_produto);
 
     void mostraPedidos();
 

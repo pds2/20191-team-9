@@ -1,8 +1,7 @@
-/*#ifndef CANECA_CPP
+#ifndef CANECA_CPP
 #define CANECA_CPP
 
 #include "produto/caneca.h"
-#include "produto.cpp"
 
 Caneca::Caneca(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, float diametro):Produto(cod, preco, mediaAvaliacoes, nome, categoria, cor, descricao, material){
 
@@ -28,4 +27,3 @@ void Caneca::imprimeProduto(){
         std::cout << "Diametro:\t\t" << getDiametro() << " cm" << std::endl;
 }
 #endif
-*/

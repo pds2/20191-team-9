@@ -1,10 +1,11 @@
-/*#ifndef CANECA_H
+#ifndef CANECA_H
 #define CANECA_H
 
 #include <iostream>
 #include <string>
 #include <vector>
-#include "produto.h"
+
+#include "produto/produto.h"
 
 class Caneca : public Produto{
     private:
@@ -19,4 +20,3 @@ class Caneca : public Produto{
 };
 
 #endif
-*/

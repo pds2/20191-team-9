@@ -1,11 +1,11 @@
-/*
 #ifndef BLUSAS_E_MOLETOM_H
 #define BLUSAS_E_MOLETOM_H
 
 #include <iostream>
 #include <string>
 #include <vector>
-#include "produto.h"
+
+#include "produto/produto.h"
 
 class BlusasEMoletom : public Produto{
     private:
@@ -22,4 +22,3 @@ class BlusasEMoletom : public Produto{
 };
 
 #endif
-*/

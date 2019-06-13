@@ -11,7 +11,6 @@
 
 #include "usuario/usuario.h"
 #include "produto/produto.h"
-#include "ecommerce.h"
 
 class Comprador : public Usuario{
   private:
@@ -24,7 +23,6 @@ class Comprador : public Usuario{
     std::string _CPF;
     std::string _endereco;
 
-    //dps mudar de Usuario para Produto quando estiver pronto
     std::vector <Produto> carrinho;
     std::vector <Produto> historico;
 

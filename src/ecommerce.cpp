@@ -1,12 +1,369 @@
+#ifndef ECOMMERCE_CPP
+#define ECOMMERCE_CPP
+
 #include "ecommerce.h"
 
 Ecommerce::Ecommerce(){
-  inicio();
+  //inicio();
 }
 
 Ecommerce::~Ecommerce(){
   usuarios.clear();
   compradores.clear();
+  produtos.clear();
+}
+
+void Ecommerce::listaComentariosArquivo(){
+  produtos.clear();
+
+  std::fstream arquivo;
+  arquivo.open("comentarios.csv",std::ios::in);
+
+  if (!arquivo.is_open()){
+    std::cout << "Erro ao abrir arquivo. Tente novamente";
+    exit(1);
+  }
+
+    int linhas = tamanhoArquivo("comentarios.csv");
+      if (tamanhoArquivo("comentarios.csv") == 0){
+        std::cout << "Nenhum comentario foi feito ainda." << std::endl;
+        return;
+      }
+
+      while (arquivo.good()){
+        int cod, num;
+        std::vector<std::string> coments;
+
+        std::string codigoS, numS, cmt;
+
+        std::getline(arquivo, codigoS,',');
+        std::getline(arquivo, numS, ',');
+
+        if (codigoS == ""){
+            break;
+        }
+
+        cod = std::stoi(codigoS);
+        num = std::stoi(numS);
+
+        std::cout << "Codigo e numero de comentarios = " << cod << " " << num << std::endl;
+
+            if (num == 0){
+                std::cout << "Esse produto nao recebeu nenhum comentario ainda." << std::endl;
+            }
+            else{
+                int aux;
+                for(aux=0; aux<num-1; aux++){
+                    std::getline(arquivo, cmt,',');
+
+                    std::cout << "Comentario " << aux << " = "  << cmt << std::endl;
+
+                    adicionaComentario(cod, cmt);
+                }
+                std::getline(arquivo, cmt);
+
+                std::cout << "Comentario " << aux << " = "  << cmt << std::endl;
+
+                adicionaComentario(cod, cmt);
+            }
+        }
+  arquivo.close();
+}
+
+void Ecommerce::gravaComentariosArquivo(){
+  std::remove("comentarios.cvs");
+
+  std::fstream arquivo;
+  arquivo.open("comentarios.csv", std::ofstream::app);
+
+  if (!arquivo.is_open()){
+    std::cout << "Erro ao abrir arquivo. Tente novamente";
+    exit(1);
+  }
+
+  int numeroProdutos = produtos.size();
+
+  for(int i=0; arquivo.good() && i < numeroProdutos; i++){
+
+        arquivo << (produtos[i]).getCodigoProduto() << ",";
+
+        int n = produtos[i].retornaNumComentarios();
+
+        arquivo << n << ",";
+        if (n == 0){ //Arquivo não possui comentarios
+            arquivo << "0" << std::endl;
+        } else{
+            int aux;
+            for(aux=0; aux < n-1; aux++){
+               arquivo << "\"" << produtos[i]._comentarios[aux] << "\"" << ",";
+            }
+
+            arquivo << "\"" << produtos[i]._comentarios[aux] << "\"" << "\n";
+        }
+  }
+  arquivo.close();
+}
+
+void Ecommerce::adicionaComentario(int cod, std::string coment){
+    int x = buscaIndiceProdutos(cod);
+    if ( x != -1){
+    produtos[x].setComentario(coment);
+    }
+}
+
+int Ecommerce::tamanhoArquivo(const char* file_name){
+    FILE *file = fopen(file_name, "r");
+
+    if(file == NULL)
+        return 0;
+
+    fseek(file, 0, SEEK_END);
+    int size = ftell(file);
+    fclose(file);
+
+    return size;
+}
+
+bool Ecommerce::checaCodigo(int cod){
+    int x = produtos.size();
+    int aux;
+
+    for (aux = 0; aux < x; aux++){
+        if(produtos[aux].getCodigoProduto()== cod){
+            return false;
+        }
+    }
+
+    return true;
+}
+
+void Ecommerce::cadastrarCaneca(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, float diametro){
+    if (checaCodigo(cod)){
+        Caneca can(cod, preco, mediaAvaliacoes, nome, "Canecas", cor, descricao, material, diametro);
+        Produto prod(cod, preco, mediaAvaliacoes, nome, "Canecas", cor, descricao, material);
+        canecas.push_back(can);
+        produtos.push_back(prod);
+    } else {
+        std::cout << "Codigo de produto ja cadastrado. Tente novamente." << std::endl;
+    }
+}
+
+void Ecommerce::cadastrarAcessorio(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, std::string tipo){
+    if(checaCodigo(cod)){
+        Acessorio ac(cod, preco, mediaAvaliacoes, nome, "Acessorios", cor, descricao, material, tipo);
+        Produto prod(cod, preco, mediaAvaliacoes, nome, "Acessorios", cor, descricao, material);
+        acessorios.push_back(ac);
+        produtos.push_back(prod);
+    } else {
+        std::cout << "Codigo de produto ja cadastrado. Tente novamente." << std::endl;
+    }
+}
+
+void Ecommerce::cadastrarBlusasEMoletom(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, char tamanho, std::string tipo){
+    if(checaCodigo(cod)){
+        BlusasEMoletom b(cod, preco, mediaAvaliacoes, nome, "Blusas e Moletons", cor, descricao, material, tamanho, tipo);
+        Produto prod(cod, preco, mediaAvaliacoes, nome, "Blusas e Moletons", cor, descricao, material);
+        blusasEmoletons.push_back(b);
+        produtos.push_back(prod);
+    } else {
+        std::cout << "Codigo de produto ja cadastrado. Tente novamente." << std::endl;
+    }
+}
+
+
+void Ecommerce::listaProdutosArquivo(){
+  produtos.clear();
+
+  std::fstream arquivo;
+  arquivo.open("produtos.csv",std::ios::in);
+
+  if (!arquivo.is_open()){
+    std::cout << "Erro ao abrir arquivo. Tente novamente";
+    exit(1);
+  }
+
+int linhas = tamanhoArquivo("produtos.csv");
+  if (tamanhoArquivo("produtos.csv") == 0){
+    std::cout << "Ainda nao ha nenhum produto cadastrado." << std::endl;
+    return;
+  }
+
+  while (arquivo.good()){
+    int cod;
+    std::string nome, categoria, cor, descricao, material;
+    float preco, mediaAvaliacoes;
+
+    std::string codigoS, precoS, mediaS;
+
+    std::getline(arquivo, codigoS,',');
+    std::getline(arquivo, nome,',');
+    std::getline(arquivo, precoS,',');
+    std::getline(arquivo, mediaS,',');
+    std::getline(arquivo, categoria,',');
+    std::getline(arquivo, cor,',');
+    std::getline(arquivo, descricao,',');
+    std::getline(arquivo, material,',');
+
+    if (codigoS == ""){
+        break;
+    }
+
+    std::istringstream iss(codigoS);
+    cod = std::stoi(codigoS);
+    preco = std::stof(precoS);
+    mediaAvaliacoes = std::stof(mediaS);
+
+    if (categoria == "Acessorios"){
+      std::string tipo;
+      std::getline(arquivo, tipo);
+
+      Acessorio ac(cod, preco, mediaAvaliacoes, nome, categoria, cor, descricao, material, tipo);
+      acessorios.push_back(ac);
+
+    }
+
+    if (categoria == "Canecas"){
+      float diametro;
+      std::string diametroS;
+      std::getline(arquivo, diametroS);
+
+      diametro = std::stof(diametroS);
+      Caneca can(cod, preco, mediaAvaliacoes, nome, categoria, cor, descricao, material, diametro);
+      canecas.push_back(can);
+
+    }
+
+    if (categoria == "Blusas e Moletons"){
+      char tamanho;
+      std::string tp, tam;
+
+      std::getline(arquivo, tam,',');
+      std::getline(arquivo, tp);
+
+      tamanho = tam[0];
+      BlusasEMoletom bM(cod, preco, mediaAvaliacoes, nome, categoria, cor, descricao, material, tamanho, tp);
+      blusasEmoletons.push_back(bM);
+    }
+
+    Produto prod(cod, preco, mediaAvaliacoes, nome, categoria, cor, descricao, material);
+    produtos.push_back(prod);
+    }
+  arquivo.close();
+}
+
+void Ecommerce::imprimirProdutos(){
+    int x = produtos.size();
+    int aux, c, i;
+    for(aux = 0; aux < x; aux++){
+
+        if (produtos[aux].getCategoria()=="Canecas"){
+            c = produtos[aux].getCodigoProduto();
+            i = buscaIndiceCaneca(c);
+            canecas[i].imprimeProduto();
+        }
+        if (produtos[aux].getCategoria()=="Blusas e Moletons"){
+            c = produtos[aux].getCodigoProduto();
+            i = buscaIndiceBlusasEMoletom(c);
+            blusasEmoletons[i].imprimeProduto();
+        }
+        if (produtos[aux].getCategoria()=="Acessorios"){
+            c = produtos[aux].getCodigoProduto();
+            i = buscaIndiceAcessorio(c);
+            acessorios[i].imprimeProduto();
+        }
+        std::cout << "Codigo do Produto:\t" << produtos[aux].getCodigoProduto() << std::endl;
+        }
+}
+
+int Ecommerce::buscaIndiceCaneca(int cod){
+    int x;
+    for(x = 0; x < canecas.size(); x++){
+        if(canecas[x].getCodigoProduto() == cod){
+            return x;
+        }
+    }
+    return -1;
+}
+
+int Ecommerce::buscaIndiceBlusasEMoletom(int cod){
+    int x;
+    for(x = 0; x < blusasEmoletons.size(); x++){
+        if(blusasEmoletons[x].getCodigoProduto() == cod){
+            return x;
+        }
+    }
+    return -1;
+}
+
+int Ecommerce::buscaIndiceAcessorio(int cod){
+    int x;
+    for(x = 0; x < acessorios.size(); x++){
+        if(acessorios[x].getCodigoProduto() == cod){
+            return x;
+        }
+    }
+    return -1;
+}
+
+int Ecommerce::buscaIndiceProdutos(int cod){
+    int x;
+    for(x = 0; x < produtos.size(); x++){
+        if(produtos[x].getCodigoProduto() == cod){
+            return x;
+        }
+    }
+    return -1;
+}
+
+
+void Ecommerce::gravaProdutosArquivo(){
+  std::remove("produtos.csv");
+
+  std::fstream arquivo;
+  arquivo.open("produtos.csv", std::ofstream::app);
+
+  if (!arquivo.is_open()){
+    std::cout << "Erro ao abrir arquivo. Tente novamente";
+    exit(1);
+  }
+
+  int numeroProdutos = produtos.size();
+
+  for(int i=0; arquivo.good() && i < numeroProdutos; i++){
+
+     //if(checaCodigo(produtos[i].getCodigoProduto())){
+        arquivo << (produtos[i]).getCodigoProduto() << "," << (produtos[i]).getNome() << "," << (produtos[i]).getPreco() << "," << (produtos[i]).getMediaAvaliacoes() << "," << (produtos[i]).getCategoria() << ","  << (produtos[i]).getCor() << "," << (produtos[i]).getDescricao() << "," << (produtos[i]).getMaterial() << ",";
+        int x = 0;
+        if (produtos[i].getCategoria()=="Acessorios"){
+            int x = produtos[i].getCodigoProduto();
+            int i = buscaIndiceAcessorio(x);
+            if(i != -1){
+                   arquivo << (acessorios[i]).getTipo() << std::endl;
+             } else {
+                std::cout << "Erro. Tente novamente." << std::endl;
+                }
+        }
+        if (produtos[i].getCategoria()=="Blusas e Moletons"){
+            int x = produtos[i].getCodigoProduto();
+            int i = buscaIndiceBlusasEMoletom(x);
+            if(i != -1){
+                   arquivo << (blusasEmoletons[i]).getTamanho() << "," << (blusasEmoletons[i]).getTipo() << std::endl;
+             } else {
+                std::cout << "Erro. Tente novamente." << std::endl;
+                }
+        }
+        if (produtos[i].getCategoria()=="Canecas"){
+          int x = produtos[i].getCodigoProduto();
+          int i = buscaIndiceCaneca(x);
+          if(i != -1){
+                arquivo << (canecas[i]).getDiametro() << std::endl;
+              } else {
+                std::cout << "Erro. Tente novamente." << std::endl;
+                }
+        }
+    //}
+  }
+  arquivo.close();
 }
 
 void Ecommerce::listaUsuarioArquivo(){
@@ -25,24 +382,32 @@ void Ecommerce::listaUsuarioArquivo(){
   while (arquivo.good()){
 
     std::string nome, email, senha, cpf, endereco;
-    std::string numHistorico, numCarrinho, numAvaliacoes, dinheiro;
+    std::string numHistoricoS, numCarrinhoS, numAvaliacoesS, dinheiroS;
     int numH, numC, numA;
-    float din;
+    float din=0.0;
 
     std::getline(arquivo, nome,',');
     std::getline(arquivo, email,',');
     std::getline(arquivo, senha,',');
     std::getline(arquivo, cpf,',');
     std::getline(arquivo, endereco,',');
-    std::getline(arquivo, numCarrinho,',');
-    std::getline(arquivo, numHistorico,',');
-    std::getline(arquivo, numAvaliacoes,',');
-    std::getline(arquivo, dinheiro,',');
+    std::getline(arquivo, numCarrinhoS,',');
+    std::getline(arquivo, numHistoricoS,',');
+    std::getline(arquivo, numAvaliacoesS,',');
+    std::getline(arquivo, dinheiroS);
 
-    din = std::stof(dinheiro);
-    numH = std::stoi(numHistorico);
-    numC = std::stoi(numCarrinho);
-    numA = std::stoi(numAvaliacoes);
+    if(email==""){
+      break;
+    }
+
+    std::istringstream iss1(numHistoricoS);
+    numH = std::stoi(numHistoricoS);
+    std::istringstream iss2(numCarrinhoS);
+    numC = std::stoi(numCarrinhoS);
+    std::istringstream iss3(numAvaliacoesS);
+    numA = std::stoi(numAvaliacoesS);
+
+    din = std::stof(dinheiroS);
 
     Comprador comp = Comprador(nome, email, senha, cpf, endereco, numC, numH, numA, din);
     Usuario usu = Usuario(nome, email, senha);
@@ -54,7 +419,7 @@ void Ecommerce::listaUsuarioArquivo(){
 }
 
 void Ecommerce::gravaUsuarioArquivo(){
-  std::remove("usuarios.cvs");
+  std::remove("usuarios.csv");
 
   std::fstream arquivo;
   arquivo.open("usuarios.csv", std::ofstream::app);
@@ -78,7 +443,7 @@ void Ecommerce::cadastrarUsuario (std::string n, std::string em, std::string s){
       Usuario usu = Usuario(n, em, s);
       usuarios.push_back(usu);
       std::cout << "Cadastro executado com sucesso!";
-      loginUsuario();
+      //loginUsuario();
     }
     else{
       std::cout << "Endereço de email já cadastrado. Tente novamente." << std::endl;
@@ -97,8 +462,8 @@ void Ecommerce::cadastrarComprador (std::string n, std::string em, std::string s
       usuarios.push_back(usu);
       compradores.push_back(comp);
       gravaUsuarioArquivo();
-      std::cout << "Cadastro executado com sucesso!";
-      loginUsuario();
+      std::cout << "Cadastro executado com sucesso!" << std::endl;
+      //loginUsuario();
      }
      else{
       std::cout << "Endereço de email já cadastrado. Tente novamente." << std::endl;
@@ -131,9 +496,9 @@ void Ecommerce::imprimirCompradores(){
   limparTela();
   int numeroCompradores = compradores.size();
   if(numeroCompradores>0){
-    for(int i=0; i < numeroCompradores-1; i++){
+    for(int i=0; i < numeroCompradores; i++){
       std::cout << "\n" << "----------------------------------------------" << std::endl;
-      std::cout << "\t\t Comprador " << i+1 << std::endl;
+      std::cout << "\t\t Comprador " << i << std::endl;
       std::cout << "----------------------------------------------" << "\n" << std::endl;
       std::cout << "Nome: " << (compradores[i]).getNome() << std::endl;
       std::cout << "Email: " << (compradores[i]).getEmail() << std::endl;
@@ -208,31 +573,28 @@ void Ecommerce::limparTela(){
 }
 
 void Ecommerce::loginUsuario(){
-  std::string nome, senha;
-  std::cout << "Insira seu nome de usuário: ";
-  std::cin >> nome;
-  limparTela();
+  std::string email, senha;
+  std::cout << "Insira seu email: ";
+  std::cin >> email;
   std::cout << std::endl << "Insira sua senha: ";
   std::cin >> senha;
   limparTela();
 
   int numeroUsuarios = usuarios.size();
   for(int i=0; i < numeroUsuarios; i++){
-    if((usuarios[i]).getNome() == nome){
+    if((usuarios[i]).getEmail() == email){
       if ((usuarios[i]).getSenha() == senha){
         *userLogged = usuarios[i];
       break;
       }
       else{
-        std::cout << "Senha incorreta!";
-        loginUsuario();
+        std::cout << "Senha incorreta!"<< std::endl;        //loginUsuario();
       }
     }
   }
 
   if (userLogged == nullptr){
-    std::cout << "Nome de usuario nao encontrado!";
-    loginUsuario();
+    std::cout << "Email nao encontrado!" << std::endl;      //loginUsuario();
   }
 }
 
@@ -243,11 +605,17 @@ void Ecommerce::logoutUsuario(){
 
 void Ecommerce::inicio(){
   int digito;
-    std::cout << "Bem vindo à nossa loja!" << std::endl
-    << "Se você já tem uma conta, digite 1" << std::endl
-    << "Para se cadastrar, digite 2" << std::endl;
-    std::cin >> digito;
-    menuSumario(1, digito);
+  limparTela();
+
+  std::cout << "\n" << "-------------------------------------------------------------" << std::endl;
+  std::cout << "\t\t Bem vindo à nossa loja!" << std::endl;
+  std::cout << "-------------------------------------------------------------" << "\n" << std::endl;
+
+  std::cout << "1 - Já possuo uma conta." << std::endl;
+  std::cout << "2 - Desejo me cadastrar." << std::endl;
+  std::cout << "\nEscolha uma opção: ";
+  std::cin >> digito;
+  menuSumario(1, digito);
 }
 
 void Ecommerce::menuSumario(int idMenu, int opcao){
@@ -258,7 +626,7 @@ void Ecommerce::menuSumario(int idMenu, int opcao){
     {
       switch (opcao){
         case 1:
-          loginUsuario();
+          //loginUsuario();
           break;
         case 2:
           int op;
@@ -284,13 +652,10 @@ void Ecommerce::menuSumario(int idMenu, int opcao){
               std::string nome, senha, confSenha, email;
               std::cout << "Insira seu nome de usuário: ";
               std::cin >> nome;
-              limparTela();
               std::cout << std::endl << "Insira uma senha: ";
               std::cin >> senha;
-              limparTela();
               std::cout << std::endl << "Confirme sua senha: ";
               std::cin >> confSenha;
-              limparTela();
               std::cout << std::endl << "Insira seu email: ";
               std::cin >> email;
               limparTela();
@@ -386,3 +751,4 @@ void Ecommerce::menuSumario(int idMenu, int opcao){
       }
   }
 }
+#endif

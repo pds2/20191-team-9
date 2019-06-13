@@ -2,6 +2,7 @@
 #define COMPRADOR_CPP
 
 #include "usuario/comprador.h"
+#include "ecommerce.h"
 
 Comprador::Comprador(std::string n, std::string em, std::string s, std::string cpf,
    std::string endereco, int numCarr, int numHist, int numAval, double din) :
@@ -44,15 +45,15 @@ int Comprador::getNumeroAvaliacoes(){
   return this->_numeroAvaliacoes;
 }
 
-double Comprador::getDinheiro(){
+float Comprador::getDinheiro(){
   return this->_dinheiro;
 }
 
 bool Comprador::adicionarCarrinho(){
+  Ecommerce ecom;
   limparTela();
 
   //imprimir listagem de produtos aqui
-  Ecommerce ecom;
   ecom.imprimirProdutos();
 
   int codProduto, opcao, indice = -1;
@@ -60,15 +61,16 @@ bool Comprador::adicionarCarrinho(){
   std::cin >> codProduto;
 
   //procurar codigo do item na listagem de produtos
-  indice = procurarItensCarrinho(codProduto);
+  indice = ecom.buscaIndiceProdutos(codProduto);
 
   if(indice != -1){
-    std::cout << "Este produto já encontra-se em seu carrinho. Deseja adiciona-lo novamente?" << "\nPressione 1 para SIM e 0 para NÃO." << std::endl;
+    std::cout << "Este produto já encontra-se em seu carrinho. Deseja adiciona-lo novamente?" << "\n0 - NÃO.\n1 - SIM." << std::endl;
     std::cin >> opcao;
 
     switch (opcao) {
       case 1:
         // pega cada atributo desse Produto encontrado e cria um novo Produto, registrando ele no carrinho
+        //(ecom.produtos[indice]).get
         //Produto *prod = new Produto("cataprima", "cataprima", "1234", 1, 1, 1, 20);
           //carrinho.push_back(prod);
         //modifica a variavel _totalCarrinho
@@ -88,6 +90,7 @@ bool Comprador::adicionarCarrinho(){
 }
 
 bool Comprador::retirarCarrinho(){
+  _numeroComprasCarrinho = carrinho.size();
   if(_numeroComprasCarrinho == 0){
     std::cout << "\n\nSeu carrinho está vazio. Adicione produtos para continuar.";
     return false;
@@ -117,7 +120,7 @@ bool Comprador::retirarCarrinho(){
 }
 
 void Comprador::imprimirCarrinho(){
-  int _numeroComprasCarrinho = carrinho.size();
+  _numeroComprasCarrinho = carrinho.size();
   double totalCarrinho=0;
 
   if(_numeroComprasCarrinho == 0){
@@ -154,7 +157,7 @@ void Comprador::imprimirCarrinho(){
 }
 
 void Comprador::imprimirHistorico(){
-  int _numeroComprasHistorico = historico.size();
+  _numeroComprasHistorico = historico.size();
   if(_numeroComprasHistorico == 0){
     std::cout << "Seu histórico está vazio. Compre produtos para continuar.";
   }
@@ -201,9 +204,9 @@ void Comprador::exibirPerfil(){
 }
 
 int Comprador::procurarItensHistorico(int codProduto){
-  int _numeroHistorico = historico.size();
+  _numeroComprasHistorico = historico.size();
 
-  for(int indice=0; indice < _numeroHistorico; indice++){
+  for(int indice=0; indice < _numeroComprasHistorico; indice++){
     if((historico[indice]).getCodigoProduto() == codProduto){
       return indice;
     }
@@ -211,32 +214,10 @@ int Comprador::procurarItensHistorico(int codProduto){
   return -1;
 }
 
-/*
-  Generic function to find an element in vector and also its position.
-  It returns a pair of bool & int i.e.
-  bool : Represents if element is present in vector or not.
-  int : Represents the index of element in vector if its found else -1
-*/
-template < typename T>
-std::pair<bool, int > findInVector(const std::vector<T>  & vecOfElements, const T  & element){
-  std::pair<bool, int > result;
-  // Find given element in vector
-  auto it = std::find(vecOfElements.begin(), vecOfElements.end(), element);
-  if (it != vecOfElements.end()){
-  result.second = distance(vecOfElements.begin(), it);
-  result.first = true;
-  }
-  else{
-  result.first = false;
-  result.second = -1;
-  }
-  return result;
-}
-
 int Comprador::procurarItensCarrinho(int codProduto){
-  int _numeroCarrinho = carrinho.size();
+  _numeroComprasCarrinho = carrinho.size();
 
-  for(int indice=0; indice < _numeroCarrinho; indice++){
+  for(int indice=0; indice < _numeroComprasCarrinho; indice++){
     if((carrinho[indice]).getCodigoProduto() == codProduto){
       return indice;
     }
@@ -308,4 +289,51 @@ bool Comprador::adicionaDinheiro(double valor, Comprador comp){
 void Comprador::limparTela(){
   std::system("clear||cls");
 }
+
+/*
+  Generic function to find an element in vector and also its position.
+  It returns a pair of bool & int i.e.
+  bool : Represents if element is present in vector or not.
+  int : Represents the index of element in vector if its found else -1
+*/
+template < typename T>
+std::pair<bool, int > findInVector(const std::vector<T>  & vecOfElements, const T  & element){
+  std::pair<bool, int > result;
+  // Find given element in vector
+  auto it = std::find(vecOfElements.begin(), vecOfElements.end(), element);
+  if (it != vecOfElements.end()){
+  result.second = distance(vecOfElements.begin(), it);
+  result.first = true;
+  }
+  else{
+  result.first = false;
+  result.second = -1;
+  }
+  return result;
+}
+
+void Comprador::fazerCompras(){
+  std::cout << "Você está comprando " << carrinho.size() << " produtos, cujo valor total é " << _totalCarrinho << ". Deseja confirmar sua compra?" << std::endl;
+  std::cout << "0 - NÃO\n1 - SIM" << std::endl;
+  switch (opcao) {
+    case 0:
+      std::cout << "Compra não realizada. Você ainda possui produtos te esperando em seu carrinho!" << std::endl;
+      break;
+    case 1:
+    {
+      if(_dinheiro>=_totalCarrinho){
+        carrinho.clear();
+        _dinheiro = _dinheiro - _totalCarrinho;
+      }
+      else{
+        std::cout << "Compra não realizada pois seu saldo é insuficiente! Você possui R$ " << _dinheiro << std::endl;
+      }
+      break
+    }
+    default:
+      std::cout << "Opção inválida. Tente novamente" << std::endl;
+      break;
+  }
+}
+
 #endif
