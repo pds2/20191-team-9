@@ -555,6 +555,11 @@ void Comprador::listaHistoricoArquivo(){
   arquivo.close();
 }
 
+/**
+ * [Comprador::gravaHistoricoArquivo função que grava o histórico de compras do vector no arquivo]
+ * @method Comprador::gravaHistoricoArquivo
+ */
+
 void Comprador::gravaHistoricoArquivo(){
   std::remove("historico.csv");
 

@@ -3,15 +3,30 @@
 
 #include "ecommerce.h"
 
+/**
+ * [Ecommerce::Ecommerce Construtor da classe Ecommerce]
+ * @method Ecommerce::Ecommerce
+ */
+
 Ecommerce::Ecommerce(){
   //inicio();
 }
+
+/**
+ * [Ecommerce Destrutor da classe Ecommerce]
+ * @method Ecommerce
+ */
 
 Ecommerce::~Ecommerce(){
   usuarios.clear();
   compradores.clear();
   produtos.clear();
 }
+
+/**
+ * [Ecommerce::listaComentariosArquivo função que lista os comentários de cada produto registrados no arquivo]
+ * @method Ecommerce::listaComentariosArquivo
+ */
 
 void Ecommerce::listaComentariosArquivo(){
   produtos.clear();
@@ -68,6 +83,11 @@ void Ecommerce::listaComentariosArquivo(){
   arquivo.close();
 }
 
+/**
+ * [Ecommerce::gravaComentariosArquivo função que registra os comentários de cada produto no arquivo]
+ * @method Ecommerce::gravaComentariosArquivo
+ */
+
 void Ecommerce::gravaComentariosArquivo(){
   std::remove("comentarios.cvs");
 
@@ -102,12 +122,26 @@ void Ecommerce::gravaComentariosArquivo(){
   arquivo.close();
 }
 
+/**
+ * [Ecommerce::adicionaComentario função que registra um comentário para um produto específico]
+ * @method Ecommerce::adicionaComentario
+ * @param  cod                           [código único que representa o produto]
+ * @param  coment                        [comentário a ser registrado para o produto]
+ */
+
 void Ecommerce::adicionaComentario(int cod, std::string coment){
     int x = buscaIndiceProdutos(cod);
     if ( x != -1){
     produtos[x].setComentario(coment);
     }
 }
+
+/**
+ * [Ecommerce::tamanhoArquivo função que registra o tamanho do arquivo a ser lido]
+ * @method Ecommerce::tamanhoArquivo
+ * @param  file_name                 [nome do arquivo a ser lido]
+ * @return                           [quantidade de linhas do arquivo lido]
+ */
 
 int Ecommerce::tamanhoArquivo(const char* file_name){
     FILE *file = fopen(file_name, "r");
@@ -364,6 +398,11 @@ void Ecommerce::gravaProdutosArquivo(){
   arquivo.close();
 }
 
+/**
+ * [Ecommerce::listaUsuarioArquivo função que lista os usuários registrados no arquivo]
+ * @method Ecommerce::listaUsuarioArquivo
+ */
+
 void Ecommerce::listaUsuarioArquivo(){
   usuarios.clear();
   compradores.clear();
@@ -416,6 +455,11 @@ void Ecommerce::listaUsuarioArquivo(){
   arquivo.close();
 }
 
+/**
+ * [Ecommerce::gravaUsuarioArquivo função que grava os usuários do vector no arquivo]
+ * @method Ecommerce::gravaUsuarioArquivo
+ */
+
 void Ecommerce::gravaUsuarioArquivo(){
   std::remove("historico.csv");
 
@@ -454,6 +498,20 @@ void Ecommerce::gravaUsuarioArquivo(){
     //dadosComprador();
   }
 }*/ //VAI OU NAO TER??
+
+/**
+ * [Ecommerce::cadastrarComprador  função que cadastra um comprador, considerando as informações dadas na hora do registro do mesmo, e adicionando-o ao vector de usuarios]
+ * @method Ecommerce::cadastrarComprador
+ * @param  n                             [nome do comprador]
+ * @param  em                            [email do comprador]
+ * @param  s                             [senha do comprador]
+ * @param  cpf                           [cpf do comprador]
+ * @param  endereco                      [endereco do comprador]
+ * @param  numCarr                       [numero de itens no carrinho do comprador]
+ * @param  numHist                       [numero de itens no histórico do comprador]
+ * @param  numAval                       [numero de avaliações realizadas pelo comprador]
+ * @param  din                           [quantidade de dinheiro que o comprador possui]
+ */
 
 void Ecommerce::cadastrarComprador (std::string n, std::string em, std::string s, std::string cpf, std::string endereco, int numCarr, int numHist, int numAval, double din){
   limparTela();

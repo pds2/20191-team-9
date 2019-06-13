@@ -9,6 +9,7 @@
 
 class Usuario{
 
+
 private:
     std::string _nome;
     std::string _email;
