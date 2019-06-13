@@ -48,7 +48,7 @@ class Comprador : public Usuario{
     bool adicionarCarrinho();
     void fazerCompras();
     bool retirarCarrinho();
-    bool adicionaDinheiro(double valor, Comprador comp);
+    bool adicionaDinheiro(float valor);
 
     void exibirPerfil();
     void imprimirCarrinho();
