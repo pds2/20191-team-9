@@ -11,6 +11,5 @@ var searchData=
   ['checanome',['checaNome',['../class_ecommerce.html#aca3eed60042bb02ac3d3cacb20b86c8d',1,'Ecommerce']]],
   ['checasenha',['checaSenha',['../class_ecommerce.html#ac0d4a423c9e3699dcb6f6783b32bdcbd',1,'Ecommerce']]],
   ['checasenhaadmin',['checaSenhaAdmin',['../class_ecommerce.html#ad3c6b34226cd0d1ab54ec0e6d82a70be',1,'Ecommerce::checaSenhaAdmin()'],['../ecommerce_8cpp.html#a04dbd8108236d70615e129214ef6140c',1,'checaSenhaAdmin():&#160;ecommerce.cpp']]],
-  ['comprador',['Comprador',['../class_comprador.html#aa8494892432d46b4c8825a5b435af44d',1,'Comprador::Comprador(std::string nome, std::string email, std::string senha, std::string cpf, std::string endereco, int numComprasCarrinho, int numComprasHistorico, int numAvaliacaoes, double dinheiro)'],['../class_comprador.html#a83fc25fdd74fceee73944bfe801ebe08',1,'Comprador::Comprador()']]],
-  ['compradorcsvtovector',['compradorCsvToVector',['../class_administrador.html#a3ce381104bd6cf900b912519cae71d44',1,'Administrador']]]
+  ['comprador',['Comprador',['../class_comprador.html#aa8494892432d46b4c8825a5b435af44d',1,'Comprador::Comprador(std::string nome, std::string email, std::string senha, std::string cpf, std::string endereco, int numComprasCarrinho, int numComprasHistorico, int numAvaliacaoes, double dinheiro)'],['../class_comprador.html#a83fc25fdd74fceee73944bfe801ebe08',1,'Comprador::Comprador()']]]
 ];

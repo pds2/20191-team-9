@@ -17,6 +17,5 @@ var searchData=
   ['comprador',['Comprador',['../class_comprador.html',1,'Comprador'],['../class_comprador.html#aa8494892432d46b4c8825a5b435af44d',1,'Comprador::Comprador(std::string nome, std::string email, std::string senha, std::string cpf, std::string endereco, int numComprasCarrinho, int numComprasHistorico, int numAvaliacaoes, double dinheiro)'],['../class_comprador.html#a83fc25fdd74fceee73944bfe801ebe08',1,'Comprador::Comprador()']]],
   ['comprador_2ecpp',['comprador.cpp',['../comprador_8cpp.html',1,'']]],
   ['comprador_2eh',['comprador.h',['../comprador_8h.html',1,'']]],
-  ['comprador_5fcpp',['COMPRADOR_CPP',['../comprador_8cpp.html#a176885b468f3ef689b03464875b203fe',1,'comprador.cpp']]],
-  ['compradorcsvtovector',['compradorCsvToVector',['../class_administrador.html#a3ce381104bd6cf900b912519cae71d44',1,'Administrador']]]
+  ['comprador_5fcpp',['COMPRADOR_CPP',['../comprador_8cpp.html#a176885b468f3ef689b03464875b203fe',1,'comprador.cpp']]]
 ];

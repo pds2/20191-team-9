@@ -23,7 +23,7 @@ Comprador::Comprador(std::string nome, std::string email, std::string senha, std
  Usuario(nome, email, senha), _CPF(cpf), _endereco(endereco), _numeroComprasCarrinho(numComprasCarrinho), _numeroComprasHistorico(numComprasHistorico), _numeroAvaliacoes(numAvaliacaoes), _dinheiro(dinheiro){};
 
 /**
- * [Comprador Construtor da classe Comprador ]
+ * [Comprador Destrutor da classe Comprador ]
  * @method Comprador
  */
 
