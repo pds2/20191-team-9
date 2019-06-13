@@ -199,6 +199,9 @@ void Administrador::removeItem(std::string nome_do_produto){
 
 }
 
+void Administrador::adicionaPedido(std::string email, float valor){
+  this->_requisicoes.insert(std::pair<std::string, float>(email,valor));
+}
 
 void Administrador::mostraPedidos(){
   // Imprime o mapa _requisicoes com o seguinte formato
@@ -209,34 +212,83 @@ void Administrador::mostraPedidos(){
     return;
   }
 
-  limparTela();
+  std::system("clear||cls");
 
   std::cout << "----------------------------------------------" << std::endl;
   std::cout << "Estas são as requisições de aumento de saldo pendentes:" << std::endl;
 
   for(int i = 0; i < _qntdade_de_requisicoes; i++){
     std::cout << "\n" << "----------------------------------------------" << std::endl;
-    std::cout << (i+1) << ") " << this->_requisicoes[i].first << " está requisitando um aumento de: R$" << this->_requisicoes[i].second << std::endl;
+    std::cout << (i+1) << ") " << this->_requisicoes[i].first << " está requisitando um aumento de: R$" << this->_requisicoes[i].second << " em seu saldo." << std::endl;
     std::cout << "\n" << "----------------------------------------------" << std::endl;
   }
 }
 
-
-/*
-void Administrador::aprovaPedido(std::string email, float valor){
+//---------------------------->
+void Administrador::aprovaPedido(std::string email){
   int aprovacao;
+  float valor;
+  int indice_comprador = -1;
+  int indice_requisicao = -1;
+  std::string email_do_cliente;
 
-  std::cout << "Deseja aprovar o pedido de " << email << " para o aumento de R$" << valor << "em seu saldo?" << std::endl;
+  this->_shoppers.clear();
+
+  usuarioCsvToVector();
+
+  // Busca o índice do comprador. Se ele não existir, exibe uma mensagem de erro
+  for(int i = 0; i<_shoppers.size(); i++){
+
+    email_do_cliente = _shoppers[i].getEmail();
+
+    if(strcomp(email_do_cliente, email) == 0){
+      indice_comprador = i;
+      break;
+    }
+  }
+
+  if(indice_comprador == -1){
+    std::cout << "Este usuário não existe!\nInsira um usuário válido." << std::endl;
+    return;
+  }
+
+  std::map<std::string, float>::iterator teste = _requisicoes.find(email);
+  if(teste->first > _requisicoes.size()){
+    std::cout << "Este usuário não fez uma requisição. Portanto, não é possível aumentar o seu saldo" << std::endl;
+
+    return;
+  }else{
+    valor = teste->second;
+  }
+
+
+  //Agora vamos garantir que o administrador realmente deseja aprovar o pedido certo
+  std::cout << "Deseja aprovar o pedido de " << email << " para o aumento de R$" << valor << " em seu saldo?" << std::endl;
   std::cout << "Digite:\n1 - aprovar\n2 - reprovar" << std::endl;
   std::cin >> aprovacao;
 
   if(aprovacao == 1){
-    int novo_saldo = user.getDinheiro() + valor;
-    user.setDinheiro(novo_saldo);
+    _requisicoes.erase(email);
+
+    int novo_saldo = _shoppers[indice_comprador].getDinheiro() + valor;
+    _shoppers[indice_comprador].setDinheiro(novo_saldo);
   }
 
+  //Agora reescrevemos o arquivo para atualizar o valor do saldo alterado
+  std::ofstream arquivo;
+
+  arquivo.open("usuarios.csv", std::ios::trunc | std::ios::out);
+
+  for(int i = 0; i<_shoppers.size(); i++){
+    arquivo << _shoppers[i].getNome() << "," << _shoppers[i].getEmail() << "," << _shoppers[i].getSenha() << "," << _shoppers[i].getCPF() << "," << _shoppers[i].getEndereco() << ","  << _shoppers[i].getNumeroComprasCarrinho() << "," << _shoppers[i].getNumeroComprasHistorico() << "," << _shoppers[i].getNumeroAvaliacoes() << "," << _shoppers[i].getDinheiro() << std::endl;
+  }
+
+  arquivo.close();
+
 }
-*/
+
+
+//------------------------->
 
 void Administrador::excluiUsuario(std::string email){
   std::string email_do_cliente;
