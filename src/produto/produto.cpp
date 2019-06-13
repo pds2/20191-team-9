@@ -2,7 +2,6 @@
 #define PRODUTO_CPP
 
 #include "produto/produto.h"
-#include "excecoes.h"
 
 /**
  * [Produto::Produto Construtor da classe Produto]
@@ -79,10 +78,12 @@ void Produto::getComentarios(){
         std::cout << _comentarios[i] << std::endl;
     }
 
-    int digito
+    int digito;
     std::cout << "Pressione qualquer tecla para voltar ao menu: ";
-    std::cin >> digito
-    if (true) { menuInicial(); }
+    std::cin >> digito;
+    if (true) {
+      menuInicial();
+    }
 }
 /**
  * [Produto::setComentario função que adiciona um comentário ao produto]

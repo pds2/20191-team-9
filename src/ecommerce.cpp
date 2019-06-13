@@ -9,7 +9,7 @@
  */
 
 Ecommerce::Ecommerce(){
-  //inicio();
+  inicio();
 }
 
 /**
