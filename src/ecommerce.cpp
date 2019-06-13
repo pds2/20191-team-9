@@ -181,8 +181,8 @@ void Ecommerce::listaProdutosArquivo(){
     std::cout << "Erro ao abrir arquivo. Tente novamente";
     exit(1);
   }
-
-int linhas = tamanhoArquivo("produtos.csv");
+  
+  int linhas = tamanhoArquivo("produtos.csv");
   if (tamanhoArquivo("produtos.csv") == 0){
     std::cout << "Ainda nao ha nenhum produto cadastrado." << std::endl;
     return;
@@ -437,24 +437,28 @@ void Ecommerce::gravaUsuarioArquivo(){
   arquivo.close();
 }
 
-void Ecommerce::cadastrarUsuario (std::string n, std::string em, std::string s){
+/*void Ecommerce::cadastrarUsuario (std::string n, std::string em, std::string s){
+  limparTela();
   if(checaNome(n) && checaEmail(em) && checaSenha(s)){
     if(procurarUsuario(em)==false){
       Usuario usu = Usuario(n, em, s);
       usuarios.push_back(usu);
       std::cout << "Cadastro executado com sucesso!";
-      //loginUsuario();
+      loginUser();
     }
     else{
       std::cout << "Endereço de email já cadastrado. Tente novamente." << std::endl;
+      inicio();
     }
   }
   else{
     std::cout << "Dados inválidos. Tente novamente." << std::endl;
+    //dadosComprador();
   }
-}
+}*/ //VAI OU NAO TER??
 
 void Ecommerce::cadastrarComprador (std::string n, std::string em, std::string s, std::string cpf, std::string endereco, int numCarr, int numHist, int numAval, double din){
+  limparTela();
   if(checaNome(n) && checaEmail(em) && checaSenha(s)){
     if(procurarComprador(em)==false){
       Comprador comp = Comprador(n, em, s, cpf, endereco, numCarr, numHist, numAval, din);
@@ -463,14 +467,16 @@ void Ecommerce::cadastrarComprador (std::string n, std::string em, std::string s
       compradores.push_back(comp);
       gravaUsuarioArquivo();
       std::cout << "Cadastro executado com sucesso!" << std::endl;
-      //loginUsuario();
+      loginUser();
      }
      else{
       std::cout << "Endereço de email já cadastrado. Tente novamente." << std::endl;
+      inicio();
      }
   }
   else{
     std::cout << "Dados inválidos. Tente novamente." << std::endl;
+    dadosComprador();
   }
 }
 
@@ -517,18 +523,106 @@ void Ecommerce::imprimirCompradores(){
 }
 
 void Ecommerce::addCarrinho(){
-  Comprador comp;
+  Comprador comp = *userLogged;
   comp.adicionarCarrinho();
+  impProdutos();
+}
+
+void Ecommerce::impProdutos(){
+  Comprador comp = *userLogged;
+  limparTela();
+  imprimirProdutos();
+  std::cout << "Para ver comentarios sobre esse produto, digite 1" << std::endl
+  std::cout << "Para adicionar produto ao carrinho, digite 2" << std::endl
+  << "Para voltar ao menu, digite 3" << std::endl
+  int digito;
+  std::cin >> digito;
+  switch (digito) {
+    case 1:
+      int codProduto;
+      std::cout << "\n" << "Digite o código do produto: ";
+      std::cin >> codProduto;
+      comp.procurarProduto(codProduto);
+      break;
+    case 2:
+      int codProduto;
+      std::cout << "\n" << "Digite o código do produto que deseja adicionar ao seu carrinho: ";
+      std::cin >> codProduto;
+      comp.addCarrinho();
+      break;
+    case 3:
+      menuInicial();
+      break;
+    default:
+      std::cout << "Opção inválida. Tente novamente" << std::endl;
+      menuInicial();
+      break;
+  }
 }
 
 void Ecommerce::impCarrinho(){
-  Comprador comp;
+  Comprador comp = *userLogged;
   comp.imprimirCarrinho();
+  std::cout << "Para procurar um item, digite 1" << std::endl
+  << "Para remover um item, digite 2" << std::endl
+  << "Para finalizar a compra, digite 3" << std::endl
+  << "Para voltar ao menu, digite 4" << std::endl;
+  int digito;
+  std::cin >> digito;
+  while((digito != 1) && (digito != 2) && (digito != 3)){
+    std::cout << "Essa opçao nao existe! Digite um numero valido: ";
+    std::cin >> digito;
+  }
+
+  switch (digito) {
+    case 1:
+      int cod;
+      std::cout << "Digite o codigo do produto que voce procura: ";
+      std::cin >> cod;
+      comp.procurarItensCarrinho(int cod);
+      break;
+    case 2:
+      retirarCarrinho();
+      impCarrinho();
+    case 3:
+      comp.fazerCompras();
+      break;
+    case 4:
+      menuInicial();
+      break;
+  }
 }
 
 void Ecommerce::impHistorico(){
-  Comprador comp;
+  Comprador comp = *userLogged;
   comp.imprimirHistorico();
+  std::cout << "Para procurar um item, digite 1" << std::endl
+  << "Para avaliar um item, digite 2" << std::endl
+  << "Para comentar um item, digite 3" << std::endl
+  << "Para voltar ao menu, digite 4" << std::endl;
+  int digito;
+  std::cin >> digito;
+  while((digito != 1) && (digito != 2) && (digito != 3) && (digito != 4)) {
+    std::cout << "Essa opçao nao existe! Digite um numero valido: ";
+    std::cin >> digito;
+  }
+  switch (digito) {
+    case 1:
+      int cod;
+      std::cout << "Digite o codigo do produto que voce procura: ";
+      std::cin >> cod;
+      comp.procurarItensHistorico(int cod);
+      break;
+    case 2:
+      comp.avaliarItem();
+      break;
+    case 3:
+      comp.adicionaComentario();
+      break;
+    case 4:
+      menuInicial();
+      break;
+  }
 }
 
 bool Ecommerce::procurarUsuario(std::string em){
@@ -572,7 +666,7 @@ void Ecommerce::limparTela(){
   std::system("clear||cls");
 }
 
-void Ecommerce::loginUsuario(){
+void Ecommerce::loginUser(){
   std::string email, senha;
   std::cout << "Insira seu email: ";
   std::cin >> email;
@@ -585,27 +679,45 @@ void Ecommerce::loginUsuario(){
     if((usuarios[i]).getEmail() == email){
       if ((usuarios[i]).getSenha() == senha){
         *userLogged = usuarios[i];
+        menuInicial()
       break;
       }
       else{
-        std::cout << "Senha incorreta!"<< std::endl;        //loginUsuario();
+        std::cout << "Senha incorreta!"<< std::endl;
+        inicio();
       }
     }
   }
 
   if (userLogged == nullptr){
-    std::cout << "Email nao encontrado!" << std::endl;      //loginUsuario();
+    std::cout << "Email nao encontrado!" << std::endl;
+    inicio();
   }
 }
 
 void Ecommerce::logoutUsuario(){
-  userLogged = nullptr;
-  inicio();
+  std::cout << "Se voce tem certeza que gostaria de sair desta conta, digite OUT" << std::endl
+  << "Se voce gostaria de voltar ao menu, digite MENU" << std::endl;
+  std::string confirma;
+  std::cin >> confirma;
+  if (confirma == "OUT"){
+    userLogged = nullptr;
+    inicio();
+  }
+  else if (confirma == "MENU"){
+    menuInicial();
+  }
+  else {
+    std::cout << "Entrada invalida. Por favor tente novamente...";
+    logoutUsuario();
+  } 
 }
 
 void Ecommerce::inicio(){
   int digito;
   limparTela();
+
+  *userLogged = nullptr;
 
   std::cout << "\n" << "-------------------------------------------------------------" << std::endl;
   std::cout << "\t\t Bem vindo à nossa loja!" << std::endl;
@@ -615,140 +727,117 @@ void Ecommerce::inicio(){
   std::cout << "2 - Desejo me cadastrar." << std::endl;
   std::cout << "\nEscolha uma opção: ";
   std::cin >> digito;
-  menuSumario(1, digito);
-}
-
-void Ecommerce::menuSumario(int idMenu, int opcao){
-
-  switch (idMenu) {
-
+  switch (digito){
     case 1:
-    {
-      switch (opcao){
-        case 1:
-          //loginUsuario();
-          break;
-        case 2:
-          int op;
-          std::cout << "Para se cadastrar como administrador, digite 1" << "\n" << "Para se cadastrar como comprador, digite 2" << std::endl;
-          std::cin >> op;
-          menuSumario(2, op);
-          break;
-      }
+      loginUser();
       break;
-
-    }
-
     case 2:
-    {
-      switch (opcao){
-        case 1:
-          {
-            std::string adminPass;
-            std::cout << "Insira a senha de administrador: ";
-            std::cin >> adminPass;
-            limparTela();
-            if(adminPass == SENHADMIN){
-              std::string nome, senha, confSenha, email;
-              std::cout << "Insira seu nome de usuário: ";
-              std::cin >> nome;
-              std::cout << std::endl << "Insira uma senha: ";
-              std::cin >> senha;
-              std::cout << std::endl << "Confirme sua senha: ";
-              std::cin >> confSenha;
-              std::cout << std::endl << "Insira seu email: ";
-              std::cin >> email;
-              limparTela();
-              cadastrarUsuario(nome, email, senha);
-            }
-            else{
-              std::cout << "Senha de administrador incorreta!";
-              menuSumario(2, 1);
-            }
-            break;
-          }
-        case 2:
-            std::string nome, senha, confSenha, email, endereco, cpf;
-            std::cout << "Insira seu nome de usuário: ";
-            std::cin >> nome;
-            limparTela();
-            std::cout << std::endl << "Insira uma senha: ";
-            std::cin >> senha;
-            limparTela();
-            std::cout << std::endl << "Confirme sua senha: ";
-            std::cin >> confSenha;
-            limparTela();
-            std::cout << std::endl << "Insira seu email: ";
-            std::cin >> email;
-            limparTela();
-            std::cout << std::endl << "Insira seu CPF: ";
-            std::cin >> cpf;
-            limparTela();
-            std::cout << std::endl << "Insira seu endereco: ";
-            std::cin >> endereco;
-            limparTela();
-            cadastrarComprador(nome, email, senha, cpf, endereco, 0, 0, 0, 0);
-            break;
-      }
+      dadosComprador();
       break;
-    }
-
-    case 3:
-    {
-      switch (opcao){
-        case 1:
-          limparTela();
-          //fazerCompras();
-          break;
-        case 2:
-          limparTela();
-          impCarrinho();
-          break;
-        case 3:
-          limparTela();
-          //exibirPerfil();
-          break;
-      }
+    default:
+      std::cout << "Opção inválida. Tente novamente" << std::endl;
+      inicio();
       break;
-    }
-
-    case 4:
-      {
-        switch (opcao){
-          case 1:
-            limparTela();
-            //imprimirProdutos();
-            break;
-          case 2:
-            limparTela();
-            imprimirUsuarios();
-            break;
-          case 3:
-            limparTela();
-            //exibirPerfil();
-            break;
-          case 4:
-            limparTela();
-            //mostraPedidos(); aqui insere a listagem de produtos
-            break;
-          case 5:
-            limparTela();
-            //imrprimirMensagens();
-            break;
-        }
-        break;
-      }
-
-    case 5: //admin produtos, usuarios, verprodutos
-      {
-          switch (opcao){
-            case 1:
-              break;
-            case 2:
-              break;
-          }
-          break;
-      }
   }
 }
+
+void Ecommerce::dadosComprador(){
+  limparTela();
+  std::string nome, senha, confSenha, email, endereco, cpf;
+  std::cout << "Insira seu nome de usuário: ";
+  std::cin >> nome;
+  std::cout << std::endl << "Insira uma senha: ";
+  std::cin >> senha;
+  std::cout << std::endl << "Confirme sua senha: ";
+  std::cin >> confSenha;
+  std::cout << std::endl << "Insira seu email: ";
+  std::cin >> email;
+  std::cout << std::endl << "Insira seu CPF: ";
+  std::cin >> cpf;
+  std::cout << std::endl << "Insira seu endereco: ";
+  std::cin >> endereco;
+  cadastrarComprador(nome, email, senha, cpf, endereco, 0, 0, 0, 0);
+}
+
+void Ecommerce::menuInicial(){
+  limparTela()
+  Usuario usu = *userLogged;
+  if(procurarComprador(usu.getEmail())){
+    menuComprador();
+  }
+  else if (procurarUsuario(usu.getEmail())){
+    menuUsuario();
+  }
+}
+
+void Ecommerce::menuComprador(){
+  Comprador comp = *userLogged;
+  limparTela();
+  std::cout << "Para ver nossos produtos, digite 1" << std::endl
+  << "Para ver seu perfil, digite 2" << std::endl
+  << "Para ver seu carrinho, digite 3" << std::endl
+  << "Para ver seu histórico de compras, digite 4" << std::endl
+  << "Para requisitar mais dinheiro, digite 5" << std::endl
+  << "Para sair desta conta, digite 9" << std::endl;
+  int digito;
+  std::cin >> digito;
+  switch (digito) {
+    case 1:
+      imprimirProdutos();
+      break;
+    case 2:
+      comp.exibirPerfil();
+      break;
+    case 3:
+      impCarrinho();
+      break;
+    case 4:
+      impHistorico();
+      break;
+    case 5:
+      comp.adicionarDinheiro();
+      break;
+    case 9:
+      comp.logoutUsuario();//Confirmar logout
+      break;
+    default:
+      std::cout << "Opção inválida. Tente novamente" << std::endl;
+      menuComprador();
+      break;
+  }
+}
+
+void Ecommerce::menuUsuario(){
+  Usuario usu = *userLogged;
+  limparTela();
+  std::cout << "Para ver as requisições pendentes, digite 1" << std::endl
+  << "Para ver os produtos oferecidos, digite 2" << std::endl
+  << "Para cer os compradores cadastrados, digite 3" << std::endl
+  << "Para ver seu perfil, digite 4" << std::endl
+  << "Para sair desta conta, digite 9" << std::endl;
+  int digito;
+  std::cin >> digito;
+  switch (digito) {
+    case 1:
+      usu.mostraPedidos();
+      break;
+    case 2:
+      imprimirProdutos();
+      break;
+    case 3:
+      usu.exibeUsuarios();
+      break;
+    case 4:
+      usu.exibirPerfil();
+      break;
+    case 9:
+      comp.logoutUsuario();
+      break;
+    default:
+      std::cout << "Opção inválida. Tente novamente" << std::endl;
+      menuUsuario();
+      break;
+  }
+}
+
 #endif

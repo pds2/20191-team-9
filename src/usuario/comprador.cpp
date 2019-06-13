@@ -100,7 +100,7 @@ bool Comprador::retirarCarrinho(){
 
     int codProduto;
     int indice = -1;
-    imprimirCarrinho();
+    //imprimirCarrinho();
 
     std::cout << "\n" << "Digite o código do produto que deseja retirar do seu carrinho: ";
     std::cin >> codProduto;
@@ -201,6 +201,21 @@ void Comprador::exibirPerfil(){
   std::cout << "Nº Compras do Histórico: " << getNumeroComprasHistorico() << std::endl;
   std::cout << "Nº Avaliações: " << getNumeroAvaliacoes() << std::endl;
   std::cout << "Qntd Dinheiro: " << getDinheiro() << std::endl;
+
+  int digito
+  std::cout << "Pressione qualquer tecla para voltar ao menu: ";
+  std::cin >> digito
+  if (true) { menuInicial(); }
+}
+
+void Comprador::procurarProduto(int codProduto){
+  _numeroProdutos = produtos.size();
+
+  for(int indice=0; indice < _numeroProdutos; indice++){
+    if((produtos[indice]).getCodigoProduto() == codProduto){
+      produtos[indice].getComentarios();
+    }
+  }
 }
 
 int Comprador::procurarItensHistorico(int codProduto){
@@ -229,9 +244,9 @@ void Comprador::adicionarComentario(){
   limparTela();
 
   int codProduto;
-  int indice = -1;
+  int indice = -1
 
-  imprimirHistorico();
+  //imprimirHistorico(); SE FOR PRA CONSULTA SO NAO LIMPAR A TELA
 
   std::cout << "\n" << "Digite o código do produto para o qual deseja registrar um comentário.";
   std::cin >> codProduto;
@@ -245,6 +260,7 @@ void Comprador::adicionarComentario(){
     std::getline(std::cin, comentario);
     //(historico[indice])->setComentario(comentario);
     //aqui altera o comentario do produto
+    ecom.impHistorico();
   }
   else{
     std::cout << "\n" << "O produto de código " << codProduto << " não consta em seu histórico então não pode ter um comentário registrado. Tente novamente.";
@@ -257,12 +273,14 @@ void Comprador::avaliarItem(){
   int codProduto;
   int indice = -1;
 
-  imprimirHistorico();
+  //imprimirHistorico();
 
   std::cout << "\n" << "Digite o código do produto que deseja avaliar: ";
   std::cin >> codProduto;
 
   indice = procurarItensHistorico(codProduto);
+
+  Ecommerce ecom;
 
   if (indice != -1){
     int nota;
@@ -271,6 +289,7 @@ void Comprador::avaliarItem(){
     std::cin >> nota;
     if(nota>=0 || nota<=5){
       (historico[indice]).avaliarProduto(nota);
+      ecom.imprimirHistorico();
     }
     else{
       std::cout << "\n" << "Nota inválida. Tente novamente.";
@@ -278,6 +297,7 @@ void Comprador::avaliarItem(){
   }
   else{
     std::cout << "\n" << "O produto de código " << codProduto << " não consta em seu histórico então não pode ser avaliado. Tente novamente.";
+    avaliarItem();
   }
 }
 
@@ -315,23 +335,30 @@ std::pair<bool, int > findInVector(const std::vector<T>  & vecOfElements, const 
 void Comprador::fazerCompras(){
   std::cout << "Você está comprando " << carrinho.size() << " produtos, cujo valor total é " << _totalCarrinho << ". Deseja confirmar sua compra?" << std::endl;
   std::cout << "0 - NÃO\n1 - SIM" << std::endl;
+  int opçao;
+  Ecommerce ecom;
+  std::cin >> opçao;
   switch (opcao) {
     case 0:
       std::cout << "Compra não realizada. Você ainda possui produtos te esperando em seu carrinho!" << std::endl;
+      ecom.impCarrinho();
       break;
     case 1:
     {
       if(_dinheiro>=_totalCarrinho){
         carrinho.clear();
         _dinheiro = _dinheiro - _totalCarrinho;
+        ecom.menuInicial();
       }
       else{
         std::cout << "Compra não realizada pois seu saldo é insuficiente! Você possui R$ " << _dinheiro << std::endl;
+        ecom.impCarrinho();
       }
       break
     }
     default:
       std::cout << "Opção inválida. Tente novamente" << std::endl;
+      fazerCompras();
       break;
   }
 }

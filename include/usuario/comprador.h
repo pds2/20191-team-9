@@ -54,6 +54,7 @@ class Comprador : public Usuario{
     void imprimirCarrinho();
     void imprimirHistorico();
 
+    void procurarProduto(int codProduto);
     int procurarItensHistorico(int codProduto);
     int procurarItensCarrinho(int codProduto);
     void adicionarComentario();
