@@ -200,15 +200,17 @@ void Administrador::removeItem(std::string nome_do_produto){
 }
 
 void Administrador::adicionaPedido(std::string email, float valor){
+  Ecommerce ecom;
   this->_requisicoes.insert(std::pair<std::string, float>(email,valor));
 }
 
 void Administrador::mostraPedidos(){
   // Imprime o mapa _requisicoes com o seguinte formato
   // Exemplo: 1 - email@docomprador.com: R$100,00
+  limparTela();
   if(_qntdade_de_requisicoes <= 0){
     std::cout << "Não há nenhuma requisição de aumento de saldo no momento." << std::endl;
-
+    ecom.menuUsuario();
     return;
   }
 
@@ -221,6 +223,21 @@ void Administrador::mostraPedidos(){
     std::cout << "\n" << "----------------------------------------------" << std::endl;
     std::cout << (i+1) << ") " << this->_requisicoes[i].first << " está requisitando um aumento de: R$" << this->_requisicoes[i].second << " em seu saldo." << std::endl;
     std::cout << "\n" << "----------------------------------------------" << std::endl;
+  }
+
+  std::cout << "Digite o codigo da requisiçao para avalia-la" << std::endl
+  << "Para voltar ao menu, digite -1" << std::endl;
+  int dig;
+  std::cin >> dig;
+  if (dig == -1){
+    ecom.menuUsuario();
+  }
+  else if ((dig > 0) && (dig <= _qntdade_de_requisicoes)){
+    aprovaPedido(_requisicoes[dig - 1]);
+  }
+  else {
+    std::cout >> "Opção inválida. Tente novamente" << std::endl;
+    mostraPedidos();
   }
 }
 
@@ -248,13 +265,14 @@ void Administrador::aprovaPedido(std::string email){
 
   if(indice_comprador == -1){
     std::cout << "Este usuário não existe!\nInsira um usuário válido." << std::endl;
+    mostraPedidos();
     return;
   }
 
   std::map<std::string, float>::iterator teste = _requisicoes.find(email);
   if(teste->first > _requisicoes.size()){
     std::cout << "Este usuário não fez uma requisição. Portanto, não é possível aumentar o seu saldo" << std::endl;
-
+    mostraPedidos();
     return;
   }else{
     valor = teste->second;
@@ -283,6 +301,7 @@ void Administrador::aprovaPedido(std::string email){
   }
 
   arquivo.close();
+  mostraPedidos();
 
 }
 

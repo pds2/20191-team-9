@@ -88,7 +88,7 @@ class Ecommerce{
     void menuInicial();
     void menuUsuario();
     void menuComprador();
-    void dadosComprador()
+    void dadosComprador();
 };
 
 #endif

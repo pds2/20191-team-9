@@ -532,9 +532,9 @@ void Ecommerce::impProdutos(){
   Comprador comp = *userLogged;
   limparTela();
   imprimirProdutos();
-  std::cout << "Para ver comentarios sobre esse produto, digite 1" << std::endl
-  std::cout << "Para adicionar produto ao carrinho, digite 2" << std::endl
-  << "Para voltar ao menu, digite 3" << std::endl
+  std::cout << "Para ver comentarios sobre um produto, digite 1" << std::endl
+  std::cout << "Para adicionar um produto ao carrinho, digite 2" << std::endl
+  << "Para voltar ao menu, digite 3" << std::endl;
   int digito;
   std::cin >> digito;
   switch (digito) {
@@ -555,12 +555,13 @@ void Ecommerce::impProdutos(){
       break;
     default:
       std::cout << "Opção inválida. Tente novamente" << std::endl;
-      menuInicial();
+      impProdutos();
       break;
   }
 }
 
 void Ecommerce::impCarrinho(){
+  limparTela();
   Comprador comp = *userLogged;
   comp.imprimirCarrinho();
   std::cout << "Para procurar um item, digite 1" << std::endl
@@ -807,6 +808,43 @@ void Ecommerce::menuComprador(){
   }
 }
 
+void Ecommerce::mostraProdutos(){
+  limparTela();
+  imprimirProdutos();
+  Usuario usu = *userLogged;
+  std::cout << "Para ver comentarios sobre um produto, digite 1" << std::endl
+  std::cout << "Para adicionar um produto, digite 2" << std::endl
+  std::cout << "Para excluir um produto, digite 3" << std::endl
+  << "Para voltar ao menu, digite 4" << std::endl;
+  int digito;
+  std::cin >> digito;
+  switch (digito) {
+    case 1:
+      int codProduto;
+      std::cout << "\n" << "Digite o código do produto: ";
+      std::cin >> codProduto;
+      Produto prod = produtos[buscaIndiceProdutos(codProduto)];
+      prod.getComentarios(codProduto);
+      break;
+    case 2:
+      adicionarProduto();
+      break;
+    case 3:
+      std::string nomeProduto;
+      std::cout << "\n" << "Digite o nome do produto que deseja remover: ";
+      std::cin >> nomeProduto;
+      usu.removeItem();
+      break;
+    case 4:
+      menuInicial();
+      break;
+    default:
+      std::cout << "Opção inválida. Tente novamente" << std::endl;
+      mostraProdutos();
+      break;
+  }
+}
+
 void Ecommerce::menuUsuario(){
   Usuario usu = *userLogged;
   limparTela();
@@ -822,7 +860,7 @@ void Ecommerce::menuUsuario(){
       usu.mostraPedidos();
       break;
     case 2:
-      imprimirProdutos();
+      mostraProdutos();
       break;
     case 3:
       usu.exibeUsuarios();
