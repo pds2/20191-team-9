@@ -24,12 +24,16 @@ class Administrador : public Usuario{
     std::vector<BlusasEMoletom> _bluemols;
     std::vector<Caneca> _cans;
     std::vector<Acessorio> _aces;
-    std::vector<Compradores> _shoppers;
+    std::vector<Comprador> _shoppers;
     std::map<std::string, float> _requisicoes;
 
   public:
 
     Administrador(std::string nome, std::string email, std::string senha);
+
+    void produtoCsvToVector();
+    void usuarioCsvToVector();
+    void reCsvToMap();
 
     void removeItem(std::string nome_do_produto);
 

@@ -15,6 +15,9 @@
  * @param  descricao            [Descrição do produto]
  * @param  material             [numero de itens avaliados pelo comprador]
  */
+Produto::Produto(){
+
+}
 
 Produto::Produto(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material){
         std::vector<std::string> vazio;

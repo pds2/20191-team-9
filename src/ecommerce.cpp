@@ -9,7 +9,8 @@
  */
 
 Ecommerce::Ecommerce(){
-  inicio();
+  limparTela();
+  //inicio();
 }
 
 /**
@@ -73,11 +74,11 @@ void Ecommerce::listaComentariosArquivo(){
 
                     std::cout << "Comentario " << aux << " = "  << cmt << std::endl;
 
-                    adicionaComentario(cod, cmt);
+                    adicionarComentario(cod, cmt);
                 }
                 std::getline(arquivo, cmt);
 
-                adicionaComentario(cod, cmt);
+                adicionarComentario(cod, cmt);
             }
         }
   arquivo.close();
@@ -123,13 +124,13 @@ void Ecommerce::gravaComentariosArquivo(){
 }
 
 /**
- * [Ecommerce::adicionaComentario função que registra um comentário para um produto específico]
- * @method Ecommerce::adicionaComentario
+ * [Ecommerce::adicionarComentario função que registra um comentário para um produto específico]
+ * @method Ecommerce::adicionarComentario
  * @param  cod                           [código único que representa o produto]
  * @param  coment                        [comentário a ser registrado para o produto]
  */
 
-void Ecommerce::adicionaComentario(int cod, std::string coment){
+void Ecommerce::adicionarComentario(int cod, std::string coment){
     int x = buscaIndiceProdutos(cod);
     if ( x != -1){
     produtos[x].setComentario(coment);
@@ -179,32 +180,43 @@ bool Ecommerce::checaCodigo(int cod){
 }
 
 void Ecommerce::cadastrarCaneca(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, float diametro){
-  Caneca can(cod, preco, mediaAvaliacoes, nome, "Canecas", cor, descricao, material, diametro);
-  Produto prod(cod, preco, mediaAvaliacoes, nome, "Canecas", cor, descricao, material);
-  canecas.push_back(can);
-  produtos.push_back(prod);
-  std:cout << "Produto cadastrado com sucesso!" << std::endl;
-  mostraProdutos();
+    if (checaCodigo(cod)){
+        Caneca can(cod, preco, mediaAvaliacoes, nome, "Canecas", cor, descricao, material, diametro);
+        Produto prod(cod, preco, mediaAvaliacoes, nome, "Canecas", cor, descricao, material);
+        canecas.push_back(can);
+        produtos.push_back(prod);
+        std:cout << "Produto cadastrado com sucesso!" << std::endl;
+
+    } else {
+        std::cout << "Codigo de produto ja cadastrado. Tente novamente." << std::endl;
+    }
 }
 
 void Ecommerce::cadastrarAcessorio(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, std::string tipo){
-  Acessorio ac(cod, preco, mediaAvaliacoes, nome, "Acessorios", cor, descricao, material, tipo);
-  Produto prod(cod, preco, mediaAvaliacoes, nome, "Acessorios", cor, descricao, material);
-  acessorios.push_back(ac);
-  produtos.push_back(prod);
-  std:cout << "Produto cadastrado com sucesso!" << std::endl;
-  mostraProdutos();
+    if(checaCodigo(cod)){
+        Acessorio ac(cod, preco, mediaAvaliacoes, nome, "Acessorios", cor, descricao, material, tipo);
+        Produto prod(cod, preco, mediaAvaliacoes, nome, "Acessorios", cor, descricao, material);
+        acessorios.push_back(ac);
+        produtos.push_back(prod);
+        std:cout << "Produto cadastrado com sucesso!" << std::endl;
+
+    } else {
+        std::cout << "Codigo de produto ja cadastrado. Tente novamente." << std::endl;
+    }
 }
 
 void Ecommerce::cadastrarBlusasEMoletom(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, char tamanho, std::string tipo){
-  BlusasEMoletom b(cod, preco, mediaAvaliacoes, nome, "Blusas e Moletons", cor, descricao, material, tamanho, tipo);
-  Produto prod(cod, preco, mediaAvaliacoes, nome, "Blusas e Moletons", cor, descricao, material);
-  blusasEmoletons.push_back(b);
-  produtos.push_back(prod);
-  std:cout << "Produto cadastrado com sucesso!" << std::endl;
-  mostraProdutos();
-}
+    if(checaCodigo(cod)){
+        BlusasEMoletom b(cod, preco, mediaAvaliacoes, nome, "Blusas e Moletons", cor, descricao, material, tamanho, tipo);
+        Produto prod(cod, preco, mediaAvaliacoes, nome, "Blusas e Moletons", cor, descricao, material);
+        blusasEmoletons.push_back(b);
+        produtos.push_back(prod);
+        std:cout << "Produto cadastrado com sucesso!" << std::endl;
 
+    } else {
+        std::cout << "Codigo de produto ja cadastrado. Tente novamente." << std::endl;
+    }
+}
 
 void Ecommerce::listaProdutosArquivo(){
   produtos.clear();
@@ -350,6 +362,27 @@ int Ecommerce::buscaIndiceProdutos(int cod){
     return -1;
 }
 
+Produto Ecommerce::buscaProdutos(int cod){
+  int x, codigo;
+  std::string nome, categoria, cor, descricao, material;
+  float preco, mediaAvaliacoes;
+  for(x = 0; x < produtos.size(); x++){
+    if(produtos[x].getCodigoProduto() == cod){
+      codigo = (produtos[x]).getCodigoProduto();
+      nome = (produtos[x]).getNome();
+      categoria = (produtos[x]).getCategoria();
+      cor = (produtos[x]).getCor();
+      descricao = (produtos[x]).getDescricao();
+      material = (produtos[x]).getMaterial();
+      preco = (produtos[x]).getPreco();
+      mediaAvaliacoes = (produtos[x]).getMediaAvaliacoes();
+    }
+  }
+
+  Produto prod = Produto(codigo, preco, mediaAvaliacoes, nome, categoria, cor, descricao, material);
+  return prod;
+}
+
 
 void Ecommerce::gravaProdutosArquivo(){
   std::remove("produtos.csv");
@@ -412,7 +445,7 @@ void Ecommerce::listaUsuarioArquivo(){
 
   std::fstream arquivo;
 
-  arquivo.open("historico.csv");
+  arquivo.open("usuarios.csv");
 
   if (!arquivo.is_open()){
     std::cout << "Erro ao abrir arquivo. Tente novamente";
@@ -454,7 +487,7 @@ void Ecommerce::listaUsuarioArquivo(){
     usuarios.push_back(usu);
     compradores.push_back(comp);
   }
-  imprimirCompradores();
+  imprimirUsuarios();
   arquivo.close();
 }
 
@@ -464,10 +497,10 @@ void Ecommerce::listaUsuarioArquivo(){
  */
 
 void Ecommerce::gravaUsuarioArquivo(){
-  std::remove("historico.csv");
+  std::remove("usuarios.csv");
 
   std::fstream arquivo;
-  arquivo.open("historico.csv", std::ofstream::app);
+  arquivo.open("usuarios.csv", std::ofstream::app);
 
   if (!arquivo.is_open()){
     std::cout << "Erro ao abrir arquivo. Tente novamente";
@@ -488,6 +521,7 @@ void Ecommerce::gravaUsuarioArquivo(){
     if(procurarUsuario(em)==false){
       Usuario usu = Usuario(n, em, s);
       usuarios.push_back(usu);
+
       std::cout << "Cadastro executado com sucesso!";
       loginUsuario();
     }
@@ -526,16 +560,13 @@ void Ecommerce::cadastrarComprador (std::string n, std::string em, std::string s
       compradores.push_back(comp);
       gravaUsuarioArquivo();
       std::cout << "Cadastro executado com sucesso!" << std::endl;
-      loginUsuario();
      }
      else{
       std::cout << "Endereço de email já cadastrado. Tente novamente." << std::endl;
-      inicio();
      }
   }
   else{
     std::cout << "Dados inválidos. Tente novamente." << std::endl;
-    dadosComprador();
   }
 }
 
@@ -590,7 +621,7 @@ void Ecommerce::imprimirCompradores(){
     std::cout << "Não há compradores cadastrados." << std::endl;
   }
 }
-
+/*
 void Ecommerce::addCarrinho(){
   Comprador comp = *userLogged;
   comp.adicionarCarrinho();
@@ -601,14 +632,14 @@ void Ecommerce::impProdutos(){
   Comprador comp = *userLogged;
   limparTela();
   imprimirProdutos();
-  std::cout << "Para ver comentarios sobre um produto, digite 1" << std::endl
-  std::cout << "Para adicionar um produto ao carrinho, digite 2" << std::endl
-  << "Para voltar ao menu, digite 3" << std::endl;
+  std::cout << "Para ver comentarios sobre um produto, digite 1" << std::endl;
+  std::cout << "Para adicionar um produto ao carrinho, digite 2" << std::endl;
+  std::cout << "Para voltar ao menu, digite 3" << std::endl;
   int digito;
   std::cin >> digito;
+  int codProduto;
   switch (digito) {
     case 1:
-      int codProduto;
       std::cout << "\n" << "Digite o código do produto: ";
       std::cin >> codProduto;
       comp.procurarProduto(codProduto);
@@ -617,10 +648,9 @@ void Ecommerce::impProdutos(){
       impProdutos();
       break;
     case 2:
-      int codProduto;
       std::cout << "\n" << "Digite o código do produto que deseja adicionar ao seu carrinho: ";
       std::cin >> codProduto;
-      comp.addCarrinho();
+      addCarrinho();
       break;
     case 3:
       menuInicial();
@@ -652,10 +682,10 @@ void Ecommerce::impCarrinho(){
       int cod;
       std::cout << "Digite o codigo do produto que voce procura: ";
       std::cin >> cod;
-      comp.procurarItensCarrinho(int cod);
+      comp.procurarItensCarrinho(cod);
       break;
     case 2:
-      retirarCarrinho();
+      comp.retirarCarrinho();
       impCarrinho();
     case 3:
       comp.fazerCompras();
@@ -684,13 +714,13 @@ void Ecommerce::impHistorico(){
       int cod;
       std::cout << "Digite o codigo do produto que voce procura: ";
       std::cin >> cod;
-      comp.procurarItensHistorico(int cod);
+      comp.procurarItensHistorico(cod);
       break;
     case 2:
       comp.avaliarItem();
       break;
     case 3:
-      comp.adicionaComentario();
+      comp.adicionarComentario();
       break;
     case 4:
       menuInicial();
@@ -701,15 +731,17 @@ void Ecommerce::impHistorico(){
 void Ecommerce::mostraProdutos(){
   limparTela();
   imprimirProdutos();
-  Administrador admin = *userLogged;
-  std::cout << "Para ver comentarios sobre um produto, digite 1" << std::endl
-  std::cout << "Para adicionar um produto, digite 2" << std::endl
-  std::cout << "Para excluir um produto, digite 3" << std::endl
-  << "Para voltar ao menu, digite 4" << std::endl;
+  Comprador comp = *userLogged;
+  Produto prod;
+  std::cout << "Para ver comentarios sobre um produto, digite 1" << std::endl;
+  std::cout << "Para adicionar um produto, digite 2" << std::endl;
+  std::cout << "Para excluir um produto, digite 3" << std::endl;
+  std::cout << "Para voltar ao menu, digite 4" << std::endl;
   int digito;
   std::cin >> digito;
   switch (digito) {
     case 1:
+    {
       int codProduto;
       std::cout << "\n" << "Digite o código do produto: ";
       std::cin >> codProduto;
@@ -719,24 +751,33 @@ void Ecommerce::mostraProdutos(){
       std::cin.get();
       mostraProdutos();
       break;
+    }
     case 2:
+    {
       dadosProduto();
       break;
+    }
     case 3:
+    {
       std::string nomeProduto;
       std::cout << "\n" << "Digite o nome do produto que deseja remover: ";
       std::cin >> nomeProduto;
-      admin.removeItem();
+      comp.retirarCarrinho();
       break;
+    }
     case 4:
+    {
       menuInicial();
       break;
+    }
     default:
+      {
       std::cout << "Opção inválida. Tente novamente" << std::endl;
-      mostraProdutos();
+
       break;
+    }
   }
-}
+}*/
 
 /**
  * [Ecommerce::procurarUsuario função que procura um usuário dado o email do mesmo]
@@ -770,6 +811,28 @@ bool Ecommerce::procurarComprador(std::string em){
     }
   }
   return false;
+}
+
+Comprador Ecommerce::procurarCompradorObj(std::string em){
+  int x, numeroComprasCarrinho, numeroComprasHistorico, numeroAvaliacoes;
+  std::string nome, email, senha, cpf, endereco;
+  float dinheiro;
+  for(x = 0; x < produtos.size(); x++){
+    if(compradores[x].getEmail() == em){
+      nome = (compradores[x]).getNome();
+      email = (compradores[x]).getEmail();
+      senha = (compradores[x]).getSenha();
+      endereco = (compradores[x]).getEndereco();
+      cpf = (compradores[x]).getCPF();
+      numeroComprasCarrinho = (compradores[x]).getNumeroComprasCarrinho();
+      numeroComprasHistorico = (compradores[x]).getNumeroComprasHistorico();
+      numeroAvaliacoes = (compradores[x]).getNumeroAvaliacoes();
+      dinheiro = (compradores[x]).getDinheiro();
+    }
+  }
+
+  Comprador comp = Comprador(nome, email, senha, cpf, endereco, numeroComprasCarrinho, numeroComprasHistorico, numeroAvaliacoes, dinheiro);
+  return comp;
 }
 
 /**
@@ -816,7 +879,7 @@ bool checaSenhaAdmin(std::string sAdmin){
 void Ecommerce::limparTela(){
   std::system("clear||cls");
 }
-
+/*
 void Ecommerce::loginUsuario(){
   std::string email, senha;
   std::cout << "Insira seu email: ";
@@ -852,7 +915,7 @@ void Ecommerce::logoutUsuario(){
   std::string confirma;
   std::cin >> confirma;
   if (confirma == "OUT"){
-    userLogged = nullptr;
+    userLogged ;
     inicio();
   }
   else if (confirma == "MENU"){
@@ -868,7 +931,7 @@ void Ecommerce::inicio(){
   int digito;
   limparTela();
 
-  *userLogged = nullptr;
+  *userLogged ;
 
   std::cout << "\n" << "-------------------------------------------------------------" << std::endl;
   std::cout << "\t\t Bem vindo à nossa loja!" << std::endl;
@@ -876,7 +939,7 @@ void Ecommerce::inicio(){
 
   std::cout << "1 - Já possuo uma conta." << std::endl;
   std::cout << "2 - Desejo me cadastrar." << std::endl;
-  std::cout << "\nEscolha uma opção: ";
+  std::cout << "\nEscolha uma opcao: ";
   std::cin >> digito;
   switch (digito){
     case 1:
@@ -914,7 +977,7 @@ void Ecommerce::dadosComprador(){
 void Ecommerce::dadosProduto(){
   limparTela();
   std::string nome, preco, cor, material, descricao;
-  int opção;
+  int opcao;
   long int codigo;
   codigo = geradorCod();
   std::cout << std::endl << "Se você deseja cadastrar uma caneca, digite 1" << std::endl
@@ -932,35 +995,41 @@ void Ecommerce::dadosProduto(){
   std::cin >> material;
   std::cout << std::endl << "Faça uma breve descricao do produto: ";
   std::cin >> descricao;
-  switch (opção){
-    caso 1:
+  switch (opcao){
+    case 1:
+    {
       float diametro;
       std::cout << std::endl << "Insira o diametro do produto: ";
       std::cin >> diametro;
       cadastrarCaneca(codigo, preco, 0, nome, cor, descricao, material, diametro);
       break;
-    caso 2:
-      std::string tipo;
-      std::cout << std::endl << "Insira o tipo do produto: ";
-      std::cin >> tipo;
-      char tamanho;
-      std::cout << std::endl << "Insira o tamanho do produto: ";
-      std::cin >> tamanho;
-      cadastrarBlusasEMoletom(codigo, preco, 0, nome, cor, descricao, material, tamanho, tipo);
-      break;
-    caso 3:
-      std::string tipo;
-      std::cout << std::endl << "Insira o tipo do produto: ";
-      std::cin >> tipo;
-      cadastrarAcessorio(codigo, preco, 0, nome, cor, descricao, material, tipo);
-      break;
-    caso 0:
-      mostraProdutos();
+    }
+    case 2:
+      {
+        std::string tipo;
+        std::cout << std::endl << "Insira o tipo do produto: ";
+        std::cin >> tipo;
+        char tamanho;
+        std::cout << std::endl << "Insira o tamanho do produto: ";
+        std::cin >> tamanho;
+        cadastrarBlusasEMoletom(codigo, preco, 0, nome, cor, descricao, material, tamanho, tipo);
+        break;
+      }
+    case 3:
+      {
+        std::string tipo;
+        std::cout << std::endl << "Insira o tipo do produto: ";
+        std::cin >> tipo;
+        cadastrarAcessorio(codigo, preco, 0, nome, cor, descricao, material, tipo);
+        break;
+      }
+    case 0:
+
   }
 }
 
 void Ecommerce::menuInicial(){
-  limparTela()
+  limparTela();
   Usuario usu = *userLogged;
   if(procurarComprador(usu.getEmail())){
     menuComprador();
@@ -995,7 +1064,7 @@ void Ecommerce::menuComprador(){
       impHistorico();
       break;
     case 5:
-      comp.adicionarDinheiro();
+      comp.adicionaDinheiro();
       break;
     case 9:
       comp.logoutUsuario();//Confirmar logout
@@ -1008,7 +1077,7 @@ void Ecommerce::menuComprador(){
 }
 
 void Ecommerce::menuUsuario(){
-  Administrador admin = *userLogged;
+  Comprador comp = *userLogged;
   limparTela();
   std::cout << "Para ver as requisições pendentes, digite 1" << std::endl
   << "Para ver os produtos oferecidos, digite 2" << std::endl
@@ -1019,19 +1088,19 @@ void Ecommerce::menuUsuario(){
   std::cin >> digito;
   switch (digito) {
     case 1:
-      admin.mostraPedidos();
+      comp.mostraPedidos();
       break;
     case 2:
-      mostraProdutos();
+
       break;
     case 3:
       mostraUsuarios();
       break;
     case 4:
-      admin.exibirPerfil();
+      comp.exibirPerfil();
       break;
     case 9:
-      admin.logoutUsuario();
+      comp.logoutUsuario();
       break;
     default:
       std::cout << "Opção inválida. Tente novamente" << std::endl;
@@ -1039,5 +1108,5 @@ void Ecommerce::menuUsuario(){
       break;
   }
 }
-
+*/
 #endif

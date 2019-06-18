@@ -40,7 +40,7 @@ class Comprador : public Usuario{
     std::string getCPF();
     std::string getEndereco();
 
-    int getTotalCarrinho();
+    float getTotalCarrinho();
 
     int getNumeroAvaliacoes();
     float getDinheiro();
@@ -49,13 +49,13 @@ class Comprador : public Usuario{
     bool adicionarCarrinho();
     void fazerCompras();
     bool retirarCarrinho();
-    bool adicionaDinheiro(float valor);
+    bool adicionaDinheiro(double valor, Comprador comp);
+
 
     void exibirPerfil();
     void imprimirCarrinho();
     void imprimirHistorico();
 
-    void procurarProduto(int codProduto);
     int procurarItensHistorico(int codProduto);
     int procurarItensCarrinho(int codProduto);
     void adicionarComentario();

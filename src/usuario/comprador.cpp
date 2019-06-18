@@ -144,32 +144,39 @@ bool Comprador::adicionarCarrinho(){
     std::cin >> opcao;
 
     switch (opcao) {
+      case 0:
+      {
+        std::cout << "Este produto já encontra-se em seu carrinho. Você escolheu não adicionar novamente." << std::endl;
+        return false;
+        break;
+      }
       case 1:
+      {
         int cod;
         std::string nome, categoria, cor, descricao, material;
         float preco, mediaAvaliacoes;
 
-        cod = (ecom.produto[indice]).getCodigoProduto();
-        nome = (ecom.produto[indice]).getNome();
-        categoria = (ecom.produto[indice]).getCategoria();
-        cor = (ecom.produto[indice]).getCor();
-        descricao = (ecom.produto[indice]).getDescricao();
-        material = (ecom.produto[indice]).getMaterial();
-        preco = (ecom.produto[indice]).getPreco();
-        mediaAvaliacoes = (ecom.produto[indice]).getMediaAvaliacoes();
+        /*cod = (ecom.produtos[indice]).getCodigoProduto();
+        nome = (ecom.produtos[indice]).getNome();
+        categoria = (ecom.produtos[indice]).getCategoria();
+        cor = (ecom.produtos[indice]).getCor();
+        descricao = (ecom.produtos[indice]).getDescricao();
+        material = (ecom.produtos[indice]).getMaterial();
+        preco = (ecom.produtos[indice]).getPreco();
+        mediaAvaliacoes = (ecom.produtos[indice]).getMediaAvaliacoes();*/
 
-        Produto prod = Produto(cod, preco, mediaAvaliacoes, nome, categoria, cor, descricao, material)
+        Produto prod = Produto(cod, preco, mediaAvaliacoes, nome, categoria, cor, descricao, material);
         carrinho.push_back(prod);
         _totalCarrinho = _totalCarrinho + preco;
         return true;
-      case 0:
-        std::cout << "Este produto já encontra-se em seu carrinho. Você escolheu não adicionar novamente." << std::endl;
-        return false;
-        break;
+      }
+
       default:
+      {
         std::cout << "Resposta inválida. Tente novamente." << std::endl;
         return false;
         break;
+      }
     }
   }
   else{
@@ -274,14 +281,14 @@ void Comprador::imprimirHistorico(){
     std::cout << "----------------------------------------------" << "\n" << std::endl;
 
     for(int i=0; i < _numeroComprasHistorico; i++){
-      if((historico[i].first) == this->_email){
+      /*if(this->historico[i].first == this->_email){
         std::cout << "\n" << "----------------------------------------------" << std::endl;
-        std::cout << "\t\t Email do Comprador: " << (historico[i].first) << std::endl;
+        std::cout << "\t\t Email do Comprador: " << this->historico[i].first << std::endl;
         std::cout << "----------------------------------------------" << "\n" << std::endl;
-        std::cout << "Código: " << (historico[i].second).getCodigoProduto() << std::endl;
-        std::cout << "Nome: " << (historico[i].second).getNome() << std::endl;
-        std::cout << "Preço " << (historico[i].second).getPreco() << std::endl;
-      }
+        std::cout << "Código: " << (this->historico[i].second).getCodigoProduto() << std::endl;
+        std::cout << "Nome: " << (this->historico[i].second).getNome() << std::endl;
+        std::cout << "Preço " << (this->historico[i].second).getPreco() << std::endl;
+      }*/
     }
 
     std::cout << "\n" << "----------------------------------------------" << std::endl;
@@ -314,22 +321,6 @@ void Comprador::exibirPerfil(){
 }
 
 /**
- * [Comprador::procurarProduto função que imprime os comentários registrados para um item específico, localizando o item através de uma pesquisa utilizando o código do produto]
- * @method Comprador::procurarProduto
- * @param  codProduto                 [código único que representa um produto]
- */
-
-void Comprador::procurarProduto(int codProduto){
-  _numeroProdutos = produtos.size();
-
-  for(int indice=0; indice < _numeroProdutos; indice++){
-    if((produtos[indice]).getCodigoProduto() == codProduto){
-      produtos[indice].getComentarios();
-    }
-  }
-}
-
-/**
  * [Comprador::procurarItensHistorico função que localiza um item no histórico do comprador, através de uma pesquisa utilizando o código do produto]
  * @method Comprador::procurarItensHistorico
  * @param  codProduto                        [código úndico que representa um produto]
@@ -340,9 +331,9 @@ int Comprador::procurarItensHistorico(int codProduto){
   _numeroComprasHistorico = historico.size();
 
   for(int indice=0; indice < _numeroComprasHistorico; indice++){
-    if((historico[indice]).getCodigoProduto() == codProduto){
+    /*if((historico[indice]).getCodigoProduto() == codProduto){
       return indice;
-    }
+    }*/
   }
   return -1;
 }
@@ -386,9 +377,8 @@ void Comprador::adicionarComentario(){
     std::cout << "\n" << "Escreva o seu comentário para o produto de código " << codProduto << " : " << std::endl;
     std::getline(std::cin, comentario);
 
-    (historico[indice]).setComentario(comentario);
+    //(historico[indice]).setComentario(comentario);
     std::cout << "\n" << "Comentário para o produto de código " << codProduto << " registrado com sucesso! " << std::endl;
-    ecom.impHistorico();
   }
   else{
     std::cout << "\n" << "O produto de código " << codProduto << " não consta em seu histórico então não pode ter um comentário registrado. Tente novamente.";
@@ -401,7 +391,9 @@ void Comprador::adicionarComentario(){
  */
 
 void Comprador::avaliarItem(){
+
   limparTela();
+  imprimirHistorico();
 
   int codProduto;
   int indice = -1;
@@ -411,16 +403,13 @@ void Comprador::avaliarItem(){
 
   indice = procurarItensHistorico(codProduto);
 
-  Ecommerce ecom;
-
   if (indice != -1){
     int nota;
 
     std::cout << "\n" << "De 0 a 5, qual nota deseja dar ao produto de código " << codProduto << "?" << std::endl;
     std::cin >> nota;
     if(nota>=0 || nota<=5){
-      (historico[indice]).avaliarProduto(nota);
-      ecom.imprimirHistorico();
+      /*(historico[indice]).avaliarProduto(nota);*/
     }
     else{
       std::cout << "\n" << "Nota inválida. Tente novamente.";
@@ -428,7 +417,6 @@ void Comprador::avaliarItem(){
   }
   else{
     std::cout << "\n" << "O produto de código " << codProduto << " não consta em seu histórico então não pode ser avaliado. Tente novamente.";
-    avaliarItem();
   }
 }
 
@@ -449,13 +437,11 @@ void Comprador::limparTela(){
 void Comprador::fazerCompras(){
   std::cout << "Você está comprando " << carrinho.size() << " produtos, cujo valor total é " << _totalCarrinho << ". Deseja confirmar sua compra?" << std::endl;
   std::cout << "0 - NÃO\n1 - SIM" << std::endl;
-  int opçao;
-  Ecommerce ecom;
-  std::cin >> opçao;
+  int opcao;
+  std::cin >> opcao;
   switch (opcao) {
     case 0:
       std::cout << "Compra não realizada. Você ainda possui produtos te esperando em seu carrinho!" << std::endl;
-      ecom.impCarrinho();
       break;
     case 1:
     {
@@ -463,17 +449,14 @@ void Comprador::fazerCompras(){
         carrinho.clear();
         _dinheiro = _dinheiro - _totalCarrinho;
         _numeroComprasHistorico++;
-
-        ecom.menuInicial();
       }
       else{
         std::cout << "Compra não realizada pois seu saldo é insuficiente! Você possui R$ " << _dinheiro << std::endl;
-        ecom.impCarrinho();
       }
-      break
+      break;
     }
     default:
-      std::cout << "Opção inválida. Tente novamente" << std::endl;
+      std::cout << "opcao inválida. Tente novamente" << std::endl;
       fazerCompras();
       break;
   }
@@ -498,6 +481,7 @@ bool Comprador::adicionaDinheiro(double valor, Comprador comp){
  */
 
 void Comprador::listaHistoricoArquivo(){
+  Ecommerce ecom;
   std::fstream arquivo;
 
   arquivo.open("historico.csv");
@@ -535,18 +519,8 @@ void Comprador::listaHistoricoArquivo(){
 
         preco = std::stof(precoProduto);
 
-        int indice = buscaIndiceProdutos(codigo);
+        Produto prod = ecom.buscaProdutos(codigo);
 
-        cod = (ecom.produto[indice]).getCodigoProduto();
-        nome = (ecom.produto[indice]).getNome();
-        categoria = (ecom.produto[indice]).getCategoria();
-        cor = (ecom.produto[indice]).getCor();
-        descricao = (ecom.produto[indice]).getDescricao();
-        material = (ecom.produto[indice]).getMaterial();
-        preco = (ecom.produto[indice]).getPreco();
-        mediaAvaliacoes = (ecom.produto[indice]).getMediaAvaliacoes();
-
-        Produto prod = Produto(cod, preco, mediaAvaliacoes, nome, categoria, cor, descricao, material);
         historico.insert(std::pair<std::string, Produto>(email, prod));
       }
     }
@@ -561,6 +535,7 @@ void Comprador::listaHistoricoArquivo(){
  */
 
 void Comprador::gravaHistoricoArquivo(){
+  Ecommerce ecom;
   std::remove("historico.csv");
 
   std::fstream arquivo;
@@ -571,15 +546,15 @@ void Comprador::gravaHistoricoArquivo(){
     exit(1);
   }
 
-  _numeroComprasHistorico = historico.size();
-  for(int i=0; arquivo.good() && i < _numeroComprasHistorico; i++){
-    int indice = procurarComprador((historico[i].first);
-    arquivo << (historico[i].first) << "," << (comprador[indice]).getNumeroComprasHistorico() << ",";
-    arquivo << << (historico[i].second).getCodigoProduto() << "," << (historico[i].second).getNome() << "," << (historico[i].second).getPreco();
+  std::map<std::string, Produto>::iterator ite;
+  for (ite=historico.begin(); ite!=historico.end(); ++ite){
+    Comprador comp = ecom.procurarCompradorObj(ite->first);
+
+    arquivo << ite->first << "," << comp.getNumeroComprasHistorico() << std::endl;
+    arquivo << (ite->second).getCodigoProduto() << "," << (ite->second).getNome() << "," << (ite->second).getPreco() << std::endl;
   }
 
   arquivo.close();
 }
-
 
 #endif
