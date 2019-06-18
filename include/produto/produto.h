@@ -38,6 +38,7 @@ class Produto{
         void getComentarios(); //imprime comentarios
         void setComentario(std::string comentario); //salva comentario
         int retornaNumComentarios();
+        virtual void imprimeProduto();
 
 };
 
