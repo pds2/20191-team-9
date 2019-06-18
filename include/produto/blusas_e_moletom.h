@@ -17,7 +17,7 @@ class BlusasEMoletom : public Produto{
         ~BlusasEMoletom();
         char getTamanho();
         std::string getTipo();
-        void imprimeProduto();
+        void imprimeProduto() override;
 
 };
 
