@@ -31,8 +31,8 @@ class Ecommerce{
     std::vector <BlusasEMoletom> blusasEmoletons;
 
 
-    const std::string SENHADMIN = "Ecom@Geek42";
-    Comprador *userLogged = nullptr;
+  /*  const std::string SENHADMIN = "Ecom@Geek42";
+    Comprador *userLogged = nullptr;*/
 
   public:
     Ecommerce();
@@ -64,6 +64,8 @@ class Ecommerce{
     int buscaIndiceAcessorio(int cod);
     int buscaIndiceBlusasEMoletom(int cod);
     int buscaIndiceProdutos(int cod);
+    Produto buscaProdutos(int cod);
+
     int tamanhoArquivo(const char* file_name); //se o arquivo tiver vazio retorna 0
 
     void addCarrinho();
@@ -83,7 +85,7 @@ class Ecommerce{
 
     void listaComentariosArquivo();
     void gravaComentariosArquivo();
-    void adicionaComentario(int cod, std::string coment); //procura produto no vector pelo codigo e adiciona comentario
+    void adicionarComentario(int cod, std::string coment); //procura produto no vector pelo codigo e adiciona comentario
 
     void loginUsuario(std::string n, std::string s);
     void loginUsuario();
@@ -94,6 +96,9 @@ class Ecommerce{
     void menuComprador();
     void dadosComprador();
     void dadosProduto();
+
+    Comprador procurarCompradorObj(std::string email);
+
 };
 
 #endif

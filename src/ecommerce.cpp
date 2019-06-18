@@ -9,7 +9,8 @@
  */
 
 Ecommerce::Ecommerce(){
-  inicio();
+  limparTela();
+  //inicio();
 }
 
 /**
@@ -183,7 +184,7 @@ void Ecommerce::cadastrarCaneca(int cod, float preco, float mediaAvaliacoes, std
         canecas.push_back(can);
         produtos.push_back(prod);
         std:cout << "Produto cadastrado com sucesso!" << std::endl;
-        mostraProdutos();
+
     } else {
         std::cout << "Codigo de produto ja cadastrado. Tente novamente." << std::endl;
     }
@@ -196,7 +197,7 @@ void Ecommerce::cadastrarAcessorio(int cod, float preco, float mediaAvaliacoes, 
         acessorios.push_back(ac);
         produtos.push_back(prod);
         std:cout << "Produto cadastrado com sucesso!" << std::endl;
-        mostraProdutos();
+
     } else {
         std::cout << "Codigo de produto ja cadastrado. Tente novamente." << std::endl;
     }
@@ -209,12 +210,11 @@ void Ecommerce::cadastrarBlusasEMoletom(int cod, float preco, float mediaAvaliac
         blusasEmoletons.push_back(b);
         produtos.push_back(prod);
         std:cout << "Produto cadastrado com sucesso!" << std::endl;
-        mostraProdutos();
+
     } else {
         std::cout << "Codigo de produto ja cadastrado. Tente novamente." << std::endl;
     }
 }
-
 
 void Ecommerce::listaProdutosArquivo(){
   produtos.clear();
@@ -360,6 +360,27 @@ int Ecommerce::buscaIndiceProdutos(int cod){
     return -1;
 }
 
+Produto Ecommerce::buscaProdutos(int cod){
+  int x, codigo;
+  std::string nome, categoria, cor, descricao, material;
+  float preco, mediaAvaliacoes;
+  for(x = 0; x < produtos.size(); x++){
+    if(produtos[x].getCodigoProduto() == cod){
+      codigo = (produtos[x]).getCodigoProduto();
+      nome = (produtos[x]).getNome();
+      categoria = (produtos[x]).getCategoria();
+      cor = (produtos[x]).getCor();
+      descricao = (produtos[x]).getDescricao();
+      material = (produtos[x]).getMaterial();
+      preco = (produtos[x]).getPreco();
+      mediaAvaliacoes = (produtos[x]).getMediaAvaliacoes();
+    }
+  }
+
+  Produto prod = Produto(codigo, preco, mediaAvaliacoes, nome, categoria, cor, descricao, material);
+  return prod;
+}
+
 
 void Ecommerce::gravaProdutosArquivo(){
   std::remove("produtos.csv");
@@ -422,7 +443,7 @@ void Ecommerce::listaUsuarioArquivo(){
 
   std::fstream arquivo;
 
-  arquivo.open("historico.csv");
+  arquivo.open("usuarios.csv");
 
   if (!arquivo.is_open()){
     std::cout << "Erro ao abrir arquivo. Tente novamente";
@@ -464,7 +485,7 @@ void Ecommerce::listaUsuarioArquivo(){
     usuarios.push_back(usu);
     compradores.push_back(comp);
   }
-  imprimirCompradores();
+  imprimirUsuarios();
   arquivo.close();
 }
 
@@ -474,10 +495,10 @@ void Ecommerce::listaUsuarioArquivo(){
  */
 
 void Ecommerce::gravaUsuarioArquivo(){
-  std::remove("historico.csv");
+  std::remove("usuarios.csv");
 
   std::fstream arquivo;
-  arquivo.open("historico.csv", std::ofstream::app);
+  arquivo.open("usuarios.csv", std::ofstream::app);
 
   if (!arquivo.is_open()){
     std::cout << "Erro ao abrir arquivo. Tente novamente";
@@ -498,6 +519,7 @@ void Ecommerce::gravaUsuarioArquivo(){
     if(procurarUsuario(em)==false){
       Usuario usu = Usuario(n, em, s);
       usuarios.push_back(usu);
+
       std::cout << "Cadastro executado com sucesso!";
       loginUsuario();
     }
@@ -536,16 +558,13 @@ void Ecommerce::cadastrarComprador (std::string n, std::string em, std::string s
       compradores.push_back(comp);
       gravaUsuarioArquivo();
       std::cout << "Cadastro executado com sucesso!" << std::endl;
-      loginUsuario();
      }
      else{
       std::cout << "Endereço de email já cadastrado. Tente novamente." << std::endl;
-      inicio();
      }
   }
   else{
     std::cout << "Dados inválidos. Tente novamente." << std::endl;
-    dadosComprador();
   }
 }
 
@@ -600,7 +619,7 @@ void Ecommerce::imprimirCompradores(){
     std::cout << "Não há compradores cadastrados." << std::endl;
   }
 }
-
+/*
 void Ecommerce::addCarrinho(){
   Comprador comp = *userLogged;
   comp.adicionarCarrinho();
@@ -746,11 +765,11 @@ void Ecommerce::mostraProdutos(){
     default:
       {
       std::cout << "Opção inválida. Tente novamente" << std::endl;
-      mostraProdutos();
+
       break;
     }
   }
-}
+}*/
 
 /**
  * [Ecommerce::procurarUsuario função que procura um usuário dado o email do mesmo]
@@ -784,6 +803,28 @@ bool Ecommerce::procurarComprador(std::string em){
     }
   }
   return false;
+}
+
+Comprador Ecommerce::procurarCompradorObj(std::string em){
+  int x, numeroComprasCarrinho, numeroComprasHistorico, numeroAvaliacoes;
+  std::string nome, email, senha, cpf, endereco;
+  float dinheiro;
+  for(x = 0; x < produtos.size(); x++){
+    if(compradores[x].getEmail() == em){
+      nome = (compradores[x]).getNome();
+      email = (compradores[x]).getEmail();
+      senha = (compradores[x]).getSenha();
+      endereco = (compradores[x]).getEndereco();
+      cpf = (compradores[x]).getCPF();
+      numeroComprasCarrinho = (compradores[x]).getNumeroComprasCarrinho();
+      numeroComprasHistorico = (compradores[x]).getNumeroComprasHistorico();
+      numeroAvaliacoes = (compradores[x]).getNumeroAvaliacoes();
+      dinheiro = (compradores[x]).getDinheiro();
+    }
+  }
+
+  Comprador comp = Comprador(nome, email, senha, cpf, endereco, numeroComprasCarrinho, numeroComprasHistorico, numeroAvaliacoes, dinheiro);
+  return comp;
 }
 
 /**
@@ -830,7 +871,7 @@ bool checaSenhaAdmin(std::string sAdmin){
 void Ecommerce::limparTela(){
   std::system("clear||cls");
 }
-
+/*
 void Ecommerce::loginUsuario(){
   std::string email, senha;
   std::cout << "Insira seu email: ";
@@ -975,7 +1016,7 @@ void Ecommerce::dadosProduto(){
         break;
       }
     case 0:
-      mostraProdutos();
+
   }
 }
 
@@ -1042,7 +1083,7 @@ void Ecommerce::menuUsuario(){
       comp.mostraPedidos();
       break;
     case 2:
-      mostraProdutos();
+
       break;
     case 3:
       mostraUsuarios();
@@ -1059,5 +1100,5 @@ void Ecommerce::menuUsuario(){
       break;
   }
 }
-
+*/
 #endif

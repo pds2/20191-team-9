@@ -10,9 +10,9 @@
  * @param senha [senha do administrador, com o qual realiza login no sistema]
  */
 Administrador::Administrador(std::string nome, std::string email, std::string senha){
-  this->_nome = nome;
+  /*this->_nome = nome;
   this->_email = email;
-  this->_senha = senha;
+  this->_senha = senha;*/
 }
 
 
@@ -21,6 +21,7 @@ Administrador::Administrador(std::string nome, std::string email, std::string se
  * produtos do arquivo csv no qual eles estão e insere-as em um vector para
  * fácil manuseio]
  */
+/*
 void Administrador::produtoCsvToVector(){
 
   std::string nome;
@@ -84,12 +85,13 @@ void Administrador::produtoCsvToVector(){
 
   arquivo.close();
 }
-
+*/
 /**
  * [Administrador::usuarioCsvToVector -> Classe que pega as informações sobre os
  * usuarios do arquivo csv no qual eles estão e insere-as em um vector para
  * fácil manuseio]
  */
+/*
 void Administrador::usuarioCsvToVector(){
 
   std::string nome, email, senha, cpf, endereco;
@@ -123,12 +125,13 @@ void Administrador::usuarioCsvToVector(){
 
   arquivo.close();
 }
-
+*/
 /**
  * [Administrador::reqCsvToMap -> Classe que pega as informações sobre as
  * requisições do arquivo csv no qual eles estão e insere-as em um map para
  * fácil manuseio]
  */
+/*
 void Administrador::reqCsvToMap(){
   this->_requisicoes.clear();
 
@@ -151,11 +154,12 @@ void Administrador::reqCsvToMap(){
   arquivo.close();
 
 }
-
+*/
 /**
  * [Administrador::removeItem description]
  * @param nome_do_produto [description]
  */
+/*
 void Administrador::removeItem(std::string nome_do_produto){
   //procura no vector se existe algum produto com o nome chamado.
   //Se ele existir, este produto é retirado do estoque. Se não existir, uma mensagem de erro é impressa na tela.
@@ -246,12 +250,13 @@ void Administrador::removeItem(std::string nome_do_produto){
   arquivo.close();
 
 }
-
+*/
 /**
  * [Administrador::adicionaPedido description]
  * @param email [description]
  * @param valor [description]
  */
+/*
 void Administrador::adicionaPedido(std::string email, float valor){
   this->_requisicoes.insert(std::pair<std::string, float>(email,valor));
 
@@ -270,10 +275,11 @@ void Administrador::adicionaPedido(std::string email, float valor){
 
   arquivo.close();
 }
-
+*/
 /**
  * [Administrador::mostraPedidos description]
  */
+/*
 void Administrador::mostraPedidos(){
   // Imprime o mapa _requisicoes com o seguinte formato
   // Exemplo: 1 - email@docomprador.com: R$100,00
@@ -298,11 +304,12 @@ void Administrador::mostraPedidos(){
     std::cout << "\n" << "----------------------------------------------" << std::endl;
   }
 }
-
+*/
 /**
  * [Administrador::aprovaPedido description]
  * @param email [description]
  */
+/*
 void Administrador::aprovaPedido(std::string email){
   int aprovacao;
   float valor;
@@ -376,11 +383,12 @@ void Administrador::aprovaPedido(std::string email){
   arquivo_req.close();
 
 }
-
+*/
 /**
  * [Administrador::excluiUsuario description]
  * @param email [description]
  */
+/*
 void Administrador::excluiUsuario(std::string email){
   std::string email_do_cliente;
   int indice = -1;
@@ -428,5 +436,5 @@ Administrador::~Administrador(){
   _shoppers.clear();
   _requisicoes.clear();
 }
-
+*/
 #endif
