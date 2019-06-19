@@ -15,7 +15,7 @@ class Caneca : public Produto{
         Caneca(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, float diametro);
         ~Caneca();
         float getDiametro();
-        void imprimeProduto() override;
+        virtual void imprimeProduto() override;
 
 };
 

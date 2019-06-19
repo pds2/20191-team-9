@@ -23,7 +23,7 @@ Produto::Produto(int cod, float preco, float mediaAvaliacoes, std::string nome, 
         std::vector<std::string> vazio;
         std::vector<int> nada;
         if((cod < 0)||(preco < 0)||(mediaAvaliacoes < 0)){
-            throw ArgumentoInvalido();
+            //throw ArgumentoInvalido();
         }
 
         this->_codigoProduto = cod;
@@ -56,7 +56,7 @@ void Produto::avaliarProduto(int nota){
     if (nota>=1 && nota<=5){
     _avaliacoes.push_back(nota);
     } else{
-        throw ArgumentoInvalido();
+        //throw ArgumentoInvalido();
     }
 
     int size = _avaliacoes.size();
@@ -163,4 +163,9 @@ int Produto::getCodigoProduto(){
 int Produto::retornaNumComentarios(){
     return _comentarios.size();
 }
+
+void Produto::imprimeProduto(){
+  std::cout << "------------------------------" << std::endl;
+}
+
 #endif

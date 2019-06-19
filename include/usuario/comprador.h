@@ -13,12 +13,6 @@
 #include "usuario/usuario.h"
 #include "produto/produto.h"
 
-#include "usuario/comprador.h"
-#include "usuario/administrador.h"
-#include "ecommerce.h"
-#include "excecoes.h"
-
-
 class Comprador : public Usuario{
 
   private:
@@ -56,7 +50,6 @@ class Comprador : public Usuario{
     void fazerCompras();
     bool retirarCarrinho();
     bool adicionaDinheiro(double valor, Comprador comp);
-
 
     void exibirPerfil();
     void imprimirCarrinho();

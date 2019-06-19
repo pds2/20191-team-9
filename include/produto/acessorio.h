@@ -16,7 +16,7 @@ class Acessorio : public Produto{
         ~Acessorio();
 
         std::string getTipo();
-        void imprimeProduto() override;
+        virtual void imprimeProduto() override;
 };
 
 #endif

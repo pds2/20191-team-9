@@ -1,9 +1,7 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 
-include "doctest.h"
+#include "doctest.h"
 #include <iostream>
-#include "ecommerce.h"
-
 
 TEST_CASE("Declaracão produto") {
     CHECK_NOTHROW(BlusasEMoletom blusa(2, 60, 4.5, "Moletom amarelo", "Moletom", "Amarelo", "Amarelo que nem o raiar do sol", "Algodao", M, "Tipo tiposo"));
@@ -22,5 +20,4 @@ TEST_CASE("Get produto") {
     CHECK_EQ(m.getMaterial(),"Algodao");
     CHECK_EQ(m.getTamanho(), M);
     CHECK_EQ(m.getTipo(),"Tipo tiposo");
-
 }

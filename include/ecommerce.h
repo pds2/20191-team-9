@@ -14,11 +14,13 @@
 #include <sstream>
 
 #include "usuario/comprador.h"
+
 #include "usuario/administrador.h"
 #include "produto/produto.h"
 #include "produto/acessorio.h"
 #include "produto/caneca.h"
 #include "produto/blusas_e_moletom.h"
+#include "excecoes.h"
 
 class Ecommerce{
   private:
@@ -28,10 +30,6 @@ class Ecommerce{
     std::vector <Caneca> canecas;
     std::vector <Acessorio> acessorios;
     std::vector <BlusasEMoletom> blusasEmoletons;
-
-
-  /*  const std::string SENHADMIN = "Ecom@Geek42";
-    Comprador *userLogged = nullptr;*/
 
   public:
     Ecommerce();
@@ -50,14 +48,11 @@ class Ecommerce{
     void imprimirUsuarios();
     void imprimirCompradores();
     void imprimirProdutos();
-    //void imprimirMensagens();
 
     bool checaNome(std::string n);
     bool checaEmail(std::string em);
     bool checaSenha(std::string s);
     bool checaSenhaAdmin(std::string sAdmin);
-    //Validar e form cadastro usuario e cadastrarUsuario
-    //Falso volta pra ecommerce()
 
     int buscaIndiceCaneca(int cod);
     int buscaIndiceAcessorio(int cod);

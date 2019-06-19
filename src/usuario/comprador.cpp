@@ -2,6 +2,7 @@
 #define COMPRADOR_CPP
 
 #include "usuario/comprador.h"
+#include "ecommerce.h"
 
 /**
  * [Comprador::Comprador Construtor da classe Comprador]

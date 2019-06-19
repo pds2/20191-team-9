@@ -5,8 +5,6 @@
 #include <string>
 #include <vector>
 
-#include "excecoes.h"
-
 class Produto{
     private:
         float _preco;

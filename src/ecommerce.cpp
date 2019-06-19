@@ -10,7 +10,6 @@
 
 Ecommerce::Ecommerce(){
   limparTela();
-  //inicio();
 }
 
 /**
