@@ -30,7 +30,7 @@ class Administrador : public Usuario{
 
   public:
 
-    Administrador(std::string nome, std::string email, std::string senha);
+    Administrador();
 
     void produtoCsvToVector();
     void usuarioCsvToVector();
