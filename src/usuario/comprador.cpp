@@ -275,34 +275,28 @@ void Comprador::imprimirHistorico(){
   }
   catch(Exception_Historico_Vazio &e){
     std::cout<<e.what();
+    //aqui voltar para o menu anterior
   }
 
-  if(_numeroComprasHistorico == 0){
-    std::cout << "Seu histórico está vazio. Compre produtos para continuar.";
+  limparTela();
+
+  std::cout << "\n" << "----------------------------------------------" << std::endl;
+  std::cout << "\t\t Histórico do Comprador " << this->getNome() << std::endl;
+  std::cout << "----------------------------------------------" << "\n" << std::endl;
+
+  std::map<std::string, Produto>::iterator ite;
+
+  for (ite=historico.begin(); ite!=historico.end(); ++ite){
+    if(ite->first == this->getEmail()){
+      std::cout << "\t\t| Código " << (ite->second).getCodigoProduto() << " |" << std::endl;
+      std::cout << "\t\t| Nome: " << (ite->second).getNome() << " |" << std::endl;
+      std::cout << "\t\t| Preço: " << (ite->second).getPreco() << " |" << std::endl;
+      }
   }
-  else{
-    limparTela();
-
-    std::cout << "\n" << "----------------------------------------------" << std::endl;
-    std::cout << "\t\t Histórico" << std::endl;
-    std::cout << "----------------------------------------------" << "\n" << std::endl;
-
-    for(int i=0; i < _numeroComprasHistorico; i++){
-      /*if(this->historico[i].first == this->_email){
-        std::cout << "\n" << "----------------------------------------------" << std::endl;
-        std::cout << "\t\t Email do Comprador: " << this->historico[i].first << std::endl;
-        std::cout << "----------------------------------------------" << "\n" << std::endl;
-        std::cout << "Código: " << (this->historico[i].second).getCodigoProduto() << std::endl;
-        std::cout << "Nome: " << (this->historico[i].second).getNome() << std::endl;
-        std::cout << "Preço " << (this->historico[i].second).getPreco() << std::endl;
-      }*/
-    }
-
     std::cout << "\n" << "----------------------------------------------" << std::endl;
     std::cout << "\n";
     std::cout << "----------------------------------------------" << "\n" << std::endl;
   }
-}
 
 /**
  * [Comprador::exibirPerfil função que exibe o perfil do comprador, com todas as informações que foram registradas durante o seu cadastro]
@@ -314,13 +308,13 @@ void Comprador::exibirPerfil(){
   std::cout << "\n" << "----------------------------------------------" << std::endl;
   std::cout << "\t\t Perfil do Usuário" << std::endl;
   std::cout << "----------------------------------------------" << "\n" << std::endl;
-  std::cout << "Nome: " << getNome() << std::endl;
-  std::cout << "Email: " << getEmail() << std::endl;
-  std::cout << "Senha: " << getSenha() << std::endl;
-  std::cout << "Nº Compras do Carrinho: " << getNumeroComprasCarrinho() << std::endl;
-  std::cout << "Nº Compras do Histórico: " << getNumeroComprasHistorico() << std::endl;
-  std::cout << "Nº Avaliações: " << getNumeroAvaliacoes() << std::endl;
-  std::cout << "Qntd Dinheiro: " << getDinheiro() << std::endl;
+  std::cout << "Nome: " << this->getNome() << std::endl;
+  std::cout << "Email: " << this->getEmail() << std::endl;
+  std::cout << "Senha: " << this->getSenha() << std::endl;
+  std::cout << "Nº Compras do Carrinho: " << this->getNumeroComprasCarrinho() << std::endl;
+  std::cout << "Nº Compras do Histórico: " << this->getNumeroComprasHistorico() << std::endl;
+  std::cout << "Nº Avaliações: " << this->getNumeroAvaliacoes() << std::endl;
+  std::cout << "Qntd Dinheiro: " << this->getDinheiro() << std::endl;
 }
 
 /**
@@ -331,12 +325,14 @@ void Comprador::exibirPerfil(){
  */
 
 int Comprador::procurarItensHistorico(int codProduto){
-  _numeroComprasHistorico = historico.size();
+  int indice = 0;
+  std::map<std::string, Produto>::iterator ite;
 
-  for(int indice=0; indice < _numeroComprasHistorico; indice++){
-    /*if((historico[indice]).getCodigoProduto() == codProduto){
+  for (ite=historico.begin(); ite!=historico.end(); ++ite){
+    if((ite->second).getCodigoProduto() == codProduto){
       return indice;
-    }*/
+    }
+    indice++;
   }
   return -1;
 }

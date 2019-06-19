@@ -486,7 +486,6 @@ void Ecommerce::listaUsuarioArquivo(){
     usuarios.push_back(usu);
     compradores.push_back(comp);
   }
-  imprimirUsuarios();
   arquivo.close();
 }
 
@@ -514,27 +513,6 @@ void Ecommerce::gravaUsuarioArquivo(){
   arquivo.close();
 }
 
-/*void Ecommerce::cadastrarUsuario (std::string n, std::string em, std::string s){
-  limparTela();
-  if(checaNome(n) && checaEmail(em) && checaSenha(s)){
-    if(procurarUsuario(em)==false){
-      Usuario usu = Usuario(n, em, s);
-      usuarios.push_back(usu);
-
-      std::cout << "Cadastro executado com sucesso!";
-      loginUsuario();
-    }
-    else{
-      std::cout << "Endereço de email já cadastrado. Tente novamente." << std::endl;
-      inicio();
-    }
-  }
-  else{
-    std::cout << "Dados inválidos. Tente novamente." << std::endl;
-    //dadosComprador();
-  }
-}*/ //VAI OU NAO TER??
-
 /**
  * [Ecommerce::cadastrarComprador  função que cadastra um comprador, considerando as informações dadas na hora do registro do mesmo, e adicionando-o ao vector de usuarios]
  * @method Ecommerce::cadastrarComprador
@@ -551,6 +529,7 @@ void Ecommerce::gravaUsuarioArquivo(){
 
 void Ecommerce::cadastrarComprador (std::string n, std::string em, std::string s, std::string cpf, std::string endereco, int numCarr, int numHist, int numAval, double din){
   limparTela();
+  listaUsuarioArquivo();
   if(checaNome(n) && checaEmail(em) && checaSenha(s)){
     if(procurarComprador(em)==false){
       Comprador comp = Comprador(n, em, s, cpf, endereco, numCarr, numHist, numAval, din);
@@ -559,6 +538,7 @@ void Ecommerce::cadastrarComprador (std::string n, std::string em, std::string s
       compradores.push_back(comp);
       gravaUsuarioArquivo();
       std::cout << "Cadastro executado com sucesso!" << std::endl;
+      comp.imprimirHistorico();
      }
      else{
       std::cout << "Endereço de email já cadastrado. Tente novamente." << std::endl;
@@ -600,10 +580,12 @@ void Ecommerce::imprimirUsuarios(){
 void Ecommerce::imprimirCompradores(){
   limparTela();
   int numeroCompradores = compradores.size();
+
+
   if(numeroCompradores>0){
     for(int i=0; i < numeroCompradores; i++){
       std::cout << "\n" << "----------------------------------------------" << std::endl;
-      std::cout << "\t\t Comprador " << i << std::endl;
+      std::cout << "\t\t Comprador " << i+1 << std::endl;
       std::cout << "----------------------------------------------" << "\n" << std::endl;
       std::cout << "Nome: " << (compradores[i]).getNome() << std::endl;
       std::cout << "Email: " << (compradores[i]).getEmail() << std::endl;
@@ -804,7 +786,6 @@ bool Ecommerce::procurarUsuario(std::string em){
 bool Ecommerce::procurarComprador(std::string em){
   int numeroCompradores = compradores.size();
   for(int i=0; i < numeroCompradores; i++){
-    std::cout << (compradores[i]).getEmail() << " " << em;
     if((compradores[i]).getEmail() == em){
       return true;
     }
