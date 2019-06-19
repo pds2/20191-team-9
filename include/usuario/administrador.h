@@ -1,3 +1,4 @@
+/*
 #ifndef ADMINISTRADOR_H
 #define ADMINISTRADOR_H
 
@@ -49,3 +50,4 @@ class Administrador : public Usuario{
 };
 
 #endif
+*/

@@ -13,6 +13,12 @@
 #include "usuario/usuario.h"
 #include "produto/produto.h"
 
+#include "usuario/comprador.h"
+#include "usuario/administrador.h"
+#include "ecommerce.h"
+#include "excecoes.h"
+
+
 class Comprador : public Usuario{
 
   private:

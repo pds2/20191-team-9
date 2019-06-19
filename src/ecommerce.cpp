@@ -158,12 +158,12 @@ int Ecommerce::tamanhoArquivo(const char* file_name){
 }
 
 long int Ecommerce::geradorCod(){
-  long int codProduto;
+  /*long int codProduto;
   srand(unsigned int time(0));
   do {
     codProduto = rand();
   } while(!checaCodigo(cod));
-  return codProduto;
+  return codProduto;*/
 }
 
 bool Ecommerce::checaCodigo(int cod){
@@ -185,7 +185,7 @@ void Ecommerce::cadastrarCaneca(int cod, float preco, float mediaAvaliacoes, std
         Produto prod(cod, preco, mediaAvaliacoes, nome, "Canecas", cor, descricao, material);
         canecas.push_back(can);
         produtos.push_back(prod);
-        std:cout << "Produto cadastrado com sucesso!" << std::endl;
+        std::cout << "Produto cadastrado com sucesso!" << std::endl;
 
     } else {
         std::cout << "Codigo de produto ja cadastrado. Tente novamente." << std::endl;
@@ -198,7 +198,7 @@ void Ecommerce::cadastrarAcessorio(int cod, float preco, float mediaAvaliacoes, 
         Produto prod(cod, preco, mediaAvaliacoes, nome, "Acessorios", cor, descricao, material);
         acessorios.push_back(ac);
         produtos.push_back(prod);
-        std:cout << "Produto cadastrado com sucesso!" << std::endl;
+        std::cout << "Produto cadastrado com sucesso!" << std::endl;
 
     } else {
         std::cout << "Codigo de produto ja cadastrado. Tente novamente." << std::endl;
@@ -211,7 +211,7 @@ void Ecommerce::cadastrarBlusasEMoletom(int cod, float preco, float mediaAvaliac
         Produto prod(cod, preco, mediaAvaliacoes, nome, "Blusas e Moletons", cor, descricao, material);
         blusasEmoletons.push_back(b);
         produtos.push_back(prod);
-        std:cout << "Produto cadastrado com sucesso!" << std::endl;
+        std::cout << "Produto cadastrado com sucesso!" << std::endl;
 
     } else {
         std::cout << "Codigo de produto ja cadastrado. Tente novamente." << std::endl;

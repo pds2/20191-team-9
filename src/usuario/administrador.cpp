@@ -1,7 +1,7 @@
-#ifndef ADMINISTRADOR_CPP
-#define ADMINISTRADOR_CPP
+//#ifndef ADMINISTRADOR_CPP
+//#define ADMINISTRADOR_CPP
 
-#include "usuario/administrador.h"
+//#include "usuario/administrador.h"
 
 /**
  * [Administrador::Administrador -> Construtor da classe Administrador]
@@ -9,11 +9,11 @@
  * @param email [email do administrador, com o qual realiza login no sistema]
  * @param senha [senha do administrador, com o qual realiza login no sistema]
  */
-Administrador::Administrador(std::string nome, std::string email, std::string senha){
+//Administrador::Administrador(std::string nome, std::string email, std::string senha){
   /*this->_nome = nome;
   this->_email = email;
   this->_senha = senha;*/
-}
+//}
 
 
 /**
@@ -449,4 +449,4 @@ Administrador::~Administrador(){
   _requisicoes.clear();
 }
 */
-#endif
+//#endif

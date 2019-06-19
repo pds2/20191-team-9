@@ -2,8 +2,6 @@
 #define COMPRADOR_CPP
 
 #include "usuario/comprador.h"
-#include "usuario/administrador.h"
-#include "ecommerce.h"
 
 /**
  * [Comprador::Comprador Construtor da classe Comprador]
@@ -270,6 +268,14 @@ void Comprador::imprimirCarrinho(){
 
 void Comprador::imprimirHistorico(){
   _numeroComprasHistorico = historico.size();
+
+  try{
+    verificar_historico_vazio(_numeroComprasHistorico);
+  }
+  catch(Exception_Historico_Vazio &e){
+    std::cout<<e.what();
+  }
+
   if(_numeroComprasHistorico == 0){
     std::cout << "Seu histórico está vazio. Compre produtos para continuar.";
   }
@@ -314,10 +320,6 @@ void Comprador::exibirPerfil(){
   std::cout << "Nº Compras do Histórico: " << getNumeroComprasHistorico() << std::endl;
   std::cout << "Nº Avaliações: " << getNumeroAvaliacoes() << std::endl;
   std::cout << "Qntd Dinheiro: " << getDinheiro() << std::endl;
-
-  std::cout << std::endl << "Pressione ENTER para voltar a pagina anterior";
-  std::cin.get();
-  ecom.menuComprador();
 }
 
 /**
@@ -535,7 +537,6 @@ void Comprador::listaHistoricoArquivo(){
  */
 
 void Comprador::gravaHistoricoArquivo(){
-  Ecommerce ecom;
   std::remove("historico.csv");
 
   std::fstream arquivo;
@@ -547,6 +548,8 @@ void Comprador::gravaHistoricoArquivo(){
   }
 
   std::map<std::string, Produto>::iterator ite;
+  Ecommerce ecom;
+
   for (ite=historico.begin(); ite!=historico.end(); ++ite){
     Comprador comp = ecom.procurarCompradorObj(ite->first);
 

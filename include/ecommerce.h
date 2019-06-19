@@ -20,7 +20,6 @@
 #include "produto/caneca.h"
 #include "produto/blusas_e_moletom.h"
 
-
 class Ecommerce{
   private:
     std::vector <Usuario> usuarios;
