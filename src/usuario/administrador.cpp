@@ -1,7 +1,8 @@
-//#ifndef ADMINISTRADOR_CPP
-//#define ADMINISTRADOR_CPP
+#ifndef ADMINISTRADOR_CPP
+#define ADMINISTRADOR_CPP
 
-//#include "usuario/administrador.h"
+#include "usuario/administrador.h"
+#include <string.h>
 
 /**
  * [Administrador::Administrador -> Construtor da classe Administrador]
@@ -9,32 +10,36 @@
  * @param email [email do administrador, com o qual realiza login no sistema]
  * @param senha [senha do administrador, com o qual realiza login no sistema]
  */
-//Administrador::Administrador(std::string nome, std::string email, std::string senha){
-  /*this->_nome = nome;
-  this->_email = email;
-  this->_senha = senha;*/
-//}
+Administrador::Administrador(){
+  /*this->_nome = "ADMIN";
+  this->_email = "admin1@gmail.com";
+  this->_senha = "123tasalvo";*/
 
+  Usuario("ADMIN", "admin1@gmail.com", "123tasalvo");
+}
 
 /**
  * [Administrador::produtoCsvToVector -> Classe que pega as informações sobre os
  * produtos do arquivo csv no qual eles estão e insere-as em um vector para
  * fácil manuseio]
  */
-/*
+
 void Administrador::produtoCsvToVector(){
 
   std::string nome;
-  std::string codigo_do_produto;
-  std::string media_das_avaliacoes;
+  std::string codigo;
+  std::string media;
   std::string preco;
   std::string categoria; //Acessorios, Canecas, Blusas e Moletons
+  std::string categoria_roupa = "Blusas e Moletons";
+  std::string categoria_caneca = "Canecas";
+  std::string categoria_acessorios = "Acessorio";
   std::string cor;
   std::string descricao;
   std::string material;
 
   std::ifstream arquivo;
-  arquivo.open("produtos.csv", ios::in);
+  arquivo.open("produtos.csv", std::ios::in);
 
   if (!arquivo.is_open()){
    std::cout << "Erro ao abrir arquivo. Tente novamente";
@@ -42,63 +47,65 @@ void Administrador::produtoCsvToVector(){
   }
 
   while(arquivo.good()){
-    std::getline(arquivo, codigo_do_produto, ',');
+    std::getline(arquivo, codigo, ',');
     std::getline(arquivo, preco, ',');
-    std::getline(arquivo, media_das_avaliacoes, ',');
+    std::getline(arquivo, media, ',');
     std::getline(arquivo, nome, ',');
     std::getline(arquivo, categoria, ',');
     std::getline(arquivo, cor, ',');
     std::getline(arquivo, descricao, ',');
     std::getline(arquivo, material, ',');
 
-    std::stoi(codigo_do_produto);
-    std::stof(media_das_avaliacoes);
-    std::stof(preco);
+    int codigo_do_produto = std::stoi(codigo);
+    float media_das_avaliacoes = std::stof(media);
+    float preco_do_produto = std::stof(preco);
 
-    if(std::strcomp(categoria, "Blusas e Moletons") == 0){
+    if(categoria == categoria_roupa){
       std::string tamanho;
       std::string tipo_de_produto;
 
       std::getline(arquivo, tamanho, ',');
       std::getline(arquivo, tipo_de_produto, '\n');
 
-      BlusasEMoletom bem = BlusasEMoletom(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tamanho,);
-      this->bluemols.push_back(bem);
+      BlusasEMoletom bem = BlusasEMoletom(codigo_do_produto, preco_do_produto, media_das_avaliacoes, nome, categoria, cor, descricao, material, tamanho[0], tipo_de_produto);
+      this->_bluemols.push_back(bem);
 
-    }else if(std::strcomp(categoria, "Canecas") == 0){
+    }else if(categoria == categoria_caneca){
       std::string diametro;
 
       std::getline(arquivo, diametro, '\n');
 
-      Caneca can = Caneca(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, diametro);
-      this->cans.push_back(can);
+      float diametro_do_produto = std::stof(diametro);
 
-    }else if(std::strcomp(categoria, "Acessorio") == 0){
+      Caneca can = Caneca(codigo_do_produto, preco_do_produto, media_das_avaliacoes, nome, categoria, cor, descricao, material, diametro_do_produto);
+      this->_cans.push_back(can);
+
+    }else if(categoria == categoria_acessorios){
       std::string tipo_de_acessorio;
 
-      std::getline(arquivo, diametro, '\n');
+      std::getline(arquivo, tipo_de_acessorio, '\n');
 
-      Acessorio ace = Acessorio(codigo_do_produto, preco, media_das_avaliacoes, nome, categoria, cor, descricao, material, tipo_de_acessorio);
-      this->aces.push_back(ace);
+      Acessorio ace = Acessorio(codigo_do_produto, preco_do_produto, media_das_avaliacoes, nome, categoria, cor, descricao, material, tipo_de_acessorio);
+      this->_aces.push_back(ace);
     }
   }
 
   arquivo.close();
 }
-*/
+
 /**
  * [Administrador::usuarioCsvToVector -> Classe que pega as informações sobre os
  * usuarios do arquivo csv no qual eles estão e insere-as em um vector para
  * fácil manuseio]
  */
-/*
+
 void Administrador::usuarioCsvToVector(){
 
   std::string nome, email, senha, cpf, endereco;
   std::string numHistorico, numCarrinho, numAvaliacoes, dinheiro;
 
   std::fstream arquivo;
-  arquivo.open("usuarios.csv", ios::in);
+  arquivo.open("usuarios.csv", std::ios::in);
 
   if (!arquivo.is_open()){
     std::cout << "Erro ao abrir arquivo. Tente novamente";
@@ -117,21 +124,24 @@ void Administrador::usuarioCsvToVector(){
     std::getline(arquivo, numAvaliacoes,',');
     std::getline(arquivo, dinheiro,'\n');
 
-    std::stof(dinheiro);
+    int numCarrinho_do_cliente = stoi(numCarrinho);
+    int numHistorico_do_cliente = stoi(numHistorico);
+    int numAvaliacoes_do_cliente = stoi(numAvaliacoes);
+    double dinheiro_do_cliente = (double) std::stof(dinheiro);
 
-    Comprador comp = Comprador(nome, email, senha, cpf, endereco, numCarrinho, numHistorico, numAvaliacoes, dinheiro);
-    this->shoppers.push_back(comp);
+    Comprador comp = Comprador(nome, email, senha, cpf, endereco, numCarrinho_do_cliente, numHistorico_do_cliente, numAvaliacoes_do_cliente, dinheiro_do_cliente);
+    this->_shoppers.push_back(comp);
   }
 
   arquivo.close();
 }
-*/
+
 /**
  * [Administrador::reqCsvToMap -> Classe que pega as informações sobre as
  * requisições do arquivo csv no qual eles estão e insere-as em um map para
  * fácil manuseio]
  */
-/*
+
 void Administrador::reqCsvToMap(){
   this->_requisicoes.clear();
 
@@ -139,27 +149,27 @@ void Administrador::reqCsvToMap(){
   std::string valor;
 
   std::ifstream arquivo;
-  arquivo.open(std::ios::in);
+  arquivo.open("requisicoes.csv",std::ios::in);
 
   while (arquivo.good()){
 
     std::getline(arquivo, email,',');
     std::getline(arquivo, valor,'\n');
 
-    std::stof(valor);
+    float valor_da_req = std::stof(valor);
 
-    _requisicoes.insert(std::pair<std::string, float>(email,valor));
+    _requisicoes.insert(std::pair<std::string, float>(email,valor_da_req));
   }
 
   arquivo.close();
 
 }
-*/
+
 /**
  * [Administrador::removeItem description]
  * @param nome_do_produto [description]
  */
-/*
+
 void Administrador::removeItem(std::string nome_do_produto){
   //procura no vector se existe algum produto com o nome chamado.
   //Se ele existir, este produto é retirado do estoque. Se não existir, uma mensagem de erro é impressa na tela.
@@ -177,11 +187,11 @@ void Administrador::removeItem(std::string nome_do_produto){
   int ac = 0;
 
   // Procura o produto dentre os produtos cadastrados
-  for(int i = 0; i<_bluemols.size(); i++){
+  for(unsigned int i = 0; i<_bluemols.size(); i++){
 
     name = _bluemols[i].getNome();
 
-    if(strcomp(nome_do_produto, name) == 0){
+    if(nome_do_produto == name){
       indice = i;
       bm = 1;
       break;
@@ -190,11 +200,11 @@ void Administrador::removeItem(std::string nome_do_produto){
   }
 
   if(indice == -1){
-    for(int i = 0; i<_cans.size(); i++){
+    for(unsigned int i = 0; i<_cans.size(); i++){
 
       name = _cans[i].getNome();
 
-      if(strcomp(nome_do_produto, name) == 0){
+      if(nome_do_produto == name){
         indice = i;
         cn = 1;
         break;
@@ -204,11 +214,11 @@ void Administrador::removeItem(std::string nome_do_produto){
   }
 
   if(indice == -1){
-    for(int i = 0; i<_aces.size(); i++){
+    for(unsigned int i = 0; i<_aces.size(); i++){
 
       name = _aces[i].getNome();
 
-      if(strcomp(nome_do_produto, name) == 0){
+      if(nome_do_produto == name){
         indice = i;
         ac = 1;
         break;
@@ -234,22 +244,25 @@ void Administrador::removeItem(std::string nome_do_produto){
 
   arquivo.open("produtos.csv", std::ios::trunc | std::ios::out);
 
-  for(int i = 0; i<_bluemols.size(); i++){
-    arquivo << _bluemols[i].getCodigoProduto() << "," << bluemols[i].getNome() << "," << bluemols[i].getPreco() << "," << bluemols[i].getMediaAvaliacoes() << "," << bluemols[i].getCategoria() << ","  << bluemols[i].getCor() << "," << bluemols[i].getDescricao() << "," << bluemols[i].getMaterial() << "," << bluemols[i].getTamanho() << "," << bluemols[i].getTipo() << std::endl;
+  for(unsigned int i = 0; i<_bluemols.size(); i++){
+    arquivo << _bluemols[i].getCodigoProduto() << "," << _bluemols[i].getNome() << "," << _bluemols[i].getPreco() << "," << _bluemols[i].getMediaAvaliacoes() << "," << _bluemols[i].getCategoria() << ","  << _bluemols[i].getCor() << "," << _bluemols[i].getDescricao() << "," << _bluemols[i].getMaterial() << "," << _bluemols[i].getTamanho() << "," << _bluemols[i].getTipo() << std::endl;
   }
 
-  for(int i = 0; i<_cans.size(); i++){
-    arquivo << _cans[i].getCodigoProduto() << "," << cans[i].getNome() << "," << cans[i].getPreco() << "," << cans[i].getMediaAvaliacoes() << "," << cans[i].getCategoria() << ","  << cans[i].getCor() << "," << cans[i].getDescricao() << "," << cans[i].getMaterial() << "," << cans[i].getDiametro() << std::endl;
+  for(unsigned int i = 0; i<_cans.size(); i++){
+    arquivo << _cans[i].getCodigoProduto() << "," << _cans[i].getNome() << "," << _cans[i].getPreco() << "," << _cans[i].getMediaAvaliacoes() << "," << _cans[i].getCategoria() << ","  << _cans[i].getCor() << "," << _cans[i].getDescricao() << "," << _cans[i].getMaterial() << "," << _cans[i].getDiametro() << std::endl;
   }
 
-  for(int i = 0; i<_aces.size(); i++){
-    arquivo << _aces[i].getCodigoProduto() << "," << aces[i].getNome() << "," << aces[i].getPreco() << "," << aces[i].getMediaAvaliacoes() << "," << aces[i].getCategoria() << ","  << aces[i].getCor() << "," << aces[i].getDescricao() << "," << aces[i].getMaterial() << "," << aces[i].getTipo() << std::endl;
+  for(unsigned int i = 0; i<_aces.size(); i++){
+    arquivo << _aces[i].getCodigoProduto() << "," << _aces[i].getNome() << "," << _aces[i].getPreco() << "," << _aces[i].getMediaAvaliacoes() << "," << _aces[i].getCategoria() << ","  << _aces[i].getCor() << "," << _aces[i].getDescricao() << "," << _aces[i].getMaterial() << "," << _aces[i].getTipo() << std::endl;
 
   }
 
   arquivo.close();
 
-void Administrador::exibirPerfil(){
+}
+
+//FUNÇÃO COM ERROS QUE NÃO SEI CONSERTAR
+/*void Administrador::exibirPerfil(){
   limparTela();
   std::cout << "\n" << "----------------------------------------------" << std::endl;
   std::cout << "\t\t Perfil do Usuário" << std::endl;
@@ -261,14 +274,14 @@ void Administrador::exibirPerfil(){
   std::cout << std::endl << "Pressione ENTER para voltar a pagina anterior";
   std::cin.get();
   ecom.menuUsuario();
-}
-*/
+}*/
+
 /**
  * [Administrador::adicionaPedido description]
  * @param email [description]
  * @param valor [description]
  */
-/*
+
 void Administrador::adicionaPedido(std::string email, float valor){
   this->_requisicoes.insert(std::pair<std::string, float>(email,valor));
 
@@ -276,7 +289,7 @@ void Administrador::adicionaPedido(std::string email, float valor){
   arquivo.open("requisicoes.csv", std::ofstream::app);
 
   if (!arquivo.is_open()){
-    std::cout << "Erro ao abrir requisicoes.csv! Tente novamente."; << std::endl;
+    std::cout << "Erro ao abrir requisicoes.csv! Tente novamente." << std::endl;
     exit(1);
   }
 
@@ -287,11 +300,11 @@ void Administrador::adicionaPedido(std::string email, float valor){
 
   arquivo.close();
 }
-*/
+
 /**
  * [Administrador::mostraPedidos description]
  */
-/*
+
 void Administrador::mostraPedidos(){
   // Imprime o mapa _requisicoes com o seguinte formato
   // Exemplo: 1 - email@docomprador.com: R$100,00
@@ -299,9 +312,9 @@ void Administrador::mostraPedidos(){
 
   reqCsvToMap();
 
-  _qntdade_de_requisicoes = _requisicoes.size();
+  this->_qntdade_de_requisicoes = this->_requisicoes.size();
 
-  if(_qntdade_de_requisicoes <= 0){
+  if(this->_qntdade_de_requisicoes <= 0){
     std::cout << "Não há nenhuma requisição de aumento de saldo no momento." << std::endl;
 
     return;
@@ -310,23 +323,24 @@ void Administrador::mostraPedidos(){
   std::cout << "----------------------------------------------" << std::endl;
   std::cout << "Estas são as requisições de aumento de saldo pendentes:" << std::endl;
 
-  for(int i = 0; i < _qntdade_de_requisicoes; i++){
+  std::map<std::string, float>::iterator it;
+  for(it = this->_requisicoes.begin(); it != this->_requisicoes.end(); it++){
     std::cout << "\n" << "----------------------------------------------" << std::endl;
-    std::cout << (i+1) << ") " << this->_requisicoes[i].first << " está requisitando um aumento de: R$" << this->_requisicoes[i].second << " em seu saldo." << std::endl;
+    std::cout << it->first << " está requisitando um aumento de: R$" << it->second << " em seu saldo." << std::endl;
     std::cout << "\n" << "----------------------------------------------" << std::endl;
   }
 }
-*/
+
 /**
  * [Administrador::aprovaPedido description]
  * @param email [description]
  */
-/*
+
 void Administrador::aprovaPedido(std::string email){
   int aprovacao;
-  float valor;
+  double valor = 0;
   int indice_comprador = -1;
-  int indice_requisicao = -1;
+  //int indice_requisicao = -1;
   std::string email_do_cliente;
 
   this->_shoppers.clear();
@@ -338,7 +352,7 @@ void Administrador::aprovaPedido(std::string email){
 
     email_do_cliente = _shoppers[i].getEmail();
 
-    if(strcomp(email_do_cliente, email) == 0){
+    if(email_do_cliente == email){
       indice_comprador = i;
       break;
     }
@@ -352,25 +366,29 @@ void Administrador::aprovaPedido(std::string email){
   //-----> Busca se existe alguma requisição no email dado. Se não houver, exibe mensagem de erro
   reqCsvToMap();
 
-  std::map<std::string, float>::iterator it = _requisicoes.find(email);
-  if(teste->first > _requisicoes.size()){
-    std::cout << "Este usuário não fez uma requisição. Portanto, não é possível aumentar o seu saldo" << std::endl;
-    std::cout << "Digite:\n1 - aprovar\n2 - reprovar" << std::endl;
+  std::map<std::string, float>::iterator it;
+  for(it = this->_requisicoes.begin(); it != this->_requisicoes.end(); it++){
 
+    if(it->first == email){
+      valor = (double) it->second;
+    }
+  }
+
+  if(valor <= 0){
+    std::cout << "Este usuário não fez uma requisição. Portanto, não é possível aumentar o seu saldo" << std::endl;
     return;
-  }else{
-    valor = it->second;
   }
 
 
   //----->Agora vamos garantir que o administrador realmente deseja aprovar o pedido certo
   std::cout << "Deseja aprovar o pedido de " << email << " para o aumento de R$" << valor << " em seu saldo?" << std::endl;
+  std::cout << "Digite:\n1 - aprovar\n2 - reprovar" << std::endl;
   std::cin >> aprovacao;
 
   if(aprovacao == 1){
-    _requisicoes.erase(email);
+    this->_requisicoes.erase(email);
 
-    int novo_saldo = _shoppers[indice_comprador].getDinheiro() + valor;
+    double novo_saldo = _shoppers[indice_comprador].getDinheiro() + valor;
     _shoppers[indice_comprador].setDinheiro(novo_saldo);
   }
 
@@ -395,12 +413,12 @@ void Administrador::aprovaPedido(std::string email){
   arquivo_req.close();
 
 }
-*/
+
 /**
  * [Administrador::excluiUsuario description]
  * @param email [description]
  */
-/*
+
 void Administrador::excluiUsuario(std::string email){
   std::string email_do_cliente;
   int indice = -1;
@@ -412,7 +430,7 @@ void Administrador::excluiUsuario(std::string email){
 
     email_do_cliente = _shoppers[i].getEmail();
 
-    if(strcomp(email_do_cliente, email) == 0){
+    if(email_do_cliente == email){
       indice = i;
       break;
     }
@@ -448,5 +466,6 @@ Administrador::~Administrador(){
   _shoppers.clear();
   _requisicoes.clear();
 }
-*/
-//#endif
+
+
+#endif
