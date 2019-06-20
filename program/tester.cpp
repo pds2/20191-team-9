@@ -87,7 +87,10 @@ TEST_CASE("Criar o Administrador"){
 }
 //implementar pós exceções
 TEST_CASE("Remover item do estoque"){
-  BlusasEMoletom teste(697, 45, 3.5, "blusazul", "Blusa e Moletom", "Amarelo", "Amarelo que nem o raiar do sol", "Algodao", 'M', "Tipo tiposo");
+   Administrador adm = Administrador();
+   BlusasEMoletom teste(697, 45, 3.5, "blusazul", "Blusa e Moletom", "Amarelo", "Amarelo que nem o raiar do sol", "Algodao", 'M', "Tipo tiposo");
+   
+   CHECK_NOTHROW(removeItem(teste));
 }
 
 TEST_CASE("Remover item que não existe"){
