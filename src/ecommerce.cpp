@@ -2,6 +2,7 @@
 #define ECOMMERCE_CPP
 
 #include "ecommerce.h"
+#include "excecoes.h"
 
 /**
  * [Ecommerce::Ecommerce Construtor da classe Ecommerce]
@@ -187,7 +188,8 @@ void Ecommerce::cadastrarCaneca(int cod, float preco, float mediaAvaliacoes, std
         std::cout << "Produto cadastrado com sucesso!" << std::endl;
 
     } else {
-        std::cout << "Codigo de produto ja cadastrado. Tente novamente." << std::endl;
+        Exception_Codigo_Ja_Registrado CJR;
+        throw CJR;
     }
 }
 
@@ -200,7 +202,8 @@ void Ecommerce::cadastrarAcessorio(int cod, float preco, float mediaAvaliacoes, 
         std::cout << "Produto cadastrado com sucesso!" << std::endl;
 
     } else {
-        std::cout << "Codigo de produto ja cadastrado. Tente novamente." << std::endl;
+        Exception_Codigo_Ja_Registrado CJR;
+        throw CJR;
     }
 }
 
@@ -213,7 +216,8 @@ void Ecommerce::cadastrarBlusasEMoletom(int cod, float preco, float mediaAvaliac
         std::cout << "Produto cadastrado com sucesso!" << std::endl;
 
     } else {
-        std::cout << "Codigo de produto ja cadastrado. Tente novamente." << std::endl;
+        Exception_Codigo_Ja_Registrado CJR;
+        throw CJR;
     }
 }
 
@@ -224,14 +228,14 @@ void Ecommerce::listaProdutosArquivo(){
   arquivo.open("produtos.csv",std::ios::in);
 
   if (!arquivo.is_open()){
-    std::cout << "Erro ao abrir arquivo. Tente novamente";
-    exit(1);
+    Exception_Erro_Abrir_Arquivo EAA;
+    throw EAA;
   }
 
   int linhas = tamanhoArquivo("produtos.csv");
   if (tamanhoArquivo("produtos.csv") == 0){
-    std::cout << "Ainda nao ha nenhum produto cadastrado." << std::endl;
-    return;
+    Exception_Nenhum_Produto_Arquivo NPA;
+    throw NPA;
   }
 
   while (arquivo.good()){
