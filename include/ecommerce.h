@@ -7,6 +7,8 @@
 #include <cstdlib>
 
 #include <math.h>
+#include <time.h>
+#include <string.h>
 
 #include <fstream>
 #include <iostream>
@@ -22,6 +24,8 @@
 #include "produto/blusas_e_moletom.h"
 #include "excecoes.h"
 
+std::string userLogged = "";
+
 class Ecommerce{
   private:
     std::vector <Usuario> usuarios;
@@ -35,7 +39,6 @@ class Ecommerce{
     Ecommerce();
     ~Ecommerce();
 
-    void cadastrarUsuario (std::string n, std::string em, std::string s);
     void cadastrarComprador (std::string n, std::string em, std::string s, std::string cpf, std::string endereco, int numCarr, int numHist, int numAval, double din);
 
     void cadastrarCaneca(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, float diametro);
@@ -52,7 +55,6 @@ class Ecommerce{
     bool checaNome(std::string n);
     bool checaEmail(std::string em);
     bool checaSenha(std::string s);
-    bool checaSenhaAdmin(std::string sAdmin);
 
     int buscaIndiceCaneca(int cod);
     int buscaIndiceAcessorio(int cod);
@@ -68,6 +70,7 @@ class Ecommerce{
     void impHistorico();
     void impProdutos();
     void mostraProdutos();
+    void mostraUsuarios();
 
     void listaUsuarioArquivo();
     void gravaUsuarioArquivo();
@@ -81,11 +84,9 @@ class Ecommerce{
     void gravaComentariosArquivo();
     void adicionarComentario(int cod, std::string coment); //procura produto no vector pelo codigo e adiciona comentario
 
-    void loginUsuario(std::string n, std::string s);
     void loginUsuario();
     void logoutUsuario();
     void inicio();
-    void menuInicial();
     void menuUsuario();
     void menuComprador();
     void dadosComprador();
