@@ -988,10 +988,8 @@ void Ecommerce::limparTela(){
 }
 
 /*_____*
- * [Ecommerce::tamanhoArquivo função que registra o tamanho do arquivo a ser lido]
- * @method Ecommerce::tamanhoArquivo
- * @param  file_name                 [nome do arquivo a ser lido]
- * @return                           [quantidade de linhas do arquivo lido]
+ * [Ecommerce::loginUsuario função que realiza o login do usuario]
+ * @method Ecommerce::loginUsuario
  */
 
 void Ecommerce::loginUsuario(){
@@ -1043,10 +1041,8 @@ void Ecommerce::loginUsuario(){
 }
 
 /*_____*
- * [Ecommerce::tamanhoArquivo função que registra o tamanho do arquivo a ser lido]
- * @method Ecommerce::tamanhoArquivo
- * @param  file_name                 [nome do arquivo a ser lido]
- * @return                           [quantidade de linhas do arquivo lido]
+ * [Ecommerce::logoutUsuario função que faz logout da conta do usuario]
+ * @method Ecommerce::logoutUsuario
  */
 
 void Ecommerce::logoutUsuario(){
@@ -1075,10 +1071,8 @@ void Ecommerce::logoutUsuario(){
 }
 
 /*_____*
- * [Ecommerce::tamanhoArquivo função que registra o tamanho do arquivo a ser lido]
- * @method Ecommerce::tamanhoArquivo
- * @param  file_name                 [nome do arquivo a ser lido]
- * @return                           [quantidade de linhas do arquivo lido]
+ * [Ecommerce::inicio função que cria o menu inicial do programa]
+ * @method Ecommerce::inicio
  */
 
 void Ecommerce::inicio(){
@@ -1121,12 +1115,11 @@ void Ecommerce::inicio(){
   }
 }
 
-/*_____*
- * [Ecommerce::tamanhoArquivo função que registra o tamanho do arquivo a ser lido]
- * @method Ecommerce::tamanhoArquivo
- * @param  file_name                 [nome do arquivo a ser lido]
- * @return                           [quantidade de linhas do arquivo lido]
+/**
+ * [Ecommerce::dadosComprador função que pede os dados do comprador a ser cadastrado e chama a de castro]
+ * @method Ecommerce::dadosComprador
  */
+
 
 void Ecommerce::dadosComprador(){
   limparTela();
@@ -1147,11 +1140,9 @@ void Ecommerce::dadosComprador(){
   loginUsuario();
 }
 
-/*_____*
- * [Ecommerce::tamanhoArquivo função que registra o tamanho do arquivo a ser lido]
- * @method Ecommerce::tamanhoArquivo
- * @param  file_name                 [nome do arquivo a ser lido]
- * @return                           [quantidade de linhas do arquivo lido]
+/**
+ * [Ecommerce::dadosProduto função que pede os dados do produto a ser cadastrado e chama a de castro]
+ * @method Ecommerce::dadosProduto
  */
 
 void Ecommerce::dadosProduto(){
@@ -1221,11 +1212,9 @@ void Ecommerce::dadosProduto(){
   }
 }
 
-/*_____*
- * [Ecommerce::tamanhoArquivo função que registra o tamanho do arquivo a ser lido]
- * @method Ecommerce::tamanhoArquivo
- * @param  file_name                 [nome do arquivo a ser lido]
- * @return                           [quantidade de linhas do arquivo lido]
+/**
+ * [Ecommerce::menuComprador função que cria um menu para compradores]
+ * @method Ecommerce::menuComprador
  */
 
 void Ecommerce::menuComprador(){
@@ -1272,11 +1261,9 @@ void Ecommerce::menuComprador(){
   }
 }
 
-/*_____*
- * [Ecommerce::tamanhoArquivo função que registra o tamanho do arquivo a ser lido]
- * @method Ecommerce::tamanhoArquivo
- * @param  file_name                 [nome do arquivo a ser lido]
- * @return                           [quantidade de linhas do arquivo lido]
+/**
+ * [Ecommerce::menuUsuario função que cria um menu para administradores]
+ * @method Ecommerce::menuUsuario
  */
 
 void Ecommerce::menuUsuario(){
