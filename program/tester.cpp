@@ -80,7 +80,7 @@ TEST_CASE("Get - Dados do Comprador") {
 
 //-----> Testes ADMINISTRADOR
 TEST_CASE("Criar o Administrador"){
-  Administrador admin;
+  Administrador admin = Administrador();
   CHECK_EQ(admin.getNome(), "ADMIN");
   CHECK_EQ(admin.getEmail(), "admin1@gmail.com");
   CHECK_EQ(admin.getSenha(), "123tasalvo");
