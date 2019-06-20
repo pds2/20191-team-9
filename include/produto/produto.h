@@ -22,7 +22,7 @@ Produto::Produto(){
 Produto::Produto(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material){
         std::vector<std::string> vazio;
         std::vector<int> nada;
-        if((cod < 0)||(preco < 0)||(mediaAvaliacoes < 0)){
+        if((cod < 0)||(preco < 0)||(mediaAvaliacoes < 0)||(mediaAvaliacoes > 5)){
                 Exception_Entrada_Invalida EI;
             throw EI;
         }
