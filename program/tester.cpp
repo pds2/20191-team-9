@@ -3,13 +3,13 @@
 #include <iostream>
 #include "doctest.h"
 #include "produto/blusas_e_moletom.h"
-
+#include "produto/caneca.h"
+#include "produto/acessorio.h"
 
 TEST_CASE("Declaracão produto") {
-    CHECK_NOTHROW(BlusasEMoletom blusa(2, 60, 4.5, "Moletom amarelo", "Moletom", "Amarelo", "Amarelo que nem o raiar do sol", "Algodao", 'M', "Tipo tiposo"));
-    CHECK_THROWS(BlusasEMoletom blusa(-2, 60, 4.5, "Moletom amarelo", "Moletom", "Amarelo", "Amarelo que nem o raiar do sol", "Algodao", 'M', "Tipo tiposo"));
-    CHECK_THROWS(BlusasEMoletom blusa(1, 60, -1, "Moletom amarelo", "Moletom", "Amarelo", "Amarelo que nem o raiar do sol", "Algodao", 'M', "Tipo tiposo"));    
-
+    CHECK_NOTHROW(Produto p(2, 60, 5, "Produto Diferenciavel", "Teste", "Verde", "Produto otimo para ser utilizado em casos de teste", "Radiacao"));
+    CHECK_THROWS(Produto p(-2, 60, 5, "Produto Diferenciavel", "Teste", "Verde", "Produto otimo para ser utilizado em casos de teste", "Radiacao"));
+    CHECK_THROWS(Produto p(3, 60, -5, "Produto Diferenciavel", "Teste", "Verde", "Produto otimo para ser utilizado em casos de teste", "Radiacao"));    
 }
 
 TEST_CASE("Get produto - BlusasEMoletom") {
@@ -25,31 +25,30 @@ TEST_CASE("Get produto - BlusasEMoletom") {
     CHECK_EQ(m.getTamanho(), 'M');
     CHECK_EQ(m.getTipo(),"Tipo tiposo");
 }
-TEST_CASE("Get produto - Caneca") {
-    Caneca m(3, 15, 4.5, "Caneca formosa", "Caneca", "Branca", "Caneca fofa de Star Wars", "Porcelana", 7);
-    CHECK_EQ(m.getCodigoProduto(),3);
-    CHECK_EQ(m.getPreco(),15);
-    CHECK_EQ(m.getMediaAvaliacoes(),4.5);
-    CHECK_EQ(m.getNome(),"Caneca formosa");
-    CHECK_EQ(m.getCategoria(),"Caneca");
-    CHECK_EQ(m.getCor(),"Branca");
-    CHECK_EQ(m.getDescricao(),"Caneca fofa de Star Wars");
-    CHECK_EQ(m.getMaterial(),"Porcelana");
-    CHECK_EQ(m.getDiametro(), 7);
 
+TEST_CASE("Get produto - Caneca") {
+    Caneca c(3, 15, 4.5, "Caneca formosa", "Caneca", "Branca", "Caneca fofa de Star Wars", "Porcelana", 5.5);
+    CHECK_EQ(c.getCodigoProduto(),3);
+    CHECK_EQ(c.getPreco(),15);
+    CHECK_EQ(c.getMediaAvaliacoes(),4.5);
+    CHECK_EQ(c.getNome(),"Caneca formosa");
+    CHECK_EQ(c.getCategoria(),"Caneca");
+    CHECK_EQ(c.getCor(),"Branca");
+    CHECK_EQ(c.getDescricao(),"Caneca fofa de Star Wars");
+    CHECK_EQ(c.getMaterial(),"Porcelana");
+    CHECK_EQ(c.getDiametro(), 5.5);
 }
 
 
 TEST_CASE("Get produto - Acessorios") {
-    Caneca m(4, 20, 4, "Pulseira GOT", "Pulseira", "Vermelha", "Pulseira Dracarys", "Couro", "Tiposo");
-    CHECK_EQ(m.getCodigoProduto(),4);
-    CHECK_EQ(m.getPreco(),20);
-    CHECK_EQ(m.getMediaAvaliacoes(),4);
-    CHECK_EQ(m.getNome(),"Pulseira GOT");
-    CHECK_EQ(m.getCategoria(),"Pulseira");
-    CHECK_EQ(m.getCor(),"Vermelha");
-    CHECK_EQ(m.getDescricao(),"Pulseira Dracarys");
-    CHECK_EQ(m.getMaterial(),"Couro");
-    CHECK_EQ(m.getTipo(),"Tiposo");
-
+    Acessorio a(4, 20, 4, "Pulseira GOT", "Pulseira", "Vermelha", "Pulseira Dracarys", "Couro", "Tiposo");
+    CHECK_EQ(a.getCodigoProduto(),4);
+    CHECK_EQ(a.getPreco(),20);
+    CHECK_EQ(a.getMediaAvaliacoes(),4);
+    CHECK_EQ(a.getNome(),"Pulseira GOT");
+    CHECK_EQ(a.getCategoria(),"Pulseira");
+    CHECK_EQ(a.getCor(),"Vermelha");
+    CHECK_EQ(a.getDescricao(),"Pulseira Dracarys");
+    CHECK_EQ(a.getMaterial(),"Couro");
+    CHECK_EQ(a.getTipo(),"Tiposo");
 }
