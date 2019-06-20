@@ -22,6 +22,36 @@
 //		}
 //};
 
+class Exception_Entrada_Invalida : public std::exception{
+public:
+	const char *what(){
+		return "Por favor, insira uma entrada valida para continuar.\n";
+	}
+};
+
+
+class Exception_Codigo_Ja_Registrado : public std::exception{
+public:
+	const char *what(){
+		return "Erro ao registrar produto: codigo de produto ja utilizado. Tente novamente.\n";
+	}
+};
+
+class Exception_Nenhum_Produto_Arquivo : public std::exception{
+public:
+	const char *what(){
+		return "Ainda nao ha nenhum produto cadastrado.\n";
+	}
+};
+
+class Exception_Erro_Abrir_Arquivo : public std::exception{
+public:
+	const char *what(){
+		return "Erro ao abrir arquivo. Tente novamente\n";
+	}
+};
+
+
 class Exception_Historico_Vazio : public std::exception{
 public:
 	const char *what(){
