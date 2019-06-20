@@ -132,18 +132,19 @@ TEST_CASE("Remover item do estoque"){
 }
 
 TEST_CASE("Remover item que não existe"){
-  Administrador adm;
+  Administrador adm = Administrador();;
 
   CHECK_EQ(adm.removeItem("naoexiste"), -1);
 }
 
 TEST_CASE("Aumentar saldo de usuário que não existe"){
-  Administrador adm;
+  Administrador adm = Administrador();;
 
   CHECK_EQ(adm.aprovaPedido("naoexiste"), -1);
 }
 
 TEST_CASE("Aumentar saldo de usuário que não requisitou o aumento"){
+  Administrador adm = Administrador();
   Ecommerce ecom;
   Comprador shops = ecom.cadastrarComprador("semaumento","sem@aumento.com","senha123","44565564","nãoaumenta",6,6,4,5);
   CHECK_EQ(admin.aprovaPedido("sem@aumento.com"), -2);
@@ -154,12 +155,13 @@ TEST_CASE("Aprovar um pedido"){
 }
 
 TEST_CASE("Excluir usuário que não existe"){
-  Administrador adm;
+  Administrador adm = Administrador();;
 
   CHECK_EQ(adm.excluiUsuario("naoexiste"), -1);
 }
 //implementar pós exceções
 TEST_CASE("Excluir um usuário"){
     Ecommerce ecom;
+    Administrador adm = Administrador();
     Comprador bye = ecom.cadastrarComprador("excluir","ex@cluir.com","excluido","000000","exclui",7,6,3,9);
 }
