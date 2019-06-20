@@ -117,49 +117,51 @@ TEST_CASE("Get - Dados do Comprador") {
 }
 
 //-----> Testes ADMINISTRADOR
-TEST_CASE("Criar o Administrador"){
+TEST_CASE("Administrador - Criar o Administrador"){
   Administrador adm = Administrador();
   CHECK_EQ(adm.getNome(), "ADMIN");
   CHECK_EQ(adm.getEmail(), "admin1@gmail.com");
   CHECK_EQ(adm.getSenha(), "123tasalvo");
 }
-//implementar pós exceções
-TEST_CASE("Remover item do estoque"){
+
+TEST_CASE("Administrador - Remover item do estoque"){
    Administrador adm = Administrador();
-   BlusasEMoletom teste(697, 45, 3.5, "blusazul", "Blusa e Moletom", "Amarelo", "Amarelo que nem o raiar do sol", "Algodao", 'M', "Tipo tiposo");
-   
-   CHECK_NOTHROW(removeItem(teste));
+   BlusasEMoletom teste(697, 45, 3.5, "blusazul", "Blusas e Moletoms", "Amarelo", "Amarelo que nem o raiar do sol", "Algodao", 'M', "Tipo tiposo");
+
+   CHECK_NOTHROW(removeItem("blusazul"));
+   CHECK_THROWS(removeItem("blusuzul"));
 }
 
-TEST_CASE("Remover item que não existe"){
-  Administrador adm;
+TEST_CASE("Administrador - Remover item que não existe"){
+  Administrador adm = Administrador();
 
   CHECK_EQ(adm.removeItem("naoexiste"), -1);
 }
 
-TEST_CASE("Aumentar saldo de usuário que não existe"){
-  Administrador adm;
+TEST_CASE("Administrador - Aumentar saldo de usuário que não existe"){
+  Administrador adm = Administrador();
 
   CHECK_EQ(adm.aprovaPedido("naoexiste"), -1);
 }
 
-TEST_CASE("Aumentar saldo de usuário que não requisitou o aumento"){
+TEST_CASE("Administrador - Aumentar saldo de usuário que não requisitou o aumento"){
+  Administrador adm = Administrador();
   Ecommerce ecom;
   Comprador shops = ecom.cadastrarComprador("semaumento","sem@aumento.com","senha123","44565564","nãoaumenta",6,6,4,5);
   CHECK_EQ(admin.aprovaPedido("sem@aumento.com"), -2);
 }
-//implementar pós exceções
-TEST_CASE("Aprovar um pedido"){
 
-}
-
-TEST_CASE("Excluir usuário que não existe"){
-  Administrador adm;
+TEST_CASE("Administrador - Excluir usuário que não existe"){
+  Administrador adm = Administrador();
 
   CHECK_EQ(adm.excluiUsuario("naoexiste"), -1);
 }
-//implementar pós exceções
-TEST_CASE("Excluir um usuário"){
+
+TEST_CASE("Administrador - Excluir um usuário"){
     Ecommerce ecom;
+    Administrador adm = Administrador();
     Comprador bye = ecom.cadastrarComprador("excluir","ex@cluir.com","excluido","000000","exclui",7,6,3,9);
+
+    CHECK_NOTHROW(adm.excluiUsuario("ex@cluir.com"));
+    CHECK_THROWS(adm.excluiUsuario("ex@cluir.com"));
 }
