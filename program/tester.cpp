@@ -126,7 +126,7 @@ TEST_CASE("Administrador - Criar o Administrador"){
 
 TEST_CASE("Administrador - Remover item do estoque"){
    Administrador adm = Administrador();
-   BlusasEMoletom teste(697, 45, 3.5, "blusazul", "Blusa e Moletom", "Amarelo", "Amarelo que nem o raiar do sol", "Algodao", 'M', "Tipo tiposo");
+   BlusasEMoletom teste(697, 45, 3.5, "blusazul", "Blusas e Moletoms", "Amarelo", "Amarelo que nem o raiar do sol", "Algodao", 'M', "Tipo tiposo");
 
    CHECK_NOTHROW(removeItem("blusazul"));
    CHECK_THROWS(removeItem("blusuzul"));
