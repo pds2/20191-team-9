@@ -126,9 +126,9 @@ float Comprador::getDinheiro(){
  */
 
 bool Comprador::adicionarCarrinho(){
-  Ecommerce ecom;
   limparTela();
 
+  Ecommerce ecom;
   ecom.imprimirProdutos();
 
   int codProduto, opcao, indice = -1;
@@ -232,11 +232,9 @@ bool Comprador::retirarCarrinho(){
  */
 
 void Comprador::imprimirCarrinho(){
-  _numeroComprasCarrinho = carrinho.size();
-  double totalCarrinho=0;
 
   try{
-    verificar_carrinho_vazio(_numeroComprasCarrinho);
+    verificar_carrinho_vazio(this->getNumeroComprasCarrinho());
   }
   catch(Exception_Carrinho_Vazio &e){
     std::cout<<e.what();
@@ -247,7 +245,7 @@ void Comprador::imprimirCarrinho(){
   std::cout << "\t\t Carrinho do Comprador: " << this->getNome() << std::endl;
   std::cout << "----------------------------------------------" << "\n" << std::endl;
 
-  for(int i=0; i < _numeroComprasCarrinho; i++){
+  for(int i=0; i < this->getNumeroComprasCarrinho(); i++){
     std::cout << "\n" << "----------------------------------------------" << std::endl;
     std::cout << "\t\t Código " << (carrinho[i]).getCodigoProduto() << std::endl;
     std::cout << "----------------------------------------------" << "\n" << std::endl;
@@ -258,12 +256,11 @@ void Comprador::imprimirCarrinho(){
     std::cout << "Media de Avaliações: " << (carrinho[i]).getMediaAvaliacoes()  << std::endl;
     std::cout << "Preço " << (carrinho[i]).getPreco() << std::endl;
     std::cout << "Descricao: " << (carrinho[i]).getDescricao() << std::endl;
-    totalCarrinho += (carrinho[i]).getPreco();
   }
 
   std::cout << "\n" << "----------------------------------------------" << std::endl;
-  std::cout << "\t\t Qntd de Produtos: " << _numeroComprasCarrinho << std::endl;
-  std::cout << "\t\t Total: "<< totalCarrinho << std::endl;
+  std::cout << "\t\t Qntd de Produtos: " << this->getNumeroComprasCarrinho() << std::endl;
+  std::cout << "\t\t Total: "<< this->getTotalCarrinho() << std::endl;
   std::cout << "----------------------------------------------" << "\n" << std::endl;
 }
 
