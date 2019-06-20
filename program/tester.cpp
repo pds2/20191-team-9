@@ -132,7 +132,7 @@ TEST_CASE("Administrador - Remover item do estoque"){
 }
 
 TEST_CASE("Administrador - Remover item que não existe"){
-  Administrador adm = Administrador();;
+  Administrador adm = Administrador();
 
   CHECK_EQ(adm.removeItem("naoexiste"), -1);
 }
