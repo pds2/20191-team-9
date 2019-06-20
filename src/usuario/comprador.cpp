@@ -243,7 +243,6 @@ void Comprador::imprimirCarrinho(){
   }
 
   limparTela();
-
   std::cout << "\n" << "----------------------------------------------" << std::endl;
   std::cout << "\t\t Carrinho do Comprador: " << this->getNome() << std::endl;
   std::cout << "----------------------------------------------" << "\n" << std::endl;
@@ -284,6 +283,7 @@ void Comprador::imprimirHistorico(){
   }
 
   limparTela();
+  listaHistoricoArquivo();
 
   std::cout << "\n" << "----------------------------------------------" << std::endl;
   std::cout << "\t\t Histórico do Comprador " << this->getNome() << std::endl;
@@ -379,7 +379,7 @@ void Comprador::adicionarComentario(){
   catch{
     //lança excecao de entrada invalida
   }*/
-
+  listaHistoricoArquivo();
   indice = procurarItensHistorico(codProduto);
 
   try{

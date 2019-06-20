@@ -585,7 +585,7 @@ void Ecommerce::imprimirCompradores(){
   limparTela();
   int numeroCompradores = compradores.size();
 
-
+  listaUsuarioArquivo();
   if(numeroCompradores>0){
     for(int i=0; i < numeroCompradores; i++){
       std::cout << "\n" << "----------------------------------------------" << std::endl;
