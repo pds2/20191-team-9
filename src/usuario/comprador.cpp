@@ -138,50 +138,48 @@ bool Comprador::adicionarCarrinho(){
   //procurar codigo do item na listagem de produtos
   indice = ecom.buscaIndiceProdutos(codProduto);
 
-  if(indice != -1){
-    std::cout << "Este produto já encontra-se em seu carrinho. Deseja adiciona-lo novamente?" << "\n0 - NÃO.\n1 - SIM." << std::endl;
-    std::cin >> opcao;
-
-    switch (opcao) {
-      case 0:
-      {
-        std::cout << "Este produto já encontra-se em seu carrinho. Você escolheu não adicionar novamente." << std::endl;
-        return false;
-        break;
-      }
-      case 1:
-      {
-        int cod;
-        std::string nome, categoria, cor, descricao, material;
-        float preco, mediaAvaliacoes;
-
-        /*cod = (ecom.produtos[indice]).getCodigoProduto();
-        nome = (ecom.produtos[indice]).getNome();
-        categoria = (ecom.produtos[indice]).getCategoria();
-        cor = (ecom.produtos[indice]).getCor();
-        descricao = (ecom.produtos[indice]).getDescricao();
-        material = (ecom.produtos[indice]).getMaterial();
-        preco = (ecom.produtos[indice]).getPreco();
-        mediaAvaliacoes = (ecom.produtos[indice]).getMediaAvaliacoes();*/
-
-        Produto prod = Produto(cod, preco, mediaAvaliacoes, nome, categoria, cor, descricao, material);
-        carrinho.push_back(prod);
-        _totalCarrinho = _totalCarrinho + preco;
-        return true;
-      }
-
-      default:
-      {
-        std::cout << "Resposta inválida. Tente novamente." << std::endl;
-        return false;
-        break;
-      }
-    }
+  /*try{
+    //verificar entrada invalida
   }
-  else{
-    std::cout << "\n\nProduto não encontrado no carrinho. Tente novamente.";
-    return false;
+  catch{
+    //lança excecao de entrada invalida
+  }*/
+
+  try{
+    verificar_produto_cadastrado(indice);
   }
+  catch(Exception_Produto_Nao_Encontrado &e){
+    std::cout<<e.what();
+  }
+
+  try{
+    verificar_produto_ja_no_carrinho(indice);
+  }
+  catch(Exception_Produto_Ja_Consta_No_Carrinho &e){
+    std::cout<<e.what();
+  }
+
+  Produto prod = buscaCarrinho(codProduto);
+
+  /*
+  int cod;
+  std::string nome, categoria, cor, descricao, material;
+  float preco, mediaAvaliacoes;
+
+  cod = prod.getCodigoProduto();
+  nome = prod.getNome();
+  categoria = prod.getCategoria();
+  cor = prod.getCor();
+  descricao = prod.getDescricao();
+  material = prod.getMaterial();
+  preco = prod.getPreco();
+  mediaAvaliacoes = prod.getMediaAvaliacoes();
+
+  Produto prod = Produto(cod, preco, mediaAvaliacoes, nome, categoria, cor, descricao, material);*/
+
+  carrinho.push_back(prod);
+  _totalCarrinho = _totalCarrinho + prod.getPreco();
+  return true;
 }
 
 /**
@@ -192,32 +190,40 @@ bool Comprador::adicionarCarrinho(){
 
 bool Comprador::retirarCarrinho(){
   _numeroComprasCarrinho = carrinho.size();
-  if(_numeroComprasCarrinho == 0){
-    std::cout << "\n\nSeu carrinho está vazio. Adicione produtos para continuar.";
-    return false;
+
+  try{
+    verificar_carrinho_vazio(_numeroComprasCarrinho);
   }
-  else{
-    limparTela();
-
-    int codProduto;
-    int indice = -1;
-    imprimirCarrinho();
-
-    std::cout << "\n" << "Digite o código do produto que deseja retirar do seu carrinho: ";
-    std::cin >> codProduto;
-
-    indice = procurarItensCarrinho(codProduto);
-
-    if(indice != -1){
-      carrinho.erase(carrinho.begin()+ indice); //apaga o indice elemento a partir do começo do vector
-      return true;
-    }
-    else{
-      std::cout << "\n\nProduto não encontrado no carrinho. Tente novamente.";
-      return false;
-    }
+  catch(Exception_Carrinho_Vazio &e){
+    std::cout<<e.what();
   }
-  return false;
+
+  int codProduto;
+  int indice = -1;
+  imprimirCarrinho();
+  limparTela();
+
+  std::cout << "\n" << "Digite o código do produto que deseja retirar do seu carrinho: ";
+  std::cin >> codProduto;
+
+  /*try{
+    //verificar entrada invalida
+  }
+  catch{
+    //lança excecao de entrada invalida
+  }*/
+
+  indice = procurarItensCarrinho(codProduto);
+
+  try{
+    verificar_produto_cadastrado(indice);
+  }
+  catch(Exception_Produto_Nao_Encontrado &e){
+    std::cout<<e.what();
+  }
+
+  carrinho.erase(carrinho.begin()+ indice); //apaga o indice elemento a partir do começo do vector
+  return true;
 }
 
 /**
@@ -229,37 +235,37 @@ void Comprador::imprimirCarrinho(){
   _numeroComprasCarrinho = carrinho.size();
   double totalCarrinho=0;
 
-  if(_numeroComprasCarrinho == 0){
-    std::cout << "Seu carrinho está vazio. Adicione produtos para continuar.";
+  try{
+    verificar_carrinho_vazio(_numeroComprasCarrinho);
   }
-  else{
-    limparTela();
-
-    std::cout << "\n" << "----------------------------------------------" << std::endl;
-    std::cout << "\t\t Carrinho" << std::endl;
-    std::cout << "----------------------------------------------" << "\n" << std::endl;
-
-    for(int i=0; i < _numeroComprasCarrinho; i++){
-
-      std::cout << "\n" << "----------------------------------------------" << std::endl;
-      std::cout << "\t\t Código " << (carrinho[i]).getCodigoProduto() << std::endl;
-      std::cout << "----------------------------------------------" << "\n" << std::endl;
-      std::cout << "Nome: " << (carrinho[i]).getNome() << std::endl;
-      std::cout << "Categoria: " << (carrinho[i]).getCategoria()  << std::endl;
-      std::cout << "Cor: " << (carrinho[i]).getCor()  << std::endl;
-      std::cout << "Material: " << (carrinho[i]).getMaterial()  << std::endl;
-      std::cout << "Media de Avaliações: " << (carrinho[i]).getMediaAvaliacoes()  << std::endl;
-      std::cout << "Preço " << (carrinho[i]).getPreco() << std::endl;
-      std::cout << "Descricao: " << (carrinho[i]).getDescricao() << std::endl;
-      totalCarrinho += (carrinho[i]).getPreco();
-
-    }
-
-    std::cout << "\n" << "----------------------------------------------" << std::endl;
-    std::cout << "\t\t Qntd de Produtos: " << _numeroComprasCarrinho << std::endl;
-    std::cout << "\t\t Total: "<< totalCarrinho << std::endl;
-    std::cout << "----------------------------------------------" << "\n" << std::endl;
+  catch(Exception_Carrinho_Vazio &e){
+    std::cout<<e.what();
   }
+
+  limparTela();
+
+  std::cout << "\n" << "----------------------------------------------" << std::endl;
+  std::cout << "\t\t Carrinho do Comprador: " << this->getNome() << std::endl;
+  std::cout << "----------------------------------------------" << "\n" << std::endl;
+
+  for(int i=0; i < _numeroComprasCarrinho; i++){
+    std::cout << "\n" << "----------------------------------------------" << std::endl;
+    std::cout << "\t\t Código " << (carrinho[i]).getCodigoProduto() << std::endl;
+    std::cout << "----------------------------------------------" << "\n" << std::endl;
+    std::cout << "Nome: " << (carrinho[i]).getNome() << std::endl;
+    std::cout << "Categoria: " << (carrinho[i]).getCategoria()  << std::endl;
+    std::cout << "Cor: " << (carrinho[i]).getCor()  << std::endl;
+    std::cout << "Material: " << (carrinho[i]).getMaterial()  << std::endl;
+    std::cout << "Media de Avaliações: " << (carrinho[i]).getMediaAvaliacoes()  << std::endl;
+    std::cout << "Preço " << (carrinho[i]).getPreco() << std::endl;
+    std::cout << "Descricao: " << (carrinho[i]).getDescricao() << std::endl;
+    totalCarrinho += (carrinho[i]).getPreco();
+  }
+
+  std::cout << "\n" << "----------------------------------------------" << std::endl;
+  std::cout << "\t\t Qntd de Produtos: " << _numeroComprasCarrinho << std::endl;
+  std::cout << "\t\t Total: "<< totalCarrinho << std::endl;
+  std::cout << "----------------------------------------------" << "\n" << std::endl;
 }
 
 /**
@@ -275,7 +281,6 @@ void Comprador::imprimirHistorico(){
   }
   catch(Exception_Historico_Vazio &e){
     std::cout<<e.what();
-    //aqui voltar para o menu anterior
   }
 
   limparTela();
@@ -288,9 +293,9 @@ void Comprador::imprimirHistorico(){
 
   for (ite=historico.begin(); ite!=historico.end(); ++ite){
     if(ite->first == this->getEmail()){
-      std::cout << "\t\t| Código " << (ite->second).getCodigoProduto() << " |" << std::endl;
-      std::cout << "\t\t| Nome: " << (ite->second).getNome() << " |" << std::endl;
-      std::cout << "\t\t| Preço: " << (ite->second).getPreco() << " |" << std::endl;
+      std::cout << "\t\tCódigo " << (ite->second).getCodigoProduto() << std::endl;
+      std::cout << "\t\tNome: " << (ite->second).getNome() << std::endl;
+      std::cout << "\t\tPreço: " << (ite->second).getPreco() << std::endl;
       }
   }
     std::cout << "\n" << "----------------------------------------------" << std::endl;
@@ -368,20 +373,31 @@ void Comprador::adicionarComentario(){
   std::cout << "\n" << "Digite o código do produto para o qual deseja registrar um comentário.";
   std::cin >> codProduto;
 
+  /*try{
+    //verificar entrada invalida
+  }
+  catch{
+    //lança excecao de entrada invalida
+  }*/
+
   indice = procurarItensHistorico(codProduto);
 
-  if (indice != -1){
-    std::string comentario;
-
-    std::cout << "\n" << "Escreva o seu comentário para o produto de código " << codProduto << " : " << std::endl;
-    std::getline(std::cin, comentario);
-
-    //(historico[indice]).setComentario(comentario);
-    std::cout << "\n" << "Comentário para o produto de código " << codProduto << " registrado com sucesso! " << std::endl;
+  try{
+    verificar_produto_fora_do_historico(indice);
   }
-  else{
-    std::cout << "\n" << "O produto de código " << codProduto << " não consta em seu histórico então não pode ter um comentário registrado. Tente novamente.";
+  catch(Exception_Produto_Fora_do_Historico &e){
+    std::cout<<e.what();
   }
+
+  Produto prod = buscaHistorico(codProduto);
+
+  std::string comentario;
+
+  std::cout << "\n" << "Escreva o seu comentário para o produto de código " << codProduto << " : " << std::endl;
+  std::getline(std::cin, comentario);
+
+  prod.setComentario(comentario);
+  std::cout << "\n" << "Comentário para o produto de código " << codProduto << " registrado com sucesso! " << std::endl;
 }
 
 /**
@@ -400,32 +416,38 @@ void Comprador::avaliarItem(){
   std::cout << "\n" << "Digite o código do produto que deseja avaliar: ";
   std::cin >> codProduto;
 
+  /*try{
+    //verificar entrada invalida
+  }
+  catch{
+    //lança excecao de entrada invalida
+  }*/
+
   indice = procurarItensHistorico(codProduto);
 
-  if (indice != -1){
-    int nota;
-
-    std::cout << "\n" << "De 0 a 5, qual nota deseja dar ao produto de código " << codProduto << "?" << std::endl;
-    std::cin >> nota;
-    if(nota>=0 || nota<=5){
-      /*(historico[indice]).avaliarProduto(nota);*/
-    }
-    else{
-      std::cout << "\n" << "Nota inválida. Tente novamente.";
-    }
+  try{
+    verificar_produto_fora_do_historico(indice);
   }
-  else{
-    std::cout << "\n" << "O produto de código " << codProduto << " não consta em seu histórico então não pode ser avaliado. Tente novamente.";
+  catch(Exception_Produto_Fora_do_Historico &e){
+    std::cout<<e.what();
   }
-}
 
-/**
- * [Comprador::limparTela função responsável por limpar a tela do sistema]
- * @method Comprador::limparTela
- */
+  int nota;
 
-void Comprador::limparTela(){
-  std::system("clear||cls");
+  std::cout << "\n" << "Como deseja avaliar o produto " << codProduto << "?" << std::endl;
+  std::cout << "\n" << "Escolha uma das opções: |0|1|2|3|4|5|" << std::endl;
+  std::cin >> nota;
+
+  try{
+    verificar_nota_invalida(nota);
+  }
+  catch(Exception_Nota_Invalida &e){
+    std::cout<<e.what();
+  }
+
+  Produto prod = buscaHistorico(codProduto);
+  prod.avaliarProduto(nota);
+
 }
 
 /**
@@ -434,31 +456,35 @@ void Comprador::limparTela(){
  */
 
 void Comprador::fazerCompras(){
+  int opcao;
   std::cout << "Você está comprando " << carrinho.size() << " produtos, cujo valor total é " << _totalCarrinho << ". Deseja confirmar sua compra?" << std::endl;
   std::cout << "0 - NÃO\n1 - SIM" << std::endl;
-  int opcao;
   std::cin >> opcao;
-  switch (opcao) {
-    case 0:
-      std::cout << "Compra não realizada. Você ainda possui produtos te esperando em seu carrinho!" << std::endl;
-      break;
-    case 1:
-    {
-      if(_dinheiro>=_totalCarrinho){
-        carrinho.clear();
-        _dinheiro = _dinheiro - _totalCarrinho;
-        _numeroComprasHistorico++;
-      }
-      else{
-        std::cout << "Compra não realizada pois seu saldo é insuficiente! Você possui R$ " << _dinheiro << std::endl;
-      }
-      break;
-    }
-    default:
-      std::cout << "opcao inválida. Tente novamente" << std::endl;
-      fazerCompras();
-      break;
+
+  /*try{
+    //verificar entrada invalida
   }
+  catch{
+    //lança excecao de entrada invalida
+  }*/
+
+  try{
+    verificar_opcao_menu_fazer_compras_invalida(opcao);
+  }
+  catch(Exception_Opcao_Menu_Fazer_Compras_Invalida &e){
+    std::cout<<e.what();
+  }
+
+  try{
+    verificar_saldo_insuficiente(this->getDinheiro(), this->getTotalCarrinho());
+  }
+  catch(Exception_Saldo_Comprador_Insuficiente &e){
+    std::cout<<e.what();
+  }
+
+  carrinho.clear();
+  _dinheiro = _dinheiro - _totalCarrinho;
+  _numeroComprasHistorico++;
 }
 
 /**
@@ -524,7 +550,6 @@ void Comprador::listaHistoricoArquivo(){
       }
     }
   }
-  imprimirHistorico();
   arquivo.close();
 }
 
@@ -555,6 +580,60 @@ void Comprador::gravaHistoricoArquivo(){
   }
 
   arquivo.close();
+}
+
+Produto Comprador::buscaHistorico(int codProduto){
+  int x, codigo;
+  std::string nome, categoria, cor, descricao, material;
+  float preco, mediaAvaliacoes;
+
+  std::map<std::string, Produto>::iterator ite;
+
+  for (ite=historico.begin(); ite!=historico.end(); ++ite){
+    if(ite->first == this->getEmail() && (ite->second).getCodigoProduto() == codProduto){
+
+      codigo = (ite->second).getCodigoProduto();
+      nome = (ite->second).getNome();
+      categoria = (ite->second).getCategoria();
+      cor = (ite->second).getCor();
+      descricao = (ite->second).getDescricao();
+      material = (ite->second).getMaterial();
+      preco = (ite->second).getPreco();
+      mediaAvaliacoes = (ite->second).getMediaAvaliacoes();
+    }
+  }
+  Produto prod = Produto(codigo, preco, mediaAvaliacoes, nome, categoria, cor, descricao, material);
+  return prod;
+}
+
+Produto Comprador::buscaCarrinho(int codProduto){
+  int x, codigo;
+  std::string nome, categoria, cor, descricao, material;
+  float preco, mediaAvaliacoes;
+
+  for(int i=0; i < _numeroComprasCarrinho; i++){
+    if(carrinho[i].getCodigoProduto() == codProduto){
+      codigo = carrinho[i].getCodigoProduto();
+      nome = carrinho[i].getNome();
+      categoria = carrinho[i].getCategoria();
+      cor = carrinho[i].getCor();
+      descricao = carrinho[i].getDescricao();
+      material = carrinho[i].getMaterial();
+      preco = carrinho[i].getPreco();
+      mediaAvaliacoes = carrinho[i].getMediaAvaliacoes();
+    }
+  }
+  Produto prod = Produto(codigo, preco, mediaAvaliacoes, nome, categoria, cor, descricao, material);
+  return prod;
+}
+
+/**
+ * [Comprador::limparTela função responsável por limpar a tela do sistema]
+ * @method Comprador::limparTela
+ */
+
+void Comprador::limparTela(){
+  std::system("clear||cls");
 }
 
 #endif

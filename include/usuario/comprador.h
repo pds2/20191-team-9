@@ -65,6 +65,9 @@ class Comprador : public Usuario{
     void gravaHistoricoArquivo();
 
     void limparTela();
+
+    Produto buscaHistorico(int codProduto);
+    Produto buscaCarrinho(int codProduto);
 };
 
 #endif

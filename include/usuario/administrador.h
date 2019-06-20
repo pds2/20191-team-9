@@ -1,4 +1,3 @@
-/*
 #ifndef ADMINISTRADOR_H
 #define ADMINISTRADOR_H
 
@@ -34,7 +33,7 @@ class Administrador : public Usuario{
 
     void produtoCsvToVector();
     void usuarioCsvToVector();
-    void reCsvToMap();
+    void reqCsvToMap();
 
     void removeItem(std::string nome_do_produto);
 
@@ -50,4 +49,3 @@ class Administrador : public Usuario{
 };
 
 #endif
-*/

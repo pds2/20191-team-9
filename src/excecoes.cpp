@@ -16,94 +16,52 @@ void verificar_carrinho_vazio(int produtosC){
         throw CV;
     };
 }
-/*
-void tratamento_habilidade_invalida(std::string escolha, int lideranca){
-    if(lideranca == 3){
-        std::cout << "Voc� s� tem lideran�a o suficiente para ter acesso �s habilidades 1,2 e 3.\n";
-        escolha = escolha_um_a_tres();
-    }
-    if(lideranca == 2){
-        std::cout << "Voc� s� tem lideran�a o suficiente para ter acesso �s habilidades 1 e 2.\n";
-        escolha = escolha_um_a_dois();
-    }
-    else{
-        std::cout << "Voc� � um novato! S� consegue utilizar a primeira habilidade.\n";
-        escolha = escolha_um_a_um();
-    }
-}
 
-void verificar_limite_habilidade(std::string escolha, short int *limite){
-    int escolha_int = escolha[0] - '0';
-    if(escolha_int > 1){
-        if(limite[escolha_int - 1] == 0){
-            Excpt_Limite_Habilidade z;
-            throw z;
-        }
-    }
-}
-
-void tratamento_limite_habilidade(std::string &escolha, short int *limite){
-    do{
-        do{
-        std::cout << "A habilidade escolhida esgotou! Escolha outra: ";
-        std::getline(std::cin, escolha);
-        }while(escolha[0] != '1' && escolha[0] != '2' && escolha[0] != '3' && escolha[0] != '4');
-    }while(limite[(escolha[0]-'0')-1]<=0);
-}
-
-void verificar_lideranca_valida(int lideranca){
-    if(lideranca<=0||lideranca>4){
-        Excpt_Lideranca_Invalida z;
-        throw z;
-    }
-}
-
-int tratamento_lideranca_invalida(){
-    std::string escolha = escolha_um_a_quatro();
-    return (escolha[0] - '0');
-}
-
-void verificar_dificuldade_valida(int dificuldade){
-    if(dificuldade<=0||dificuldade>4){
-        Excpt_Dificuldade_Invalida z;
-        throw z;
-    }
-}
-
-void verificar_num_pokemon_valido(Treinador jogador){
-    if(jogador._lista_de_pokemon.size()>=9){
-        Excpt_Num_Pokemon_Invalido z;
-        throw z;
-	}
-}
-
-Treinador tratamento_num_pokemon_invalido(Treinador jogador){
-    int doacao = doar_pokemon(jogador);
-    jogador._lista_de_pokemon.erase(jogador._lista_de_pokemon.begin()+doacao);
-    return jogador;
-}
-
-int verifica_inteiro(std::string enunciado){
-  int escolha;
-  while (true) {
-    std::cout << enunciado;
-    std::cin >> escolha;
-    if(!std::cin) {
-       std::cin.clear();
-       std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-       std::cout << "\nPor favor, digite um número inteiro!\n\n";
-       continue;
-    } else {
-        return escolha;
-        break;
-    }
+void verificar_usuario_existente(int indiceComprador){
+  if(indiceComprador != -1){
+    Exception_Usuario_Ja_Cadastrado UJC;
+    throw UJC;
   }
 }
 
-void verifica_entrada(std::string p) {
-    if ((p[0] != '1') || (p[0] != '2') || (p[0] != '3')) {
-        Excpt_Entrada_Inicial x;
-        throw x;
-    }
+void verificar_produto_ja_no_carrinho(int indiceProduto){
+  if(indiceProduto != -1){
+    Exception_Produto_Ja_Consta_No_Carrinho PNC;
+    throw PNC;
+  }
 }
-*/
+
+void verificar_produto_cadastrado(int indiceProduto){
+  if(indiceProduto == -1){
+    Exception_Produto_Nao_Encontrado PNE;
+    throw PNE;
+  }
+}
+
+void verificar_saldo_insuficiente(float dinheiroComprador, float totalCompras){
+  if(totalCompras > dinheiroComprador){
+    Exception_Saldo_Comprador_Insuficiente SCI;
+    throw SCI;
+  }
+}
+
+void verificar_produto_fora_do_historico(int indiceProdutoHistorico){
+  if(indiceProdutoHistorico == -1){
+    Exception_Produto_Fora_do_Historico PFH;
+    throw PFH;
+  }
+}
+
+void verificar_nota_invalida(int nota){
+  if(nota!=0 && nota!=1 && nota!=2 && nota!=3 && nota!=4 && nota!=5){
+    Exception_Nota_Invalida NI;
+    throw NI;
+  }
+}
+
+void verificar_opcao_menu_fazer_compras_invalida(int opcao){
+  if(opcao!=0 && opcao!=1){
+    Exception_Opcao_Menu_Fazer_Compras_Invalida OMCI;
+    throw OMCI;
+  }
+}
