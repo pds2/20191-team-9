@@ -80,10 +80,10 @@ TEST_CASE("Get - Dados do Comprador") {
 
 //-----> Testes ADMINISTRADOR
 TEST_CASE("Criar o Administrador"){
-  Administrador admin = Administrador();
-  CHECK_EQ(admin.getNome(), "ADMIN");
-  CHECK_EQ(admin.getEmail(), "admin1@gmail.com");
-  CHECK_EQ(admin.getSenha(), "123tasalvo");
+  Administrador adm = Administrador();
+  CHECK_EQ(adm.getNome(), "ADMIN");
+  CHECK_EQ(adm.getEmail(), "admin1@gmail.com");
+  CHECK_EQ(adm.getSenha(), "123tasalvo");
 }
 //implementar pós exceções
 TEST_CASE("Remover item do estoque"){
@@ -91,15 +91,15 @@ TEST_CASE("Remover item do estoque"){
 }
 
 TEST_CASE("Remover item que não existe"){
-  Administrador admin;
+  Administrador adm;
 
-  CHECK_EQ(admin.removeItem("naoexiste"), -1);
+  CHECK_EQ(adm.removeItem("naoexiste"), -1);
 }
 
 TEST_CASE("Aumentar saldo de usuário que não existe"){
-  Administrador admin;
+  Administrador adm;
 
-  CHECK_EQ(admin.aprovaPedido("naoexiste"), -1);
+  CHECK_EQ(adm.aprovaPedido("naoexiste"), -1);
 }
 
 TEST_CASE("Aumentar saldo de usuário que não requisitou o aumento"){
@@ -113,9 +113,9 @@ TEST_CASE("Aprovar um pedido"){
 }
 
 TEST_CASE("Excluir usuário que não existe"){
-  Administrador admin;
+  Administrador adm;
 
-  CHECK_EQ(admin.excluiUsuario("naoexiste"), -1);
+  CHECK_EQ(adm.excluiUsuario("naoexiste"), -1);
 }
 //implementar pós exceções
 TEST_CASE("Excluir um usuário"){
