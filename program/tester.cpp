@@ -39,7 +39,6 @@ TEST_CASE("Get produto - Caneca") {
 
 }
 
-int cod, float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material, std::string tipo
 
 TEST_CASE("Get produto - Acessorios") {
     Caneca m(4, 20, 4, "Pulseira GOT", "Pulseira", "Vermelha", "Pulseira Dracarys", "Couro", "Tiposo");
