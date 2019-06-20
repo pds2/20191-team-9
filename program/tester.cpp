@@ -5,11 +5,14 @@
 #include "produto/blusas_e_moletom.h"
 #include "produto/caneca.h"
 #include "produto/acessorio.h"
+#include "usuario/comprador.h"
+#include "usuario/administrador.h"
+#include "ecommerce.h"
 
 TEST_CASE("Declaracão produto") {
     CHECK_NOTHROW(Produto p(2, 60, 5, "Produto Diferenciavel", "Teste", "Verde", "Produto otimo para ser utilizado em casos de teste", "Radiacao"));
     CHECK_THROWS(Produto p(-2, 60, 5, "Produto Diferenciavel", "Teste", "Verde", "Produto otimo para ser utilizado em casos de teste", "Radiacao"));
-    CHECK_THROWS(Produto p(3, 60, -5, "Produto Diferenciavel", "Teste", "Verde", "Produto otimo para ser utilizado em casos de teste", "Radiacao"));    
+    CHECK_THROWS(Produto p(3, 60, -5, "Produto Diferenciavel", "Teste", "Verde", "Produto otimo para ser utilizado em casos de teste", "Radiacao"));
     CHECK_THROWS(Produto p(2, 60, 6, "Produto Diferenciavel", "Teste", "Verde", "Produto otimo para ser utilizado em casos de teste", "Radiacao"));
 }
 
@@ -40,7 +43,6 @@ TEST_CASE("Get produto - Caneca") {
     CHECK_EQ(c.getDiametro(), 5.5);
 }
 
-
 TEST_CASE("Get produto - Acessorios") {
     Acessorio a(4, 20, 4, "Pulseira GOT", "Pulseira", "Vermelha", "Pulseira Dracarys", "Couro", "Tiposo");
     CHECK_EQ(a.getCodigoProduto(),4);
@@ -52,4 +54,74 @@ TEST_CASE("Get produto - Acessorios") {
     CHECK_EQ(a.getDescricao(),"Pulseira Dracarys");
     CHECK_EQ(a.getMaterial(),"Couro");
     CHECK_EQ(a.getTipo(),"Tiposo");
+}
+
+//-----> Testes COMPRADOR
+
+TEST_CASE("Cadastrar Comprador") {
+    Ecommerce ecom;
+    CHECK_NOTHROW(ecom.cadastrarComprador("Arthur Moura", "arthur.moura@gmail.com", "1234", "123456789", "Rua Washington, 80. Copacabana.", 0, 0, 0, 0.0));
+    CHECK_NOTHROW(ecom.cadastrarComprador("Carolina Enya", "carolina.enya@gmail.com", "1234", "222222222", "Rua Washington, 90. Copacabana.", 0, 0, 0, 0.0));
+    CHECK_NOTHROW(ecom.cadastrarComprador("Rita Caldas", "rita.caldas@gmail.com", "1234", "33333333333", "Rua Washington, 100. Copacabana.", 0, 0, 0, 0.0));
+    CHECK_NOTHROW(ecom.cadastrarComprador("Tula Valentina", "tula.valentina@gmail.com", "1234", "444444444", "Rua Washington, 110. Copacabana.", 0, 0, 0, 0.0));
+}
+
+TEST_CASE("Get - Dados do Comprador") {
+    Comprador comp ("Catarina Enya", "catarina.edp@gmail.com", "1234", "555555555", "Rua Washington, 120. Copacabana.", 0, 0, 0, 0.0);
+    CHECK_EQ(comp.getNome(), "Catarina Enya");
+    CHECK_EQ(comp.getEmail(), "catarina.edp@gmail.com");
+    CHECK_EQ(comp.getSenha(), "1234");
+    CHECK_EQ(comp.getCPF(), "555555555");
+    CHECK_EQ(comp.getNumeroComprasCarrinho(), 0);
+    CHECK_EQ(comp.getNumeroComprasHistorico(), 0);
+    CHECK_EQ(comp.getNumeroAvaliacoes(), 0);
+    CHECK_EQ(comp.getDinheiro(), 0.0);
+}
+
+//-----> Testes ADMINISTRADOR
+TEST_CASE("Criar o Administrador"){
+  Administrador adm = Administrador();
+  CHECK_EQ(adm.getNome(), "ADMIN");
+  CHECK_EQ(adm.getEmail(), "admin1@gmail.com");
+  CHECK_EQ(adm.getSenha(), "123tasalvo");
+}
+//implementar pós exceções
+TEST_CASE("Remover item do estoque"){
+   Administrador adm = Administrador();
+   BlusasEMoletom teste(697, 45, 3.5, "blusazul", "Blusa e Moletom", "Amarelo", "Amarelo que nem o raiar do sol", "Algodao", 'M', "Tipo tiposo");
+   
+   CHECK_NOTHROW(removeItem(teste));
+}
+
+TEST_CASE("Remover item que não existe"){
+  Administrador adm;
+
+  CHECK_EQ(adm.removeItem("naoexiste"), -1);
+}
+
+TEST_CASE("Aumentar saldo de usuário que não existe"){
+  Administrador adm;
+
+  CHECK_EQ(adm.aprovaPedido("naoexiste"), -1);
+}
+
+TEST_CASE("Aumentar saldo de usuário que não requisitou o aumento"){
+  Ecommerce ecom;
+  Comprador shops = ecom.cadastrarComprador("semaumento","sem@aumento.com","senha123","44565564","nãoaumenta",6,6,4,5);
+  CHECK_EQ(admin.aprovaPedido("sem@aumento.com"), -2);
+}
+//implementar pós exceções
+TEST_CASE("Aprovar um pedido"){
+
+}
+
+TEST_CASE("Excluir usuário que não existe"){
+  Administrador adm;
+
+  CHECK_EQ(adm.excluiUsuario("naoexiste"), -1);
+}
+//implementar pós exceções
+TEST_CASE("Excluir um usuário"){
+    Ecommerce ecom;
+    Comprador bye = ecom.cadastrarComprador("excluir","ex@cluir.com","excluido","000000","exclui",7,6,3,9);
 }

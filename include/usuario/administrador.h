@@ -37,13 +37,13 @@ class Administrador : public Usuario{
 
     void exibirPerfil();
 
-    void removeItem(std::string nome_do_produto);
+    int removeItem(std::string nome_do_produto);
 
     void adicionaPedido(std::string email, float valor);
     void mostraPedidos();
-    void aprovaPedido(std::string email);
+    int aprovaPedido(std::string email);
 
-    void excluiUsuario(std::string email);
+    int excluiUsuario(std::string email);
 
     ~Administrador();
 

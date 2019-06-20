@@ -166,7 +166,7 @@ void Administrador::reqCsvToMap(){
  * [Administrador::removeItem Função para remover um item do estoque da loja]
  * @param nome_do_produto [nome do produto a ser removido]
  */
-void Administrador::removeItem(std::string nome_do_produto){
+int Administrador::removeItem(std::string nome_do_produto){
   //procura no vector se existe algum produto com o nome chamado.
   //Se ele existir, este produto é retirado do estoque. Se não existir, uma mensagem de erro é impressa na tela.
 
@@ -226,7 +226,7 @@ void Administrador::removeItem(std::string nome_do_produto){
   //Se não achou, imprime uma mensagem de erro. Se achou, procura em qual categoria está o item para fazer a remoção
   if(indice == -1){
     std::cout << "Este produto não existe!" << std::endl;
-    return;
+    return -1;
   }else if(bm == 1){
     _bluemols.erase(_bluemols.begin() + indice);
   }else if(cn == 1){
@@ -255,6 +255,7 @@ void Administrador::removeItem(std::string nome_do_produto){
 
   arquivo.close();
 
+  return 0;
 }
 
 /**
@@ -269,9 +270,6 @@ void Administrador::exibirPerfil(){
   std::cout << "Email: " << getEmail() << std::endl;
   std::cout << "Senha: " << getSenha() << std::endl;
 
-  std::cout << std::endl << "Pressione ENTER para voltar a pagina anterior";
-  std::cin.get();
-  //ecom.menuUsuario();
 }
 
 
@@ -333,7 +331,7 @@ void Administrador::mostraPedidos(){
  * [Administrador::aprovaPedido Função para aprovar uma requisição de aumento de saldo]
  * @param email [email do comprador cujo saldo será aumentado]
  */
-void Administrador::aprovaPedido(std::string email){
+int Administrador::aprovaPedido(std::string email){
   int aprovacao;
   double valor = 0;
   int indice_comprador = -1;
@@ -357,7 +355,7 @@ void Administrador::aprovaPedido(std::string email){
 
   if(indice_comprador == -1){
     std::cout << "Este usuário não existe!\nInsira um usuário válido." << std::endl;
-    return;
+    return -1;
   }
 
   //-----> Busca se existe alguma requisição no email dado. Se não houver, exibe mensagem de erro
@@ -373,7 +371,7 @@ void Administrador::aprovaPedido(std::string email){
 
   if(valor <= 0){
     std::cout << "Este usuário não fez uma requisição. Portanto, não é possível aumentar o seu saldo" << std::endl;
-    return;
+    return -2;
   }
 
 
@@ -409,6 +407,7 @@ void Administrador::aprovaPedido(std::string email){
   arquivo_user.close();
   arquivo_req.close();
 
+  return 0;
 }
 
 
@@ -416,7 +415,7 @@ void Administrador::aprovaPedido(std::string email){
  * [Administrador::excluiUsuario Exclui um usuário]
  * @param email [email do usuario a ser excluído]
  */
-void Administrador::excluiUsuario(std::string email){
+int Administrador::excluiUsuario(std::string email){
   std::string email_do_cliente;
   int indice = -1;
   this->_shoppers.clear();
@@ -436,7 +435,7 @@ void Administrador::excluiUsuario(std::string email){
 
   if(indice == -1){
     std::cout << "Este usuário não existe!\nInsira um usuário válido" << std::endl;
-    return;
+    return -1;
   }
 
   _shoppers.erase(_shoppers.begin() + indice);
@@ -453,6 +452,8 @@ void Administrador::excluiUsuario(std::string email){
   }
 
   arquivo.close();
+
+  return 0;
 }
 
 Administrador::~Administrador(){
