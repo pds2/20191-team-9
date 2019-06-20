@@ -7,7 +7,9 @@
 
 TEST_CASE("Declaracão produto") {
     CHECK_NOTHROW(BlusasEMoletom blusa(2, 60, 4.5, "Moletom amarelo", "Moletom", "Amarelo", "Amarelo que nem o raiar do sol", "Algodao", 'M', "Tipo tiposo"));
-    //CHECK_NOTHROW(BlusasEMoletom blusa ());
+    CHECK_THROWS(BlusasEMoletom blusa(-2, 60, 4.5, "Moletom amarelo", "Moletom", "Amarelo", "Amarelo que nem o raiar do sol", "Algodao", 'M', "Tipo tiposo"));
+    CHECK_THROWS(BlusasEMoletom blusa(1, 60, -1, "Moletom amarelo", "Moletom", "Amarelo", "Amarelo que nem o raiar do sol", "Algodao", 'M', "Tipo tiposo"));    
+
 }
 
 TEST_CASE("Get produto") {
