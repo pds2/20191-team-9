@@ -2,7 +2,7 @@
 #define PRODUTO_CPP
 
 #include "produto/produto.h"
-
+#include "excecoes.h"
 /**
  * [Produto::Produto Construtor da classe Produto]
  * @method Produto::Produto
@@ -23,7 +23,8 @@ Produto::Produto(int cod, float preco, float mediaAvaliacoes, std::string nome, 
         std::vector<std::string> vazio;
         std::vector<int> nada;
         if((cod < 0)||(preco < 0)||(mediaAvaliacoes < 0)){
-            //throw ArgumentoInvalido();
+                Exception_Entrada_Invalida EI;
+            throw EI;
         }
 
         this->_codigoProduto = cod;
@@ -56,7 +57,8 @@ void Produto::avaliarProduto(int nota){
     if (nota>=1 && nota<=5){
     _avaliacoes.push_back(nota);
     } else{
-        //throw ArgumentoInvalido();
+        Exception_Entrada_Invalida EI;
+        throw EI;
     }
 
     int size = _avaliacoes.size();
