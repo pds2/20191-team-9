@@ -55,7 +55,7 @@ TEST_CASE("Get produto - Acessorios") {
     CHECK_EQ(a.getTipo(),"Tiposo");
 }
 
-
+/*
 //-----> Testes ADMINISTRADOR
 TEST_CASE("Criar o Administrador"){
   Administrador admin();
@@ -92,7 +92,7 @@ TEST_CASE("Excluir usuário que não existe"){
 TEST_CASE("Excluir um usuário"){
   Comprador bye("excluir","ex@cluir.com","excluido","000000","exclui",7,6,3,9);
 }
-
+*/
 //-----> Testes COMPRADOR
 
 TEST_CASE("Cadastrar Comprador") {
@@ -114,24 +114,27 @@ TEST_CASE("Get - Dados do Comprador") {
 }
 
 TEST_CASE("Adicionar Produto ao Carrinho do Comprador") {
+  Comprador comp ("Arthur Moura", "arthur.moura@gmail.com", "1234", "123456789", "Rua Washington, 80. Copacabana.", 0, 0, 0, 0.0);
   BlusasEMoletom m(2, 60, 4.5, "Moletom Amarelo", "Moletom", "Amarelo", "Amarelo que nem o raiar do sol", "Algodao", 'M', "Tipo tiposo");
   Caneca c(3, 15, 4.5, "Caneca formosa", "Caneca", "Branca", "Caneca fofa de Star Wars", "Porcelana", 5.5);
   Acessorio a(4, 20, 4, "Pulseira GOT", "Pulseira", "Vermelha", "Pulseira Dracarys", "Couro", "Tiposo");
-  adicionarCarrinho();
+  comp.adicionarCarrinho();
 }
 
 TEST_CASE("Realizar Busca por Produto no Carrinho do Comprador") {
+  Comprador comp ("Carolina Enya", "carolina.enya@gmail.com", "1234", "222222222", "Rua Washington, 90. Copacabana.", 0, 0, 0, 0.0)
   BlusasEMoletom m(2, 60, 4.5, "Moletom Amarelo", "Moletom", "Amarelo", "Amarelo que nem o raiar do sol", "Algodao", 'M', "Tipo tiposo");
   Caneca c(3, 15, 4.5, "Caneca formosa", "Caneca", "Branca", "Caneca fofa de Star Wars", "Porcelana", 5.5);
   Acessorio a(4, 20, 4, "Pulseira GOT", "Pulseira", "Vermelha", "Pulseira Dracarys", "Couro", "Tiposo");
-  adicionarCarrinho();
+  comp.buscaCarrinho();
 }
 
 TEST_CASE("Realizar Busca por Produto no Histórico do Comprador") {
+  Comprador comp ("Rita Caldas", "rita.caldas@gmail.com", "1234", "33333333333", "Rua Washington, 100. Copacabana.", 0, 0, 0, 0.0)
   BlusasEMoletom m(2, 60, 4.5, "Moletom Amarelo", "Moletom", "Amarelo", "Amarelo que nem o raiar do sol", "Algodao", 'M', "Tipo tiposo");
   Caneca c(3, 15, 4.5, "Caneca formosa", "Caneca", "Branca", "Caneca fofa de Star Wars", "Porcelana", 5.5);
   Acessorio a(4, 20, 4, "Pulseira GOT", "Pulseira", "Vermelha", "Pulseira Dracarys", "Couro", "Tiposo");
-  fazerCompras();
+  comp.buscaHistorico();
 }
 
 /*
