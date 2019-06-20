@@ -1156,7 +1156,8 @@ void Ecommerce::dadosComprador(){
 
 void Ecommerce::dadosProduto(){
   limparTela();
-  std::string nome, preco, cor, material, descricao;
+  std::string nome, cor, material, descricao;
+  float preco;
   int opcao;
   long int codigo;
   codigo = geradorCod();
