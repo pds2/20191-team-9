@@ -35,6 +35,8 @@ class Administrador : public Usuario{
     void usuarioCsvToVector();
     void reqCsvToMap();
 
+    void exibirPerfil();
+
     void removeItem(std::string nome_do_produto);
 
     void adicionaPedido(std::string email, float valor);
