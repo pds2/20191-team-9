@@ -41,9 +41,9 @@ class Ecommerce{
 
     void cadastrarComprador (std::string n, std::string em, std::string s, std::string cpf, std::string endereco, int numCarr, int numHist, int numAval, double din);
 
-    void cadastrarCaneca(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, float diametro);
-    void cadastrarAcessorio(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, std::string tipo);
-    void cadastrarBlusasEMoletom(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, char tamanho, std::string tipo);
+    void cadastrarCaneca(long int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, float diametro);
+    void cadastrarAcessorio(long int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, std::string tipo);
+    void cadastrarBlusasEMoletom(long int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, char tamanho, std::string tipo);
 
     bool procurarUsuario(std::string email);
     bool procurarComprador(std::string em);
@@ -52,15 +52,14 @@ class Ecommerce{
     void imprimirCompradores();
     void imprimirProdutos();
 
-    bool checaNome(std::string n);
-    bool checaEmail(std::string em);
-    bool checaSenha(std::string s);
+    bool checaEmail(const char *em);
+    bool validaAlfanumerica(const char *s);
 
-    int buscaIndiceCaneca(int cod);
-    int buscaIndiceAcessorio(int cod);
-    int buscaIndiceBlusasEMoletom(int cod);
-    int buscaIndiceProdutos(int cod);
-    Produto buscaProdutos(int cod);
+    int buscaIndiceCaneca(long int cod);
+    int buscaIndiceAcessorio(long int cod);
+    int buscaIndiceBlusasEMoletom(long int cod);
+    int buscaIndiceProdutos(long int cod);
+    Produto buscaProdutos(long int cod);
 
     int tamanhoArquivo(const char* file_name); //se o arquivo tiver vazio retorna 0
 
@@ -76,13 +75,13 @@ class Ecommerce{
     void gravaUsuarioArquivo();
 
     long int geradorCod();
-    bool checaCodigo(int cod); //verifica se ja existe um produto com o mesmo codigo cadastrado, caso sim retorna false
+    bool checaCodigo(long int cod); //verifica se ja existe um produto com o mesmo codigo cadastrado, caso sim retorna false
     void listaProdutosArquivo();
     void gravaProdutosArquivo();
 
     void listaComentariosArquivo();
     void gravaComentariosArquivo();
-    void adicionarComentario(int cod, std::string coment); //procura produto no vector pelo codigo e adiciona comentario
+    void adicionarComentario(long int cod, std::string coment); //procura produto no vector pelo codigo e adiciona comentario
 
     void loginUsuario();
     void logoutUsuario();

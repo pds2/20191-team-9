@@ -133,7 +133,7 @@ void Ecommerce::gravaComentariosArquivo(){
  * @param  coment                        [comentário a ser registrado para o produto]
  */
 
-void Ecommerce::adicionarComentario(int cod, std::string coment){
+void Ecommerce::adicionarComentario(long int cod, std::string coment){
     int x = buscaIndiceProdutos(cod);
     if ( x != -1){
     produtos[x].setComentario(coment);
@@ -160,6 +160,12 @@ int Ecommerce::tamanhoArquivo(const char* file_name){
     return size;
 }
 
+/**
+ * [Ecommerce::geradorCod função que gera codigos aleatorios para novos produto]
+ * @method Ecommerce::geradorCod
+ * @return                           [codigo de ate oito digitos]
+ */
+
 long int Ecommerce::geradorCod(){
   long int codProduto;
   srand(time(0));
@@ -169,7 +175,14 @@ long int Ecommerce::geradorCod(){
   return codProduto;
 }
 
-bool Ecommerce::checaCodigo(int cod){
+/**
+ * [Ecommerce::checaCodigo função que checa se o codigo gerado para um produto já existe]
+ * @method Ecommerce::checaCodigo
+ * @param  cod                       [codigo gerado]
+ * @return                           [false se o codigo ja existia, true se o codigo não existia]
+ */
+
+bool Ecommerce::checaCodigo(long int cod){
     int x = produtos.size();
     int aux;
 
@@ -182,7 +195,7 @@ bool Ecommerce::checaCodigo(int cod){
     return true;
 }
 
-void Ecommerce::cadastrarCaneca(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, float diametro){
+void Ecommerce::cadastrarCaneca(long int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, float diametro){
     if (checaCodigo(cod)){
         Caneca can(cod, preco, mediaAvaliacoes, nome, "Canecas", cor, descricao, material, diametro);
         Produto prod(cod, preco, mediaAvaliacoes, nome, "Canecas", cor, descricao, material);
@@ -196,7 +209,7 @@ void Ecommerce::cadastrarCaneca(int cod, float preco, float mediaAvaliacoes, std
     }
 }
 
-void Ecommerce::cadastrarAcessorio(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, std::string tipo){
+void Ecommerce::cadastrarAcessorio(long int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, std::string tipo){
     if(checaCodigo(cod)){
         Acessorio ac(cod, preco, mediaAvaliacoes, nome, "Acessorios", cor, descricao, material, tipo);
         Produto prod(cod, preco, mediaAvaliacoes, nome, "Acessorios", cor, descricao, material);
@@ -210,7 +223,7 @@ void Ecommerce::cadastrarAcessorio(int cod, float preco, float mediaAvaliacoes, 
     }
 }
 
-void Ecommerce::cadastrarBlusasEMoletom(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, char tamanho, std::string tipo){
+void Ecommerce::cadastrarBlusasEMoletom(long int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, char tamanho, std::string tipo){
     if(checaCodigo(cod)){
         BlusasEMoletom b(cod, preco, mediaAvaliacoes, nome, "Blusas e Moletons", cor, descricao, material, tamanho, tipo);
         Produto prod(cod, preco, mediaAvaliacoes, nome, "Blusas e Moletons", cor, descricao, material);
@@ -328,7 +341,7 @@ void Ecommerce::imprimirProdutos(){
         }
 }
 
-int Ecommerce::buscaIndiceCaneca(int cod){
+int Ecommerce::buscaIndiceCaneca(long int cod){
     int x;
     for(x = 0; x < canecas.size(); x++){
         if(canecas[x].getCodigoProduto() == cod){
@@ -338,7 +351,7 @@ int Ecommerce::buscaIndiceCaneca(int cod){
     return -1;
 }
 
-int Ecommerce::buscaIndiceBlusasEMoletom(int cod){
+int Ecommerce::buscaIndiceBlusasEMoletom(long int cod){
     int x;
     for(x = 0; x < blusasEmoletons.size(); x++){
         if(blusasEmoletons[x].getCodigoProduto() == cod){
@@ -348,7 +361,7 @@ int Ecommerce::buscaIndiceBlusasEMoletom(int cod){
     return -1;
 }
 
-int Ecommerce::buscaIndiceAcessorio(int cod){
+int Ecommerce::buscaIndiceAcessorio(long int cod){
     int x;
     for(x = 0; x < acessorios.size(); x++){
         if(acessorios[x].getCodigoProduto() == cod){
@@ -358,7 +371,7 @@ int Ecommerce::buscaIndiceAcessorio(int cod){
     return -1;
 }
 
-int Ecommerce::buscaIndiceProdutos(int cod){
+int Ecommerce::buscaIndiceProdutos(long int cod){
     int x;
     for(x = 0; x < produtos.size(); x++){
         if(produtos[x].getCodigoProduto() == cod){
@@ -368,7 +381,7 @@ int Ecommerce::buscaIndiceProdutos(int cod){
     return -1;
 }
 
-Produto Ecommerce::buscaProdutos(int cod){
+Produto Ecommerce::buscaProdutos(long int cod){
   int x, codigo;
   std::string nome, categoria, cor, descricao, material;
   float preco, mediaAvaliacoes;
@@ -388,7 +401,6 @@ Produto Ecommerce::buscaProdutos(int cod){
   Produto prod = Produto(codigo, preco, mediaAvaliacoes, nome, categoria, cor, descricao, material);
   return prod;
 }
-
 
 void Ecommerce::gravaProdutosArquivo(){
   std::remove("produtos.csv");
@@ -610,10 +622,20 @@ void Ecommerce::imprimirCompradores(){
   }
 }
 
+/**
+ * [Ecommerce::geradorCod função que adiciona produtos no carrinho do usuario e retorna a pagina anterior]
+ * @method Ecommerce::geradorCod
+ */
+
 void Ecommerce::addCarrinho(){
-  procurarCompradorObj().adicionarCarrinho();
+  procurarCompradorObj(userLogged).adicionarCarrinho();
   impProdutos();
 }
+
+/**
+ * [Ecommerce::impProdutos função que cria um menu de opçoes para compradores na pagina de produtos]
+ * @method Ecommerce::impProdutos
+ */
 
 void Ecommerce::impProdutos(){
   limparTela();
@@ -626,6 +648,7 @@ void Ecommerce::impProdutos(){
   int codProduto;
   switch (digito) {
     case 1:
+    {
       std::cout << "\n" << "Digite o código do produto: ";
       std::cin >> codProduto;
       Produto prod = buscaProdutos(codProduto);
@@ -636,7 +659,9 @@ void Ecommerce::impProdutos(){
       menuComprador();
       impProdutos();
       break;
+    }
     case 2:
+    {
       std::cout << "\n" << "Digite o código do produto que deseja adicionar ao seu carrinho: ";
       std::cin >> codProduto;
       addCarrinho();
@@ -646,17 +671,27 @@ void Ecommerce::impProdutos(){
       menuComprador();
       impProdutos();
       break;
+    }
     case 3:
+    {
       menuComprador();
       break;
+    }
     default:
+    {
       std::cout << "Opção inválida. Tente novamente" << std::endl;
       std::cin.get();
       std::cin.get();
       impProdutos();
+    }
       break;
   }
 }
+
+/**
+ * [Ecommerce::impCarrinho função que cria um menu de opçoes para compradores na pagina do carrinho]
+ * @method Ecommerce::impCarrinho
+ */
 
 void Ecommerce::impCarrinho(){
   limparTela();
@@ -674,6 +709,7 @@ void Ecommerce::impCarrinho(){
 
   switch (digito) {
     case 1:
+    {
       int cod;
       std::cout << "Digite o codigo do produto que voce procura: ";
       std::cin >> cod;
@@ -684,7 +720,9 @@ void Ecommerce::impCarrinho(){
       std::cin.get();
       impCarrinho();
       break;
+    }
     case 2:
+    {
       int cod;
       std::cout << "Digite o codigo do produto que voce deseja remover: ";
       std::cin >> cod;
@@ -693,18 +731,28 @@ void Ecommerce::impCarrinho(){
       std::cin.get();
       std::cin.get();
       impCarrinho();
+    }
     case 3:
+    {
       procurarCompradorObj(userLogged).fazerCompras();
       std::cout << std::endl << "Pressione ENTER para voltar a pagina anterior";
       std::cin.get();
       std::cin.get();
       impCarrinho();
       break;
+    }
     case 4:
+    {
       menuComprador();
       break;
+    }
   }
 }
+
+/**
+ * [Ecommerce::impHistorico função que cria um menu de opçoes para compradores na pagina do historico]
+ * @method Ecommerce::impHistorico
+ */
 
 void Ecommerce::impHistorico(){
   procurarCompradorObj(userLogged).imprimirHistorico();
@@ -736,6 +784,11 @@ void Ecommerce::impHistorico(){
       break;
   }
 }
+
+/**
+ * [Ecommerce::mostraProdutos função que cria um menu de opçoes para o administrador na pagina de produtos]
+ * @method Ecommerce::mostraProdutos
+ */
 
 void Ecommerce::mostraProdutos(){
   limparTela();
@@ -770,7 +823,7 @@ void Ecommerce::mostraProdutos(){
       std::string nomeProduto;
       std::cout << "\n" << "Digite o nome do produto que deseja remover: ";
       std::cin >> nomeProduto;
-      admin.removeItem();
+      admin.removeItem(nomeProduto);
       break;
     }
     case 4:
@@ -787,6 +840,11 @@ void Ecommerce::mostraProdutos(){
   }
 }
 
+/**
+ * [Ecommerce::mostraUsuarios função que cria um menu de opçoes para o administrador na pagina de usuarios]
+ * @method Ecommerce::mostraUsuarios
+ */
+
 void Ecommerce::mostraUsuarios(){
   limparTela();
   imprimirUsuarios();
@@ -797,7 +855,7 @@ void Ecommerce::mostraUsuarios(){
   switch (digito) {
     case 1:
     {
-      std::string nomeProduto;
+      std::string emUsuario;
       std::cout << "\n" << "Digite o email do usuário que deseja remover: ";
       std::cin >> emUsuario;
       admin.excluiUsuario(emUsuario);    
@@ -929,6 +987,13 @@ void Ecommerce::limparTela(){
   std::system("clear||cls");
 }
 
+/*_____*
+ * [Ecommerce::tamanhoArquivo função que registra o tamanho do arquivo a ser lido]
+ * @method Ecommerce::tamanhoArquivo
+ * @param  file_name                 [nome do arquivo a ser lido]
+ * @return                           [quantidade de linhas do arquivo lido]
+ */
+
 void Ecommerce::loginUsuario(){
   limparTela();
   std::string email, senha;
@@ -977,6 +1042,13 @@ void Ecommerce::loginUsuario(){
   }
 }
 
+/*_____*
+ * [Ecommerce::tamanhoArquivo função que registra o tamanho do arquivo a ser lido]
+ * @method Ecommerce::tamanhoArquivo
+ * @param  file_name                 [nome do arquivo a ser lido]
+ * @return                           [quantidade de linhas do arquivo lido]
+ */
+
 void Ecommerce::logoutUsuario(){
   std::cout << "Se voce tem certeza que gostaria de sair desta conta, digite OUT" << std::endl
   << "Se voce gostaria de voltar ao menu, digite MENU" << std::endl;
@@ -1002,6 +1074,13 @@ void Ecommerce::logoutUsuario(){
   }
 }
 
+/*_____*
+ * [Ecommerce::tamanhoArquivo função que registra o tamanho do arquivo a ser lido]
+ * @method Ecommerce::tamanhoArquivo
+ * @param  file_name                 [nome do arquivo a ser lido]
+ * @return                           [quantidade de linhas do arquivo lido]
+ */
+
 void Ecommerce::inicio(){
   int digito;
   limparTela();
@@ -1025,7 +1104,7 @@ void Ecommerce::inicio(){
       dadosComprador();
       break;
     case 3:
-      std::cout << "Se voce tem certeza que gostaria de sair da loja, digite OUT" << std::endl
+      std::cout << "Se voce tem certeza que gostaria de sair da loja, digite OUT" << std::endl;
       std::string confirma;
       std::cin >> confirma;
       if (confirma == "OUT"){
@@ -1041,6 +1120,13 @@ void Ecommerce::inicio(){
       break;
   }
 }
+
+/*_____*
+ * [Ecommerce::tamanhoArquivo função que registra o tamanho do arquivo a ser lido]
+ * @method Ecommerce::tamanhoArquivo
+ * @param  file_name                 [nome do arquivo a ser lido]
+ * @return                           [quantidade de linhas do arquivo lido]
+ */
 
 void Ecommerce::dadosComprador(){
   limparTela();
@@ -1060,6 +1146,13 @@ void Ecommerce::dadosComprador(){
   cadastrarComprador(nome, email, senha, cpf, endereco, 0, 0, 0, 0);
   loginUsuario();
 }
+
+/*_____*
+ * [Ecommerce::tamanhoArquivo função que registra o tamanho do arquivo a ser lido]
+ * @method Ecommerce::tamanhoArquivo
+ * @param  file_name                 [nome do arquivo a ser lido]
+ * @return                           [quantidade de linhas do arquivo lido]
+ */
 
 void Ecommerce::dadosProduto(){
   limparTela();
@@ -1127,6 +1220,13 @@ void Ecommerce::dadosProduto(){
   }
 }
 
+/*_____*
+ * [Ecommerce::tamanhoArquivo função que registra o tamanho do arquivo a ser lido]
+ * @method Ecommerce::tamanhoArquivo
+ * @param  file_name                 [nome do arquivo a ser lido]
+ * @return                           [quantidade de linhas do arquivo lido]
+ */
+
 void Ecommerce::menuComprador(){
   limparTela();
   std::cout << "Para ver nossos produtos, digite 1" << std::endl
@@ -1170,6 +1270,13 @@ void Ecommerce::menuComprador(){
       break;
   }
 }
+
+/*_____*
+ * [Ecommerce::tamanhoArquivo função que registra o tamanho do arquivo a ser lido]
+ * @method Ecommerce::tamanhoArquivo
+ * @param  file_name                 [nome do arquivo a ser lido]
+ * @return                           [quantidade de linhas do arquivo lido]
+ */
 
 void Ecommerce::menuUsuario(){
   limparTela();
