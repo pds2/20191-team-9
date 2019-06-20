@@ -103,8 +103,8 @@ TEST_CASE("Aumentar saldo de usuário que não existe"){
 }
 
 TEST_CASE("Aumentar saldo de usuário que não requisitou o aumento"){
-  Administrador admin;
-  Comprador shops("semaumento","sem@aumento.com","senha123","44565564","nãoaumenta",6,6,4,5);
+  Ecommerce ecom;
+  Comprador shops = ecom.cadastrarComprador("semaumento","sem@aumento.com","senha123","44565564","nãoaumenta",6,6,4,5);
   CHECK_EQ(admin.aprovaPedido("sem@aumento.com"), -2);
 }
 //implementar pós exceções
@@ -119,5 +119,6 @@ TEST_CASE("Excluir usuário que não existe"){
 }
 //implementar pós exceções
 TEST_CASE("Excluir um usuário"){
-  Comprador bye("excluir","ex@cluir.com","excluido","000000","exclui",7,6,3,9);
+    Ecommerce ecom;
+    Comprador bye = ecom.cadastrarComprador("excluir","ex@cluir.com","excluido","000000","exclui",7,6,3,9);
 }
