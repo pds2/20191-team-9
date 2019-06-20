@@ -22,8 +22,8 @@ Produto::Produto(){
 Produto::Produto(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string categoria, std::string cor, std::string descricao, std::string material){
         std::vector<std::string> vazio;
         std::vector<int> nada;
-        if((cod < 0)||(preco < 0)||(mediaAvaliacoes < 0)){
-                Exception_Entrada_Invalida EI;
+        if((cod < 0)||(preco < 0)||(mediaAvaliacoes < 0)||(mediaAvaliacoes > 5)){
+            Exception_Entrada_Invalida EI;
             throw EI;
         }
 
@@ -54,13 +54,15 @@ Produto::~Produto(){
  */
 
 void Produto::avaliarProduto(int nota){
-    if (nota>=1 && nota<=5){
-    _avaliacoes.push_back(nota);
-    } else{
-        Exception_Entrada_Invalida EI;
-        throw EI;
+    try{
+        verificar_nota_invalida(nota);
+    }catch(Exception_Nota_Invalida &e){
+        std::cout << e.what() << std::endl;
+        return;
     }
-
+    
+    _avaliacoes.push_back(nota);
+    
     int size = _avaliacoes.size();
     int i, soma;
     soma = 0;
