@@ -4,6 +4,9 @@
 #include "ecommerce.h"
 #include "excecoes.h"
 
+Administrador admin;
+admin.Administrador();
+
 /**
  * [Ecommerce::Ecommerce Construtor da classe Ecommerce]
  * @method Ecommerce::Ecommerce
@@ -130,7 +133,7 @@ void Ecommerce::gravaComentariosArquivo(){
  * @param  coment                        [comentário a ser registrado para o produto]
  */
 
-void Ecommerce::adicionarComentario(int cod, std::string coment){
+void Ecommerce::adicionarComentario(long int cod, std::string coment){
     int x = buscaIndiceProdutos(cod);
     if ( x != -1){
     produtos[x].setComentario(coment);
@@ -157,16 +160,29 @@ int Ecommerce::tamanhoArquivo(const char* file_name){
     return size;
 }
 
+/**
+ * [Ecommerce::geradorCod função que gera codigos aleatorios para novos produto]
+ * @method Ecommerce::geradorCod
+ * @return                           [codigo de ate oito digitos]
+ */
+
 long int Ecommerce::geradorCod(){
-  /*long int codProduto;
-  srand(unsigned int time(0));
+  long int codProduto;
+  srand(time(0));
   do {
-    codProduto = rand();
-  } while(!checaCodigo(cod));
-  return codProduto;*/
+    codProduto = rand()%99999999;
+  } while(!checaCodigo(codProduto));
+  return codProduto;
 }
 
-bool Ecommerce::checaCodigo(int cod){
+/**
+ * [Ecommerce::checaCodigo função que checa se o codigo gerado para um produto já existe]
+ * @method Ecommerce::checaCodigo
+ * @param  cod                       [codigo gerado]
+ * @return                           [false se o codigo ja existia, true se o codigo não existia]
+ */
+
+bool Ecommerce::checaCodigo(long int cod){
     int x = produtos.size();
     int aux;
 
@@ -179,7 +195,7 @@ bool Ecommerce::checaCodigo(int cod){
     return true;
 }
 
-void Ecommerce::cadastrarCaneca(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, float diametro){
+void Ecommerce::cadastrarCaneca(long int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, float diametro){
     if (checaCodigo(cod)){
         Caneca can(cod, preco, mediaAvaliacoes, nome, "Canecas", cor, descricao, material, diametro);
         Produto prod(cod, preco, mediaAvaliacoes, nome, "Canecas", cor, descricao, material);
@@ -193,7 +209,7 @@ void Ecommerce::cadastrarCaneca(int cod, float preco, float mediaAvaliacoes, std
     }
 }
 
-void Ecommerce::cadastrarAcessorio(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, std::string tipo){
+void Ecommerce::cadastrarAcessorio(long int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, std::string tipo){
     if(checaCodigo(cod)){
         Acessorio ac(cod, preco, mediaAvaliacoes, nome, "Acessorios", cor, descricao, material, tipo);
         Produto prod(cod, preco, mediaAvaliacoes, nome, "Acessorios", cor, descricao, material);
@@ -207,7 +223,7 @@ void Ecommerce::cadastrarAcessorio(int cod, float preco, float mediaAvaliacoes, 
     }
 }
 
-void Ecommerce::cadastrarBlusasEMoletom(int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, char tamanho, std::string tipo){
+void Ecommerce::cadastrarBlusasEMoletom(long int cod, float preco, float mediaAvaliacoes, std::string nome, std::string cor, std::string descricao, std::string material, char tamanho, std::string tipo){
     if(checaCodigo(cod)){
         BlusasEMoletom b(cod, preco, mediaAvaliacoes, nome, "Blusas e Moletons", cor, descricao, material, tamanho, tipo);
         Produto prod(cod, preco, mediaAvaliacoes, nome, "Blusas e Moletons", cor, descricao, material);
@@ -326,7 +342,7 @@ void Ecommerce::imprimirProdutos(){
         }
 }
 
-int Ecommerce::buscaIndiceCaneca(int cod){
+int Ecommerce::buscaIndiceCaneca(long int cod){
     int x;
     for(x = 0; x < canecas.size(); x++){
         if(canecas[x].getCodigoProduto() == cod){
@@ -336,7 +352,7 @@ int Ecommerce::buscaIndiceCaneca(int cod){
     return -1;
 }
 
-int Ecommerce::buscaIndiceBlusasEMoletom(int cod){
+int Ecommerce::buscaIndiceBlusasEMoletom(long int cod){
     int x;
     for(x = 0; x < blusasEmoletons.size(); x++){
         if(blusasEmoletons[x].getCodigoProduto() == cod){
@@ -346,7 +362,7 @@ int Ecommerce::buscaIndiceBlusasEMoletom(int cod){
     return -1;
 }
 
-int Ecommerce::buscaIndiceAcessorio(int cod){
+int Ecommerce::buscaIndiceAcessorio(long int cod){
     int x;
     for(x = 0; x < acessorios.size(); x++){
         if(acessorios[x].getCodigoProduto() == cod){
@@ -356,7 +372,7 @@ int Ecommerce::buscaIndiceAcessorio(int cod){
     return -1;
 }
 
-int Ecommerce::buscaIndiceProdutos(int cod){
+int Ecommerce::buscaIndiceProdutos(long int cod){
     int x;
     for(x = 0; x < produtos.size(); x++){
         if(produtos[x].getCodigoProduto() == cod){
@@ -366,7 +382,7 @@ int Ecommerce::buscaIndiceProdutos(int cod){
     return -1;
 }
 
-Produto Ecommerce::buscaProdutos(int cod){
+Produto Ecommerce::buscaProdutos(long int cod){
   int x, codigo;
   std::string nome, categoria, cor, descricao, material;
   float preco, mediaAvaliacoes;
@@ -386,7 +402,6 @@ Produto Ecommerce::buscaProdutos(int cod){
   Produto prod = Produto(codigo, preco, mediaAvaliacoes, nome, categoria, cor, descricao, material);
   return prod;
 }
-
 
 void Ecommerce::gravaProdutosArquivo(){
   std::remove("produtos.csv");
@@ -612,15 +627,23 @@ void Ecommerce::imprimirCompradores(){
     std::cout << "Não há compradores cadastrados." << std::endl;
   }
 }
-/*
+
+/**
+ * [Ecommerce::geradorCod função que adiciona produtos no carrinho do usuario e retorna a pagina anterior]
+ * @method Ecommerce::geradorCod
+ */
+
 void Ecommerce::addCarrinho(){
-  Comprador comp = *userLogged;
-  comp.adicionarCarrinho();
+  procurarCompradorObj(userLogged).adicionarCarrinho();
   impProdutos();
 }
 
+/**
+ * [Ecommerce::impProdutos função que cria um menu de opçoes para compradores na pagina de produtos]
+ * @method Ecommerce::impProdutos
+ */
+
 void Ecommerce::impProdutos(){
-  Comprador comp = *userLogged;
   limparTela();
   imprimirProdutos();
   std::cout << "Para ver comentarios sobre um produto, digite 1" << std::endl;
@@ -631,32 +654,54 @@ void Ecommerce::impProdutos(){
   int codProduto;
   switch (digito) {
     case 1:
+    {
       std::cout << "\n" << "Digite o código do produto: ";
       std::cin >> codProduto;
-      comp.procurarProduto(codProduto);
+      Produto prod = buscaProdutos(codProduto);
+      prod.getComentarios();
       std::cout << std::endl << "Pressione ENTER para voltar a pagina anterior";
       std::cin.get();
+      std::cin.get();
+      menuComprador();
       impProdutos();
       break;
+    }
     case 2:
+    {
       std::cout << "\n" << "Digite o código do produto que deseja adicionar ao seu carrinho: ";
       std::cin >> codProduto;
       addCarrinho();
-      break;
-    case 3:
-      menuInicial();
-      break;
-    default:
-      std::cout << "Opção inválida. Tente novamente" << std::endl;
+      std::cout << std::endl << "Pressione ENTER para voltar a pagina anterior";
+      std::cin.get();
+      std::cin.get();
+      menuComprador();
       impProdutos();
+      break;
+    }
+    case 3:
+    {
+      menuComprador();
+      break;
+    }
+    default:
+    {
+      std::cout << "Opção inválida. Tente novamente" << std::endl;
+      std::cin.get();
+      std::cin.get();
+      impProdutos();
+    }
       break;
   }
 }
 
+/**
+ * [Ecommerce::impCarrinho função que cria um menu de opçoes para compradores na pagina do carrinho]
+ * @method Ecommerce::impCarrinho
+ */
+
 void Ecommerce::impCarrinho(){
   limparTela();
-  Comprador comp = *userLogged;
-  comp.imprimirCarrinho();
+  procurarCompradorObj(userLogged).imprimirCarrinho();
   std::cout << "Para procurar um item, digite 1" << std::endl
   << "Para remover um item, digite 2" << std::endl
   << "Para finalizar a compra, digite 3" << std::endl
@@ -670,26 +715,53 @@ void Ecommerce::impCarrinho(){
 
   switch (digito) {
     case 1:
+    {
       int cod;
       std::cout << "Digite o codigo do produto que voce procura: ";
       std::cin >> cod;
-      comp.procurarItensCarrinho(cod);
-      break;
-    case 2:
-      comp.retirarCarrinho();
+      Produto prod = procurarCompradorObj(userLogged).buscaCarrinho(cod);
+      prod.imprimeProduto();
+      std::cout << std::endl << "Pressione ENTER para voltar a pagina anterior";
+      std::cin.get();
+      std::cin.get();
       impCarrinho();
+      break;
+    }
+    case 2:
+    {
+      int cod;
+      std::cout << "Digite o codigo do produto que voce deseja remover: ";
+      std::cin >> cod;
+      procurarCompradorObj(userLogged).retirarCarrinho(cod);
+      std::cout << std::endl << "Pressione ENTER para voltar a pagina anterior";
+      std::cin.get();
+      std::cin.get();
+      impCarrinho();
+    }
     case 3:
-      comp.fazerCompras();
+    {
+      procurarCompradorObj(userLogged).fazerCompras();
+      std::cout << std::endl << "Pressione ENTER para voltar a pagina anterior";
+      std::cin.get();
+      std::cin.get();
+      impCarrinho();
       break;
+    }
     case 4:
-      menuInicial();
+    {
+      menuComprador();
       break;
+    }
   }
 }
 
+/**
+ * [Ecommerce::impHistorico função que cria um menu de opçoes para compradores na pagina do historico]
+ * @method Ecommerce::impHistorico
+ */
+
 void Ecommerce::impHistorico(){
-  Comprador comp = *userLogged;
-  comp.imprimirHistorico();
+  procurarCompradorObj(userLogged).imprimirHistorico();
   std::cout << "Para procurar um item, digite 1" << std::endl
   << "Para avaliar um item, digite 2" << std::endl
   << "Para comentar um item, digite 3" << std::endl
@@ -705,25 +777,28 @@ void Ecommerce::impHistorico(){
       int cod;
       std::cout << "Digite o codigo do produto que voce procura: ";
       std::cin >> cod;
-      comp.procurarItensHistorico(cod);
+      procurarCompradorObj(userLogged).procurarItensHistorico(cod);
       break;
     case 2:
-      comp.avaliarItem();
+      procurarCompradorObj(userLogged).avaliarItem();
       break;
     case 3:
-      comp.adicionarComentario();
+      procurarCompradorObj(userLogged).adicionarComentario();
       break;
     case 4:
-      menuInicial();
+      menuComprador();
       break;
   }
 }
 
+/**
+ * [Ecommerce::mostraProdutos função que cria um menu de opçoes para o administrador na pagina de produtos]
+ * @method Ecommerce::mostraProdutos
+ */
+
 void Ecommerce::mostraProdutos(){
   limparTela();
   imprimirProdutos();
-  Comprador comp = *userLogged;
-  Produto prod;
   std::cout << "Para ver comentarios sobre um produto, digite 1" << std::endl;
   std::cout << "Para adicionar um produto, digite 2" << std::endl;
   std::cout << "Para excluir um produto, digite 3" << std::endl;
@@ -736,9 +811,10 @@ void Ecommerce::mostraProdutos(){
       int codProduto;
       std::cout << "\n" << "Digite o código do produto: ";
       std::cin >> codProduto;
-      Produto prod = produtos[buscaIndiceProdutos(codProduto)];
-      prod.getComentarios(codProduto);
+      Produto prod = buscaProdutos(codProduto);
+      prod.getComentarios();
       std::cout << std::endl << "Pressione ENTER para voltar a pagina anterior";
+      std::cin.get();
       std::cin.get();
       mostraProdutos();
       break;
@@ -753,12 +829,12 @@ void Ecommerce::mostraProdutos(){
       std::string nomeProduto;
       std::cout << "\n" << "Digite o nome do produto que deseja remover: ";
       std::cin >> nomeProduto;
-      comp.retirarCarrinho();
+      admin.removeItem(nomeProduto);
       break;
     }
     case 4:
     {
-      menuInicial();
+      menuUsuario();
       break;
     }
     default:
@@ -768,7 +844,42 @@ void Ecommerce::mostraProdutos(){
       break;
     }
   }
-}*/
+}
+
+/**
+ * [Ecommerce::mostraUsuarios função que cria um menu de opçoes para o administrador na pagina de usuarios]
+ * @method Ecommerce::mostraUsuarios
+ */
+
+void Ecommerce::mostraUsuarios(){
+  limparTela();
+  imprimirUsuarios();
+  std::cout << "Para excluir um usuario, digite 1" << std::endl;
+  std::cout << "Para voltar ao menu, digite 9" << std::endl;
+  int digito;
+  std::cin >> digito;
+  switch (digito) {
+    case 1:
+    {
+      std::string emUsuario;
+      std::cout << "\n" << "Digite o email do usuário que deseja remover: ";
+      std::cin >> emUsuario;
+      admin.excluiUsuario(emUsuario);
+      break;
+    }
+    case 9:
+    {
+      menuUsuario();
+      break;
+    }
+    default:
+      {
+      std::cout << "Opção inválida. Tente novamente" << std::endl;
+
+      break;
+    }
+  }
+}
 
 /**
  * [Ecommerce::procurarUsuario função que procura um usuário dado o email do mesmo]
@@ -776,6 +887,7 @@ void Ecommerce::mostraProdutos(){
  * @param  em                         [email do usuário]
  * @return                            [true se o usuário for encontrado e false, em caso contrário]
  */
+
 bool Ecommerce::procurarUsuario(std::string em){
   int numeroUsuarios = usuarios.size();
   for(int i=0; i < numeroUsuarios; i++){
@@ -826,38 +938,49 @@ Comprador Ecommerce::procurarCompradorObj(std::string em){
 }
 
 /**
- * [Ecommerce::checaNome função que checa se o nome fornecido possui o formato aceito]
- * @method Ecommerce::checaNome
- * @param  n                    [nome fornecido]
- * @return                      [true se o formato do nome fornecido for correto e false, em caso contrário]
- */
-bool Ecommerce::checaNome(std::string n){
-  return true;
-}
-
-/**
  * [Ecommerce::checaEmail função que checa se o email fornecido possui o formato aceito]
  * @method Ecommerce::checaEmail
  * @param  em                    [email fornecido]
  * @return                       [true se o formato do email fornecido for correto e false, em caso contrário]
  */
 
-bool Ecommerce::checaEmail(std::string em){
-  return true;
+bool Ecommerce::checaEmail(const char *em){
+  int i, em_size;
+  bool arroba = false, dotcom = false;
+  em_size = strlen(em);
+  for(i = 0; i < em_size - 3; i++){
+    if(em[i] == 64){ // after this interval we have the ASCII numbers
+      arroba = true;
+    }
+    if((em[i] == 46) && (em[i+1] == 99) && (em[i+2] == 111) && (em[i+3] == 109)){
+      dotcom = true;
+    }
+  }
+  return arroba + dotcom;
 }
 
 /**
- * [Ecommerce::checaSenha função que checa se a senha fornecida possui o formato aceito]
- * @method Ecommerce::checaSenha
- * @param  s                     [senha fornecida]
+ * [Ecommerce::validaAlfanumerica função que checa se a senha e o nome fornecidos possuem o formato aceito]
+ * @method Ecommerce::validaAlfanumerica
+ * @param  s                     [string fornecida]
  * @return                       [true se o formato da senha fornecida for correto e false, em caso contrário]
  */
 
-bool Ecommerce::checaSenha(std::string s){
-  return true;
-}
-
-bool checaSenhaAdmin(std::string sAdmin){
+bool Ecommerce::validaAlfanumerica(const char *s){
+  int i, s_size, aux;
+  s_size = strlen(s);
+  for(i = 0; i < s_size; i++){
+    aux = s[i];
+    if((aux >= 0) && (aux <= 47)){ // after this interval we have the ASCII numbers
+      return false;
+    }else if((aux >= 58) && (aux <= 64)){ // after this interval we have ASCII capital letters
+      return false;
+    }else if((aux >= 91) && (aux <= 96)){ // after this interval we have ASCII letters
+      return false;
+    }else if((aux >= 123) && (aux <= 127)){ // the rest of ASCII
+      return false;
+    }
+  }
   return true;
 }
 
@@ -869,8 +992,16 @@ bool checaSenhaAdmin(std::string sAdmin){
 void Ecommerce::limparTela(){
   std::system("clear||cls");
 }
-/*
+
+/*_____*
+ * [Ecommerce::tamanhoArquivo função que registra o tamanho do arquivo a ser lido]
+ * @method Ecommerce::tamanhoArquivo
+ * @param  file_name                 [nome do arquivo a ser lido]
+ * @return                           [quantidade de linhas do arquivo lido]
+ */
+
 void Ecommerce::loginUsuario(){
+  limparTela();
   std::string email, senha;
   std::cout << "Insira seu email: ";
   std::cin >> email;
@@ -878,26 +1009,51 @@ void Ecommerce::loginUsuario(){
   std::cin >> senha;
   limparTela();
 
-  int numeroUsuarios = usuarios.size();
-  for(int i=0; i < numeroUsuarios; i++){
-    if((usuarios[i]).getEmail() == email){
-      if ((usuarios[i]).getSenha() == senha){
-        *userLogged = usuarios[i];
-        menuInicial();
-      break;
-      }
-      else{
-        std::cout << "Senha incorreta!"<< std::endl;
-        inicio();
+  if(email == "adminl@gmail.com"){
+    if (senha == "123tasalvo"){
+      userLogged = email;
+      menuUsuario();
+    }
+    else {
+      std::cout << "Senha incorreta!"<< std::endl;
+      std::cin.get();
+      std::cin.get();
+      inicio();
+    }
+  }
+  else{
+    int numeroUsuarios = usuarios.size();
+    for(int i=0; i < numeroUsuarios; i++){
+      if((usuarios[i]).getEmail() == email){
+        if ((usuarios[i]).getSenha() == senha){
+          userLogged = email;
+          menuComprador();
+        break;
+        }
+        else{
+          std::cout << "Senha incorreta!"<< std::endl;
+          std::cin.get();
+          std::cin.get();
+          inicio();
+        }
       }
     }
   }
 
-  if (userLogged == nullptr){
+  if (userLogged == ""){
     std::cout << "Email nao encontrado!" << std::endl;
+    std::cin.get();
+    std::cin.get();
     inicio();
   }
 }
+
+/*_____*
+ * [Ecommerce::tamanhoArquivo função que registra o tamanho do arquivo a ser lido]
+ * @method Ecommerce::tamanhoArquivo
+ * @param  file_name                 [nome do arquivo a ser lido]
+ * @return                           [quantidade de linhas do arquivo lido]
+ */
 
 void Ecommerce::logoutUsuario(){
   std::cout << "Se voce tem certeza que gostaria de sair desta conta, digite OUT" << std::endl
@@ -905,23 +1061,37 @@ void Ecommerce::logoutUsuario(){
   std::string confirma;
   std::cin >> confirma;
   if (confirma == "OUT"){
-    userLogged ;
+    userLogged = "";
     inicio();
   }
   else if (confirma == "MENU"){
-    menuInicial();
+    if (userLogged == "adminl@gmail.com"){
+      menuUsuario();
+    }
+    else {
+      menuComprador();
+    }
   }
   else {
     std::cout << "Entrada invalida. Por favor tente novamente...";
+    std::cin.get();
+    std::cin.get();
     logoutUsuario();
   }
 }
+
+/*_____*
+ * [Ecommerce::tamanhoArquivo função que registra o tamanho do arquivo a ser lido]
+ * @method Ecommerce::tamanhoArquivo
+ * @param  file_name                 [nome do arquivo a ser lido]
+ * @return                           [quantidade de linhas do arquivo lido]
+ */
 
 void Ecommerce::inicio(){
   int digito;
   limparTela();
 
-  *userLogged ;
+  userLogged = "";
 
   std::cout << "\n" << "-------------------------------------------------------------" << std::endl;
   std::cout << "\t\t Bem vindo à nossa loja!" << std::endl;
@@ -929,6 +1099,7 @@ void Ecommerce::inicio(){
 
   std::cout << "1 - Já possuo uma conta." << std::endl;
   std::cout << "2 - Desejo me cadastrar." << std::endl;
+  std::cout << "3 - Quero sair do programa." << std::endl;
   std::cout << "\nEscolha uma opcao: ";
   std::cin >> digito;
   switch (digito){
@@ -938,6 +1109,17 @@ void Ecommerce::inicio(){
     case 2:
       dadosComprador();
       break;
+    case 3:
+      std::cout << "Se voce tem certeza que gostaria de sair da loja, digite OUT" << std::endl;
+      std::string confirma;
+      std::cin >> confirma;
+      if (confirma == "OUT"){
+        exit(1);
+      }
+      else {
+        inicio();
+      }
+    break;
     default:
       std::cout << "Opção inválida. Tente novamente" << std::endl;
       inicio();
@@ -945,12 +1127,19 @@ void Ecommerce::inicio(){
   }
 }
 
+/*_____*
+ * [Ecommerce::tamanhoArquivo função que registra o tamanho do arquivo a ser lido]
+ * @method Ecommerce::tamanhoArquivo
+ * @param  file_name                 [nome do arquivo a ser lido]
+ * @return                           [quantidade de linhas do arquivo lido]
+ */
+
 void Ecommerce::dadosComprador(){
   limparTela();
   std::string nome, senha, confSenha, email, endereco, cpf;
-  std::cout << "Insira seu nome de usuário: ";
+  std::cout << "Insira seu nome de usuário: \nPor favor use apenas letras e numeros!";
   std::cin >> nome;
-  std::cout << std::endl << "Insira uma senha: ";
+  std::cout << std::endl << "Insira uma senha: \nPor favor use apenas letras e numeros!";
   std::cin >> senha;
   std::cout << std::endl << "Confirme sua senha: ";
   std::cin >> confSenha;
@@ -964,6 +1153,13 @@ void Ecommerce::dadosComprador(){
   loginUsuario();
 }
 
+/*_____*
+ * [Ecommerce::tamanhoArquivo função que registra o tamanho do arquivo a ser lido]
+ * @method Ecommerce::tamanhoArquivo
+ * @param  file_name                 [nome do arquivo a ser lido]
+ * @return                           [quantidade de linhas do arquivo lido]
+ */
+
 void Ecommerce::dadosProduto(){
   limparTela();
   std::string nome, preco, cor, material, descricao;
@@ -974,7 +1170,7 @@ void Ecommerce::dadosProduto(){
   << "Se você deseja cadastrar uma blusa ou moletom, digite 2" << std::endl
   << "Se você deseja cadastrar um acessorio, digite 3" << std::endl
   << "Se você deseja voltar a pagina de produtos, digite 0" << std::endl;
-  std::cin >> opção;
+  std::cin >> opcao;
   std::cout << "Insira o nome do produto: ";
   std::cin >> nome;
   std::cout << std::endl << "Insira o preço do produto: ";
@@ -987,13 +1183,16 @@ void Ecommerce::dadosProduto(){
   std::cin >> descricao;
   switch (opcao){
     case 1:
-    {
-      float diametro;
-      std::cout << std::endl << "Insira o diametro do produto: ";
-      std::cin >> diametro;
-      cadastrarCaneca(codigo, preco, 0, nome, cor, descricao, material, diametro);
-      break;
-    }
+      {
+        float diametro;
+        std::cout << std::endl << "Insira o diametro do produto: ";
+        std::cin >> diametro;
+        cadastrarCaneca(codigo, preco, 0, nome, cor, descricao, material, diametro);
+        std::cout << std::endl << "Pressione ENTER para voltar a pagina anterior";
+        std::cin.get();
+        std::cin.get();
+        break;
+      }
     case 2:
       {
         std::string tipo;
@@ -1003,6 +1202,9 @@ void Ecommerce::dadosProduto(){
         std::cout << std::endl << "Insira o tamanho do produto: ";
         std::cin >> tamanho;
         cadastrarBlusasEMoletom(codigo, preco, 0, nome, cor, descricao, material, tamanho, tipo);
+        std::cout << std::endl << "Pressione ENTER para voltar a pagina anterior";
+        std::cin.get();
+        std::cin.get();
         break;
       }
     case 3:
@@ -1011,26 +1213,27 @@ void Ecommerce::dadosProduto(){
         std::cout << std::endl << "Insira o tipo do produto: ";
         std::cin >> tipo;
         cadastrarAcessorio(codigo, preco, 0, nome, cor, descricao, material, tipo);
+        std::cout << std::endl << "Pressione ENTER para voltar a pagina anterior";
+        std::cin.get();
+        std::cin.get();
         break;
       }
     case 0:
-
+      {
+        mostraProdutos();
+        break;
+      }
   }
 }
 
-void Ecommerce::menuInicial(){
-  limparTela();
-  Usuario usu = *userLogged;
-  if(procurarComprador(usu.getEmail())){
-    menuComprador();
-  }
-  else if (procurarUsuario(usu.getEmail())){
-    menuUsuario();
-  }
-}
+/*_____*
+ * [Ecommerce::tamanhoArquivo função que registra o tamanho do arquivo a ser lido]
+ * @method Ecommerce::tamanhoArquivo
+ * @param  file_name                 [nome do arquivo a ser lido]
+ * @return                           [quantidade de linhas do arquivo lido]
+ */
 
 void Ecommerce::menuComprador(){
-  Comprador comp = *userLogged;
   limparTela();
   std::cout << "Para ver nossos produtos, digite 1" << std::endl
   << "Para ver seu perfil, digite 2" << std::endl
@@ -1042,10 +1245,13 @@ void Ecommerce::menuComprador(){
   std::cin >> digito;
   switch (digito) {
     case 1:
-      imprimirProdutos();
+      impProdutos();
       break;
     case 2:
-      comp.exibirPerfil();
+      procurarCompradorObj(userLogged).exibirPerfil();
+      std::cin.get();
+      std::cin.get();
+      menuComprador();
       break;
     case 3:
       impCarrinho();
@@ -1054,51 +1260,63 @@ void Ecommerce::menuComprador(){
       impHistorico();
       break;
     case 5:
-      comp.adicionaDinheiro();
+      procurarCompradorObj(userLogged).adicionaDinheiro();
+      std::cin.get();
+      std::cin.get();
+      menuComprador();
       break;
     case 9:
-      comp.logoutUsuario();//Confirmar logout
+      logoutUsuario();//Confirmar logout
       break;
     default:
       std::cout << "Opção inválida. Tente novamente" << std::endl;
+      std::cin.get();
+      std::cin.get();
       menuComprador();
       break;
   }
 }
 
+/*_____*
+ * [Ecommerce::tamanhoArquivo função que registra o tamanho do arquivo a ser lido]
+ * @method Ecommerce::tamanhoArquivo
+ * @param  file_name                 [nome do arquivo a ser lido]
+ * @return                           [quantidade de linhas do arquivo lido]
+ */
+
 void Ecommerce::menuUsuario(){
-  Comprador comp = *userLogged;
   limparTela();
   std::cout << "Para ver as requisições pendentes, digite 1" << std::endl
   << "Para ver os produtos oferecidos, digite 2" << std::endl
-  << "Para cer os compradores cadastrados, digite 3" << std::endl
+  << "Para ver os compradores cadastrados, digite 3" << std::endl
   << "Para ver seu perfil, digite 4" << std::endl
   << "Para sair desta conta, digite 9" << std::endl;
   int digito;
   std::cin >> digito;
   switch (digito) {
     case 1:
-      comp.mostraPedidos();
+      admin.mostraPedidos();
       break;
     case 2:
-
+      mostraProdutos();
       break;
     case 3:
       mostraUsuarios();
       break;
     case 4:
-      comp.exibirPerfil();
+      admin.exibirPerfil();
       break;
     case 9:
-      comp.logoutUsuario();
+      logoutUsuario();
       break;
     default:
       std::cout << "Opção inválida. Tente novamente" << std::endl;
+      std::cin.get();
+      std::cin.get();
       menuUsuario();
       break;
   }
 }
-*/
 
 Comprador Ecommerce::buscaComprador(std::string em){
   int numA, numH, numC;
