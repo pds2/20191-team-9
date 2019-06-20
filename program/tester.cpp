@@ -5,11 +5,12 @@
 #include "produto/blusas_e_moletom.h"
 #include "produto/caneca.h"
 #include "produto/acessorio.h"
+#include "usuario/comprador.h"
 
 TEST_CASE("Declaracão produto") {
     CHECK_NOTHROW(Produto p(2, 60, 5, "Produto Diferenciavel", "Teste", "Verde", "Produto otimo para ser utilizado em casos de teste", "Radiacao"));
     CHECK_THROWS(Produto p(-2, 60, 5, "Produto Diferenciavel", "Teste", "Verde", "Produto otimo para ser utilizado em casos de teste", "Radiacao"));
-    CHECK_THROWS(Produto p(3, 60, -5, "Produto Diferenciavel", "Teste", "Verde", "Produto otimo para ser utilizado em casos de teste", "Radiacao"));    
+    CHECK_THROWS(Produto p(3, 60, -5, "Produto Diferenciavel", "Teste", "Verde", "Produto otimo para ser utilizado em casos de teste", "Radiacao"));
     CHECK_THROWS(Produto p(2, 60, 6, "Produto Diferenciavel", "Teste", "Verde", "Produto otimo para ser utilizado em casos de teste", "Radiacao"));
 }
 
@@ -91,3 +92,62 @@ TEST_CASE("Excluir usuário que não existe"){
 TEST_CASE("Excluir um usuário"){
   Comprador bye("excluir","ex@cluir.com","excluido","000000","exclui",7,6,3,9);
 }
+
+//-----> Testes COMPRADOR
+
+TEST_CASE("Cadastrar Comprador") {
+    CHECK_NOTHROW(Comprador comp ("Arthur Moura", "arthur.moura@gmail.com", "1234", "123456789", "Rua Washington, 80. Copacabana.", 0, 0, 0, 0.0));
+    CHECK_NOTHROW(Comprador comp ("Carolina Enya", "carolina.enya@gmail.com", "1234", "222222222", "Rua Washington, 90. Copacabana.", 0, 0, 0, 0.0));
+    CHECK_NOTHROW(Comprador comp ("Rita Caldas", "rita.caldas@gmail.com", "1234", "33333333333", "Rua Washington, 100. Copacabana.", 0, 0, 0, 0.0));
+    CHECK_NOTHROW(Comprador comp ("Tula Valentina", "tula.valentina@gmail.com", "1234", "444444444", "Rua Washington, 110. Copacabana.", 0, 0, 0, 0.0));
+}
+TEST_CASE("Get - Dados do Comprador") {
+    Comprador comp ("Catarina Enya", "catarina.edp@gmail.com", "1234", "555555555", "Rua Washington, 120. Copacabana.", 0, 0, 0, 0.0));
+    CHECK_EQ(comp.getNome(), "Catarina Enya");
+    CHECK_EQ(comp.getEmail(), "catarina.edp@gmail.com");
+    CHECK_EQ(comp.getSenha(), "1234");
+    CHECK_EQ(comp.getCPF(), "555555555");
+    CHECK_EQ(comp.getNumeroComprasCarrinho(), 0);
+    CHECK_EQ(comp.getNumeroComprasHistorico(), 0);
+    CHECK_EQ(comp.getNumeroAvaliacoes(), 0);
+    CHECK_EQ(comp.getDinheiro(), 0.0);
+}
+
+TEST_CASE("Adicionar Produto ao Carrinho do Comprador") {
+  BlusasEMoletom m(2, 60, 4.5, "Moletom Amarelo", "Moletom", "Amarelo", "Amarelo que nem o raiar do sol", "Algodao", 'M', "Tipo tiposo");
+  Caneca c(3, 15, 4.5, "Caneca formosa", "Caneca", "Branca", "Caneca fofa de Star Wars", "Porcelana", 5.5);
+  Acessorio a(4, 20, 4, "Pulseira GOT", "Pulseira", "Vermelha", "Pulseira Dracarys", "Couro", "Tiposo");
+  adicionarCarrinho();
+}
+
+TEST_CASE("Realizar Busca por Produto no Carrinho do Comprador") {
+  BlusasEMoletom m(2, 60, 4.5, "Moletom Amarelo", "Moletom", "Amarelo", "Amarelo que nem o raiar do sol", "Algodao", 'M', "Tipo tiposo");
+  Caneca c(3, 15, 4.5, "Caneca formosa", "Caneca", "Branca", "Caneca fofa de Star Wars", "Porcelana", 5.5);
+  Acessorio a(4, 20, 4, "Pulseira GOT", "Pulseira", "Vermelha", "Pulseira Dracarys", "Couro", "Tiposo");
+  adicionarCarrinho();
+}
+
+TEST_CASE("Realizar Busca por Produto no Histórico do Comprador") {
+  BlusasEMoletom m(2, 60, 4.5, "Moletom Amarelo", "Moletom", "Amarelo", "Amarelo que nem o raiar do sol", "Algodao", 'M', "Tipo tiposo");
+  Caneca c(3, 15, 4.5, "Caneca formosa", "Caneca", "Branca", "Caneca fofa de Star Wars", "Porcelana", 5.5);
+  Acessorio a(4, 20, 4, "Pulseira GOT", "Pulseira", "Vermelha", "Pulseira Dracarys", "Couro", "Tiposo");
+  fazerCompras();
+}
+
+/*
+bool adicionarCarrinho();
+void fazerCompras();
+bool retirarCarrinho();
+bool adicionaDinheiro();
+
+void exibirPerfil();
+void imprimirCarrinho();
+void imprimirHistorico();
+
+int procurarItensHistorico(int codProduto);
+int procurarItensCarrinho(int codProduto);
+void adicionarComentario();
+void avaliarItem();
+
+Produto buscaHistorico(int codProduto);
+Produto buscaCarrinho(int codProduto);*/
