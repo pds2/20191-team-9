@@ -42,7 +42,6 @@ class Administrador : public Usuario{
     void adicionaPedido(std::string email, float valor);
     void mostraPedidos();
     void aprovaPedido(std::string email);
-    void exibirPerfil();
 
     void excluiUsuario(std::string email);
 
