@@ -1,8 +1,8 @@
 #ifndef COMPRADOR_CPP
 #define COMPRADOR_CPP
 
-#include "usuario/comprador.h"
 #include "ecommerce.h"
+#include "usuario/comprador.h"
 
 /**
  * [Comprador::Comprador Construtor da classe Comprador]
@@ -495,8 +495,22 @@ void Comprador::fazerCompras(){
  * @return                             [true em caso da requisicao ter sido bem sucedida e false, em caso contrário]
  */
 
-bool Comprador::adicionaDinheiro(double valor, Comprador comp){
+bool Comprador::adicionaDinheiro(){
   //aqui tem que mandar uma requisicao para o administrador
+
+  float valor;
+  std::cout << "Digite o valor que deseja adicionar a carteira: " << std::endl;
+  std::cin >> valor;
+
+  /*try{
+    //verificar entrada invalida e tbm se o valor não é negativo
+  }
+  catch{
+    //lança excecao de entrada invalida
+  }*/
+
+  Administrador admin;
+  admin.adicionaPedido(this->getEmail(), valor);
   return true;
 }
 

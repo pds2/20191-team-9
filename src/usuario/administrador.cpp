@@ -4,6 +4,7 @@
 #include "usuario/administrador.h"
 #include <string.h>
 
+
 /**
  * [Administrador::Administrador -> Construtor da classe Administrador]
  * @param nome  [nome do administrador]
