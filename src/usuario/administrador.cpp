@@ -4,27 +4,22 @@
 #include "usuario/administrador.h"
 #include <string.h>
 
-
 /**
- * [Administrador::Administrador -> Construtor da classe Administrador]
- * @param nome  [nome do administrador]
- * @param email [email do administrador, com o qual realiza login no sistema]
- * @param senha [senha do administrador, com o qual realiza login no sistema]
+ * [Administrador::Administrador Construtor da classe Administrador]
+ * [Sempre inicia o objeto com o nome ADMIN, email admin1@gmail.com e senha 123tasalvo]
+ * [Não é possível modificar estes parâmetros porque não há registro de novo administrador,
+ * as informações do administrador do sistema estarão sempre imbutidas no sistema]
  */
 Administrador::Administrador(){
-  /*this->_nome = "ADMIN";
-  this->_email = "admin1@gmail.com";
-  this->_senha = "123tasalvo";*/
-
   Usuario("ADMIN", "admin1@gmail.com", "123tasalvo");
 }
 
+
 /**
- * [Administrador::produtoCsvToVector -> Classe que pega as informações sobre os
+ * [Administrador::produtoCsvToVector Classe que pega as informações sobre os
  * produtos do arquivo csv no qual eles estão e insere-as em um vector para
  * fácil manuseio]
  */
-
 void Administrador::produtoCsvToVector(){
 
   std::string nome;
@@ -94,12 +89,12 @@ void Administrador::produtoCsvToVector(){
   arquivo.close();
 }
 
+
 /**
- * [Administrador::usuarioCsvToVector -> Classe que pega as informações sobre os
+ * [Administrador::usuarioCsvToVector Classe que pega as informações sobre os
  * usuarios do arquivo csv no qual eles estão e insere-as em um vector para
  * fácil manuseio]
  */
-
 void Administrador::usuarioCsvToVector(){
 
   std::string nome, email, senha, cpf, endereco;
@@ -137,12 +132,12 @@ void Administrador::usuarioCsvToVector(){
   arquivo.close();
 }
 
+
 /**
- * [Administrador::reqCsvToMap -> Classe que pega as informações sobre as
+ * [Administrador::reqCsvToMap Classe que pega as informações sobre as
  * requisições do arquivo csv no qual eles estão e insere-as em um map para
  * fácil manuseio]
  */
-
 void Administrador::reqCsvToMap(){
   this->_requisicoes.clear();
 
@@ -166,11 +161,11 @@ void Administrador::reqCsvToMap(){
 
 }
 
-/**
- * [Administrador::removeItem description]
- * @param nome_do_produto [description]
- */
 
+/**
+ * [Administrador::removeItem Função para remover um item do estoque da loja]
+ * @param nome_do_produto [nome do produto a ser removido]
+ */
 void Administrador::removeItem(std::string nome_do_produto){
   //procura no vector se existe algum produto com o nome chamado.
   //Se ele existir, este produto é retirado do estoque. Se não existir, uma mensagem de erro é impressa na tela.
@@ -262,9 +257,11 @@ void Administrador::removeItem(std::string nome_do_produto){
 
 }
 
-//FUNÇÃO COM ERROS QUE NÃO SEI CONSERTAR
-/*void Administrador::exibirPerfil(){
-  limparTela();
+/**
+ * [Administrador::exibirPerfil Imprime na tela as informações sobre o administrador]
+ */
+void Administrador::exibirPerfil(){
+  std::system("clear||cls");
   std::cout << "\n" << "----------------------------------------------" << std::endl;
   std::cout << "\t\t Perfil do Usuário" << std::endl;
   std::cout << "----------------------------------------------" << "\n" << std::endl;
@@ -274,15 +271,16 @@ void Administrador::removeItem(std::string nome_do_produto){
 
   std::cout << std::endl << "Pressione ENTER para voltar a pagina anterior";
   std::cin.get();
-  ecom.menuUsuario();
-}*/
+  //ecom.menuUsuario();
+}
+
 
 /**
- * [Administrador::adicionaPedido description]
- * @param email [description]
- * @param valor [description]
+ * [Administrador::adicionaPedido Função chamada pelos usuários quando desejam requisitar
+ * aumento em seu saldo]
+ * @param email [email do usuário que deseja aumentar seu saldo]
+ * @param valor [valor que o usuário deseja adicionar em seu saldo]
  */
-
 void Administrador::adicionaPedido(std::string email, float valor){
   this->_requisicoes.insert(std::pair<std::string, float>(email,valor));
 
@@ -302,13 +300,11 @@ void Administrador::adicionaPedido(std::string email, float valor){
   arquivo.close();
 }
 
-/**
- * [Administrador::mostraPedidos description]
- */
 
+/**
+ * [Administrador::mostraPedidos Imprime na tela as requisições de aumento de saldo]
+ */
 void Administrador::mostraPedidos(){
-  // Imprime o mapa _requisicoes com o seguinte formato
-  // Exemplo: 1 - email@docomprador.com: R$100,00
   std::system("clear||cls");
 
   reqCsvToMap();
@@ -332,11 +328,11 @@ void Administrador::mostraPedidos(){
   }
 }
 
-/**
- * [Administrador::aprovaPedido description]
- * @param email [description]
- */
 
+/**
+ * [Administrador::aprovaPedido Função para aprovar uma requisição de aumento de saldo]
+ * @param email [email do comprador cujo saldo será aumentado]
+ */
 void Administrador::aprovaPedido(std::string email){
   int aprovacao;
   double valor = 0;
@@ -415,11 +411,11 @@ void Administrador::aprovaPedido(std::string email){
 
 }
 
-/**
- * [Administrador::excluiUsuario description]
- * @param email [description]
- */
 
+/**
+ * [Administrador::excluiUsuario Exclui um usuário]
+ * @param email [email do usuario a ser excluído]
+ */
 void Administrador::excluiUsuario(std::string email){
   std::string email_do_cliente;
   int indice = -1;
