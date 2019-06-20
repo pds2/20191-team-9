@@ -59,6 +59,7 @@ class Ecommerce{
     int buscaIndiceBlusasEMoletom(int cod);
     int buscaIndiceProdutos(int cod);
     Produto buscaProdutos(int cod);
+    Comprador buscaComprador(std::string em);
 
     int tamanhoArquivo(const char* file_name); //se o arquivo tiver vazio retorna 0
 

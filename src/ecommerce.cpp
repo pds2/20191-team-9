@@ -302,6 +302,7 @@ void Ecommerce::listaProdutosArquivo(){
 }
 
 void Ecommerce::imprimirProdutos(){
+    listaProdutosArquivo();
     int x = produtos.size();
     int aux, c, i;
     for(aux = 0; aux < x; aux++){
@@ -583,9 +584,10 @@ void Ecommerce::imprimirUsuarios(){
 
 void Ecommerce::imprimirCompradores(){
   limparTela();
+  listaUsuarioArquivo();
+
   int numeroCompradores = compradores.size();
 
-  listaUsuarioArquivo();
   if(numeroCompradores>0){
     for(int i=0; i < numeroCompradores; i++){
       std::cout << "\n" << "----------------------------------------------" << std::endl;
@@ -601,6 +603,10 @@ void Ecommerce::imprimirCompradores(){
       std::cout << "Avaliações: " << (compradores[i]).getNumeroAvaliacoes() << std::endl;
       std::cout << "Dinheiro: " << (compradores[i]).getDinheiro() << std::endl;
     }
+
+    std::cout << "\n" << "----------------------------------------------" << std::endl;
+    std::cout << "\t\t" << std::endl;
+    std::cout << "----------------------------------------------" << "\n" << std::endl;
   }
   else{
     std::cout << "Não há compradores cadastrados." << std::endl;
@@ -1093,4 +1099,28 @@ void Ecommerce::menuUsuario(){
   }
 }
 */
+
+Comprador Ecommerce::buscaComprador(std::string em){
+  int numA, numH, numC;
+  std::string nome, email, senha, cpf, endereco;
+  float dinheiro;
+  listaUsuarioArquivo();
+  int numeroCompradores = compradores.size();
+
+  for(int i=0; i < numeroCompradores ; i++){
+    if(compradores[i].getEmail() == em){
+      email = compradores[i].getEmail();
+      nome = compradores[i].getNome();
+      senha = compradores[i].getSenha();
+      endereco = compradores[i].getEndereco();
+      cpf = compradores[i].getCPF();
+      numA = compradores[i].getNumeroAvaliacoes();
+      numH = compradores[i].getNumeroComprasHistorico();
+      numC = compradores[i].getNumeroComprasCarrinho();
+      dinheiro = compradores[i].getDinheiro();
+    }
+  }
+  Comprador comp = Comprador(nome, email, senha, cpf, endereco, numC, numH, numA, dinheiro);
+  return comp;
+}
 #endif
