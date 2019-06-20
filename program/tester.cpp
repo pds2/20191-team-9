@@ -53,3 +53,41 @@ TEST_CASE("Get produto - Acessorios") {
     CHECK_EQ(a.getMaterial(),"Couro");
     CHECK_EQ(a.getTipo(),"Tiposo");
 }
+
+
+//-----> Testes ADMINISTRADOR
+TEST_CASE("Criar o Administrador"){
+  Administrador admin();
+  CHECK_EQ(admin.getNome(), "ADMIN");
+  CHECK_EQ(admin.getEmail(), "admin1@gmail.com");
+  CHECK_EQ(admin.getSenha(), "123tasalvo");
+}
+//implementar pós exceções
+TEST_CASE("Remover item do estoque"){
+  BlusasEMoletom teste(697, 45, 3.5, "blusazul", "Blusa e Moletom", "Amarelo", "Amarelo que nem o raiar do sol", "Algodao", M, "Tipo tiposo");
+}
+
+TEST_CASE("Remover item que não existe"){
+  CHECK_EQ(removeItem(naoexiste), -1);
+}
+
+TEST_CASE("Aumentar saldo de usuário que não existe"){
+  CHECK_EQ(aprovaPedido(naoexiste), -1);
+}
+
+TEST_CASE("Aumentar saldo de usuário que não requisitou o aumento"){
+  Comprador shops("semaumento","sem@aumento.com","senha123","44565564","nãoaumenta",6,6,4,5);
+  CHECK_EQ(aprovaPedido(sem@aumento.com), -2);
+}
+//implementar pós exceções
+TEST_CASE("Aprovar um pedido"){
+
+}
+
+TEST_CASE("Excluir usuário que não existe"){
+  CHECK_EQ(excluiUsuario(naoexiste), -1);
+}
+//implementar pós exceções
+TEST_CASE("Excluir um usuário"){
+  Comprador bye("excluir","ex@cluir.com","excluido","000000","exclui",7,6,3,9);
+}
