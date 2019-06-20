@@ -9,6 +9,7 @@
 #include "usuario/administrador.h"
 #include "ecommerce.h"
 
+
 TEST_CASE("Declaracão produto") {
     CHECK_NOTHROW(Produto p(2, 60, 5, "Produto Diferenciavel", "Teste", "Verde", "Produto otimo para ser utilizado em casos de teste", "Radiacao"));
     CHECK_THROWS(Produto p(-2, 60, 5, "Produto Diferenciavel", "Teste", "Verde", "Produto otimo para ser utilizado em casos de teste", "Radiacao"));
@@ -54,6 +55,43 @@ TEST_CASE("Get produto - Acessorios") {
     CHECK_EQ(a.getDescricao(),"Pulseira Dracarys");
     CHECK_EQ(a.getMaterial(),"Couro");
     CHECK_EQ(a.getTipo(),"Tiposo");
+}
+
+TEST_CASE("Ecommerce - Cadastrar Acessorios"){
+    Ecommerce ecom;
+    CHECK_NOTHROW(ecom.cadastrarAcessorio(2, 5.5, 5, "Chaveiro", "Azul", "Chaveiro muito descolado.", "Ferro", "Chaves"));
+    CHECK_THROWS(ecom.cadastrarCaneca(2, 10, 5, "Caneca Frozen", "Azul", "Canecao da disney", "Porcelana", 5)); //mesmo código
+    Produto p = ecom.buscaProdutos(2);
+    CHECK_EQ(p.getCodigoProduto(),2);
+    CHECK_EQ(p.getPreco(),5.5);
+    CHECK_EQ(p.getMediaAvaliacoes(),5);
+    CHECK_EQ(p.getCategoria(),"Acessorios");
+    CHECK_EQ(p.getCor(),"Azul");
+
+}
+
+TEST_CASE("Ecommerce - Cadastrar Caneca"){
+    Ecommerce ecom;
+    CHECK_NOTHROW(ecom.cadastrarCaneca(3, 10, 5, "Caneca Frozen", "Azul", "Canecao da disney", "Porcelana", 5));
+    CHECK_THROWS(ecom.cadastrarAcessorio(3, 5.5, 5, "Chaveiro", "Azul", "Chaveiro muito descolado.", "Ferro", "Chaves")); //mesmo código
+    Produto p = ecom.buscaProdutos(3);
+    CHECK_EQ(p.getCodigoProduto(),3);
+    CHECK_EQ(p.getPreco(),10);
+    CHECK_EQ(p.getMediaAvaliacoes(),5);
+    CHECK_EQ(p.getCategoria(),"Canecas");
+    CHECK_EQ(p.getCor(),"Azul");
+}
+
+TEST_CASE("Ecommerce - Cadastrar Blusas e Moletons"){
+    Ecommerce ecom;
+    CHECK_NOTHROW(ecom.cadastrarBlusasEMoletom(5, 25, 5, "Blusa Simples", "Branco", "Blusa simples casual", "Algodao", 'P', "Blusa"));
+    CHECK_THROWS(ecom.cadastrarAcessorio(5, 5.5, 5, "Chaveiro", "Azul", "Chaveiro muito descolado.", "Ferro", "Chaves")); //mesmo código
+    Produto p = ecom.buscaProdutos(5);
+    CHECK_EQ(p.getCodigoProduto(),5);
+    CHECK_EQ(p.getPreco(),25);
+    CHECK_EQ(p.getMediaAvaliacoes(),5);
+    CHECK_EQ(p.getCategoria(),"Blusas e Moletons");
+    CHECK_EQ(p.getCor(),"Branco");
 }
 
 //-----> Testes COMPRADOR
