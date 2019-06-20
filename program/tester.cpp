@@ -9,6 +9,7 @@
 #include "usuario/administrador.h"
 #include "ecommerce.h"
 
+
 TEST_CASE("Declaracão produto") {
     CHECK_NOTHROW(Produto p(2, 60, 5, "Produto Diferenciavel", "Teste", "Verde", "Produto otimo para ser utilizado em casos de teste", "Radiacao"));
     CHECK_THROWS(Produto p(-2, 60, 5, "Produto Diferenciavel", "Teste", "Verde", "Produto otimo para ser utilizado em casos de teste", "Radiacao"));
@@ -56,6 +57,43 @@ TEST_CASE("Get produto - Acessorios") {
     CHECK_EQ(a.getTipo(),"Tiposo");
 }
 
+TEST_CASE("Ecommerce - Cadastrar Acessorios"){
+    Ecommerce ecom;
+    CHECK_NOTHROW(ecom.cadastrarAcessorio(2, 5.5, 5, "Chaveiro", "Azul", "Chaveiro muito descolado.", "Ferro", "Chaves"));
+    CHECK_THROWS(ecom.cadastrarCaneca(2, 10, 5, "Caneca Frozen", "Azul", "Canecao da disney", "Porcelana", 5)); //mesmo código
+    Produto p = ecom.buscaProdutos(2);
+    CHECK_EQ(p.getCodigoProduto(),2);
+    CHECK_EQ(p.getPreco(),5.5);
+    CHECK_EQ(p.getMediaAvaliacoes(),5);
+    CHECK_EQ(p.getCategoria(),"Acessorios");
+    CHECK_EQ(p.getCor(),"Azul");
+
+}
+
+TEST_CASE("Ecommerce - Cadastrar Caneca"){
+    Ecommerce ecom;
+    CHECK_NOTHROW(ecom.cadastrarCaneca(3, 10, 5, "Caneca Frozen", "Azul", "Canecao da disney", "Porcelana", 5));
+    CHECK_THROWS(ecom.cadastrarAcessorio(3, 5.5, 5, "Chaveiro", "Azul", "Chaveiro muito descolado.", "Ferro", "Chaves")); //mesmo código
+    Produto p = ecom.buscaProdutos(3);
+    CHECK_EQ(p.getCodigoProduto(),3);
+    CHECK_EQ(p.getPreco(),10);
+    CHECK_EQ(p.getMediaAvaliacoes(),5);
+    CHECK_EQ(p.getCategoria(),"Canecas");
+    CHECK_EQ(p.getCor(),"Azul");
+}
+
+TEST_CASE("Ecommerce - Cadastrar Blusas e Moletons"){
+    Ecommerce ecom;
+    CHECK_NOTHROW(ecom.cadastrarBlusasEMoletom(5, 25, 5, "Blusa Simples", "Branco", "Blusa simples casual", "Algodao", 'P', "Blusa"));
+    CHECK_THROWS(ecom.cadastrarAcessorio(5, 5.5, 5, "Chaveiro", "Azul", "Chaveiro muito descolado.", "Ferro", "Chaves")); //mesmo código
+    Produto p = ecom.buscaProdutos(5);
+    CHECK_EQ(p.getCodigoProduto(),5);
+    CHECK_EQ(p.getPreco(),25);
+    CHECK_EQ(p.getMediaAvaliacoes(),5);
+    CHECK_EQ(p.getCategoria(),"Blusas e Moletons");
+    CHECK_EQ(p.getCor(),"Branco");
+}
+
 //-----> Testes COMPRADOR
 
 TEST_CASE("Cadastrar Comprador") {
@@ -79,45 +117,51 @@ TEST_CASE("Get - Dados do Comprador") {
 }
 
 //-----> Testes ADMINISTRADOR
-TEST_CASE("Criar o Administrador"){
-  Administrador admin = Administrador();
-  CHECK_EQ(admin.getNome(), "ADMIN");
-  CHECK_EQ(admin.getEmail(), "admin1@gmail.com");
-  CHECK_EQ(admin.getSenha(), "123tasalvo");
-}
-//implementar pós exceções
-TEST_CASE("Remover item do estoque"){
-  BlusasEMoletom teste(697, 45, 3.5, "blusazul", "Blusa e Moletom", "Amarelo", "Amarelo que nem o raiar do sol", "Algodao", 'M', "Tipo tiposo");
+TEST_CASE("Administrador - Criar o Administrador"){
+  Administrador adm = Administrador();
+  CHECK_EQ(adm.getNome(), "ADMIN");
+  CHECK_EQ(adm.getEmail(), "admin1@gmail.com");
+  CHECK_EQ(adm.getSenha(), "123tasalvo");
 }
 
-TEST_CASE("Remover item que não existe"){
-  Administrador admin;
+TEST_CASE("Administrador - Remover item do estoque"){
+   Administrador adm = Administrador();
+   BlusasEMoletom teste(697, 45, 3.5, "blusazul", "Blusas e Moletoms", "Amarelo", "Amarelo que nem o raiar do sol", "Algodao", 'M', "Tipo tiposo");
 
-  CHECK_EQ(admin.removeItem("naoexiste"), -1);
+   CHECK_NOTHROW(removeItem("blusazul"));
+   CHECK_THROWS(removeItem("blusuzul"));
 }
 
-TEST_CASE("Aumentar saldo de usuário que não existe"){
-  Administrador admin;
+TEST_CASE("Administrador - Remover item que não existe"){
+  Administrador adm = Administrador();
 
-  CHECK_EQ(admin.aprovaPedido("naoexiste"), -1);
+  CHECK_EQ(adm.removeItem("naoexiste"), -1);
 }
 
-TEST_CASE("Aumentar saldo de usuário que não requisitou o aumento"){
-  Administrador admin;
-  Comprador shops("semaumento","sem@aumento.com","senha123","44565564","nãoaumenta",6,6,4,5);
+TEST_CASE("Administrador - Aumentar saldo de usuário que não existe"){
+  Administrador adm = Administrador();
+
+  CHECK_EQ(adm.aprovaPedido("naoexiste"), -1);
+}
+
+TEST_CASE("Administrador - Aumentar saldo de usuário que não requisitou o aumento"){
+  Administrador adm = Administrador();
+  Ecommerce ecom;
+  Comprador shops = ecom.cadastrarComprador("semaumento","sem@aumento.com","senha123","44565564","nãoaumenta",6,6,4,5);
   CHECK_EQ(admin.aprovaPedido("sem@aumento.com"), -2);
 }
-//implementar pós exceções
-TEST_CASE("Aprovar um pedido"){
 
+TEST_CASE("Administrador - Excluir usuário que não existe"){
+  Administrador adm = Administrador();
+
+  CHECK_EQ(adm.excluiUsuario("naoexiste"), -1);
 }
 
-TEST_CASE("Excluir usuário que não existe"){
-  Administrador admin;
+TEST_CASE("Administrador - Excluir um usuário"){
+    Ecommerce ecom;
+    Administrador adm = Administrador();
+    Comprador bye = ecom.cadastrarComprador("excluir","ex@cluir.com","excluido","000000","exclui",7,6,3,9);
 
-  CHECK_EQ(admin.excluiUsuario("naoexiste"), -1);
-}
-//implementar pós exceções
-TEST_CASE("Excluir um usuário"){
-  Comprador bye("excluir","ex@cluir.com","excluido","000000","exclui",7,6,3,9);
+    CHECK_NOTHROW(adm.excluiUsuario("ex@cluir.com"));
+    CHECK_THROWS(adm.excluiUsuario("ex@cluir.com"));
 }
