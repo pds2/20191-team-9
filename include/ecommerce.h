@@ -52,23 +52,15 @@ class Ecommerce{
     void imprimirCompradores();
     void imprimirProdutos();
 
-    bool checaEmail(const char *em);
+    bool checaEmail(std::string email);
     bool validaAlfanumerica(const char *s);
 
-<<<<<<< HEAD
     int buscaIndiceCaneca(int cod);
     int buscaIndiceAcessorio(int cod);
     int buscaIndiceBlusasEMoletom(int cod);
     int buscaIndiceProdutos(int cod);
     Produto buscaProdutos(int cod);
     Comprador buscaComprador(std::string em);
-=======
-    int buscaIndiceCaneca(long int cod);
-    int buscaIndiceAcessorio(long int cod);
-    int buscaIndiceBlusasEMoletom(long int cod);
-    int buscaIndiceProdutos(long int cod);
-    Produto buscaProdutos(long int cod);
->>>>>>> dc738173207860e95ca45a92efdbe3fd2e5f0f98
 
     int tamanhoArquivo(const char* file_name); //se o arquivo tiver vazio retorna 0
 
