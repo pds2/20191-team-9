@@ -18,13 +18,13 @@
 #include "usuario/comprador.h"
 
 #include "usuario/administrador.h"
+#include "usuario/usuario.h"
 #include "produto/produto.h"
 #include "produto/acessorio.h"
 #include "produto/caneca.h"
 #include "produto/blusas_e_moletom.h"
 #include "excecoes.h"
 
-std::string userLogged = "";
 
 class Ecommerce{
   private:
@@ -36,6 +36,9 @@ class Ecommerce{
     std::vector <BlusasEMoletom> blusasEmoletons;
 
   public:
+    std::string userLogged = "";
+    Administrador admin;
+
     Ecommerce();
     ~Ecommerce();
 
