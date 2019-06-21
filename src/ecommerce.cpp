@@ -5,7 +5,6 @@
 #include "excecoes.h"
 
 Administrador admin;
-admin.Administrador();
 
 /**
  * [Ecommerce::Ecommerce Construtor da classe Ecommerce]
@@ -342,7 +341,7 @@ void Ecommerce::imprimirProdutos(){
         }
 }
 
-int Ecommerce::buscaIndiceCaneca(long int cod){
+int Ecommerce::buscaIndiceCaneca(int cod){
     int x;
     for(x = 0; x < canecas.size(); x++){
         if(canecas[x].getCodigoProduto() == cod){
@@ -352,7 +351,7 @@ int Ecommerce::buscaIndiceCaneca(long int cod){
     return -1;
 }
 
-int Ecommerce::buscaIndiceBlusasEMoletom(long int cod){
+int Ecommerce::buscaIndiceBlusasEMoletom(int cod){
     int x;
     for(x = 0; x < blusasEmoletons.size(); x++){
         if(blusasEmoletons[x].getCodigoProduto() == cod){
@@ -362,7 +361,7 @@ int Ecommerce::buscaIndiceBlusasEMoletom(long int cod){
     return -1;
 }
 
-int Ecommerce::buscaIndiceAcessorio(long int cod){
+int Ecommerce::buscaIndiceAcessorio(int cod){
     int x;
     for(x = 0; x < acessorios.size(); x++){
         if(acessorios[x].getCodigoProduto() == cod){
@@ -372,7 +371,7 @@ int Ecommerce::buscaIndiceAcessorio(long int cod){
     return -1;
 }
 
-int Ecommerce::buscaIndiceProdutos(long int cod){
+int Ecommerce::buscaIndiceProdutos(int cod){
     int x;
     for(x = 0; x < produtos.size(); x++){
         if(produtos[x].getCodigoProduto() == cod){
@@ -382,7 +381,7 @@ int Ecommerce::buscaIndiceProdutos(long int cod){
     return -1;
 }
 
-Produto Ecommerce::buscaProdutos(long int cod){
+Produto Ecommerce::buscaProdutos(int cod){
   int x, codigo;
   std::string nome, categoria, cor, descricao, material;
   float preco, mediaAvaliacoes;
@@ -417,8 +416,6 @@ void Ecommerce::gravaProdutosArquivo(){
   int numeroProdutos = produtos.size();
 
   for(int i=0; arquivo.good() && i < numeroProdutos; i++){
-
-     //if(checaCodigo(produtos[i].getCodigoProduto())){
         arquivo << (produtos[i]).getCodigoProduto() << "," << (produtos[i]).getNome() << "," << (produtos[i]).getPreco() << "," << (produtos[i]).getMediaAvaliacoes() << "," << (produtos[i]).getCategoria() << ","  << (produtos[i]).getCor() << "," << (produtos[i]).getDescricao() << "," << (produtos[i]).getMaterial() << ",";
         int x = 0;
         if (produtos[i].getCategoria()=="Acessorios"){
@@ -448,7 +445,6 @@ void Ecommerce::gravaProdutosArquivo(){
                 std::cout << "Erro. Tente novamente." << std::endl;
                 }
         }
-    //}
   }
   arquivo.close();
 }
@@ -550,7 +546,7 @@ void Ecommerce::gravaUsuarioArquivo(){
 void Ecommerce::cadastrarComprador (std::string n, std::string em, std::string s, std::string cpf, std::string endereco, int numCarr, int numHist, int numAval, double din){
   limparTela();
   listaUsuarioArquivo();
-  if(checaNome(n) && checaEmail(em) && checaSenha(s)){
+  if(checaEmail(em) && checaEmail(s)){
     if(procurarComprador(em)==false){
       Comprador comp = Comprador(n, em, s, cpf, endereco, numCarr, numHist, numAval, din);
       Usuario usu = Usuario(n, em, s);
@@ -729,10 +725,8 @@ void Ecommerce::impCarrinho(){
     }
     case 2:
     {
-      int cod;
-      std::cout << "Digite o codigo do produto que voce deseja remover: ";
-      std::cin >> cod;
-      procurarCompradorObj(userLogged).retirarCarrinho(cod);
+      Comprador comp = procurarCompradorObj(userLogged);
+      comp.retirarCarrinho();
       std::cout << std::endl << "Pressione ENTER para voltar a pagina anterior";
       std::cin.get();
       std::cin.get();
@@ -838,7 +832,7 @@ void Ecommerce::mostraProdutos(){
       break;
     }
     default:
-      {
+    {
       std::cout << "Opção inválida. Tente novamente" << std::endl;
 
       break;
@@ -873,9 +867,8 @@ void Ecommerce::mostraUsuarios(){
       break;
     }
     default:
-      {
+    {
       std::cout << "Opção inválida. Tente novamente" << std::endl;
-
       break;
     }
   }
@@ -944,10 +937,10 @@ Comprador Ecommerce::procurarCompradorObj(std::string em){
  * @return                       [true se o formato do email fornecido for correto e false, em caso contrário]
  */
 
-bool Ecommerce::checaEmail(const char *em){
+bool Ecommerce::checaEmail(std::string em){
   int i, em_size;
   bool arroba = false, dotcom = false;
-  em_size = strlen(em);
+  em_size = em.size();
   for(i = 0; i < em_size - 3; i++){
     if(em[i] == 64){ // after this interval we have the ASCII numbers
       arroba = true;
@@ -1104,12 +1097,17 @@ void Ecommerce::inicio(){
   std::cin >> digito;
   switch (digito){
     case 1:
+    {
       loginUsuario();
       break;
+    }
     case 2:
+    {
       dadosComprador();
       break;
+    }
     case 3:
+    {
       std::cout << "Se voce tem certeza que gostaria de sair da loja, digite OUT" << std::endl;
       std::string confirma;
       std::cin >> confirma;
@@ -1119,11 +1117,14 @@ void Ecommerce::inicio(){
       else {
         inicio();
       }
-    break;
+      break;
+    }
     default:
+    {
       std::cout << "Opção inválida. Tente novamente" << std::endl;
       inicio();
       break;
+    }
   }
 }
 
@@ -1245,35 +1246,49 @@ void Ecommerce::menuComprador(){
   std::cin >> digito;
   switch (digito) {
     case 1:
+    {
       impProdutos();
       break;
+    }
     case 2:
+    {
       procurarCompradorObj(userLogged).exibirPerfil();
       std::cin.get();
       std::cin.get();
       menuComprador();
       break;
+    }
     case 3:
+    {
       impCarrinho();
       break;
+    }
     case 4:
+    {
       impHistorico();
       break;
+    }
     case 5:
+    {
       procurarCompradorObj(userLogged).adicionaDinheiro();
       std::cin.get();
       std::cin.get();
       menuComprador();
       break;
+    }
     case 9:
+    {
       logoutUsuario();//Confirmar logout
       break;
+    }
     default:
+    {
       std::cout << "Opção inválida. Tente novamente" << std::endl;
       std::cin.get();
       std::cin.get();
       menuComprador();
       break;
+    }
   }
 }
 
@@ -1295,26 +1310,38 @@ void Ecommerce::menuUsuario(){
   std::cin >> digito;
   switch (digito) {
     case 1:
+    {
       admin.mostraPedidos();
       break;
+    }
     case 2:
+    {
       mostraProdutos();
       break;
+    }
     case 3:
+    {
       mostraUsuarios();
       break;
+    }
     case 4:
+    {
       admin.exibirPerfil();
       break;
+    }
     case 9:
+    {
       logoutUsuario();
       break;
+    }
     default:
+    {
       std::cout << "Opção inválida. Tente novamente" << std::endl;
       std::cin.get();
       std::cin.get();
       menuUsuario();
       break;
+    }
   }
 }
 
@@ -1341,4 +1368,6 @@ Comprador Ecommerce::buscaComprador(std::string em){
   Comprador comp = Comprador(nome, email, senha, cpf, endereco, numC, numH, numA, dinheiro);
   return comp;
 }
+
+
 #endif

@@ -150,6 +150,7 @@ bool Comprador::adicionarCarrinho(){
   }
   catch(Exception_Produto_Nao_Encontrado &e){
     std::cout<<e.what();
+    return;
   }
 
   try{
@@ -157,6 +158,7 @@ bool Comprador::adicionarCarrinho(){
   }
   catch(Exception_Produto_Ja_Consta_No_Carrinho &e){
     std::cout<<e.what();
+    return;
   }
 
   Produto prod = buscaCarrinho(codProduto);
@@ -196,6 +198,7 @@ bool Comprador::retirarCarrinho(){
   }
   catch(Exception_Carrinho_Vazio &e){
     std::cout<<e.what();
+    return;
   }
 
   int codProduto;
@@ -220,6 +223,7 @@ bool Comprador::retirarCarrinho(){
   }
   catch(Exception_Produto_Nao_Encontrado &e){
     std::cout<<e.what();
+    return;
   }
 
   carrinho.erase(carrinho.begin()+ indice); //apaga o indice elemento a partir do começo do vector
@@ -238,6 +242,7 @@ void Comprador::imprimirCarrinho(){
   }
   catch(Exception_Carrinho_Vazio &e){
     std::cout<<e.what();
+    return;
   }
 
   limparTela();
@@ -277,6 +282,7 @@ void Comprador::imprimirHistorico(){
   }
   catch(Exception_Historico_Vazio &e){
     std::cout<<e.what();
+    return;
   }
 
   limparTela();
@@ -384,6 +390,7 @@ void Comprador::adicionarComentario(){
   }
   catch(Exception_Produto_Fora_do_Historico &e){
     std::cout<<e.what();
+    return;
   }
 
   Produto prod = buscaHistorico(codProduto);
@@ -427,6 +434,7 @@ void Comprador::avaliarItem(){
   }
   catch(Exception_Produto_Fora_do_Historico &e){
     std::cout<<e.what();
+    return;
   }
 
   int nota;
@@ -440,11 +448,11 @@ void Comprador::avaliarItem(){
   }
   catch(Exception_Nota_Invalida &e){
     std::cout<<e.what();
+    return;
   }
 
   Produto prod = buscaHistorico(codProduto);
   prod.avaliarProduto(nota);
-
 }
 
 /**
@@ -470,6 +478,7 @@ void Comprador::fazerCompras(){
   }
   catch(Exception_Opcao_Menu_Fazer_Compras_Invalida &e){
     std::cout<<e.what();
+    return;
   }
 
   try{
@@ -477,6 +486,7 @@ void Comprador::fazerCompras(){
   }
   catch(Exception_Saldo_Comprador_Insuficiente &e){
     std::cout<<e.what();
+    return;
   }
 
   carrinho.clear();
