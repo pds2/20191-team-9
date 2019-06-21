@@ -128,8 +128,8 @@ TEST_CASE("Administrador - Remover item do estoque"){
    Administrador adm = Administrador();
    BlusasEMoletom teste(697, 45, 3.5, "blusazul", "Blusas e Moletoms", "Amarelo", "Amarelo que nem o raiar do sol", "Algodao", 'M', "Tipo tiposo");
 
-   CHECK_NOTHROW(removeItem("blusazul"));
-   CHECK_THROWS(removeItem("blusuzul"));
+   CHECK_NOTHROW(adm.removeItem("blusazul"));
+   CHECK_THROWS(adm.removeItem("blusauzul"));
 }
 
 TEST_CASE("Administrador - Remover item que não existe"){
@@ -147,7 +147,7 @@ TEST_CASE("Administrador - Aumentar saldo de usuário que não existe"){
 TEST_CASE("Administrador - Aumentar saldo de usuário que não requisitou o aumento"){
   Administrador adm = Administrador();
   Ecommerce ecom;
-  Comprador shops = ecom.cadastrarComprador("semaumento","sem@aumento.com","senha123","44565564","nãoaumenta",6,6,4,5);
+  ecom.cadastrarComprador("semaumento","sem@aumento.com","senha123","44565564","nãoaumenta",6,6,4,5);
   CHECK_EQ(admin.aprovaPedido("sem@aumento.com"), -2);
 }
 
@@ -160,7 +160,7 @@ TEST_CASE("Administrador - Excluir usuário que não existe"){
 TEST_CASE("Administrador - Excluir um usuário"){
     Ecommerce ecom;
     Administrador adm = Administrador();
-    Comprador bye = ecom.cadastrarComprador("excluir","ex@cluir.com","excluido","000000","exclui",7,6,3,9);
+    ecom.cadastrarComprador("excluir","ex@cluir.com","excluido","000000","exclui",7,6,3,9);
 
     CHECK_NOTHROW(adm.excluiUsuario("ex@cluir.com"));
     CHECK_THROWS(adm.excluiUsuario("ex@cluir.com"));
