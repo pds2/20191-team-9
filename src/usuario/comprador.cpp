@@ -604,9 +604,9 @@ void Comprador::gravaHistoricoArquivo(){
 }
 
 Produto Comprador::buscaHistorico(long int codProduto){
-  int x, codigo;
-  std::string nome, categoria, cor, descricao, material;
-  float preco, mediaAvaliacoes;
+  int x=0, codigo=0;
+  std::string nome="", categoria="", cor="", descricao="", material="";
+  float preco=0.0, mediaAvaliacoes=0.0;
 
   std::map<std::string, Produto>::iterator ite;
 
@@ -628,9 +628,9 @@ Produto Comprador::buscaHistorico(long int codProduto){
 }
 
 Produto Comprador::buscaCarrinho(long int codProduto){
-  int x, codigo;
-  std::string nome, categoria, cor, descricao, material;
-  float preco, mediaAvaliacoes;
+  int x=0, codigo=0;
+  std::string nome="", categoria="", cor="", descricao="", material="";
+  float preco=0.0, mediaAvaliacoes=0.0;
 
   for(int i=0; i < _numeroComprasCarrinho; i++){
     if(carrinho[i].getCodigoProduto() == codProduto){
