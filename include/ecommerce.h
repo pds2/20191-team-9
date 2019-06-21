@@ -18,6 +18,7 @@
 #include "usuario/comprador.h"
 
 #include "usuario/administrador.h"
+#include "usuario/usuario.h"
 #include "produto/produto.h"
 #include "produto/acessorio.h"
 #include "produto/caneca.h"
@@ -32,9 +33,10 @@ class Ecommerce{
     std::vector <Caneca> canecas;
     std::vector <Acessorio> acessorios;
     std::vector <BlusasEMoletom> blusasEmoletons;
-    std::string userLogged = "";
 
   public:
+    std::string userLogged = "";
+    Administrador admin;
 
     Ecommerce();
     ~Ecommerce();

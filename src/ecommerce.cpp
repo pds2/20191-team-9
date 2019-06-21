@@ -4,7 +4,7 @@
 #include "ecommerce.h"
 #include "excecoes.h"
 
-Administrador admin;
+
 
 /**
  * [Ecommerce::Ecommerce Construtor da classe Ecommerce]
@@ -41,8 +41,6 @@ void Ecommerce::listaComentariosArquivo(){
     std::cout << "Erro ao abrir arquivo. Tente novamente";
     exit(1);
   }
-
-    int linhas = tamanhoArquivo("comentarios.csv");
       if (tamanhoArquivo("comentarios.csv") == 0){
         std::cout << "Nenhum comentario foi feito ainda." << std::endl;
         return;
@@ -247,7 +245,6 @@ void Ecommerce::listaProdutosArquivo(){
     throw EAA;
   }
 
-  int linhas = tamanhoArquivo("produtos.csv");
   if (tamanhoArquivo("produtos.csv") == 0){
     Exception_Nenhum_Produto_Arquivo NPA;
     throw NPA;
@@ -343,7 +340,8 @@ void Ecommerce::imprimirProdutos(){
 
 int Ecommerce::buscaIndiceCaneca(int cod){
     int x;
-    for(x = 0; x < canecas.size(); x++){
+    int c = canecas.size();
+    for(x = 0; x < c; x++){
         if(canecas[x].getCodigoProduto() == cod){
             return x;
         }
@@ -353,7 +351,8 @@ int Ecommerce::buscaIndiceCaneca(int cod){
 
 int Ecommerce::buscaIndiceBlusasEMoletom(int cod){
     int x;
-    for(x = 0; x < blusasEmoletons.size(); x++){
+    int b = blusasEmoletons.size();
+    for(x = 0; x < b; x++){
         if(blusasEmoletons[x].getCodigoProduto() == cod){
             return x;
         }
@@ -363,7 +362,8 @@ int Ecommerce::buscaIndiceBlusasEMoletom(int cod){
 
 int Ecommerce::buscaIndiceAcessorio(int cod){
     int x;
-    for(x = 0; x < acessorios.size(); x++){
+    int a = acessorios.size();
+    for(x = 0; x < a; x++){
         if(acessorios[x].getCodigoProduto() == cod){
             return x;
         }
@@ -373,7 +373,8 @@ int Ecommerce::buscaIndiceAcessorio(int cod){
 
 int Ecommerce::buscaIndiceProdutos(int cod){
     int x;
-    for(x = 0; x < produtos.size(); x++){
+    int p = produtos.size();
+    for(x = 0; x < p; x++){
         if(produtos[x].getCodigoProduto() == cod){
             return x;
         }
@@ -385,7 +386,8 @@ Produto Ecommerce::buscaProdutos(int cod){
   int x, codigo;
   std::string nome, categoria, cor, descricao, material;
   float preco, mediaAvaliacoes;
-  for(x = 0; x < produtos.size(); x++){
+  int p = produtos.size();
+  for(x = 0; x < p; x++){
     if(produtos[x].getCodigoProduto() == cod){
       codigo = (produtos[x]).getCodigoProduto();
       nome = (produtos[x]).getNome();
@@ -417,7 +419,7 @@ void Ecommerce::gravaProdutosArquivo(){
 
   for(int i=0; arquivo.good() && i < numeroProdutos; i++){
         arquivo << (produtos[i]).getCodigoProduto() << "," << (produtos[i]).getNome() << "," << (produtos[i]).getPreco() << "," << (produtos[i]).getMediaAvaliacoes() << "," << (produtos[i]).getCategoria() << ","  << (produtos[i]).getCor() << "," << (produtos[i]).getDescricao() << "," << (produtos[i]).getMaterial() << ",";
-        int x = 0;
+        
         if (produtos[i].getCategoria()=="Acessorios"){
             int x = produtos[i].getCodigoProduto();
             int i = buscaIndiceAcessorio(x);
@@ -912,7 +914,8 @@ Comprador Ecommerce::procurarCompradorObj(std::string em){
   int x, numeroComprasCarrinho, numeroComprasHistorico, numeroAvaliacoes;
   std::string nome, email, senha, cpf, endereco;
   float dinheiro;
-  for(x = 0; x < produtos.size(); x++){
+  int p = produtos.size();
+  for(x = 0; x < p; x++){
     if(compradores[x].getEmail() == em){
       nome = (compradores[x]).getNome();
       email = (compradores[x]).getEmail();

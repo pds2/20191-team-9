@@ -8,7 +8,6 @@
 #include <iterator>
 #include <fstream>
 
-#include "ecommerce.h"
 #include "produto/produto.h"
 #include "produto/acessorio.h"
 #include "produto/blusas_e_moletom.h"

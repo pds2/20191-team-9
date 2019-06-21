@@ -56,8 +56,8 @@ class Comprador : public Usuario{
     void imprimirCarrinho();
     void imprimirHistorico();
 
-    int procurarItensHistorico(int codProduto);
-    int procurarItensCarrinho(int codProduto);
+    int procurarItensHistorico(long int codProduto);
+    int procurarItensCarrinho(long int codProduto);
     void adicionarComentario();
     void avaliarItem();
 
@@ -67,8 +67,8 @@ class Comprador : public Usuario{
 
     void limparTela();
 
-    Produto buscaHistorico(int codProduto);
-    Produto buscaCarrinho(int codProduto);
+    Produto buscaHistorico(long int codProduto);
+    Produto buscaCarrinho(long int codProduto);
 };
 
 #endif

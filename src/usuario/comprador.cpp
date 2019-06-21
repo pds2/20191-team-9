@@ -332,7 +332,7 @@ void Comprador::exibirPerfil(){
  * @return                                   [indice no histórico em que o produto se encontra]
  */
 
-int Comprador::procurarItensHistorico(int codProduto){
+int Comprador::procurarItensHistorico(long int codProduto){
   int indice = 0;
   std::map<std::string, Produto>::iterator ite;
 
@@ -352,7 +352,7 @@ int Comprador::procurarItensHistorico(int codProduto){
  * @return                                  [indice no carrinho em que o produto se encontra]
  */
 
-int Comprador::procurarItensCarrinho(int codProduto){
+int Comprador::procurarItensCarrinho(long int codProduto){
   _numeroComprasCarrinho = carrinho.size();
 
   for(int indice=0; indice < _numeroComprasCarrinho; indice++){
@@ -603,7 +603,7 @@ void Comprador::gravaHistoricoArquivo(){
   arquivo.close();
 }
 
-Produto Comprador::buscaHistorico(int codProduto){
+Produto Comprador::buscaHistorico(long int codProduto){
   int x, codigo;
   std::string nome, categoria, cor, descricao, material;
   float preco, mediaAvaliacoes;
@@ -627,7 +627,7 @@ Produto Comprador::buscaHistorico(int codProduto){
   return prod;
 }
 
-Produto Comprador::buscaCarrinho(int codProduto){
+Produto Comprador::buscaCarrinho(long int codProduto){
   int x, codigo;
   std::string nome, categoria, cor, descricao, material;
   float preco, mediaAvaliacoes;
