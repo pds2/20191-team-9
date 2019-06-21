@@ -5,7 +5,6 @@
 #include "excecoes.h"
 
 Administrador admin;
-admin.Administrador();
 
 /**
  * [Ecommerce::Ecommerce Construtor da classe Ecommerce]
@@ -550,7 +549,7 @@ void Ecommerce::gravaUsuarioArquivo(){
 void Ecommerce::cadastrarComprador (std::string n, std::string em, std::string s, std::string cpf, std::string endereco, int numCarr, int numHist, int numAval, double din){
   limparTela();
   listaUsuarioArquivo();
-  if(checaNome(n) && checaEmail(em) && checaSenha(s)){
+  if(validaAlfanumerica(&n) && checaEmail(&em) && validaAlfanumerica(s)){
     if(procurarComprador(em)==false){
       Comprador comp = Comprador(n, em, s, cpf, endereco, numCarr, numHist, numAval, din);
       Usuario usu = Usuario(n, em, s);
@@ -1098,12 +1097,17 @@ void Ecommerce::inicio(){
   std::cin >> digito;
   switch (digito){
     case 1:
+    {
       loginUsuario();
       break;
+    }
     case 2:
+    {
       dadosComprador();
       break;
+    }
     case 3:
+    {
       std::cout << "Se voce tem certeza que gostaria de sair da loja, digite OUT" << std::endl;
       std::string confirma;
       std::cin >> confirma;
@@ -1114,10 +1118,13 @@ void Ecommerce::inicio(){
         inicio();
       }
     break;
+    }
     default:
+    {
       std::cout << "Opção inválida. Tente novamente" << std::endl;
       inicio();
       break;
+    }
   }
 }
 
