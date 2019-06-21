@@ -560,10 +560,16 @@ void Ecommerce::cadastrarComprador (std::string n, std::string em, std::string s
      }
      else{
       std::cout << "Endereço de email já cadastrado. Tente novamente." << std::endl;
+      std::cin.get();
+      std::cin.get();
+      dadosComprador();
      }
   }
   else{
     std::cout << "Dados inválidos. Tente novamente." << std::endl;
+    std::cin.get();
+    std::cin.get();
+    dadosComprador();
   }
 }
 
