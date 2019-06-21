@@ -4,6 +4,8 @@
 #include "ecommerce.h"
 #include "excecoes.h"
 
+
+
 /**
  * [Ecommerce::Ecommerce Construtor da classe Ecommerce]
  * @method Ecommerce::Ecommerce
@@ -544,7 +546,7 @@ void Ecommerce::gravaUsuarioArquivo(){
 void Ecommerce::cadastrarComprador (std::string n, std::string em, std::string s, std::string cpf, std::string endereco, int numCarr, int numHist, int numAval, double din){
   limparTela();
   listaUsuarioArquivo();
-  if(validaAlfanumerica(&n) && checaEmail(&em) && validaAlfanumerica(s)){
+  if(checaEmail(em) && checaEmail(s)){
     if(procurarComprador(em)==false){
       Comprador comp = Comprador(n, em, s, cpf, endereco, numCarr, numHist, numAval, din);
       Usuario usu = Usuario(n, em, s);
