@@ -148,7 +148,7 @@ TEST_CASE("Administrador - Aumentar saldo de usuário que não requisitou o aume
   Administrador adm = Administrador();
   Ecommerce ecom;
   ecom.cadastrarComprador("semaumento","sem@aumento.com","senha123","44565564","nãoaumenta",6,6,4,5);
-  CHECK_EQ(admin.aprovaPedido("sem@aumento.com"), -2);
+  CHECK_EQ(adm.aprovaPedido("sem@aumento.com"), -2);
 }
 
 TEST_CASE("Administrador - Excluir usuário que não existe"){
