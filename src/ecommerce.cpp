@@ -383,9 +383,9 @@ int Ecommerce::buscaIndiceProdutos(int cod){
 }
 
 Produto Ecommerce::buscaProdutos(int cod){
-  int x, codigo;
-  std::string nome, categoria, cor, descricao, material;
-  float preco, mediaAvaliacoes;
+  int x=0, codigo=0;
+  std::string nome = "", categoria = "", cor = "", descricao = "", material = "";
+  float preco = 0.0, mediaAvaliacoes = 0.0;
   int p = produtos.size();
   for(x = 0; x < p; x++){
     if(produtos[x].getCodigoProduto() == cod){
@@ -419,7 +419,7 @@ void Ecommerce::gravaProdutosArquivo(){
 
   for(int i=0; arquivo.good() && i < numeroProdutos; i++){
         arquivo << (produtos[i]).getCodigoProduto() << "," << (produtos[i]).getNome() << "," << (produtos[i]).getPreco() << "," << (produtos[i]).getMediaAvaliacoes() << "," << (produtos[i]).getCategoria() << ","  << (produtos[i]).getCor() << "," << (produtos[i]).getDescricao() << "," << (produtos[i]).getMaterial() << ",";
-        
+
         if (produtos[i].getCategoria()=="Acessorios"){
             int x = produtos[i].getCodigoProduto();
             int i = buscaIndiceAcessorio(x);
@@ -706,13 +706,18 @@ void Ecommerce::impProdutos(){
 void Ecommerce::impCarrinho(){
   limparTela();
   procurarCompradorObj(userLogged).imprimirCarrinho();
+
+  std::cout << "\n" << "----------------------------------------------" << std::endl;
+  std::cout << "\t\t MENU " << std::endl;
+  std::cout << "----------------------------------------------" << "\n" << std::endl;
+
   std::cout << "Para procurar um item, digite 1" << std::endl
   << "Para remover um item, digite 2" << std::endl
   << "Para finalizar a compra, digite 3" << std::endl
   << "Para voltar ao menu, digite 4" << std::endl;
   int digito;
   std::cin >> digito;
-  while((digito != 1) && (digito != 2) && (digito != 3)){
+  while((digito != 1) && (digito != 2) && (digito != 3) && (digito!=4)){
     std::cout << "Essa opcao nao existe! Digite um numero valido: ";
     std::cin >> digito;
   }
@@ -720,6 +725,10 @@ void Ecommerce::impCarrinho(){
   switch (digito) {
     case 1:
     {
+      std::cout << "\n" << "----------------------------------------------" << std::endl;
+      std::cout << "\t\t MENU " << std::endl;
+      std::cout << "----------------------------------------------" << "\n" << std::endl;
+
       int cod;
       std::cout << "Digite o codigo do produto que voce procura: ";
       std::cin >> cod;
@@ -733,6 +742,10 @@ void Ecommerce::impCarrinho(){
     }
     case 2:
     {
+      std::cout << "\n" << "----------------------------------------------" << std::endl;
+      std::cout << "\t\t MENU " << std::endl;
+      std::cout << "----------------------------------------------" << "\n" << std::endl;
+
       Comprador comp = procurarCompradorObj(userLogged);
       comp.retirarCarrinho();
       std::cout << std::endl << "Pressione ENTER para voltar a pagina anterior";
@@ -742,6 +755,10 @@ void Ecommerce::impCarrinho(){
     }
     case 3:
     {
+      std::cout << "\n" << "----------------------------------------------" << std::endl;
+      std::cout << "\t\t MENU " << std::endl;
+      std::cout << "----------------------------------------------" << "\n" << std::endl;
+
       procurarCompradorObj(userLogged).fazerCompras();
       std::cout << std::endl << "Pressione ENTER para voltar a pagina anterior";
       std::cin.get();
@@ -764,6 +781,11 @@ void Ecommerce::impCarrinho(){
 
 void Ecommerce::impHistorico(){
   procurarCompradorObj(userLogged).imprimirHistorico();
+
+  std::cout << "\n" << "----------------------------------------------" << std::endl;
+  std::cout << "\t\t MENU " << std::endl;
+  std::cout << "----------------------------------------------" << "\n" << std::endl;
+
   std::cout << "Para procurar um item, digite 1" << std::endl
   << "Para avaliar um item, digite 2" << std::endl
   << "Para comentar um item, digite 3" << std::endl
@@ -776,20 +798,28 @@ void Ecommerce::impHistorico(){
   }
   switch (digito) {
     case 1:
+    {
       int cod;
       std::cout << "Digite o codigo do produto que voce procura: ";
       std::cin >> cod;
       procurarCompradorObj(userLogged).procurarItensHistorico(cod);
       break;
+      }
     case 2:
+    {
       procurarCompradorObj(userLogged).avaliarItem();
       break;
+    }
     case 3:
+    {
       procurarCompradorObj(userLogged).adicionarComentario();
       break;
+    }
     case 4:
+    {
       menuComprador();
       break;
+    }
   }
 }
 
@@ -801,6 +831,11 @@ void Ecommerce::impHistorico(){
 void Ecommerce::mostraProdutos(){
   limparTela();
   imprimirProdutos();
+
+  std::cout << "\n" << "----------------------------------------------" << std::endl;
+  std::cout << "\t\t MENU " << std::endl;
+  std::cout << "----------------------------------------------" << "\n" << std::endl;
+
   std::cout << "Para ver comentarios sobre um produto, digite 1" << std::endl;
   std::cout << "Para adicionar um produto, digite 2" << std::endl;
   std::cout << "Para excluir um produto, digite 3" << std::endl;
@@ -810,6 +845,11 @@ void Ecommerce::mostraProdutos(){
   switch (digito) {
     case 1:
     {
+
+      std::cout << "\n" << "----------------------------------------------" << std::endl;
+      std::cout << "\t\t MENU " << std::endl;
+      std::cout << "----------------------------------------------" << "\n" << std::endl;
+
       int codProduto;
       std::cout << "\n" << "Digite o código do produto: ";
       std::cin >> codProduto;
@@ -828,6 +868,10 @@ void Ecommerce::mostraProdutos(){
     }
     case 3:
     {
+      std::cout << "\n" << "----------------------------------------------" << std::endl;
+      std::cout << "\t\t MENU " << std::endl;
+      std::cout << "----------------------------------------------" << "\n" << std::endl;
+
       std::string nomeProduto;
       std::cout << "\n" << "Digite o nome do produto que deseja remover: ";
       std::cin >> nomeProduto;
@@ -842,7 +886,6 @@ void Ecommerce::mostraProdutos(){
     default:
     {
       std::cout << "Opção inválida. Tente novamente" << std::endl;
-
       break;
     }
   }
@@ -856,6 +899,11 @@ void Ecommerce::mostraProdutos(){
 void Ecommerce::mostraUsuarios(){
   limparTela();
   imprimirUsuarios();
+
+  std::cout << "\n" << "----------------------------------------------" << std::endl;
+  std::cout << "\t\t MENU " << std::endl;
+  std::cout << "----------------------------------------------" << "\n" << std::endl;
+
   std::cout << "Para excluir um usuario, digite 1" << std::endl;
   std::cout << "Para voltar ao menu, digite 9" << std::endl;
   int digito;
@@ -917,9 +965,9 @@ bool Ecommerce::procurarComprador(std::string em){
 }
 
 Comprador Ecommerce::procurarCompradorObj(std::string em){
-  int x, numeroComprasCarrinho, numeroComprasHistorico, numeroAvaliacoes;
-  std::string nome, email, senha, cpf, endereco;
-  float dinheiro;
+  int x = 0, numeroComprasCarrinho = 0, numeroComprasHistorico = 0, numeroAvaliacoes = 0;
+  std::string nome = "", email = "", senha = "", cpf = "", endereco = "";
+  float dinheiro = 0.0;
   int p = produtos.size();
   for(x = 0; x < p; x++){
     if(compradores[x].getEmail() == em){
@@ -968,9 +1016,9 @@ bool Ecommerce::checaEmail(std::string em){
  * @return                       [true se o formato da senha fornecida for correto e false, em caso contrário]
  */
 
-bool Ecommerce::validaAlfanumerica(const char *s){
+bool Ecommerce::validaAlfanumerica(std::string s){
   int i, s_size, aux;
-  s_size = strlen(s);
+  s_size = s.size();
   for(i = 0; i < s_size; i++){
     aux = s[i];
     if((aux >= 0) && (aux <= 47)){ // after this interval we have the ASCII numbers
@@ -1054,8 +1102,7 @@ void Ecommerce::loginUsuario(){
  */
 
 void Ecommerce::logoutUsuario(){
-  std::cout << "Se voce tem certeza que gostaria de sair desta conta, digite OUT" << std::endl
-  << "Se voce gostaria de voltar ao menu, digite MENU" << std::endl;
+  std::cout << "Se voce tem certeza que gostaria de sair desta conta, digite OUT. Se voce gostaria de voltar ao menu, digite MENU: " << std::endl;
   std::string confirma;
   std::cin >> confirma;
   if (confirma == "OUT"){
@@ -1111,7 +1158,7 @@ void Ecommerce::inicio(){
     }
     case 3:
     {
-      std::cout << "Se voce tem certeza que gostaria de sair da loja, digite OUT" << std::endl;
+      std::cout << "Se voce tem certeza que gostaria de sair da loja, digite OUT: ";
       std::string confirma;
       std::cin >> confirma;
       if (confirma == "OUT"){
@@ -1139,10 +1186,11 @@ void Ecommerce::inicio(){
 
 void Ecommerce::dadosComprador(){
   limparTela();
+
   std::string nome, senha, confSenha, email, endereco, cpf;
-  std::cout << "Insira seu nome de usuário: \nPor favor use apenas letras e numeros!";
+  std::cout << "[alfa-numérico] Insira seu nome de usuário: ";
   std::cin >> nome;
-  std::cout << std::endl << "Insira uma senha: \nPor favor use apenas letras e numeros!";
+  std::cout << std::endl << "[alfa-numérico] Insira sua senha de usuário: ";
   std::cin >> senha;
   std::cout << std::endl << "Confirme sua senha: ";
   std::cin >> confSenha;
@@ -1152,6 +1200,7 @@ void Ecommerce::dadosComprador(){
   std::cin >> cpf;
   std::cout << std::endl << "Insira seu endereco: ";
   std::cin >> endereco;
+
   cadastrarComprador(nome, email, senha, cpf, endereco, 0, 0, 0, 0);
   loginUsuario();
 }
@@ -1235,6 +1284,11 @@ void Ecommerce::dadosProduto(){
 
 void Ecommerce::menuComprador(){
   limparTela();
+
+  std::cout << "\n" << "----------------------------------------------" << std::endl;
+  std::cout << "\t\t MENU " << std::endl;
+  std::cout << "----------------------------------------------" << "\n" << std::endl;
+
   std::cout << "Para ver nossos produtos, digite 1" << std::endl
   << "Para ver seu perfil, digite 2" << std::endl
   << "Para ver seu carrinho, digite 3" << std::endl
@@ -1343,9 +1397,9 @@ void Ecommerce::menuUsuario(){
 }
 
 Comprador Ecommerce::buscaComprador(std::string em){
-  int numA, numH, numC;
-  std::string nome, email, senha, cpf, endereco;
-  float dinheiro;
+  int numA = 0, numH = 0, numC = 0;
+  std::string nome = "", email = "", senha = "", cpf = "", endereco = "";
+  float dinheiro = 0.0;
   listaUsuarioArquivo();
   int numeroCompradores = compradores.size();
 

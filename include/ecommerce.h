@@ -57,7 +57,7 @@ class Ecommerce{
     std::string getUserLogged();
 
     bool checaEmail(std::string email);
-    bool validaAlfanumerica(const char *s);
+    bool validaAlfanumerica(std::string s);
 
     int buscaIndiceCaneca(int cod);
     int buscaIndiceAcessorio(int cod);
