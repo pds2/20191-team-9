@@ -4,8 +4,6 @@
 #include "ecommerce.h"
 #include "excecoes.h"
 
-Administrador admin;
-
 /**
  * [Ecommerce::Ecommerce Construtor da classe Ecommerce]
  * @method Ecommerce::Ecommerce
