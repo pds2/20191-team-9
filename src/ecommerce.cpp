@@ -38,7 +38,7 @@ void Ecommerce::listaComentariosArquivo(){
   arquivo.open("comentarios.csv",std::ios::in);
 
   if (!arquivo.is_open()){
-    std::cout << "Erro ao abrir arquivo. Tente novamente";
+    std::cout << "Erro ao abrir arquivo. Tente novamente\n";
     exit(1);
   }
       if (tamanhoArquivo("comentarios.csv") == 0){
@@ -96,7 +96,7 @@ void Ecommerce::gravaComentariosArquivo(){
   arquivo.open("comentarios.csv", std::ofstream::app);
 
   if (!arquivo.is_open()){
-    std::cout << "Erro ao abrir arquivo. Tente novamente";
+    std::cout << "Erro ao abrir arquivo. Tente novamente\n";
     exit(1);
   }
 
@@ -411,7 +411,7 @@ void Ecommerce::gravaProdutosArquivo(){
   arquivo.open("produtos.csv", std::ofstream::app);
 
   if (!arquivo.is_open()){
-    std::cout << "Erro ao abrir arquivo. Tente novamente";
+    std::cout << "Erro ao abrir arquivo. Tente novamente\n";
     exit(1);
   }
 
@@ -465,7 +465,7 @@ void Ecommerce::listaUsuarioArquivo(){
   arquivo.open("usuarios.csv");
 
   if (!arquivo.is_open()){
-    std::cout << "Erro ao abrir arquivo. Tente novamente";
+    std::cout << "Erro ao abrir arquivo. Tente novamente\n";
     exit(1);
   }
 
@@ -519,7 +519,7 @@ void Ecommerce::gravaUsuarioArquivo(){
   arquivo.open("usuarios.csv", std::ofstream::app);
 
   if (!arquivo.is_open()){
-    std::cout << "Erro ao abrir arquivo. Tente novamente";
+    std::cout << "Erro ao abrir arquivo. Tente novamente\n";
     exit(1);
   }
 
@@ -556,7 +556,6 @@ void Ecommerce::cadastrarComprador (std::string n, std::string em, std::string s
       compradores.push_back(comp);
       gravaUsuarioArquivo();
       std::cout << "Cadastro executado com sucesso!" << std::endl;
-      comp.imprimirHistorico();
      }
      else{
       std::cout << "Endereço de email já cadastrado. Tente novamente." << std::endl;

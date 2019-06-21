@@ -98,6 +98,12 @@ TEST_CASE("Ecommerce - Cadastrar Blusas e Moletons"){
 
 TEST_CASE("Cadastrar Comprador") {
     Ecommerce ecom;
+
+    std::remove("usuarios.csv");
+
+    std::fstream arquivo;
+    arquivo.open("usuarios.csv", std::ofstream::app);
+
     CHECK_NOTHROW(ecom.cadastrarComprador("Arthur Moura", "arthur.moura@gmail.com", "1234", "123456789", "Rua Washington, 80. Copacabana.", 0, 0, 0, 0.0));
     CHECK_NOTHROW(ecom.cadastrarComprador("Carolina Enya", "carolina.enya@gmail.com", "1234", "222222222", "Rua Washington, 90. Copacabana.", 0, 0, 0, 0.0));
     CHECK_NOTHROW(ecom.cadastrarComprador("Rita Caldas", "rita.caldas@gmail.com", "1234", "33333333333", "Rua Washington, 100. Copacabana.", 0, 0, 0, 0.0));
