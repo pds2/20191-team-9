@@ -717,7 +717,11 @@ void Ecommerce::impCarrinho(){
   << "Para voltar ao menu, digite 4" << std::endl;
   int digito;
   std::cin >> digito;
+<<<<<<< HEAD
   while((digito != 1) && (digito != 2) && (digito != 3) && (digito!=4)){
+=======
+  while((digito != 1) && (digito != 2) && (digito != 3) && (digito != 4)){
+>>>>>>> 758398cfdfeb28f30cc697f1dc25fbaa6ffd7ef1
     std::cout << "Essa opcao nao existe! Digite um numero valido: ";
     std::cin >> digito;
   }
@@ -1400,6 +1404,7 @@ Comprador Ecommerce::buscaComprador(std::string em){
   int numA = 0, numH = 0, numC = 0;
   std::string nome = "", email = "", senha = "", cpf = "", endereco = "";
   float dinheiro = 0.0;
+  
   listaUsuarioArquivo();
   int numeroCompradores = compradores.size();
 
