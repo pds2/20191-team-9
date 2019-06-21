@@ -712,7 +712,7 @@ void Ecommerce::impCarrinho(){
   << "Para voltar ao menu, digite 4" << std::endl;
   int digito;
   std::cin >> digito;
-  while((digito != 1) && (digito != 2) && (digito != 3)){
+  while((digito != 1) && (digito != 2) && (digito != 3) && (digito != 4)){
     std::cout << "Essa opcao nao existe! Digite um numero valido: ";
     std::cin >> digito;
   }
