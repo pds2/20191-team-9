@@ -150,7 +150,7 @@ bool Comprador::adicionarCarrinho(){
   }
   catch(Exception_Produto_Nao_Encontrado &e){
     std::cout<<e.what();
-    return;
+    return false;
   }
 
   try{
@@ -158,7 +158,7 @@ bool Comprador::adicionarCarrinho(){
   }
   catch(Exception_Produto_Ja_Consta_No_Carrinho &e){
     std::cout<<e.what();
-    return;
+    return false;
   }
 
   Produto prod = buscaCarrinho(codProduto);
@@ -198,7 +198,7 @@ bool Comprador::retirarCarrinho(){
   }
   catch(Exception_Carrinho_Vazio &e){
     std::cout<<e.what();
-    return;
+    return false;
   }
 
   int codProduto;
@@ -223,7 +223,7 @@ bool Comprador::retirarCarrinho(){
   }
   catch(Exception_Produto_Nao_Encontrado &e){
     std::cout<<e.what();
-    return;
+    return false;
   }
 
   carrinho.erase(carrinho.begin()+ indice); //apaga o indice elemento a partir do começo do vector
