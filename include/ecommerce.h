@@ -24,8 +24,6 @@
 #include "produto/blusas_e_moletom.h"
 #include "excecoes.h"
 
-std::string userLogged = "";
-
 class Ecommerce{
   private:
     std::vector <Usuario> usuarios;
@@ -34,8 +32,10 @@ class Ecommerce{
     std::vector <Caneca> canecas;
     std::vector <Acessorio> acessorios;
     std::vector <BlusasEMoletom> blusasEmoletons;
+    std::string userLogged = "";
 
   public:
+
     Ecommerce();
     ~Ecommerce();
 
@@ -51,6 +51,8 @@ class Ecommerce{
     void imprimirUsuarios();
     void imprimirCompradores();
     void imprimirProdutos();
+
+    std::string getUserLogged();
 
     bool checaEmail(std::string email);
     bool validaAlfanumerica(const char *s);
