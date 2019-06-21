@@ -343,7 +343,8 @@ int Administrador::aprovaPedido(std::string email){
   usuarioCsvToVector();
 
   //-----> Busca o índice do comprador. Se ele não existir, exibe uma mensagem de erro
-  for(int i = 0; i<_shoppers.size(); i++){
+  int tam3 = _shoppers.size();
+  for(int i = 0; i < tam3; i++){
 
     email_do_cliente = _shoppers[i].getEmail();
 
@@ -394,7 +395,8 @@ int Administrador::aprovaPedido(std::string email){
   arquivo_user.open("usuarios.csv", std::ios::trunc | std::ios::out);
   arquivo_req.open("requisicoes.csv", std::ios::trunc | std::ios::out);
 
-  for(int i = 0; i<_shoppers.size(); i++){
+  int tam = _shoppers.size();
+  for(int i = 0; i<tam; i++){
     arquivo_user << _shoppers[i].getNome() << "," << _shoppers[i].getEmail() << "," << _shoppers[i].getSenha() << "," << _shoppers[i].getCPF() << "," << _shoppers[i].getEndereco() << ","  << _shoppers[i].getNumeroComprasCarrinho() << "," << _shoppers[i].getNumeroComprasHistorico() << "," << _shoppers[i].getNumeroAvaliacoes() << "," << _shoppers[i].getDinheiro() << std::endl;
   }
 
@@ -422,7 +424,8 @@ int Administrador::excluiUsuario(std::string email){
 
   usuarioCsvToVector();
 
-  for(int i = 0; i<_shoppers.size(); i++){
+  int tam2 = _shoppers.size();
+  for(int i = 0; i<tam2; i++){
 
     email_do_cliente = _shoppers[i].getEmail();
 
@@ -446,8 +449,8 @@ int Administrador::excluiUsuario(std::string email){
   std::ofstream arquivo;
 
   arquivo.open("usuarios.csv", std::ios::trunc | std::ios::out);
-
-  for(int i = 0; i<_shoppers.size(); i++){
+  int tam1 = _shoppers.size();
+  for(int i = 0; i<tam1; i++){
     arquivo << _shoppers[i].getNome() << "," << _shoppers[i].getEmail() << "," << _shoppers[i].getSenha() << "," << _shoppers[i].getCPF() << "," << _shoppers[i].getEndereco() << ","  << _shoppers[i].getNumeroComprasCarrinho() << "," << _shoppers[i].getNumeroComprasHistorico() << "," << _shoppers[i].getNumeroAvaliacoes() << "," << _shoppers[i].getDinheiro() << std::endl;
   }
 
